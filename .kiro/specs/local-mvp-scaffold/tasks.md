@@ -131,15 +131,31 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 2. Types and shared contracts
 
-- [ ] 2.1 Define the `AssistantResponse` contract and related types
-  - `src/types/assistant.ts`: `Confidence`, `Citation`, `AssistantResponse` exactly per
+- [x] 2.1 Define the `AssistantResponse` contract and related types
+  - `src/types/assistant.ts`: `Confidence`, `Citation`, `AssistantResponse` per
     `AGENTS.md` §9.
   - _Requirements: 3.5_
+  - NOTE: `AssistantResponse` is modeled as an explicit discriminated union over `kind`
+    (`grounded` | `insufficient_evidence` | `safe_rejection`) per the response-contract
+    rules; every variant carries the §9 fields and a compile-time assertion
+    (`_Section9Conformance`) proves conformance. `Citation` gains a required `sourceId`
+    (Property 2). Related state types live alongside: `SafeRejection`,
+    `EscalationGuidance`/`EscalationReason`/`DepartmentContact` (`escalation.ts`),
+    `SensitiveCategory` (`guardrail.ts`).
 
-- [ ] 2.2 Define seam interface types (no implementations yet)
+- [x] 2.2 Define seam interface types (no implementations yet)
   - `RetrievedSnippet`, `RetrievalResult`, `GuardrailVerdict`, feedback input types as
     declared in the design's Components and Interfaces section.
   - _Requirements: 9.2_
+  - NOTE: seam types are centralized in `src/types/` (design designates it as the home for
+    shared types) and re-exported from `src/types/index.ts`. Added function-type + object
+    interfaces for every seam future code must satisfy — retrieval (`RetrieveFn` /
+    `RetrievalService`), guardrail, escalation (`ApplyEscalationRulesFn` /
+    `EscalationDecision`), normalization (`ToAssistantResponseFn` / `NormalizeInput`),
+    redaction (`RedactFn` / `RedactedLogRecord`), and persistence (`RecordFeedbackFn` /
+    `FeedbackRepository`). The design's `MockSource`/`MockCourseDate` are defined as
+    permanent domain types `Source`/`CourseDate` (`source.ts`). No implementations, mock
+    data, or Zod schemas were added.
 
 ## 3. Environment and input validation (Zod)
 
