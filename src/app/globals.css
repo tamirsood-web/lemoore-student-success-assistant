@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Institutional, calm palette. Neutral surfaces + a single restrained accent.
+   Values are HSL channels consumed via hsl(var(--token)) in tailwind.config.ts. */
+:root {
+  --background: 0 0% 100%;
+  --foreground: 222 22% 18%;
+  --border: 214 20% 88%;
+  --muted: 210 20% 96%;
+  --muted-foreground: 215 16% 42%;
+  --accent: 211 72% 38%;
+  --accent-foreground: 0 0% 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: 222 24% 12%;
+    --foreground: 210 20% 92%;
+    --border: 217 18% 26%;
+    --muted: 217 18% 20%;
+    --muted-foreground: 215 16% 65%;
+    --accent: 211 72% 55%;
+    --accent-foreground: 222 24% 12%;
+  }
+}
+
+body {
+  min-height: 100vh;
+}
