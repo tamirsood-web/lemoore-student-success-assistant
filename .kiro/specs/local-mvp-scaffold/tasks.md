@@ -184,23 +184,37 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 4. Mock knowledge data
 
-- [ ] 4.1 Mock approved-source dataset
-  - `src/lib/mock/sources.ts`: `MockSource[]` covering admissions/records, financial-aid
+- [x] 4.1 Mock approved-source dataset
+  - `src/lib/mock/sources.ts`: `Source[]` covering admissions/records, financial-aid
     FAQ, counseling/registration, academic calendar, transcript/degree posting, office
     hours/contacts, adult-learner services (from `docs/ARCHITECTURE.md` categories and
     `docs/EVAL_QUESTIONS.md`). Clearly labeled as mock/sample content.
   - _Requirements: 3.1, 9.3_
+  - NOTE: 10 sources typed with the Group 2 `Source` type. IDs are stable `src_`-prefixed
+    slugs; `department` is typed as `DepartmentId` at authoring time (compile-time
+    integrity). Every `content` ends with `MOCK_DATA_DISCLAIMER`. Exposes `sourceById`,
+    `sourceTitles`, `getSourceById`. All specific hours/steps/contacts are labeled demo
+    content — only the categories and institution name are repo-derived.
 
-- [ ] 4.2 Mock course-date dataset
-  - `src/lib/mock/courseDates.ts`: `MockCourseDate[]` preserving term, subject,
+- [x] 4.2 Mock course-date dataset
+  - `src/lib/mock/courseDates.ts`: `CourseDate[]` preserving term, subject,
     catalogNumber, section, startDate, censusDate, dropDate, sourceTitle (exact-match
     fields not flattened).
   - _Requirements: 4.2, 9.3_
+  - NOTE: 4 records (Fall 2025 + Spring 2026), ISO-8601 dates, each referencing the sample
+    course-date source by title (`COURSE_DATE_SOURCE_TITLE`) so every citation maps to a
+    real source record.
 
-- [ ] 4.3 Department/contact directory for escalation
-  - `src/lib/mock/departments.ts`: department names + official (mock) contact info used
+- [x] 4.3 Department/contact directory for escalation
+  - `src/lib/mock/departments.ts`: department names + (mock) contact info used
     by escalation cards.
   - _Requirements: 5.2, 9.3_
+  - NOTE: 5 departments keyed by `DepartmentId` (`admissions_records`, `financial_aid`,
+    `counseling`, `adult_learner_services`, `student_services`) with `getDepartment` /
+    `isDepartmentId`. Contact details use reserved fictional patterns (`.example` TLD,
+    `(000) 555-01xx`) so they are obviously not real. Barrel at `src/lib/mock/index.ts`;
+    16 integrity tests in `src/lib/mock/mock.test.ts`. No retrieval/ranking, answer
+    composition, guardrail, or route logic added.
 
 ## 5. Retrieval, guardrail, escalation, normalization (server-only mocks behind seams)
 
