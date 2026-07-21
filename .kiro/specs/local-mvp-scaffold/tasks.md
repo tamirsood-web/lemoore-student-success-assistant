@@ -159,16 +159,28 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 3. Environment and input validation (Zod)
 
-- [ ] 3.1 Zod-validated environment loader
+- [x] 3.1 Zod-validated environment loader
   - `src/lib/validation/env.ts`: validate env; AWS vars **optional** so the app boots
-    without them; `CHAT_MAX_INPUT_CHARS` default (e.g. 500).
+    without them; `CHAT_MAX_INPUT_CHARS` default.
   - _Requirements: 9.4_
+  - NOTE: default `CHAT_MAX_INPUT_CHARS` is **2000** to match the committed `.env.example`
+    (the design's "e.g. 500" was illustrative). All AWS vars are `.optional()` and
+    empty/whitespace values are coerced to unset. Exposes `parseEnv` (safe result),
+    `loadEnv` (fail-fast), `getEnv` (memoized), and an `AppConfig` type inferred from the
+    schema. Validated config is normalized to a nested `aws.{bedrock,cognito}` shape.
 
-- [ ] 3.2 Zod request schemas
-  - `src/lib/validation/schemas.ts`: `ChatRequest` (trimmed, min 1, max
-    `CHAT_MAX_INPUT_CHARS`), `FeedbackRequest`. No client-supplied role/mode is trusted.
+- [x] 3.2 Zod request schemas
+  - `src/lib/validation/schemas.ts`: `chatRequestSchema` (trimmed, min 1, max
+    `CHAT_MAX_INPUT_CHARS`), `feedbackRequestSchema`. No client-supplied role/mode is
+    trusted (unknown keys stripped).
   - Unit tests: empty, whitespace-only, over-max rejected; valid accepted.
   - _Requirements: 8.1, 8.2, 8.5_
+  - NOTE: added `src/lib/validation/parse.ts` (`safeParse` → structured `ValidationResult`
+    with user-safe messages) and a `src/lib/validation/index.ts` barrel. `parseChatRequest`
+    / `parseFeedbackRequest` return the existing `@/types` domain contracts
+    (`ChatRequestBody` / `FeedbackInput`); compile-time assertions enforce that the
+    Zod-inferred types agree with those contracts. 17 validation unit tests added; only
+    input-shape validation is implemented (no guardrail/sensitive-data behavior).
 
 ## 4. Mock knowledge data
 
