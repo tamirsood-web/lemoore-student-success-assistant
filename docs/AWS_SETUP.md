@@ -1,14 +1,5 @@
 # AWS Setup Checklist
 
-> **Current Local MVP Status (additive note).** None of the AWS resources below are
-> provisioned or deployed yet. The current MVP runs **entirely locally** using deterministic
-> local mock implementations behind fixed interfaces (retrieval, guardrail, and feedback
-> seams), and requires **no AWS account, no paid API, and no live model**. This checklist
-> describes the **planned** later AWS phase. The reserved AWS environment variable names are
-> optional placeholders in `.env.example`, and the app boots without them. Do not provision
-> AWS resources for the local MVP. See the README "Local Development" and "Architecture
-> Seams" sections for what exists today versus what is planned.
-
 Record actual values as the team provisions resources. Do not commit secrets.
 
 ## Region
