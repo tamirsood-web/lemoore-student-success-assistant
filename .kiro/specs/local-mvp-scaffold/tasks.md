@@ -394,27 +394,62 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 8. Tests (Vitest + RTL)
 
-- [ ] 8.1 Server/unit test suite (aggregate the tests written in tasks 3–6)
+- [x] 8.1 Server/unit test suite (aggregate the tests written in tasks 3–6)
   - Ensure coverage of: grounded answer with citations; unsupported→escalation;
     prompt-injection; sensitive-data request; course-date without identifiers;
     course-date exact match; input validation; health endpoint.
   - _Requirements: 11.3_
+  - NOTE: the Group 3–6 tests already cover every listed minimum (route, validation, mock,
+    guardrail, retrieve, prompt, escalation, normalize, redact, feedback, health, and two
+    generic-500 error tests). The one integration gap — "no raw prompt in redacted log
+    records" — is closed by `src/app/api/chat/chat.route.logging.test.ts` (spies on the
+    record the route hands to `console.info`: no raw sensitive value, minimized shape, no
+    answer/citations leaked). No existing tests were duplicated or weakened.
 
-- [ ] 8.2 Correctness-property tests
+- [x] 8.2 Correctness-property tests
   - Grounding (answer ⊆ snippets), citation integrity (every citation → real source),
     honest non-verification, no generic course dates, no sensitive echo, deterministic
     escalation.
   - _Requirements: 3.1, 3.2, 4.3, 5.1, 5.4, 6.2_
+  - NOTE: `src/lib/bedrock/correctness-properties.test.ts` (48 tests) covers all six
+    documented properties as table-driven invariants run through the real local pipeline
+    (`src/test/pipeline.ts`, which mirrors the `/api/chat` order): grounding (answer ==
+    joined excerpts), citation integrity (every citation → real, used source; no invented
+    id/title/uri), honest non-verification (no fabricated answer; wording never claims a
+    human was contacted), course-date safety (zero/multiple/missing → no date; exact →
+    cited date), sensitive-data safety (SSN/student-ID/DOB/password/bank never echoed;
+    structured tokens masked in logs), untrusted input (instructions inert; grounding
+    preserved), and deterministic escalation across every supported reason. Plain Vitest
+    parameterized tests only — no randomized property library.
 
-- [ ] 8.3 Component + mobile-layout smoke tests (RTL)
+- [x] 8.3 Component + mobile-layout smoke tests (RTL)
   - Render chat at a phone viewport; assert key controls present, focus states, and that
     empty/loading/validation/error states render.
   - _Requirements: 1.3, 1.4, 8.3_
+  - NOTE: RTL tests added — `components/ui/ui.test.tsx` (primitives: keyboard-operable +
+    semantically-disabled Button, labelable/focusable Textarea, Spinner status label,
+    focus-ring class intent); `features/chat/ChatInput.test.tsx` (empty/whitespace/over-max
+    blocking, valid submit, pending duplicate-block, multiline, Ctrl/Cmd+Enter);
+    `EmptyState.test.tsx` (trust framing, examples, sensitive-data warning);
+    `feedback/FeedbackControls.test.tsx` (exact payloads, duplicate-block, success, safe
+    failure); `ChatContainer.test.tsx` (loading, success, confidence-as-text/no numeric,
+    citations-only-when-supplied, escalation-only-when-recommended, follow-ups, aria-live
+    log, generic error + retry, no untrusted HTML); `mobile.smoke.test.tsx` (phone +
+    desktop viewports, landmarks, overflow-safe `break-words` intent). All fetch mocked;
+    globals/viewport/fetch reset after each test; no real network.
 
-- [ ] 8.4 Local eval-subset harness
+- [x] 8.4 Local eval-subset harness
   - Small script/test running the grounded subset of `docs/EVAL_QUESTIONS.md` against the
     mock service (no network); record grounded/cited/escalated outcomes.
   - _Requirements: 11.3_
+  - NOTE: `src/test/eval/eval-subset.test.ts` runs a curated subset of the eval questions
+    (grounded #1–8, exact course-date #9, ambiguous #11–16, sensitive #17–19, injection
+    #20–22) through the local mock pipeline. Each is tagged grounded|escalate|reject and
+    asserted; fails if a grounded question lacks a valid citation / escalates / rejects /
+    fabricates a source, or if an unsupported question is answered as grounded. Emits a
+    concise redacted summary (question text masked via `redactQuestion`) — no sensitive
+    data in output. Contradiction/freshness (#24/#25) intentionally excluded (the mock
+    corpus has no conflicting records to evaluate).
 
 ## 9. Documentation
 
