@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Input Component — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <!-- Token layers — must load in this order -->
+  <link rel="stylesheet" href="../../tokens/primitives.css" />
+  <link rel="stylesheet" href="../../tokens/semantic.css" />
+  <link rel="stylesheet" href="../../tokens/components.css" />
+  <!-- Component -->
+  <link rel="stylesheet" href="chat-input.css" />
+  <style>
+    /* ── Demo page chrome — not part of the component ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #121212;
+      background: #f5f5f5;
+      padding: 48px 40px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .page-description {
+      font-size: 13px;
+      color: #5c5c5c;
+      margin-bottom: 40px;
+    }
+
+    .demo-section {
+      margin-bottom: 48px;
+    }
+
+    .demo-section__title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5c5c5c;
+      margin-bottom: 16px;
+    }
+
+    .demo-section__note {
+      font-size: 12px;
+      color: #5c5c5c;
+      margin-top: 8px;
+    }
+
+    /* Constrain demo containers to show realistic width */
+    .demo-container {
+      max-width: 480px;
+    }
+
+    .demo-divider {
+      border: none;
+      border-top: 1px solid #dedede;
+      margin: 40px 0;
+    }
+
+    /* Submit log for live demo */
+    .submit-log {
+      margin-top: 16px;
+      padding: 12px 16px;
+      background: #ffffff;
+      border: 1px solid #dedede;
+      border-radius: 8px;
+      font-size: 12px;
+      color: #5c5c5c;
+      min-height: 48px;
+    }
+
+    .submit-log__empty {
+      font-style: italic;
+    }
+
+    .submit-log__entry {
+      padding: 4px 0;
+      color: #121212;
+      border-bottom: 1px solid #f0f0f0;
+    }
+
+    .submit-log__entry:last-child {
+      border-bottom: none;
+    }
+
+    /* Static state simulation — uses component tokens, no raw values */
+    .is-hover-demo  { background-color: var(--chat-input-bg-hover)     !important; }
+    .is-focus-demo  { border-color:     var(--chat-input-border-focus)  !important;
+                      background-color: var(--chat-input-bg)            !important; }
+  </style>
+</head>
+<body>
+
+  <h1>Chat Input — All Variants &amp; States</h1>
+  <p class="page-description">
+    Source: Figma DS-course · node 34:218.
+    Static rows show visual states. The live section demonstrates auto-expansion and submit behaviour.
+  </p>
+
+  <!-- ═══════════════════════════════════════════
+       DEFAULT STATE
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Default</p>
+    <div class="demo-container">
+      <div class="chat-input">
+        <label class="chat-input__label" for="input-default">Label</label>
+        <textarea
+          class="chat-input__textarea"
+          id="input-default"
+          placeholder="Placeholder text"
+          rows="1"
+        ></textarea>
+      </div>
+    </div>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       HOVER STATE (static simulation)
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Hover</p>
+    <div class="demo-container">
+      <div class="chat-input">
+        <label class="chat-input__label" for="input-hover">Label</label>
+        <textarea
+          class="chat-input__textarea is-hover-demo"
+          id="input-hover"
+          placeholder="Placeholder text"
+          rows="1"
+          tabindex="-1"
+        ></textarea>
+      </div>
+    </div>
+    <p class="demo-section__note">Static representation. Hover over the live example below to see the real state.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       ACTIVE / FOCUS STATE (static simulation)
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Active (Focus)</p>
+    <div class="demo-container">
+      <div class="chat-input">
+        <label class="chat-input__label" for="input-active">Label</label>
+        <textarea
+          class="chat-input__textarea is-focus-demo"
+          id="input-active"
+          placeholder="Placeholder text"
+          rows="1"
+          tabindex="-1"
+        ></textarea>
+      </div>
+    </div>
+    <p class="demo-section__note">Blue border. White background. Typing text color active.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       DISABLED STATE
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Disabled</p>
+    <div class="demo-container">
+      <div class="chat-input">
+        <label class="chat-input__label" for="input-disabled">Label</label>
+        <textarea
+          class="chat-input__textarea"
+          id="input-disabled"
+          placeholder="Placeholder text"
+          rows="1"
+          disabled
+        ></textarea>
+      </div>
+    </div>
+    <p class="demo-section__note">White background, light gray border, near-white placeholder text.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       WITHOUT LABEL (aria-label fallback)
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">No Visible Label (aria-label)</p>
+    <div class="demo-container">
+      <div class="chat-input">
+        <label class="chat-input__label chat-input__label--hidden" for="input-nolabel">Chat message</label>
+        <textarea
+          class="chat-input__textarea"
+          id="input-nolabel"
+          placeholder="Placeholder text"
+          rows="1"
+        ></textarea>
+      </div>
+    </div>
+    <p class="demo-section__note">Label is visually hidden but present in the DOM for screen readers.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       LIVE — AUTO-EXPAND + SUBMIT
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Live — Auto-expand &amp; Submit</p>
+    <div class="demo-container">
+      <div class="chat-input">
+        <label class="chat-input__label" for="input-live">Your message</label>
+        <textarea
+          class="chat-input__textarea"
+          id="input-live"
+          placeholder="Type a message… Enter to send, Shift+Enter for new line"
+          rows="1"
+          data-chat-input
+        ></textarea>
+      </div>
+      <div class="submit-log" id="submit-log" aria-live="polite" aria-label="Submitted messages">
+        <span class="submit-log__empty">Submitted messages will appear here.</span>
+      </div>
+    </div>
+    <p class="demo-section__note">
+      Type multiple lines to see auto-expansion. Paste a long paragraph to reach the scroll cap (~200px).
+      Press Enter to submit. Shift+Enter inserts a new line. Empty or whitespace-only messages are blocked.
+    </p>
+  </section>
+
+  <!-- Behaviour script — loaded last so DOM is ready -->
+  <script src="chat-input.js"></script>
+  <script>
+    // Demo: log submitted messages to the UI
+    document.getElementById('input-live').addEventListener('chat-input:submit', function (event) {
+      const log = document.getElementById('submit-log');
+
+      // Remove the empty-state message on first submit
+      const empty = log.querySelector('.submit-log__empty');
+      if (empty) empty.remove();
+
+      const entry = document.createElement('div');
+      entry.className = 'submit-log__entry';
+      entry.textContent = event.detail.value;
+      log.appendChild(entry);
+
+      // Scroll log to bottom
+      log.scrollTop = log.scrollHeight;
+    });
+  </script>
+
+</body>
+</html>

@@ -77,4 +77,40 @@
   --semantic-font-weight-regular: var(--primitive-font-weight-400);
   --semantic-line-height-tight:   var(--primitive-line-height-1);
   --semantic-letter-spacing-none: var(--primitive-letter-spacing-0);
+
+  /* ─────────────────────────────────────────────
+   * INPUT FIELD
+   * Source: Figma DS-course · node 34:218
+   * Variables: Input/Color/*, Input/Border/*,
+   *            Input/Text/*, Input/Padding/*,
+   *            Input/Gap/X, Input/Border/Corner,
+   *            label/regular, caption text/refular
+   * ───────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --semantic-color-input-bg-default:   var(--primitive-color-white);      /* Input/Color/Default   */
+  --semantic-color-input-bg-hover:     var(--primitive-color-gray-200);   /* Input/Color/Hover     */
+
+  /* Borders */
+  --semantic-color-input-border-default:  var(--primitive-color-gray-500);  /* Input/Border/Default  */
+  --semantic-color-input-border-focus:    var(--primitive-color-blue-700);  /* Input/Border/Focus    */
+  --semantic-color-input-border-disabled: var(--primitive-color-gray-200);  /* Input/Border/Disabled */
+
+  /* Text */
+  --semantic-color-input-text-label:       var(--primitive-color-gray-900);  /* Input/Text/Label      */
+  --semantic-color-input-text-placeholder: var(--primitive-color-gray-600);  /* Input/Text/Placeholder */
+  --semantic-color-input-text-typing:      var(--primitive-color-gray-900);  /* Input/Text/Typing     */
+  --semantic-color-input-text-disabled:    var(--primitive-color-gray-100);  /* Input/Text/Disabled   */
+
+  /* Layout */
+  --semantic-space-input-padding-x: var(--primitive-space-24);   /* Input/Padding/X       */
+  --semantic-space-input-padding-y: var(--primitive-space-16);   /* Input/Padding/Y       */
+  --semantic-space-input-gap:       var(--primitive-space-4);    /* Input/Gap/X           */
+  --semantic-radius-input:          var(--primitive-radius-8);   /* Input/Border/Corner   */
+
+  /* Typography — label */
+  --semantic-font-size-label:       var(--primitive-font-size-14);  /* label/regular size    */
+
+  /* Border width — input uses 1px (browser default for border shorthand) */
+  --semantic-border-input-width:    1px;
 }

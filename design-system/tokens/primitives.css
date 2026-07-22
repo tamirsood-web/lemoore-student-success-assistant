@@ -25,6 +25,7 @@
   /* Grays */
   --primitive-color-gray-900:   #121212;
   --primitive-color-gray-600:   #5c5c5c;
+  --primitive-color-gray-500:   #9d9d9d;  /* Input/Border/Default — DS-course node 34:218 */
   --primitive-color-gray-300:   #bebebe;
   --primitive-color-gray-200:   #dedede;
   --primitive-color-gray-100:   #ebebeb;
@@ -73,6 +74,7 @@
    * ───────────────────────────────────────────── */
   --primitive-font-family-inter: 'Inter', sans-serif;
   --primitive-font-size-16:      16px;
+  --primitive-font-size-14:      14px;   /* Input/Text/Label typography — DS-course node 34:218 */
   --primitive-font-weight-400:   400;
   --primitive-line-height-1:     1;      /* 100% */
   --primitive-letter-spacing-0:  0;

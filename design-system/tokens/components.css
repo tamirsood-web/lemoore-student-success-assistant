@@ -104,4 +104,55 @@
   --btn-icon-color-disabled:  var(--semantic-color-text-muted);
 
   --btn-icon-focus-ring:      var(--semantic-color-focus-ring);
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Layout & Structure
+   * Source: Figma DS-course · node 34:218
+   * Consumed by: components/chat-input/chat-input.css
+   * ───────────────────────────────────────────── */
+  --chat-input-padding-x:       var(--semantic-space-input-padding-x);
+  --chat-input-padding-y:       var(--semantic-space-input-padding-y);
+  --chat-input-gap:             var(--semantic-space-input-gap);
+  --chat-input-radius:          var(--semantic-radius-input);
+  --chat-input-border-width:    var(--semantic-border-input-width);
+
+  /* Heights — min is 1 line of text + padding + borders */
+  --chat-input-min-height:      50px;   /* 16px padding-top + 16px line-height + 16px padding-bottom + 2px borders */
+  --chat-input-max-height:      200px;  /* ~6 lines before internal scroll engages */
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Colors
+   * ───────────────────────────────────────────── */
+  --chat-input-bg:              var(--semantic-color-input-bg-default);
+  --chat-input-bg-hover:        var(--semantic-color-input-bg-hover);
+
+  --chat-input-border:          var(--semantic-color-input-border-default);
+  --chat-input-border-focus:    var(--semantic-color-input-border-focus);
+  --chat-input-border-disabled: var(--semantic-color-input-border-disabled);
+
+  --chat-input-bg-disabled:     var(--semantic-color-input-bg-default);  /* white in disabled state */
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Typography (textarea / input text)
+   * Source: caption text/refular
+   * ───────────────────────────────────────────── */
+  --chat-input-font-family:       var(--semantic-font-family-ui);
+  --chat-input-font-size:         var(--semantic-font-size-ui);
+  --chat-input-font-weight:       var(--semantic-font-weight-regular);
+  --chat-input-line-height:       var(--semantic-line-height-tight);
+  --chat-input-letter-spacing:    var(--semantic-letter-spacing-none);
+
+  --chat-input-color:             var(--semantic-color-input-text-typing);
+  --chat-input-color-placeholder: var(--semantic-color-input-text-placeholder);
+  --chat-input-color-disabled:    var(--semantic-color-input-text-disabled);
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Label typography
+   * Source: label/regular
+   * ───────────────────────────────────────────── */
+  --chat-input-label-font-size:   var(--semantic-font-size-label);
+  --chat-input-label-font-family: var(--semantic-font-family-ui);
+  --chat-input-label-font-weight: var(--semantic-font-weight-regular);
+  --chat-input-label-line-height: var(--semantic-line-height-tight);
+  --chat-input-label-color:       var(--semantic-color-input-text-label);
 }
