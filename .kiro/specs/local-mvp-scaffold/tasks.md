@@ -314,53 +314,83 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 7. UI components
 
-- [ ] 7.1 Hand-authored accessible primitives
+- [x] 7.1 Hand-authored accessible primitives
   - `src/components/ui/`: `Button`, `Card`, `Textarea`, `Spinner` with labels, keyboard
     operability, and visible focus states. No shadcn/ui generators.
   - _Requirements: 1.4_
+  - NOTE: hand-authored native-element primitives + `cn` helper (`src/lib/utils/cn.ts`);
+    focus-visible ring on accent token; disabled styles; `Spinner` uses `role="status"`
+    with a live label. Barrel at `src/components/ui/index.ts`.
 
-- [ ] 7.2 Chat state machine and container
+- [x] 7.2 Chat state machine and container
   - `src/features/chat/states.ts` (`ChatState` union) and `ChatContainer.tsx` (client):
     owns state, calls `/api/chat`, prevents duplicate submits.
   - _Requirements: 8.3_
+  - NOTE: `ChatState` union (idle/submitting/ready/validation/error) + per-turn `TurnState`
+    (pending/answered/failed) keep the question visible through the lifecycle. In-flight
+    guard + `AbortController` (aborts on unmount). Failures never fabricate an answer.
 
-- [ ] 7.3 Chat input with validation
+- [x] 7.3 Chat input with validation
   - `ChatInput.tsx`: disable submit on empty/whitespace; inline message on
     over-`CHAT_MAX_INPUT_CHARS`; no request sent when invalid.
   - _Requirements: 8.1, 8.2_
+  - NOTE: max passed as a numeric prop from the server page (never imports server env);
+    multiline preserved; Ctrl/Cmd+Enter submits; calm character count; `role="alert"`
+    over-max message wired via `aria-describedby`.
 
-- [ ] 7.4 Message rendering with confidence-safe language
+- [x] 7.4 Message rendering with confidence-safe language
   - `MessageList.tsx`, `MessageBubble.tsx`: render question/answer turns; map confidence
     enum to student-friendly lead-in; never show numeric scores; keep answers concise;
     `aria-live="polite"` on the answer region.
   - _Requirements: 1.4, 3.4_
+  - NOTE: assistant region is a `role="log"` `aria-live="polite"` container; plain-text
+    only (no HTML); grounded / insufficient_evidence / safe_rejection visually
+    distinguished via a calm kind label.
 
-- [ ] 7.5 Citations UI
+- [x] 7.5 Citations UI
   - `citations/CitationList.tsx`, `CitationCard.tsx`: visually separated citation area;
     linked title when `uri` present, plain title otherwise.
   - _Requirements: 3.2, 3.3_
+  - NOTE: renders nothing on empty citations; only response citations used; source ids
+    never shown as the label; `break-words` prevents overflow; external links use
+    `rel="noopener noreferrer"`.
 
-- [ ] 7.6 Escalation card
+- [x] 7.6 Escalation card
   - `escalation/EscalationCard.tsx`: shown when `escalationRecommended`; department +
     official contact + transparent wording; no claim a human was contacted.
   - _Requirements: 5.2, 5.3_
+  - NOTE: "You may want to contact…"; mailto for email, tel only for a plausibly-valid
+    number (fictional 000 numbers render as text), external link for web; preserves the
+    "sample/demo" office note; no invented contact info.
 
-- [ ] 7.7 Feedback controls
+- [x] 7.7 Feedback controls
   - `feedback/FeedbackControls.tsx`: helpful/unhelpful → `POST /api/feedback`; reflect
     success/failure without blocking the chat.
   - _Requirements: 8.4_
+  - NOTE: idle/submitting/success/error states; uses the local turn id as
+    `conversationId` (no server id exists in the response); "Thanks for the feedback.";
+    failures don't break chat; no claim of permanent storage.
 
-- [ ] 7.8 Empty state and example/follow-up questions
+- [x] 7.8 Empty state and example/follow-up questions
   - `EmptyState.tsx` + `ExampleQuestions.tsx`: trust-framing intro and suggestion chips
     (from grounded set); selecting a chip submits it; render response
     `suggestedQuestions` as follow-ups.
   - _Requirements: 1.2, 2.1, 2.2, 2.3_
+  - NOTE: real `<button>` chips only; examples restricted to mock-answerable questions;
+    chips route through the same validated submit; follow-ups render only when the
+    response supplies `suggestedQuestions`.
 
-- [ ] 7.9 Public page assembly, layout, and mobile-first responsiveness
+- [x] 7.9 Public page assembly, layout, and mobile-first responsiveness
   - `app/(public)/page.tsx` + `layout.tsx`: assemble the chat experience; mobile-first
     single column, reachable input, no horizontal scroll; desktop reading measure.
   - Loading, empty, validation, and error states all reachable through the UI.
   - _Requirements: 1.1, 1.3, 8.3, 8.4_
+  - NOTE: scaffold root `src/app/page.tsx` migrated into the `(public)` group (only one
+    `/` page remains). Root `layout.tsx` (html/body/globals.css/metadata) preserved;
+    `(public)/layout.tsx` adds header/main/footer landmarks. `(public)/page.tsx` is a
+    server component that passes `getEnv().chatMaxInputChars` to the client. Mobile-first
+    single column, `max-w-3xl` reading measure, `break-words` throughout. Client-bundle
+    scan confirmed no AWS env values or server-only modules shipped.
 
 ## 8. Tests (Vitest + RTL)
 
