@@ -49,6 +49,12 @@ export type EscalationDecision = {
 export type ApplyEscalationRulesFn = (input: {
   readonly result: RetrievalResult;
   readonly composedAnswer: string | null;
+  /**
+   * The original user query, used to deterministically detect query-driven escalation
+   * reasons (safety, private/student-specific, conflicting, binding-policy, high-stakes)
+   * per AGENTS.md §10. Treated strictly as data — never as instructions.
+   */
+  readonly query?: string;
 }) => EscalationDecision;
 
 export interface EscalationPolicy {
