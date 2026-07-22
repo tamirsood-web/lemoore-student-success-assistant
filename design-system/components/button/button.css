@@ -117,6 +117,29 @@
 
 
 /* ─────────────────────────────────────────────────────────────
+ * PRIMARY — Loading state
+ * Activated via .btn--loading class + aria-busy="true".
+ * Uses disabled bg with dark text. Non-interactive.
+ * ───────────────────────────────────────────────────────────── */
+.btn--primary.btn--loading {
+  background-color: var(--btn-primary-bg-loading);
+  color:            var(--btn-primary-color-loading);
+  pointer-events:   none;
+  cursor:           default;
+}
+
+/* Spinning loader icon animation */
+@keyframes btn-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.btn--loading .btn__loader {
+  animation: btn-spin 1s linear infinite;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
  * SECONDARY
  * ───────────────────────────────────────────────────────────── */
 .btn--secondary {

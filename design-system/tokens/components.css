@@ -54,6 +54,10 @@
 
   --btn-primary-focus-ring:      var(--semantic-color-focus-ring-inverse);
 
+  /* Loading state — reuses disabled bg, text is default (black) */
+  --btn-primary-bg-loading:      var(--semantic-color-action-bg-disabled);
+  --btn-primary-color-loading:   var(--semantic-color-text-default);  /* Button/Primary/Text/Load: #121212 */
+
   /* ─────────────────────────────────────────────
    * BUTTON — Secondary variant
    * Background: surface tokens
