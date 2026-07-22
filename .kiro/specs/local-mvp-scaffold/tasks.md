@@ -360,17 +360,37 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 9. Documentation
 
-- [ ] 9.1 README local-setup section
+- [x] 9.1 README local-setup section
   - Add setup steps: `npm install` → `cp .env.example .env.local` → `npm run dev` →
     `http://localhost:3000`; state clearly that no AWS account or paid API is required.
   - Do not modify existing instruction docs beyond adding this setup content.
   - _Requirements: 11.4, 12.2_
+  - NOTE: added a "Local Development (Current MVP)" section to `README.md` (existing
+    Agent-Pack content preserved): clone → `cd` → `npm install` → copy `.env.example` to
+    `.env.local` (PowerShell `Copy-Item` + macOS/Linux `cp`) → `npm run dev` →
+    http://localhost:3000, plus the four verification commands. States: runs entirely
+    locally, no AWS account, no paid/live model, deterministic local mock data + mock
+    services, `/api/feedback` is a validated no-op that stores nothing, `.env.local` must
+    not be committed, `.env.example` has safe placeholders only, content is sample/mock.
+    npm only; no secrets/ARNs/regions/deployment commands. NOTE: this branch had Groups
+    5–8 reverted in git; they were restored (user-authorized) from commit `e313e0f` before
+    documenting, so every documented file/route/seam actually exists.
 
-- [ ] 9.2 Note the AWS-swap seam in docs
+- [x] 9.2 Note the AWS-swap seam in docs
   - Briefly document that retrieval/guardrail/persistence are local mocks behind fixed
     interfaces to be replaced in a later AWS phase. Do not alter `docs/AWS_SETUP.md`
     content beyond additive notes if needed.
   - _Requirements: 9.2, 12.2_
+  - NOTE: added an "Architecture Seams: Local Mocks Today, AWS Later" section to
+    `README.md` documenting each seam with accurate repo-relative paths — retrieval
+    (`src/lib/bedrock/retrieve.ts`), guardrail (`src/lib/bedrock/guardrail.ts`),
+    composition/normalization (`src/lib/bedrock/prompt.ts` + `normalize.ts`, with the
+    grounding/citation/honest-non-verification/sensitive-data invariants any future model
+    must preserve), and feedback persistence (`src/lib/db/feedback.ts` no-op). Also states
+    routes keep calling the same interfaces, AWS creds/server-only config never enter the
+    client bundle, and AWS env vars are optional placeholders. Added a clearly-labeled
+    additive "Current Local MVP Status" note at the top of `docs/AWS_SETUP.md` (no existing
+    content removed or contradicted), distinguishing what exists now from what is planned.
 
 ## 10. Verification gates
 
