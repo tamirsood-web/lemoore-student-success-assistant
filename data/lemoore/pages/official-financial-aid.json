@@ -1,0 +1,15 @@
+{
+  "id": "official-financial-aid",
+  "title": "Financial Aid",
+  "url": "https://lemoorecollege.edu/admissions/financial-aid/",
+  "department": "Financial Aid",
+  "topic": "financial-aid",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Lemoore College can help you find the right financial aid, from grants and scholarships to loans. Financial aid comes in many forms, but it's all designed to help with your educational expenses. The office guides students through a three-step application process: submitting an admissions application, completing either the FAFSA or California Dream Act Application, and setting up a Financial Aid Forms account to manage aid tasks. Financial Aid Office, 100 Bldg. Phone: (559) 925-3310. Email: lemoorefinancialaid@whccd.edu. Hours: Monday - Friday 8:00 am - 5:00 pm.",
+  "chunks": [
+    { "id": "official-financial-aid#0", "text": "Lemoore College can help you find the right financial aid, from grants and scholarships to loans. Financial aid comes in many forms, but it's all designed to help with your educational expenses." },
+    { "id": "official-financial-aid#1", "text": "The financial aid application involves three steps: submit an admissions application, complete either the FAFSA or California Dream Act Application, and set up a Financial Aid Forms account to manage aid tasks." },
+    { "id": "official-financial-aid#2", "text": "Financial Aid Office, 100 Bldg. Phone: (559) 925-3310. Email: lemoorefinancialaid@whccd.edu. Hours: Monday - Friday 8:00 am - 5:00 pm." }
+  ]
+}

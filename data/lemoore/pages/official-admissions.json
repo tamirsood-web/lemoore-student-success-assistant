@@ -1,0 +1,16 @@
+{
+  "id": "official-admissions",
+  "title": "Apply to Lemoore College | Lemoore College",
+  "url": "https://lemoorecollege.edu/admissions/",
+  "department": "Admissions",
+  "topic": "admissions",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "What are you waiting for? It's free to apply. Start your application by completing the Lemoore College application through CCCApply. To create your account, enter your cell phone number or a personal email (example: Gmail, yahoo mail or iCloud), then enter the 6-digit number sent to your cellphone or personal email to verify your account. Complete the application by providing required information including your address, parent contact numbers, email address, Social Security/Residency number (if available), and general tax info. You should receive a confirmation email in the email account you entered when you created your OpenCCC Apply account. You will receive an additional email message from WHC Coalinga or WHC Lemoore with your one time log in link and username. Admissions & Records is located at 555 College Avenue, Building 100, open Mon-Fri 8:00 am - 5:00pm (Virtual Services available via zoom or phone), phone (559) 925-3317.",
+  "chunks": [
+    { "id": "official-admissions#0", "text": "What are you waiting for? It's free to apply. Start your application by completing the Lemoore College application through CCCApply." },
+    { "id": "official-admissions#1", "text": "To create your account, enter your cell phone number or a personal email (example: Gmail, yahoo mail or iCloud), then enter the 6-digit number sent to your cellphone or personal email to verify your account." },
+    { "id": "official-admissions#2", "text": "Complete the application by providing required information including your address, parent contact numbers, email address, Social Security/Residency number (if available), and general tax info. You should receive a confirmation email in the email account you entered when you created your OpenCCC Apply account. You will receive an additional email message from WHC Coalinga or WHC Lemoore with your one time log in link and username." },
+    { "id": "official-admissions#3", "text": "Admissions & Records is located at 555 College Avenue, Building 100, open Mon-Fri 8:00 am - 5:00pm (Virtual Services available via zoom or phone), phone (559) 925-3317." }
+  ]
+}

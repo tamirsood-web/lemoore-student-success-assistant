@@ -1,0 +1,16 @@
+{
+  "id": "official-counseling",
+  "title": "Counseling/Advising Services | Lemoore College",
+  "url": "https://lemoorecollege.edu/resources/counseling/",
+  "department": "Counseling",
+  "topic": "counseling",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Counseling Services is located at 555 College Avenue, Building 100, Student Services. Phone: (559) 925-3130. Hours: Monday - Friday 8:15am - 4:45pm. General/Academic counseling provides educational planning and course selection along with assistance with degree and certificate requirements. Probation/Academic Recovery offers individualized counseling to create a tailored success plan and access to tutoring resources. Career Services provides career assessments to identify interests and strengths and resume and cover letter review and support. Transfer Planning offers workshops, planning tools, and application assistance for four-year university transfers. Students can Schedule an Appointment and meet with counselors organized by academic major (Arts & Letters, Career Technical Education, Health Careers, Math & Science, and Social Science) as well as specialized affinity teams (CalWORKs, DSPS, EOPS/CARE, Military, and Dual Enrollment).",
+  "chunks": [
+    { "id": "official-counseling#0", "text": "Counseling Services is located at 555 College Avenue, Building 100, Student Services. Phone: (559) 925-3130. Hours: Monday - Friday 8:15am - 4:45pm." },
+    { "id": "official-counseling#1", "text": "General/Academic counseling provides educational planning and course selection along with assistance with degree and certificate requirements. Probation/Academic Recovery offers individualized counseling to create a tailored success plan and access to tutoring resources." },
+    { "id": "official-counseling#2", "text": "Career Services provides career assessments to identify interests and strengths and resume and cover letter review and support. Transfer Planning offers workshops, planning tools, and application assistance for four-year university transfers." },
+    { "id": "official-counseling#3", "text": "Students can Schedule an Appointment and meet with counselors organized by academic major (Arts & Letters, Career Technical Education, Health Careers, Math & Science, and Social Science) as well as specialized affinity teams (CalWORKs, DSPS, EOPS/CARE, Military, and Dual Enrollment)." }
+  ]
+}

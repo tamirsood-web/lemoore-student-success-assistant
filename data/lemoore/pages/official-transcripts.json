@@ -1,0 +1,16 @@
+{
+  "id": "official-transcripts",
+  "title": "Transcripts | Lemoore College",
+  "url": "https://lemoorecollege.edu/resources/transcripts.php",
+  "department": "Admissions and Records",
+  "topic": "transcripts",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Students receive two free transcript requests in their lifetime. These are only printed for pick up or mail delivery by USMS mail. After exhausting free requests, students must use Parchment. All standard transcript requests ordered through Parchment are $7.38 per transcript. Parchment delivers electronically when available and printed & mailed orders upon request. Paper transcripts from other institutions should be mailed to Lemoore College, Admissions and Records, 555 College Ave., Lemoore, CA 93245. Electronic transcripts from other institutions can be sent via email to LemooreTranscripts@whccd.edu. Admissions & Records is available Monday - Friday 8am - 5pm.",
+  "chunks": [
+    { "id": "official-transcripts#0", "text": "Students receive two free transcript requests in their lifetime. These are only printed for pick up or mail delivery by USMS mail." },
+    { "id": "official-transcripts#1", "text": "After exhausting free requests, students must use Parchment. All standard transcript requests ordered through Parchment are $7.38 per transcript. Parchment delivers electronically when available and printed & mailed orders upon request." },
+    { "id": "official-transcripts#2", "text": "Paper transcripts from other institutions should be mailed to Lemoore College, Admissions and Records, 555 College Ave., Lemoore, CA 93245. Electronic transcripts from other institutions can be sent via email to LemooreTranscripts@whccd.edu." },
+    { "id": "official-transcripts#3", "text": "Admissions & Records is available Monday - Friday 8am - 5pm." }
+  ]
+}

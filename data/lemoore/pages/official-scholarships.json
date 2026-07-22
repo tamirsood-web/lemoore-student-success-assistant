@@ -1,0 +1,16 @@
+{
+  "id": "official-scholarships",
+  "title": "Grants And Scholarships",
+  "url": "https://lemoorecollege.edu/admissions/grants-and-scholarships.php",
+  "department": "Financial Aid",
+  "topic": "grants-and-scholarships",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Scholarships are a great way to help offset part or all of your academic expenses. The President's Scholars Program provides free tuition and book expenses to all California high school graduates with a 3.5 GPA or higher. Grants available include: Federal Pell Grant, federally funded, need-based grants awarded to low-income undergraduate students; SEOG, federally funded grants awarded to undergraduates with exceptional financial need; Cal Grant and SSCG, state-funded monetary grants given to students to help pay for college expenses; and the California Chafee Grant, which gives current or former foster youth money for career and technical training or college courses. Students are encouraged to submit the FAFSA or CA Dream Act Application, and early application is strongly encouraged.",
+  "chunks": [
+    { "id": "official-scholarships#0", "text": "Scholarships are a great way to help offset part or all of your academic expenses. The President's Scholars Program provides free tuition and book expenses to all California high school graduates with a 3.5 GPA or higher." },
+    { "id": "official-scholarships#1", "text": "Grants available include the Federal Pell Grant (federally funded, need-based grants awarded to low-income undergraduate students) and SEOG (federally funded grants awarded to undergraduates with exceptional financial need)." },
+    { "id": "official-scholarships#2", "text": "Cal Grant and SSCG are state-funded monetary grants given to students to help pay for college expenses. The California Chafee Grant gives current or former foster youth money for career and technical training or college courses." },
+    { "id": "official-scholarships#3", "text": "Students are encouraged to submit the FAFSA or CA Dream Act Application, and early application is strongly encouraged." }
+  ]
+}

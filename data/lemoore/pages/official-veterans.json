@@ -1,0 +1,16 @@
+{
+  "id": "official-veterans",
+  "title": "Veterans",
+  "url": "https://lemoorecollege.edu/resources/military-services/veterans/",
+  "department": "Veterans Services",
+  "topic": "veterans",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Lemoore College is approved for training of veterans and dependents under Federal and State laws administered by the Veterans' Administration and State Department of Veterans' Affairs. The institution certifies enrollment and progress for eligible students while providing counseling and academic planning support. Certifying Official Services include assistance applying for Veteran Educational benefits, certification of enrollment for Veteran Educational benefits, tuition deferments for Chapter 31 and 33 students, military transcript requests, military credit evaluation, and CalVet dependent fee waiver management. Counseling and Advising Services include academic advising and orientation workshops, career and probation workshops, personal counseling, previous college credit evaluation, and priority registration eligibility (365REG). The college supports multiple GI Bill chapters including Chapter 30 (Montgomery GI Bill), Chapter 31 (Vocational Rehabilitation), Chapter 33 (Post-9/11 GI Bill), Chapter 35 (Survivors & Dependents), Chapter 1606 (Selected Reserve), and Chapter 1607 (REAP), plus CalVet fee waivers. Contact Military Services at (559) 925-3216 or lemooremilitary@whccd.edu, located in the 100 Bldg.",
+  "chunks": [
+    { "id": "official-veterans#0", "text": "Lemoore College is approved for training of veterans and dependents under Federal and State laws administered by the Veterans' Administration and State Department of Veterans' Affairs. The institution certifies enrollment and progress for eligible students while providing counseling and academic planning support." },
+    { "id": "official-veterans#1", "text": "Certifying Official Services include assistance applying for Veteran Educational benefits, certification of enrollment for Veteran Educational benefits, tuition deferments for Chapter 31 and 33 students, military transcript requests, military credit evaluation, and CalVet dependent fee waiver management." },
+    { "id": "official-veterans#2", "text": "Counseling and Advising Services include academic advising and orientation workshops, career and probation workshops, personal counseling, previous college credit evaluation, and priority registration eligibility (365REG). The college supports GI Bill chapters including Chapter 30 (Montgomery GI Bill), Chapter 31 (Vocational Rehabilitation), Chapter 33 (Post-9/11 GI Bill), Chapter 35 (Survivors & Dependents), Chapter 1606 (Selected Reserve), and Chapter 1607 (REAP), plus CalVet fee waivers." },
+    { "id": "official-veterans#3", "text": "Contact Military Services at (559) 925-3216 or lemooremilitary@whccd.edu, located in the 100 Bldg." }
+  ]
+}

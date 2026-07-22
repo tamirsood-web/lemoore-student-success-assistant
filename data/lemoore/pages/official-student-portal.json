@@ -1,0 +1,15 @@
+{
+  "id": "official-student-portal",
+  "title": "myWestHills Portal | West Hills Community College District",
+  "url": "https://lemoorecollege.edu/portal/",
+  "department": "Information Technology",
+  "topic": "student-portal",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "To access the myWestHills student portal, users enter their myWestHills user name and Password. The username portion is the username@my.whccd.edu part in your email. Students can log into the Student Login portal at the Lemoore Golden Eagles Student Portal to access their account. For login issues, the portal provides three troubleshooting options: a Forgot your username? link, a Reset Password option, and Manage Account access. For additional assistance, students should Contact Lemoore Student Services at (559) 925-3000. The portal provides direct links to myCourses (Canvas), Email, Student Self-Service, and Employee Self-Service. Users no longer enrolled or employed can access Self Service Tools to perform actions such as request unofficial transcripts or view tax documents.",
+  "chunks": [
+    { "id": "official-student-portal#0", "text": "To access the myWestHills student portal, users enter their myWestHills user name and Password. The username portion is the username@my.whccd.edu part in your email. Students can log into the Student Login portal at the Lemoore Golden Eagles Student Portal to access their account." },
+    { "id": "official-student-portal#1", "text": "For login issues, the portal provides three troubleshooting options: a Forgot your username? link, a Reset Password option, and Manage Account access. For additional assistance, students should Contact Lemoore Student Services at (559) 925-3000." },
+    { "id": "official-student-portal#2", "text": "The portal provides direct links to myCourses (Canvas), Email, Student Self-Service, and Employee Self-Service. Users no longer enrolled or employed can access Self Service Tools to perform actions such as request unofficial transcripts or view tax documents." }
+  ]
+}

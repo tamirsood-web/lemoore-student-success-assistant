@@ -1,0 +1,15 @@
+{
+  "id": "official-dsps",
+  "title": "Disabled Students Program & Services",
+  "url": "https://lemoorecollege.edu/resources/student-support/disabled-student-services/",
+  "department": "DSPS",
+  "topic": "dsps",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "The DSPS program serves students with disabilities pursuing certificates, degrees, or transfer goals. The program offers an engaging educational experience providing a full range of case management services, including advising and counseling, outreach, accommodations, and much more. The program provides several support options: application and forms processing, direct case management and advising, A.L.P.S Academy programming, educational assistance classes, and mental wellness services. The college emphasizes that these services create an inclusive, balanced, and collegial climate for students with disabilities. Students can reach DSPS at (559) 925-3330, in Room 270B, Monday-Friday 8am-5pm. The Associate Dean of Categorical Programs is Maria Gonzalez, reachable at (559) 925-3244 or MariadelaluzGonzalez@whccd.edu.",
+  "chunks": [
+    { "id": "official-dsps#0", "text": "The DSPS program serves students with disabilities pursuing certificates, degrees, or transfer goals. The program offers an engaging educational experience providing a full range of case management services, including advising and counseling, outreach, accommodations, and much more." },
+    { "id": "official-dsps#1", "text": "The program provides several support options: application and forms processing, direct case management and advising, A.L.P.S Academy programming, educational assistance classes, and mental wellness services. The college emphasizes that these services create an inclusive, balanced, and collegial climate for students with disabilities." },
+    { "id": "official-dsps#2", "text": "Students can reach DSPS at (559) 925-3330, in Room 270B, Monday-Friday 8am-5pm. The Associate Dean of Categorical Programs is Maria Gonzalez, reachable at (559) 925-3244 or MariadelaluzGonzalez@whccd.edu." }
+  ]
+}

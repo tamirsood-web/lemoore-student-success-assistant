@@ -20,6 +20,23 @@ const optionalEnvString = z.preprocess(
   z.string().min(1).optional(),
 );
 
+/** Optional bounded integer from env; empty/unset becomes the provided default. */
+function boundedIntFromEnv(min: number, max: number, fallback: number) {
+  return z.preprocess(
+    (value) =>
+      value === undefined ||
+      value === null ||
+      (typeof value === "string" && value.trim() === "")
+        ? fallback
+        : value,
+    z.coerce
+      .number()
+      .int()
+      .min(min)
+      .max(max),
+  );
+}
+
 /** Parse common truthy/falsy env spellings into a boolean; unset becomes `false`. */
 const booleanFromEnv = z.preprocess((value) => {
   if (typeof value === "boolean") return value;
@@ -55,10 +72,31 @@ const RawEnvSchema = z.object({
 
   ENABLE_ADMIN_SOURCE_SYNC: booleanFromEnv,
 
-  // --- AWS (all optional in this phase; the app boots without them) ---
+  // RAG provider selection: "local" (default, offline) or "bedrock".
+  RAG_PROVIDER: z.preprocess(
+    (value) =>
+      typeof value === "string" && value.trim() === "" ? undefined : value,
+    z.enum(["local", "bedrock"]).default("local"),
+  ),
+
+  // Bedrock Knowledge Base type. Optional at the env level (only meaningful in bedrock
+  // mode); the bedrock config resolver requires + validates it when RAG_PROVIDER=bedrock.
+  BEDROCK_KB_TYPE: z.preprocess(
+    (value) =>
+      typeof value === "string" && value.trim() === "" ? undefined : value,
+    z.enum(["vector", "managed"]).optional(),
+  ),
+
+  // --- AWS (all optional at env level; app boots without them in local mode) ---
+  // KB id / model ARN structure is validated in the bedrock config resolver (bedrock mode
+  // only), so a placeholder value can't break local boot. The two numeric settings are
+  // bounded ints with safe defaults, so they are always well-formed.
   AWS_REGION: optionalEnvString,
   BEDROCK_MODEL_ID: optionalEnvString,
+  BEDROCK_MODEL_ARN: optionalEnvString,
   BEDROCK_KNOWLEDGE_BASE_ID: optionalEnvString,
+  BEDROCK_NUMBER_OF_RESULTS: boundedIntFromEnv(1, 20, 8),
+  BEDROCK_REQUEST_TIMEOUT_MS: boundedIntFromEnv(1000, 60000, 15000),
   BEDROCK_GUARDRAIL_ID: optionalEnvString,
   BEDROCK_GUARDRAIL_VERSION: optionalEnvString,
   COGNITO_USER_POOL_ID: optionalEnvString,
@@ -73,11 +111,16 @@ export const EnvSchema = RawEnvSchema.transform((raw) => ({
   appName: raw.NEXT_PUBLIC_APP_NAME,
   chatMaxInputChars: raw.CHAT_MAX_INPUT_CHARS,
   enableAdminSourceSync: raw.ENABLE_ADMIN_SOURCE_SYNC,
+  ragProvider: raw.RAG_PROVIDER,
   aws: {
     region: raw.AWS_REGION,
     bedrock: {
       modelId: raw.BEDROCK_MODEL_ID,
+      modelArn: raw.BEDROCK_MODEL_ARN,
       knowledgeBaseId: raw.BEDROCK_KNOWLEDGE_BASE_ID,
+      kbType: raw.BEDROCK_KB_TYPE,
+      numberOfResults: raw.BEDROCK_NUMBER_OF_RESULTS,
+      timeoutMs: raw.BEDROCK_REQUEST_TIMEOUT_MS,
       guardrailId: raw.BEDROCK_GUARDRAIL_ID,
       guardrailVersion: raw.BEDROCK_GUARDRAIL_VERSION,
     },

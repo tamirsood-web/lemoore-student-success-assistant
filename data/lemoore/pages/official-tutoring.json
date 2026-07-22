@@ -1,0 +1,16 @@
+{
+  "id": "official-tutoring",
+  "title": "Academic Center for Excellence and Academic Support (ACE) | Lemoore College",
+  "url": "https://lemoorecollege.edu/resources/student-support/tutoring/",
+  "department": "Academic Support",
+  "topic": "tutoring",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "The Academic Center for Excellence (ACE) provides support in reading, writing, and math. Students can receive help with understanding class assignments, reading comprehension, and overcoming math phobias. The center also assists with personal statements for college transfer or scholarship essays and administers English prerequisite challenges. The service requires enrollment in NC 100, described as a no-cost, non-credit course with no assignments or expectations. The Academic Center is situated in the Library and Learning Resource Center (Building 400), 555 College Avenue. Hours are Monday: 10am-12pm, 1-7pm; Tuesday-Thursday: 10am-7pm; Friday: 10am-12pm. Contact Lupe Alvarado, Tutoring Specialist, Phone: (559) 925-3416, Email: lupealvarado1@whccd.edu, Office: Library room 452. Supplemental Instruction leaders who are current students lead SI Sessions, and tutoring is available both in-person and online.",
+  "chunks": [
+    { "id": "official-tutoring#0", "text": "The Academic Center for Excellence (ACE) provides support in reading, writing, and math. Students can receive help with understanding class assignments, reading comprehension, and overcoming math phobias. The center also assists with personal statements for college transfer or scholarship essays and administers English prerequisite challenges." },
+    { "id": "official-tutoring#1", "text": "The service requires enrollment in NC 100, described as a no-cost, non-credit course with no assignments or expectations." },
+    { "id": "official-tutoring#2", "text": "The Academic Center is situated in the Library and Learning Resource Center (Building 400), 555 College Avenue. Hours are Monday: 10am-12pm, 1-7pm; Tuesday-Thursday: 10am-7pm; Friday: 10am-12pm." },
+    { "id": "official-tutoring#3", "text": "Contact Lupe Alvarado, Tutoring Specialist, Phone: (559) 925-3416, Email: lupealvarado1@whccd.edu, Office: Library room 452. Supplemental Instruction leaders who are current students lead SI Sessions, and tutoring is available both in-person and online." }
+  ]
+}

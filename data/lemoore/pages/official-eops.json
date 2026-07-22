@@ -1,0 +1,16 @@
+{
+  "id": "official-eops",
+  "title": "EOPS",
+  "url": "https://lemoorecollege.edu/resources/student-support/eops/",
+  "department": "EOPS",
+  "topic": "eops",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Extended Opportunity Programs & Services (EOPS) is a state-funded program designed to help low-income and educationally disadvantaged students gain access to and successfully complete a program of higher education. The program provides school supplies, book vouchers, EOPS grants, transit passes, gas cards, educational counseling, priority registration, and application fee waivers for CSU/UC transfers. To be eligible, applicants must demonstrate financial need under CA Promise Grant B, educational disadvantage, enrollment in 12+ units at application, completion of no more than 55 degree-applicable units, and a completed education plan. Contact: EOPS/CARE Program (559) 925-3330; Maria Gonzalez, Associate Dean of Categorical Programs (559) 925-3244, MariadelaluzGonzalez@whccd.edu; Room 270B; Hours Monday-Friday, 8:00am-5:00pm.",
+  "chunks": [
+    { "id": "official-eops#0", "text": "Extended Opportunity Programs & Services (EOPS) is a state-funded program designed to help low-income and educationally disadvantaged students gain access to and successfully complete a program of higher education." },
+    { "id": "official-eops#1", "text": "The program provides school supplies, book vouchers, EOPS grants, transit passes, gas cards, educational counseling, priority registration, and application fee waivers for CSU/UC transfers." },
+    { "id": "official-eops#2", "text": "To be eligible, applicants must demonstrate financial need under CA Promise Grant B, educational disadvantage, enrollment in 12+ units at application, completion of no more than 55 degree-applicable units, and a completed education plan." },
+    { "id": "official-eops#3", "text": "Contact: EOPS/CARE Program (559) 925-3330; Maria Gonzalez, Associate Dean of Categorical Programs (559) 925-3244, MariadelaluzGonzalez@whccd.edu; Room 270B; Hours Monday-Friday, 8:00am-5:00pm." }
+  ]
+}

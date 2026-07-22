@@ -1,9 +1,21 @@
-import { getEnv } from "@/lib/validation";
-import { ChatContainer } from "@/features/chat/ChatContainer";
+import { Hero } from "@/features/site/sections/Hero";
+import { SearchByInterests } from "@/features/site/sections/SearchByInterests";
+import { NewsEvents } from "@/features/site/sections/NewsEvents";
+import { FinancingEducation } from "@/features/site/sections/FinancingEducation";
+import { LearningThatFits } from "@/features/site/sections/LearningThatFits";
 
-// Server component: reads the server-validated input limit and passes the numeric value
-// into the client chat component. No server-only module or AWS env value reaches the client.
-export default function PublicHomePage() {
-  const maxInputChars = getEnv().chatMaxInputChars;
-  return <ChatContainer maxInputChars={maxInputChars} />;
+// Static reproduction of the Lemoore College homepage, in the real section order:
+// hero → Search By Your Interests → Latest News & Events → Financing Your Education →
+// Learning That Fits Your Life. The AI search + floating assistant (in the layout) are the
+// three added improvements over the current official site.
+export default function HomePage() {
+  return (
+    <>
+      <Hero />
+      <SearchByInterests />
+      <NewsEvents />
+      <FinancingEducation />
+      <LearningThatFits />
+    </>
+  );
 }

@@ -1,0 +1,15 @@
+{
+  "id": "official-academic-calendar",
+  "title": "Academic Calendar | Lemoore College",
+  "url": "https://lemoorecollege.edu/academic-calendar/",
+  "department": "Admissions and Records",
+  "topic": "academic calendar",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "West Hills College's academic calendar provides important student deadlines throughout the academic year. Calendar information is updated periodically and subject to change. Check back frequently, to ensure you have the most up-to-date information. Key dates for the 2026-2027 academic year include: Instruction begins August 10, 2026; Labor Day (no classes) September 7, 2026; Second 8-week classes begin October 12, 2026; Finals week December 7-11, 2026; Spring semester instruction begins January 11, 2027; Spring recess March 22-26, 2027; Finals week May 17-21, 2027; Lemoore College Commencement May 20, 2027.",
+  "chunks": [
+    { "id": "official-academic-calendar#0", "text": "West Hills College's academic calendar provides important student deadlines throughout the academic year. Calendar information is updated periodically and subject to change. Check back frequently, to ensure you have the most up-to-date information." },
+    { "id": "official-academic-calendar#1", "text": "Key fall 2026 dates: Instruction begins August 10, 2026; Labor Day (no classes) September 7, 2026; Second 8-week classes begin October 12, 2026; Finals week December 7-11, 2026." },
+    { "id": "official-academic-calendar#2", "text": "Key spring 2027 dates: Spring semester instruction begins January 11, 2027; Spring recess March 22-26, 2027; Finals week May 17-21, 2027; Lemoore College Commencement May 20, 2027." }
+  ]
+}

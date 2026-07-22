@@ -1,0 +1,15 @@
+{
+  "$comment": "Project permissions. .env.example contains ONLY placeholder names (no secrets) and is a tracked file (see .gitignore '!.env.example'), so reading/editing it is explicitly allowed here. Real secrets live in .env.local, which stays ignored and is NOT allowed.",
+  "permissions": {
+    "allow": [
+      "Read(./.env.example)",
+      "Edit(./.env.example)",
+      "Write(./.env.example)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.local)",
+      "Read(./.env.*.local)"
+    ]
+  }
+}

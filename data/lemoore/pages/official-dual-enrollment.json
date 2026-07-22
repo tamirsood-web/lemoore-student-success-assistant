@@ -1,0 +1,16 @@
+{
+  "id": "official-dual-enrollment",
+  "title": "High School Dual Enrollment",
+  "url": "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/",
+  "department": "Admissions",
+  "topic": "dual-enrollment",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Lemoore College's dual enrollment program enables current high school students to earn college credits while still attending secondary school. The term dual enrollment refers to students being enrolled, concurrently, in two different educational institutions. The program offers several advantages: students may potentially earn an Associate's degree by or shortly after high school graduation; courses are tuition-free, making it a cost-efficient path to accumulate college credits; and the transition from high school to college becomes smoother through early exposure to college-level academics. Dual enrollment courses are different in that they are taught to the rigor of a college course. Final grades appear on official college transcripts, and grading uses college rubrics rather than high school standards. Requirements to apply include a principal recommendation from the student's high school, parental permission, meeting course prerequisites where applicable, and parental/guardian and high school counselor consent. To apply, students must complete the Lemoore College application through CCCApply, then use the Lemoore Dual Enrollment Portal to select courses. Contact the dual enrollment office at lemooredualenrollment@whccd.edu or (559) 925-3357.",
+  "chunks": [
+    { "id": "official-dual-enrollment#0", "text": "Lemoore College's dual enrollment program enables current high school students to earn college credits while still attending secondary school. The term dual enrollment refers to students being enrolled, concurrently, in two different educational institutions." },
+    { "id": "official-dual-enrollment#1", "text": "The program offers several advantages: students may potentially earn an Associate's degree by or shortly after high school graduation; courses are tuition-free, making it a cost-efficient path to accumulate college credits; and the transition from high school to college becomes smoother through early exposure to college-level academics." },
+    { "id": "official-dual-enrollment#2", "text": "Dual enrollment courses are different in that they are taught to the rigor of a college course. Final grades appear on official college transcripts, and grading uses college rubrics rather than high school standards." },
+    { "id": "official-dual-enrollment#3", "text": "Requirements to apply include a principal recommendation from the student's high school, parental permission, and meeting course prerequisites where applicable. To apply, students must complete the Lemoore College application through CCCApply, then use the Lemoore Dual Enrollment Portal to select courses. Contact the dual enrollment office at lemooredualenrollment@whccd.edu or (559) 925-3357." }
+  ]
+}

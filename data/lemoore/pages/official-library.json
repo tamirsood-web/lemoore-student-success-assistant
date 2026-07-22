@@ -1,0 +1,16 @@
+{
+  "id": "official-library",
+  "title": "Library and Learning Resource Center | Lemoore College",
+  "url": "https://lemoorecollege.edu/resources/library/",
+  "department": "Library",
+  "topic": "library",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "The Library and Learning Resource Center is located at 555 College Avenue, Building 400, and operates Monday - Thursday 8am - 7pm, Friday 8am - 4pm. Contact: (559) 925-3420 and ask@westhillscollege.libanswers.com. The center offers a searchable collection of Books, eBooks, eJournals and Videos through its OneSearch interface. Users can access My Library Account for personal resources. The facility provides several support options including Databases, Research & Citation Guides, Study Rooms available for booking, and Tutoring services. A Magazine Collection is available digitally, and the center maintains instructional videos covering topics like Introduction to College Research, Finding eBooks, Finding Print Books, and Accessing Databases.",
+  "chunks": [
+    { "id": "official-library#0", "text": "The Library and Learning Resource Center is located at 555 College Avenue, Building 400, and operates Monday - Thursday 8am - 7pm, Friday 8am - 4pm. Contact: (559) 925-3420 and ask@westhillscollege.libanswers.com." },
+    { "id": "official-library#1", "text": "The center offers a searchable collection of Books, eBooks, eJournals and Videos through its OneSearch interface. Users can access My Library Account for personal resources." },
+    { "id": "official-library#2", "text": "The facility provides several support options including Databases, Research & Citation Guides, Study Rooms available for booking, and Tutoring services." },
+    { "id": "official-library#3", "text": "A Magazine Collection is available digitally, and the center maintains instructional videos covering topics like Introduction to College Research, Finding eBooks, Finding Print Books, and Accessing Databases." }
+  ]
+}

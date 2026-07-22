@@ -25,3 +25,15 @@ export {
   parseChatRequest,
   parseFeedbackRequest,
 } from "./schemas";
+
+export {
+  APPROVED_OFFICIAL_DOMAINS,
+  isApprovedOfficialUrl,
+  officialSourceSchema,
+  officialSourceCitationSchema,
+  websiteSearchResponseSchema,
+  buildSearchRequestSchema,
+  searchRequestSchema,
+  parseSearchRequest,
+  type SearchRequestBody,
+} from "./searchSchemas";

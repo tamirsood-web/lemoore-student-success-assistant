@@ -1,0 +1,16 @@
+{
+  "id": "official-registration",
+  "title": "Lemoore College Class Schedule - Course Catalog | Lemoore College",
+  "url": "https://lemoorecollege.edu/schedule/",
+  "department": "Admissions and Records",
+  "topic": "registration",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Classes Around Your Schedule - Find the classes you need in the style you want at Lemoore College! West Hills offers select course sections with Zero Textbook Cost (ZTC). For Low Textbook Cost (LTC) courses, the textbook purchase for this type of course is $40 or less. Coalinga College & Lemoore College are updating course numbers to align with the CCC Common Course Numbering system. The schedule includes a filter system allowing students to search by subject, course title, location, term, start date, length, and textbook requirements. Tip: To view short-term classes simply filter by length.",
+  "chunks": [
+    { "id": "official-registration#0", "text": "Classes Around Your Schedule - Find the classes you need in the style you want at Lemoore College!" },
+    { "id": "official-registration#1", "text": "West Hills offers select course sections with Zero Textbook Cost (ZTC). For Low Textbook Cost (LTC) courses, the textbook purchase for this type of course is $40 or less." },
+    { "id": "official-registration#2", "text": "Coalinga College & Lemoore College are updating course numbers to align with the CCC Common Course Numbering system." },
+    { "id": "official-registration#3", "text": "The schedule includes a filter system allowing students to search by subject, course title, location, term, start date, length, and textbook requirements. Tip: To view short-term classes simply filter by length." }
+  ]
+}

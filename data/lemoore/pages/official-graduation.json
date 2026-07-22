@@ -1,0 +1,15 @@
+{
+  "id": "official-graduation",
+  "title": "How do I petition to Graduate",
+  "url": "https://lemoorecollege.edu/admissions/faqs.php",
+  "department": "Admissions and Records",
+  "topic": "graduation",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "Petitioning to graduate is an important milestone in your academic career. Students at Lemoore College may apply for graduation online, safely and conveniently from any remote location, through a dedicated module designed to be convenient and time-efficient. A detailed guide titled Petition to Graduate Guide walks students through the graduation application steps. If students are unsure about eligibility or cannot locate their program, they should consult with a counselor before submitting their petition. The Admissions & Records office provides support at (559) 925-3317, with in-person services available Monday-Friday, 8:00 AM - 5:00 PM, plus virtual options via Zoom or phone.",
+  "chunks": [
+    { "id": "official-graduation#0", "text": "Petitioning to graduate is an important milestone in your academic career. Students at Lemoore College may apply for graduation online, safely and conveniently from any remote location, through a dedicated module designed to be convenient and time-efficient." },
+    { "id": "official-graduation#1", "text": "A detailed guide titled Petition to Graduate Guide walks students through the graduation application steps. If students are unsure about eligibility or cannot locate their program, they should consult with a counselor before submitting their petition." },
+    { "id": "official-graduation#2", "text": "The Admissions & Records office provides support at (559) 925-3317, with in-person services available Monday-Friday, 8:00 AM - 5:00 PM, plus virtual options via Zoom or phone." }
+  ]
+}

@@ -23,6 +23,15 @@ export type {
 
 export type { SourceAudience, Source, CourseDate } from "./source";
 
+export type {
+  OfficialChunk,
+  OfficialSource,
+  OfficialSourceCitation,
+  RagProvider,
+  WebsiteSearchResponse,
+  WebsiteSearchResponseKind,
+} from "./search";
+
 export type { SensitiveCategory, GuardrailVerdict } from "./guardrail";
 
 export type {

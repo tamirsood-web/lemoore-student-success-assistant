@@ -1,0 +1,158 @@
+{
+  "name": "Lemoore College official-source corpus",
+  "description": "Curated pages ingested from approved official domains for the AI website search + assistant. Prototype demo — not the official website.",
+  "approvedDomains": [
+    "lemoorecollege.edu",
+    "westhillscollege.com",
+    "whccd.edu"
+  ],
+  "lastIngested": "2026-07-22",
+  "pageCount": 16,
+  "chunkCount": 59,
+  "pages": [
+    {
+      "id": "official-academic-calendar",
+      "title": "Academic Calendar | Lemoore College",
+      "url": "https://lemoorecollege.edu/academic-calendar/",
+      "department": "Admissions and Records",
+      "topic": "academic calendar",
+      "file": "pages/official-academic-calendar.json",
+      "chunks": 3
+    },
+    {
+      "id": "official-admissions",
+      "title": "Apply to Lemoore College | Lemoore College",
+      "url": "https://lemoorecollege.edu/admissions/",
+      "department": "Admissions",
+      "topic": "admissions",
+      "file": "pages/official-admissions.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-cost-of-attendance",
+      "title": "Cost Of Attendance",
+      "url": "https://lemoorecollege.edu/admissions/cost-of-attendance/",
+      "department": "Financial Aid",
+      "topic": "cost-of-attendance",
+      "file": "pages/official-cost-of-attendance.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-counseling",
+      "title": "Counseling/Advising Services | Lemoore College",
+      "url": "https://lemoorecollege.edu/resources/counseling/",
+      "department": "Counseling",
+      "topic": "counseling",
+      "file": "pages/official-counseling.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-dsps",
+      "title": "Disabled Students Program & Services",
+      "url": "https://lemoorecollege.edu/resources/student-support/disabled-student-services/",
+      "department": "DSPS",
+      "topic": "dsps",
+      "file": "pages/official-dsps.json",
+      "chunks": 3
+    },
+    {
+      "id": "official-dual-enrollment",
+      "title": "High School Dual Enrollment",
+      "url": "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/",
+      "department": "Admissions",
+      "topic": "dual-enrollment",
+      "file": "pages/official-dual-enrollment.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-eops",
+      "title": "EOPS",
+      "url": "https://lemoorecollege.edu/resources/student-support/eops/",
+      "department": "EOPS",
+      "topic": "eops",
+      "file": "pages/official-eops.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-financial-aid",
+      "title": "Financial Aid",
+      "url": "https://lemoorecollege.edu/admissions/financial-aid/",
+      "department": "Financial Aid",
+      "topic": "financial-aid",
+      "file": "pages/official-financial-aid.json",
+      "chunks": 3
+    },
+    {
+      "id": "official-graduation",
+      "title": "How do I petition to Graduate",
+      "url": "https://lemoorecollege.edu/admissions/faqs.php",
+      "department": "Admissions and Records",
+      "topic": "graduation",
+      "file": "pages/official-graduation.json",
+      "chunks": 3
+    },
+    {
+      "id": "official-library",
+      "title": "Library and Learning Resource Center | Lemoore College",
+      "url": "https://lemoorecollege.edu/resources/library/",
+      "department": "Library",
+      "topic": "library",
+      "file": "pages/official-library.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-registration",
+      "title": "Lemoore College Class Schedule - Course Catalog | Lemoore College",
+      "url": "https://lemoorecollege.edu/schedule/",
+      "department": "Admissions and Records",
+      "topic": "registration",
+      "file": "pages/official-registration.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-scholarships",
+      "title": "Grants And Scholarships",
+      "url": "https://lemoorecollege.edu/admissions/grants-and-scholarships.php",
+      "department": "Financial Aid",
+      "topic": "grants-and-scholarships",
+      "file": "pages/official-scholarships.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-student-portal",
+      "title": "myWestHills Portal | West Hills Community College District",
+      "url": "https://lemoorecollege.edu/portal/",
+      "department": "Information Technology",
+      "topic": "student-portal",
+      "file": "pages/official-student-portal.json",
+      "chunks": 3
+    },
+    {
+      "id": "official-transcripts",
+      "title": "Transcripts | Lemoore College",
+      "url": "https://lemoorecollege.edu/resources/transcripts.php",
+      "department": "Admissions and Records",
+      "topic": "transcripts",
+      "file": "pages/official-transcripts.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-tutoring",
+      "title": "Academic Center for Excellence and Academic Support (ACE) | Lemoore College",
+      "url": "https://lemoorecollege.edu/resources/student-support/tutoring/",
+      "department": "Academic Support",
+      "topic": "tutoring",
+      "file": "pages/official-tutoring.json",
+      "chunks": 4
+    },
+    {
+      "id": "official-veterans",
+      "title": "Veterans",
+      "url": "https://lemoorecollege.edu/resources/military-services/veterans/",
+      "department": "Veterans Services",
+      "topic": "veterans",
+      "file": "pages/official-veterans.json",
+      "chunks": 4
+    }
+  ]
+}

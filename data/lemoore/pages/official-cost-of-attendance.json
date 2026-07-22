@@ -1,0 +1,16 @@
+{
+  "id": "official-cost-of-attendance",
+  "title": "Cost Of Attendance",
+  "url": "https://lemoorecollege.edu/admissions/cost-of-attendance/",
+  "department": "Financial Aid",
+  "topic": "cost-of-attendance",
+  "sourceType": "official-web-page",
+  "lastIngested": "2026-07-22",
+  "content": "The California Community Colleges' enrollment fee is $46 per unit. Non Resident/Foreign Student Tuition is $386 per unit. As of January 1, 2020, any student registered for classes will be charged a $2 student representation fee in compliance with AB1504. Students must pay for required instructional materials. For Academic Year 2026-27, an in-state student living at home has an estimated total of $20,991, which includes Enrollment Fees of $1,380 (based on 15 units), Books, course materials, supplies, and equipment at $1,305, living expenses of $12,537, transportation of $1,206, and personal/miscellaneous costs of $4,563. Out-of-state students at home face costs totaling $32,571, with Out of State Tuition Including Enrollment Fees of $12,960.",
+  "chunks": [
+    { "id": "official-cost-of-attendance#0", "text": "The California Community Colleges' enrollment fee is $46 per unit. Non Resident/Foreign Student Tuition is $386 per unit." },
+    { "id": "official-cost-of-attendance#1", "text": "As of January 1, 2020, any student registered for classes will be charged a $2 student representation fee in compliance with AB1504. Students must pay for required instructional materials." },
+    { "id": "official-cost-of-attendance#2", "text": "For Academic Year 2026-27, an in-state student living at home has an estimated total of $20,991: Enrollment Fees $1,380 (based on 15 units), Books/course materials/supplies/equipment $1,305, living expenses $12,537, transportation $1,206, and personal/miscellaneous costs $4,563." },
+    { "id": "official-cost-of-attendance#3", "text": "Out-of-state students living at home face costs totaling $32,571, with Out of State Tuition Including Enrollment Fees of $12,960." }
+  ]
+}

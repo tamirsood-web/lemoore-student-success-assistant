@@ -1,23 +1,25 @@
 import type { ReactNode } from "react";
+import { SearchProvider } from "@/features/search/SearchProvider";
+import { PrototypeBanner } from "@/features/site/PrototypeBanner";
+import { SiteHeader } from "@/features/site/SiteHeader";
+import { SiteFooter } from "@/features/site/SiteFooter";
+import { AssistantWidget } from "@/features/assistant/AssistantWidget";
 
-/** Public route-group chrome: page landmarks around the student chat experience. */
+/**
+ * Public site shell reproducing the Lemoore College chrome: prototype disclosure bar,
+ * header (utility + main nav + AI search), page content, institutional footer, and the
+ * floating Student Assistant. The SearchProvider hosts the single shared search overlay.
+ */
 export default function PublicLayout({ children }: { children: ReactNode }) {
   return (
-    <div className="mx-auto flex min-h-screen w-full max-w-3xl flex-col px-4">
-      <header className="py-6">
-        <h1 className="text-xl font-semibold tracking-tight text-foreground">
-          Lemoore Student Success Assistant
-        </h1>
-        <p className="mt-1 text-sm text-muted-foreground">
-          Grounded answers from sample college sources, with citations and safe
-          escalation.
-        </p>
-      </header>
-      <main className="flex-1 pb-8">{children}</main>
-      <footer className="border-t border-border py-4 text-xs text-muted-foreground">
-        Local demo using sample data. Answers may reference sample sources and are
-        not official Lemoore College information.
-      </footer>
-    </div>
+    <SearchProvider>
+      <div className="flex min-h-screen flex-col overflow-x-hidden bg-white">
+        <PrototypeBanner />
+        <SiteHeader />
+        <main className="flex-1">{children}</main>
+        <SiteFooter />
+      </div>
+      <AssistantWidget />
+    </SearchProvider>
   );
 }
