@@ -170,4 +170,26 @@
 
   --bubble-bg-agent:         var(--semantic-color-bubble-agent);
   --bubble-bg-user:          var(--semantic-color-bubble-user);
+
+  /* ─────────────────────────────────────────────
+   * MODAL WINDOW
+   * Source: Figma DS-course · node 234:760
+   * Consumed by: components/modal-window/modal-window.css
+   * ───────────────────────────────────────────── */
+  --modal-bg:              var(--semantic-color-modal-bg);
+  --modal-overlay:         var(--semantic-color-modal-overlay);
+  --modal-radius:          var(--semantic-radius-modal);
+  --modal-divider-color:   var(--semantic-color-modal-divider);
+
+  --modal-padding-x:       var(--semantic-space-modal-padding-x);
+  --modal-padding-y:       var(--semantic-space-modal-padding-y);
+  --modal-gap-y:           var(--semantic-space-modal-gap-y);
+  --modal-gap-x:           var(--semantic-space-modal-gap-x);
+
+  --modal-title-color:       var(--semantic-color-modal-title);
+  --modal-title-font-family: var(--semantic-font-family-ui);
+  --modal-title-font-size:   var(--semantic-font-size-heading);
+  --modal-title-font-weight: var(--semantic-font-weight-bold);
+  --modal-title-line-height: var(--semantic-line-height-tight);
+  --modal-title-letter-spacing: var(--semantic-letter-spacing-none);
 }

@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chat Window — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Token layers -->
+  <link rel="stylesheet" href="../../tokens/primitives.css" />
+  <link rel="stylesheet" href="../../tokens/semantic.css" />
+  <link rel="stylesheet" href="../../tokens/components.css" />
+  <!-- Dependency components -->
+  <link rel="stylesheet" href="../button/button.css" />
+  <link rel="stylesheet" href="../chat-input/chat-input.css" />
+  <!-- This component -->
+  <link rel="stylesheet" href="chat-window.css" />
+
+  <style>
+    /* ── Demo page chrome — not part of the component ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #121212;
+      background: #f5f5f5;
+      padding: 48px 40px;
+      min-height: 150vh;
+    }
+
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+
+    .page-description {
+      font-size: 13px;
+      color: #5c5c5c;
+      margin-bottom: 40px;
+      max-width: 560px;
+    }
+
+    .demo-section { margin-bottom: 48px; }
+
+    .demo-section__title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5c5c5c;
+      margin-bottom: 16px;
+    }
+
+    .demo-section__note {
+      font-size: 12px;
+      color: #5c5c5c;
+      margin-top: 12px;
+    }
+
+    .icon { display: block; width: 16px; height: 16px; }
+
+    .demo-message-list {
+      display: flex; flex-direction: column; gap: 12px;
+      padding: 0; list-style: none;
+    }
+
+    .demo-msg {
+      font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400;
+      line-height: 1.5; color: #121212; background: #ebebeb;
+      border-radius: 12px 12px 12px 4px; padding: 12px 16px;
+      max-width: 80%; align-self: flex-start;
+    }
+
+    .demo-msg--user {
+      background: #e5e9ef; border-radius: 12px 12px 4px 12px;
+      align-self: flex-end;
+    }
+
+    .demo-divider { border: none; border-top: 1px solid #dedede; margin: 40px 0; }
+
+    .demo-toggle-row { display: flex; gap: 12px; margin-bottom: 32px; }
+
+    .demo-fixed-position {
+      position: fixed; bottom: 24px; right: 24px; z-index: 50;
+    }
+
+    .page-content { max-width: 560px; margin-top: 40px; }
+    .page-content p { font-size: 14px; line-height: 1.7; margin-bottom: 16px; }
+    .page-content input {
+      display: block; padding: 8px 12px; border: 1px solid #9d9d9d;
+      border-radius: 4px; font-size: 14px; width: 100%; max-width: 300px; margin-bottom: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Chat Window — Floating Non-Modal</h1>
+  <p class="page-description">
+    A floating chat interface element with expand/collapse support.
+    Does not block page interaction. Header and footer stay fixed inside.
+    Only the content area scrolls. Click the middle header button to expand.
+  </p>
+
+  <!-- ═══════════════════════════════════════════
+       INLINE DEMO (static position)
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Inline (static — expand toggles to fixed center)</p>
+
+    <div class="chat-window" id="inline-chat">
+
+      <div class="chat-window__header">
+        <h2 class="chat-window__title">Name of the Chat-bot</h2>
+        <div class="chat-window__actions" role="group" aria-label="Window controls">
+          <button type="button" class="btn btn--icon" aria-label="Open in new tab">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M14 14H2V2h6V0H2C.9 0 0 .9 0 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8h-2v6zM10 0v2h2.59L4.46 10.13l1.41 1.41L14 3.41V6h2V0h-6z"/>
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn btn--icon"
+            aria-label="Expand chat window"
+            aria-expanded="false"
+            data-chat-window-expand
+          >
+            <!-- expand/collapse icon (arrows outward) -->
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2 9H0v7h7v-2H2V9zM0 7h2V2h5V0H0v7zM14 14H9v2h7V9h-2v5zM9 0v2h5v5h2V0H9z"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn--icon" aria-label="Minimize">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2 7h12v2H2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="chat-window__body">
+        <div class="chat-window__content">
+          <ul class="demo-message-list">
+            <li class="demo-msg">Hello! How can I help you today?</li>
+            <li class="demo-msg demo-msg--user">Can you explain design tokens?</li>
+            <li class="demo-msg">
+              Design tokens are named variables that store visual design values — colors,
+              spacing, radius, typography — so components stay consistent.
+            </li>
+            <li class="demo-msg demo-msg--user">That makes sense. What are the three layers?</li>
+            <li class="demo-msg">
+              Primitives hold raw values. Semantics assign them roles. Component tokens
+              map those roles to specific component properties like --btn-primary-bg.
+            </li>
+            <li class="demo-msg demo-msg--user">Got it. Thanks!</li>
+            <li class="demo-msg">Happy to help. Ask me anything else.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chat-window__footer">
+        <div class="chat-input">
+          <label class="chat-input__label" for="chat-input-inline">Message</label>
+          <textarea
+            class="chat-input__textarea"
+            id="chat-input-inline"
+            placeholder="Placeholder text"
+            rows="1"
+            data-chat-input
+          ></textarea>
+        </div>
+        <button type="button" class="btn btn--primary">
+          Send
+          <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 14l12-6L2 2v5l8 1-8 1v5z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+
+    <p class="demo-section__note">
+      Click the middle icon (expand arrows) to toggle 75vw × 75vh expanded state.
+      Click again to collapse back to 451px × 469px.
+    </p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       FLOATING DEMO (fixed position)
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Floating (fixed bottom-right, expandable)</p>
+
+    <div class="demo-toggle-row">
+      <button type="button" class="btn btn--primary" onclick="toggleFloating()">
+        Toggle floating chat window
+      </button>
+    </div>
+
+    <p class="demo-section__note">
+      The page remains fully interactive. Expand the floating chat to see it center in the viewport.
+    </p>
+  </section>
+
+  <div class="page-content">
+    <p>This is regular page content. Scroll, click, and interact with the input below while the chat window is open.</p>
+    <input type="text" placeholder="Type here — the page is interactive…" />
+    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+    <p>More content to make the page scrollable. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+  </div>
+
+  <!-- Floating chat window (initially hidden) -->
+  <div class="demo-fixed-position" id="floating-chat-wrapper" hidden>
+    <div class="chat-window" id="floating-chat">
+
+      <div class="chat-window__header">
+        <h2 class="chat-window__title">Chat Assistant</h2>
+        <div class="chat-window__actions" role="group" aria-label="Window controls">
+          <button type="button" class="btn btn--icon" aria-label="Open in new tab">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M14 14H2V2h6V0H2C.9 0 0 .9 0 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V8h-2v6zM10 0v2h2.59L4.46 10.13l1.41 1.41L14 3.41V6h2V0h-6z"/>
+            </svg>
+          </button>
+          <button
+            type="button"
+            class="btn btn--icon"
+            aria-label="Expand chat window"
+            aria-expanded="false"
+            data-chat-window-expand
+          >
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2 9H0v7h7v-2H2V9zM0 7h2V2h5V0H0v7zM14 14H9v2h7V9h-2v5zM9 0v2h5v5h2V0H9z"/>
+            </svg>
+          </button>
+          <button type="button" class="btn btn--icon" aria-label="Minimize" onclick="toggleFloating()">
+            <svg class="icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+              <path d="M2 7h12v2H2z"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <div class="chat-window__body" id="floating-chat-body">
+        <div class="chat-window__content">
+          <ul class="demo-message-list" id="floating-chat-messages">
+            <li class="demo-msg">Hi! I'm always here. The page behind me is still interactive.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="chat-window__footer">
+        <div class="chat-input">
+          <label class="chat-input__label" for="chat-input-floating">Message</label>
+          <textarea
+            class="chat-input__textarea"
+            id="chat-input-floating"
+            placeholder="Placeholder text"
+            rows="1"
+            data-chat-input
+          ></textarea>
+        </div>
+        <button type="button" class="btn btn--primary">
+          Send
+          <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
+            <path d="M2 14l12-6L2 2v5l8 1-8 1v5z"/>
+          </svg>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="../chat-input/chat-input.js"></script>
+  <script src="chat-window.js"></script>
+  <script>
+    function toggleFloating() {
+      var el = document.getElementById('floating-chat-wrapper');
+      if (el.hidden) { el.removeAttribute('hidden'); }
+      else { el.setAttribute('hidden', ''); }
+    }
+
+    document.getElementById('chat-input-floating').addEventListener('chat-input:submit', function(e) {
+      var list = document.getElementById('floating-chat-messages');
+      if (!list) return;
+      var li = document.createElement('li');
+      li.className = 'demo-msg demo-msg--user';
+      li.textContent = e.detail.value;
+      list.appendChild(li);
+      var body = document.getElementById('floating-chat-body');
+      if (body) body.scrollTop = body.scrollHeight;
+    });
+  </script>
+
+</body>
+</html>

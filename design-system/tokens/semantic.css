@@ -129,4 +129,28 @@
 
   --semantic-radius-bubble-default:  var(--primitive-radius-16);       /* Bubble/Border/Default */
   --semantic-radius-bubble-point:    var(--primitive-radius-4);        /* Bubble/Border/Point   */
+
+  /* ─────────────────────────────────────────────
+   * MODAL WINDOW
+   * Source: Figma DS-course · node 234:760
+   * Variables: Modal window/Color/Bg, Modal window/Overlay/Shadow,
+   *            Modal window/Border/Default, Modal window/Border/color,
+   *            Modal window/Padding/X, Modal window/Padding/Y,
+   *            Modal window/Gap/X, Modal window/Gap/Y,
+   *            Modal window/Text/color, headline 5
+   * ───────────────────────────────────────────── */
+  --semantic-color-modal-bg:       var(--primitive-color-white);       /* Modal window/Color/Bg      */
+  --semantic-color-modal-overlay:  var(--primitive-color-overlay);     /* Modal window/Overlay/Shadow */
+  --semantic-color-modal-divider:  var(--primitive-color-gray-500);    /* Modal window/Border/color  */
+  --semantic-color-modal-title:    var(--primitive-color-gray-900);    /* Modal window/Text/color    */
+
+  --semantic-radius-modal:         var(--primitive-radius-24);         /* Modal window/Border/Default */
+
+  --semantic-space-modal-padding-x: var(--primitive-space-24);         /* Modal window/Padding/X     */
+  --semantic-space-modal-padding-y: var(--primitive-space-24);         /* Modal window/Padding/Y     */
+  --semantic-space-modal-gap-y:     var(--primitive-space-16);         /* Modal window/Gap/Y         */
+  --semantic-space-modal-gap-x:     var(--primitive-space-8);          /* Modal window/Gap/X         */
+
+  --semantic-font-size-heading:     var(--primitive-font-size-18);     /* headline 5 size            */
+  --semantic-font-weight-bold:      var(--primitive-font-weight-700);  /* headline 5 weight          */
 }

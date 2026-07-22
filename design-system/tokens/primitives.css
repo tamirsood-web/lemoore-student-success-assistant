@@ -36,6 +36,7 @@
   /* Absolute */
   --primitive-color-white:      #ffffff;
   --primitive-color-transparent: transparent;
+  --primitive-color-overlay:    rgba(0, 0, 0, 0.48);  /* Modal window/Overlay/Shadow — DS-course node 234:760 */
 
   /* ─────────────────────────────────────────────
    * SPACING
@@ -56,6 +57,7 @@
    * ───────────────────────────────────────────── */
   --primitive-radius-8:    8px;
   --primitive-radius-16:   16px;   /* Bubble/Border/Default — DS-course node 234:684 */
+  --primitive-radius-24:   24px;   /* Modal window/Border/Default — DS-course node 234:760 */
   --primitive-radius-4:    4px;    /* Bubble/Border/Point   — DS-course node 234:684 */
   --primitive-radius-full: 100px;
 
@@ -78,8 +80,10 @@
    * Source: caption text/refular
    * ───────────────────────────────────────────── */
   --primitive-font-family-inter: 'Inter', sans-serif;
+  --primitive-font-size-18:      18px;   /* headline 5 — DS-course node 234:760 */
   --primitive-font-size-16:      16px;
   --primitive-font-size-14:      14px;   /* Input/Text/Label typography — DS-course node 34:218 */
+  --primitive-font-weight-700:   700;    /* headline 5 Bold — DS-course node 234:760 */
   --primitive-font-weight-400:   400;
   --primitive-line-height-1:     1;      /* 100% */
   --primitive-letter-spacing-0:  0;
