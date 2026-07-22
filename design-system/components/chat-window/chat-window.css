@@ -7,32 +7,23 @@
  * Required load order:
  *   1. tokens/primitives.css
  *   2. tokens/semantic.css
- *   3. tokens/components.css  ← defines all --modal-* properties
+ *   3. tokens/components.css
  *   4. ../button/button.css
  *   5. ../chat-input/chat-input.css
  *   6. this file
  *
- * Structure:
- *   .chat-window             — the floating panel (no backdrop, non-modal)
- *     .chat-window__header   — fixed top bar: title + icon actions
- *     .chat-window__body     — scrollable content slot (accepts any HTML)
- *     .chat-window__footer   — fixed bottom bar: chat input + send button
- *
  * States:
- *   .chat-window--expanded   — 75vw × 75vh, centered in viewport
- *
- * This component does NOT block page interaction.
- * There is no overlay, no backdrop, no focus trap.
+ *   (default)                — 451×469px compact
+ *   .chat-window--expanded  — 75vw×75vh centered
+ *   .chat-window--entering  — open animation playing
+ *   .chat-window--exiting   — close animation playing
  *
  * This file consumes ONLY --modal-* custom properties.
- * No raw values. No token definitions.
  */
 
 
 /* ─────────────────────────────────────────────────────────────
  * PANEL — default (compact) state
- * Width: 451px (Figma). Height: 469px (Figma).
- * Position determined by the application.
  * ───────────────────────────────────────────────────────────── */
 .chat-window {
   display:          flex;
@@ -40,20 +31,52 @@
   width:            451px;
   max-width:        100%;
   height:           469px;
+  padding-left:     var(--modal-padding-x);
+  padding-right:    var(--modal-padding-x);
   background-color: var(--modal-bg);
   border-radius:    var(--modal-radius);
   box-shadow:       -1px 5px 6px var(--modal-overlay);
   overflow:         hidden;
+}
 
-  /* Smooth transition between default ↔ expanded */
-  transition: width 250ms ease,
-              height 250ms ease;
+
+/* ─────────────────────────────────────────────────────────────
+ * OPEN / CLOSE ANIMATIONS
+ * ───────────────────────────────────────────────────────────── */
+@keyframes chat-window-enter {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes chat-window-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(16px) scale(0.95);
+  }
+}
+
+.chat-window--entering {
+  animation: chat-window-enter 200ms ease-out forwards;
+}
+
+.chat-window--exiting {
+  animation: chat-window-exit 150ms ease-in forwards;
+  pointer-events: none;  /* prevent interaction during close */
 }
 
 
 /* ─────────────────────────────────────────────────────────────
  * EXPANDED STATE
- * Toggled via JS class. 75% of viewport, centered.
  * ───────────────────────────────────────────────────────────── */
 .chat-window--expanded {
   position: fixed;
@@ -65,17 +88,50 @@
   z-index:  200;
 }
 
+/* FLIP animation in progress — applied by JS during expand/collapse */
+.chat-window--animating {
+  position: fixed;
+  transition: width 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              height 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              top 500ms cubic-bezier(0.4, 0, 0.2, 1),
+              left 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * REDUCED MOTION
+ * ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .chat-window,
+  .chat-window--animating {
+    transition: none;
+  }
+
+  .chat-window--entering {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+
+  .chat-window--exiting {
+    animation: none;
+    opacity: 0;
+    transform: none;
+  }
+}
+
 
 /* ─────────────────────────────────────────────────────────────
  * HEADER
- * Fixed at the top. Title left, actions right.
  * ───────────────────────────────────────────────────────────── */
 .chat-window__header {
   display:          flex;
   align-items:      center;
   justify-content:  space-between;
   flex-shrink:      0;
-  padding:          var(--modal-padding-y) var(--modal-padding-x) var(--modal-gap-y);
+  padding-top:      var(--modal-padding-y);
+  padding-bottom:   var(--modal-gap-y);
   border-bottom:    1px solid var(--modal-divider-color);
 }
 
@@ -110,7 +166,8 @@
   flex:       1 1 0;
   min-height: 0;
   overflow-y: auto;
-  padding:    var(--modal-gap-y) var(--modal-padding-x);
+  padding-top:    var(--modal-gap-y);
+  padding-bottom: var(--modal-gap-y);
 }
 
 .chat-window__content {
@@ -119,14 +176,15 @@
 
 
 /* ─────────────────────────────────────────────────────────────
- * FOOTER — fixed at the bottom
+ * FOOTER
  * ───────────────────────────────────────────────────────────── */
 .chat-window__footer {
-  display:     flex;
-  align-items: center;
-  gap:         var(--modal-gap-x);
-  flex-shrink: 0;
-  padding:     var(--modal-gap-y) var(--modal-padding-x) var(--modal-padding-y);
+  display:        flex;
+  align-items:    center;
+  gap:            var(--modal-gap-x);
+  flex-shrink:    0;
+  padding-top:    var(--modal-gap-y);
+  padding-bottom: var(--modal-padding-y);
 }
 
 .chat-window__footer .chat-input {

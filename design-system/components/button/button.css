@@ -65,6 +65,7 @@
   flex-shrink: 0;
   width:       var(--btn-icon-size);
   height:      var(--btn-icon-size);
+  color:       inherit;  /* Ensure SVG currentColor resolves from button's color */
 }
 
 /* Disabled — applies to all variants */
@@ -218,6 +219,7 @@
 .btn--icon .btn__icon {
   width:  var(--btn-icon-size-solo);
   height: var(--btn-icon-size-solo);
+  color:  inherit;
 }
 
 .btn--icon:hover {
