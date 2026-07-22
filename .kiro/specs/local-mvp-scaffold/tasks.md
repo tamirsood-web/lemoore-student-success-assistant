@@ -394,24 +394,64 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 10. Verification gates
 
-- [ ] 10.1 Run `npm run lint` and resolve issues
+- [x] 10.1 Run `npm run lint` and resolve issues
   - _Requirements: 11.1_
+  - NOTE: `npm run lint` (`next lint`) exits clean — "No ESLint warnings or errors". No
+    rules disabled, no eslint-disable comments added, no lint config weakened, no
+    dependencies added. (Next.js prints a deprecation notice that `next lint` will be
+    removed in Next 16; this is informational only and not a lint error/warning — left
+    unchanged as it is outside Group 10 scope.)
 
-- [ ] 10.2 Run `npm run typecheck` (strict) and resolve issues
+- [x] 10.2 Run `npm run typecheck` (strict) and resolve issues
   - No `any` except unavoidable + documented.
   - _Requirements: 11.1, 11.2_
+  - NOTE: `npm run typecheck` (`tsc --noEmit`) exits clean with zero errors. TypeScript
+    strict mode remains enabled (`tsconfig.json` unchanged). No `any` introduced, no unsafe
+    casts, no strictness weakened; the `AssistantResponse` discriminated union, API
+    contracts, validation contracts, and seam interfaces are unchanged.
 
-- [ ] 10.3 Run `npm test` and ensure all tests pass (no network)
+- [x] 10.3 Run `npm test` and ensure all tests pass (no network)
   - _Requirements: 11.1, 11.3_
+  - NOTE: `npm test` (`vitest run`) passes — **23 test files, 200 tests**, no failures/skips.
+    Deterministic, no network, no AWS/credentials/DB/paid API/live model. Route tests call
+    handlers locally; global fetch mocks are restored between tests. The local eval subset
+    (21 cases) honestly separates grounded (9), escalate (10), and reject (2) outcomes, and
+    sensitive values are redacted in logs/output ([redacted-number]/[redacted-id]). No
+    assertions weakened or removed; no tests added to inflate the count.
 
-- [ ] 10.4 Run `npm run build` and confirm a clean production build
+- [x] 10.4 Run `npm run build` and confirm a clean production build
   - Confirm no AWS credentials/secrets reach the client bundle.
   - _Requirements: 11.1_
+  - NOTE: `npm run build` (`next build`) succeeds (exit 0). Routes: `○ /` (single static
+    root page — no duplicate root), and `ƒ /api/chat`, `ƒ /api/feedback`, `ƒ /api/health`
+    (server-rendered). Build ran with no AWS variables set, confirming the app builds
+    without them. Client static bundle (`.next/static`) scanned for AWS_REGION,
+    AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY, BEDROCK_/COGNITO_/DYNAMODB_ prefixes, `secret`,
+    `process.env.*`, and server-only mock internals (MOCK_DATA_DISCLAIMER, redactedQuestion):
+    **none present**. The only `credential` hits are unavoidable React/Next runtime tokens
+    (`credentials:"same-origin"`, `use-credentials`, URL polyfill `includesCredentials()`) —
+    not secrets. No build checks disabled; no deployment performed.
 
-- [ ] 10.5 Final review checklist
+- [x] 10.5 Final review checklist
   - Confirm: no AWS calls, no deployment, no real secrets, existing docs intact, all
     four gates green.
   - _Requirements: 9.1, 12.1, 12.2_
+  - NOTE: Repository-wide final review passed with **no production-code changes required**.
+    App remains a local, deterministic, mock-backed MVP: no AWS/Bedrock/DynamoDB/Cognito/
+    Amplify calls, no live model or paid API. Retrieval/guardrail/feedback stay behind their
+    seams; `/api/feedback` is a validated no-op (`src/lib/db/feedback.ts` stores nothing);
+    the browser UI calls only `/api/chat` and `/api/feedback`. Answers are composed only from
+    retrieved snippets; unsupported → honest non-verification; citations map to real sources;
+    course-date requests need identifiers (no generic dates); sensitive input is rejected
+    without echo; injection stays inert data; escalation never claims a human was contacted;
+    logging is redacted (never the raw prompt). No real credentials/keys/ARNs; `.env.local`
+    ignored; `.env.example` placeholders only; boots without AWS vars; no server-only value
+    in client code. No deployment/infra config added. npm-only, `package-lock.json` present,
+    no `pnpm-lock.yaml`/`yarn.lock`; no dependencies added; AGENTS/CLAUDE/steering/docs
+    intact. No admin/ambassador/auth/analytics/tracking/real-persistence added. UI keeps
+    empty/loading/success/validation/escalation/feedback/error states, accessible names,
+    keyboard/focus/aria-live behavior, mobile overflow protection, and descriptive (non-
+    numeric) confidence. All four gates (lint, typecheck, test, build) are green.
 
 ## Notes
 
