@@ -1,6 +1,6 @@
 # Chat Window
 
-A floating, non-modal chat interface panel with expand/collapse support.
+A floating, non-modal chat interface panel with open/close and expand/collapse animations.
 
 Source: [Figma DS-course · node 234:760](https://www.figma.com/design/3VxuDMd9Wva3mjoG7FBgj3/%F0%9F%91%A9%F0%9F%8F%BB%E2%80%8D%F0%9F%92%BBDS-course?node-id=234-760)
 
@@ -10,20 +10,9 @@ Source: [Figma DS-course · node 234:760](https://www.figma.com/design/3VxuDMd9W
 
 | File | Purpose |
 |---|---|
-| `chat-window.css` | Component styles — default + expanded states |
-| `chat-window.js` | Expand/collapse toggle behavior |
-| `chat-window-demo.html` | Visual reference (inline and floating demos) |
-
----
-
-## Non-modal behavior
-
-- No backdrop or page dimming
-- No page interaction blocked
-- No focus trap
-- No `aria-modal`
-- Page remains fully scrollable and interactive
-- Position determined by the application
+| `chat-window.css` | Component styles + animations |
+| `chat-window.js` | Expand/collapse toggle + open/close with animation |
+| `chat-window-demo.html` | Interactive demo with all transitions |
 
 ---
 
@@ -42,90 +31,101 @@ Source: [Figma DS-course · node 234:760](https://www.figma.com/design/3VxuDMd9W
 
 ---
 
+## Icons
+
+Header buttons use SVG assets from `design-system/icons/`:
+
+| Action | File | aria-label |
+|---|---|---|
+| Open in new tab | `icons/external-link.svg` | "Open in new tab" |
+| Expand / Collapse | `icons/arrow-expand.svg` | "Expand chat window" / "Collapse chat window" |
+| Minimize (close) | `icons/remove.svg` | "Minimize" |
+
+Icons are loaded via `<img>` with `aria-hidden="true"` — they are decorative. Accessible names come from `aria-label` on the button.
+
+---
+
 ## HTML structure
 
 ```html
-<div class="chat-window">
-
-  <!-- Header -->
-  <div class="chat-window__header">
-    <h2 class="chat-window__title">Chat-bot Name</h2>
-    <div class="chat-window__actions" role="group" aria-label="Window controls">
-      <button type="button" class="btn btn--icon" aria-label="Open in new tab">…</button>
-      <button
-        type="button"
-        class="btn btn--icon"
-        aria-label="Expand chat window"
-        aria-expanded="false"
-        data-chat-window-expand
-      >…</button>
-      <button type="button" class="btn btn--icon" aria-label="Minimize">…</button>
+<div id="wrapper" hidden>
+  <div class="chat-window">
+    <div class="chat-window__header">
+      <h2 class="chat-window__title">Title</h2>
+      <div class="chat-window__actions" role="group" aria-label="Window controls">
+        <button class="btn btn--icon" aria-label="Open in new tab">
+          <img class="btn__icon" src="…/icons/external-link.svg" alt="" aria-hidden="true" />
+        </button>
+        <button class="btn btn--icon" aria-label="Expand chat window" aria-expanded="false" data-chat-window-expand>
+          <img class="btn__icon" src="…/icons/arrow-expand.svg" alt="" aria-hidden="true" />
+        </button>
+        <button class="btn btn--icon" aria-label="Minimize">
+          <img class="btn__icon" src="…/icons/remove.svg" alt="" aria-hidden="true" />
+        </button>
+      </div>
+    </div>
+    <div class="chat-window__body">
+      <div class="chat-window__content"><!-- content --></div>
+    </div>
+    <div class="chat-window__footer">
+      <!-- Chat Input + Button (reused, not duplicated) -->
     </div>
   </div>
-
-  <!-- Body — scrolls, accepts any HTML -->
-  <div class="chat-window__body">
-    <div class="chat-window__content">
-      <!-- application content here -->
-    </div>
-  </div>
-
-  <!-- Footer — reused Chat Input + Button -->
-  <div class="chat-window__footer">
-    <div class="chat-input">
-      <label class="chat-input__label" for="msg-input">Message</label>
-      <textarea class="chat-input__textarea" id="msg-input" placeholder="Placeholder text" rows="1" data-chat-input></textarea>
-    </div>
-    <button type="button" class="btn btn--primary">
-      Send
-      <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor">
-        <path d="M2 14l12-6L2 2v5l8 1-8 1v5z"/>
-      </svg>
-    </button>
-  </div>
-
 </div>
 ```
 
 ---
 
-## Expand / Collapse
+## Open / Close
 
-The middle header button toggles `.chat-window--expanded` on the panel.
+```js
+openChatWindow(wrapperElement);   // removes [hidden], plays entrance animation
+closeChatWindow(wrapperElement);  // plays exit animation, then sets [hidden]
+```
 
-| State | Size | Position |
+| Phase | Animation | Duration |
 |---|---|---|
-| Default (compact) | 451px × 469px | Determined by application |
-| Expanded | 75vw × 75vh | `position: fixed`, centered in viewport |
+| Enter | opacity 0→1, translateY(16px)→0, scale(0.95)→1 | 200ms ease-out |
+| Exit | opacity 1→0, translateY(0)→16px, scale(1)→0.95 | 150ms ease-in |
 
-### Attributes on the toggle button:
-
-- `data-chat-window-expand` — triggers auto-init by `chat-window.js`
-- `aria-expanded="false"` / `"true"` — updated by JS on toggle
-- `aria-label` — switches between "Expand chat window" and "Collapse chat window"
-
-The transition between states is animated (250ms ease on width + height).
+During exit, `pointer-events: none` prevents interaction. After `animationend`, the wrapper is hidden.
 
 ---
 
-## Layout behavior
+## Expand / Collapse
 
-| Region | Behavior |
-|---|---|
-| `.chat-window` | Flex column, fixed size or expanded |
-| `.chat-window__header` | `flex-shrink: 0` — always visible |
-| `.chat-window__body` | `flex: 1 1 0; overflow-y: auto` — fills and scrolls |
-| `.chat-window__footer` | `flex-shrink: 0` — always visible |
+Toggled by clicking `[data-chat-window-expand]`:
+
+| State | Size | Position |
+|---|---|---|
+| Default | 451px × 469px | Application-controlled |
+| Expanded | 75vw × 75vh | `position: fixed`, centered |
+
+Transition uses `250ms ease` on width, height, top, left, and transform.
+
+The toggle button updates:
+- `aria-expanded="true"` / `"false"`
+- `aria-label` between "Expand chat window" and "Collapse chat window"
+
+---
+
+## Reduced motion
+
+When `prefers-reduced-motion: reduce`:
+- All transitions are disabled (`transition: none`)
+- Enter/exit animations are suppressed — the window appears/disappears instantly
+- All functionality and state changes are preserved
 
 ---
 
 ## Accessibility
 
-- The expand toggle must have `aria-expanded` and a descriptive `aria-label`
-- All header icon buttons need `aria-label`
-- Footer textarea requires a `<label>` (visually hidden inside the component)
-- No `role="dialog"` — this is not a dialog
-- Keyboard users can Tab into and out of the chat window freely
+- No `role="dialog"` or `aria-modal` — not a modal
+- Icon buttons have descriptive `aria-label`
+- Icons use `aria-hidden="true"` — purely decorative
+- `aria-expanded` tracks expand state
+- Keyboard users can Tab into and out freely
+- Content area scrolls; header/footer remain fixed
 
 ---
 
@@ -133,7 +133,6 @@ The transition between states is animated (250ms ease on width + height).
 
 - Backdrop or overlay
 - Focus trapping
-- Open/close animation (expand only — not show/hide)
 - Loading or error states
-- Message list or conversation logic
+- Message list logic
 - Chatbot business logic

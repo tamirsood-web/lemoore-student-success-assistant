@@ -54,6 +54,10 @@
 
   --btn-primary-focus-ring:      var(--semantic-color-focus-ring-inverse);
 
+  /* Loading state — reuses disabled bg, text is default (black) */
+  --btn-primary-bg-loading:      var(--semantic-color-action-bg-disabled);
+  --btn-primary-color-loading:   var(--semantic-color-text-default);  /* Button/Primary/Text/Load: #121212 */
+
   /* ─────────────────────────────────────────────
    * BUTTON — Secondary variant
    * Background: surface tokens
@@ -96,8 +100,8 @@
    * Focus ring: standard blue
    * ───────────────────────────────────────────── */
   --btn-icon-bg:              var(--semantic-color-ghost-default);
-  --btn-icon-bg-hover:        var(--semantic-color-surface-hover);
-  --btn-icon-bg-active:       var(--semantic-color-surface-active);
+  --btn-icon-bg-hover:        var(--semantic-color-ghost-hover);     /* Button/Icon btn/BG/Hover: #ebebeb */
+  --btn-icon-bg-active:       var(--semantic-color-ghost-active);    /* Button/Icon btn/BG/Active: #dedede */
   --btn-icon-bg-disabled:     var(--semantic-color-surface-disabled);
 
   --btn-icon-color:           var(--semantic-color-text-default);

@@ -19,7 +19,9 @@
 
   /* Blues */
   --primitive-color-blue-900:   #134571;
+  --primitive-color-blue-800:   #0c2e4c;  /* Button/Primary/BG/Active — updated */
   --primitive-color-blue-700:   #335183;
+  --primitive-color-blue-600:   #4d6792;  /* Button/Primary/BG/Hover — updated */
   --primitive-color-blue-500:   #1f73bd;  /* focus ring (secondary/clean/icon) */
 
   /* Grays */
