@@ -113,4 +113,20 @@
 
   /* Border width — input uses 1px (browser default for border shorthand) */
   --semantic-border-input-width:    1px;
+
+  /* ─────────────────────────────────────────────
+   * MESSAGE BUBBLE
+   * Source: Figma DS-course · node 234:684
+   * Variables: Bubble/Color/Agent, Bubble/Color/User,
+   *            Bubble/Padding/X, Bubble/Padding/Y,
+   *            Bubble/Border/Default, Bubble/Border/Point
+   * ───────────────────────────────────────────── */
+  --semantic-color-bubble-agent:    var(--primitive-color-gray-200);   /* Bubble/Color/Agent    */
+  --semantic-color-bubble-user:     var(--primitive-color-blue-100);   /* Bubble/Color/User     */
+
+  --semantic-space-bubble-padding-x: var(--primitive-space-24);        /* Bubble/Padding/X      */
+  --semantic-space-bubble-padding-y: var(--primitive-space-24);        /* Bubble/Padding/Y      */
+
+  --semantic-radius-bubble-default:  var(--primitive-radius-16);       /* Bubble/Border/Default */
+  --semantic-radius-bubble-point:    var(--primitive-radius-4);        /* Bubble/Border/Point   */
 }

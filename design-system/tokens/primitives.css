@@ -30,6 +30,9 @@
   --primitive-color-gray-200:   #dedede;
   --primitive-color-gray-100:   #ebebeb;
 
+  /* Blues — chat bubble */
+  --primitive-color-blue-100:   #e5e9ef;  /* Bubble/Color/User — DS-course node 234:684 */
+
   /* Absolute */
   --primitive-color-white:      #ffffff;
   --primitive-color-transparent: transparent;
@@ -52,6 +55,8 @@
    *         Button/Icon/standart/size/icon-btn-default-crn-radius
    * ───────────────────────────────────────────── */
   --primitive-radius-8:    8px;
+  --primitive-radius-16:   16px;   /* Bubble/Border/Default — DS-course node 234:684 */
+  --primitive-radius-4:    4px;    /* Bubble/Border/Point   — DS-course node 234:684 */
   --primitive-radius-full: 100px;
 
   /* ─────────────────────────────────────────────

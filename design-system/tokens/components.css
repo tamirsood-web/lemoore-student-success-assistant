@@ -155,4 +155,19 @@
   --chat-input-label-font-weight: var(--semantic-font-weight-regular);
   --chat-input-label-line-height: var(--semantic-line-height-tight);
   --chat-input-label-color:       var(--semantic-color-input-text-label);
+
+  /* ─────────────────────────────────────────────
+   * MESSAGE BUBBLE
+   * Source: Figma DS-course · node 234:684
+   * Consumed by: components/message-bubble/message-bubble.css
+   * Two variants: agent (message from AI) and user (message from human)
+   * ───────────────────────────────────────────── */
+  --bubble-padding-x:        var(--semantic-space-bubble-padding-x);
+  --bubble-padding-y:        var(--semantic-space-bubble-padding-y);
+
+  --bubble-radius-default:   var(--semantic-radius-bubble-default);   /* large corners       */
+  --bubble-radius-point:     var(--semantic-radius-bubble-point);     /* tail/pointer corner */
+
+  --bubble-bg-agent:         var(--semantic-color-bubble-agent);
+  --bubble-bg-user:          var(--semantic-color-bubble-user);
 }

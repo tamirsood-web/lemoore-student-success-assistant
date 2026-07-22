@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Message Bubble — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <!-- Token layers — must load in this order -->
+  <link rel="stylesheet" href="../../tokens/primitives.css" />
+  <link rel="stylesheet" href="../../tokens/semantic.css" />
+  <link rel="stylesheet" href="../../tokens/components.css" />
+  <!-- Component -->
+  <link rel="stylesheet" href="message-bubble.css" />
+  <style>
+    /* ── Demo chrome only — not part of the component ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #121212;
+      background: #f5f5f5;
+      padding: 48px 40px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .page-description {
+      font-size: 13px;
+      color: #5c5c5c;
+      margin-bottom: 40px;
+      max-width: 560px;
+    }
+
+    .demo-section {
+      margin-bottom: 48px;
+    }
+
+    .demo-section__title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5c5c5c;
+      margin-bottom: 16px;
+    }
+
+    .demo-section__note {
+      font-size: 12px;
+      color: #5c5c5c;
+      margin-top: 12px;
+    }
+
+    /* Column that constrains bubble width, matching a chat layout */
+    .demo-column {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 480px;
+    }
+
+    /* Align user bubbles to the right */
+    .demo-column--user {
+      align-items: flex-end;
+    }
+
+    /* Align agent bubbles to the left */
+    .demo-column--agent {
+      align-items: flex-start;
+    }
+
+    /* Conversation layout alternates left/right */
+    .demo-conversation {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      max-width: 480px;
+    }
+
+    .demo-conversation .message-bubble--user  { align-self: flex-end; }
+    .demo-conversation .message-bubble--agent { align-self: flex-start; }
+
+    .demo-divider {
+      border: none;
+      border-top: 1px solid #dedede;
+      margin: 40px 0;
+    }
+
+    /* Demo-only typography applied to content — not part of the component */
+    .demo-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      color: #121212;
+    }
+
+    /* Demo-only table inside a bubble */
+    .demo-table {
+      border-collapse: collapse;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #121212;
+      width: 100%;
+    }
+
+    .demo-table th,
+    .demo-table td {
+      padding: 6px 10px;
+      border: 1px solid #bebebe;
+      text-align: left;
+    }
+
+    .demo-table th {
+      background: rgba(0, 0, 0, 0.06);
+      font-weight: 600;
+    }
+
+    /* Demo-only file card */
+    .demo-file-card {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 10px 12px;
+      background: rgba(255, 255, 255, 0.6);
+      border-radius: 8px;
+      font-family: 'Inter', sans-serif;
+      font-size: 13px;
+      color: #121212;
+    }
+
+    .demo-file-card__icon {
+      font-size: 20px;
+      line-height: 1;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Message Bubble</h1>
+  <p class="page-description">
+    Layout container only. Provides background, border radius, and padding.
+    The content slot accepts arbitrary HTML — typography, images, tables, cards, or any application component.
+    Source: Figma DS-course · node 234:684.
+  </p>
+
+  <!-- ═══════════════════════════════════════════
+       VARIANTS — side by side
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Variants</p>
+    <div style="display:flex; gap:24px; flex-wrap:wrap; align-items:flex-start;">
+
+      <!-- Agent -->
+      <div>
+        <p class="demo-section__note" style="margin-top:0; margin-bottom:8px;">Agent (pointer: top-left)</p>
+        <div class="message-bubble message-bubble--agent">
+          <div class="message-bubble__content"></div>
+        </div>
+      </div>
+
+      <!-- User -->
+      <div>
+        <p class="demo-section__note" style="margin-top:0; margin-bottom:8px;">User (pointer: bottom-right)</p>
+        <div class="message-bubble message-bubble--user">
+          <div class="message-bubble__content"></div>
+        </div>
+      </div>
+
+    </div>
+    <p class="demo-section__note">Content slot is empty — this is the default state of the component.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CONTENT SLOT — plain text
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Content: Plain text</p>
+    <div class="demo-conversation">
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content demo-text">
+          Hello! How can I help you today?
+        </div>
+      </div>
+      <div class="message-bubble message-bubble--user">
+        <div class="message-bubble__content demo-text">
+          Can you explain how tokens work?
+        </div>
+      </div>
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content demo-text">
+          Tokens are named values — colors, spacing, radius — that represent
+          design decisions. They decouple visual values from component code,
+          making it easy to update an entire system from a single source.
+        </div>
+      </div>
+    </div>
+    <p class="demo-section__note">Typography is applied by the application, not by this component.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CONTENT SLOT — table
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Content: Table</p>
+    <div class="demo-column demo-column--agent">
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content">
+          <table class="demo-table">
+            <thead>
+              <tr><th>Token</th><th>Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>--bubble-padding-x</td><td>24px</td></tr>
+              <tr><td>--bubble-padding-y</td><td>24px</td></tr>
+              <tr><td>--bubble-radius-default</td><td>16px</td></tr>
+              <tr><td>--bubble-radius-point</td><td>4px</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <p class="demo-section__note">The bubble does not restrict or style table children.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CONTENT SLOT — image
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Content: Image</p>
+    <div class="demo-column demo-column--user">
+      <div class="message-bubble message-bubble--user">
+        <div class="message-bubble__content">
+          <img
+            src="https://placehold.co/280x160/e5e9ef/335183?text=Image+content"
+            alt="Placeholder image"
+            style="display:block; width:280px; max-width:100%; border-radius:8px;"
+          />
+        </div>
+      </div>
+    </div>
+    <p class="demo-section__note">Images are not constrained by the component — sizing is the application's responsibility.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CONTENT SLOT — file card (custom component)
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Content: Custom application component (file card)</p>
+    <div class="demo-column demo-column--agent">
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content">
+          <div class="demo-file-card">
+            <span class="demo-file-card__icon">📄</span>
+            <div>
+              <div style="font-weight:600;">design-system-spec.pdf</div>
+              <div style="color:#5c5c5c; font-size:12px;">PDF · 1.2 MB</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="demo-section__note">Any application component can be slotted into the content area.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CONVERSATION — combined layout
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Conversation layout (application-level)</p>
+    <div class="demo-conversation">
+      <div class="message-bubble message-bubble--user">
+        <div class="message-bubble__content demo-text">What can you help me with?</div>
+      </div>
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content demo-text">
+          I can answer questions, summarize documents, write code, and more.
+        </div>
+      </div>
+      <div class="message-bubble message-bubble--user">
+        <div class="message-bubble__content demo-text">Great — here's a file:</div>
+      </div>
+      <div class="message-bubble message-bubble--user">
+        <div class="message-bubble__content">
+          <div class="demo-file-card">
+            <span class="demo-file-card__icon">📄</span>
+            <div>
+              <div style="font-weight:600;">brief.docx</div>
+              <div style="color:#5c5c5c; font-size:12px;">DOCX · 48 KB</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content demo-text">Got it, reading now…</div>
+      </div>
+    </div>
+    <p class="demo-section__note">
+      Alignment (left/right) and spacing between bubbles are layout decisions made by the application,
+      not by this component.
+    </p>
+  </section>
+
+</body>
+</html>

@@ -1,0 +1,85 @@
+/*
+ * message-bubble.css
+ *
+ * Message Bubble component — layout container only.
+ * Source: Figma DS-course · node 234:684
+ *
+ * Required load order:
+ *   1. tokens/primitives.css
+ *   2. tokens/semantic.css
+ *   3. tokens/components.css  ← defines all --bubble-* properties
+ *   4. this file
+ *
+ * Variants: agent, user
+ *
+ * This component is a layout container only. It is responsible for:
+ *   - background color (per variant)
+ *   - border radius (per variant — asymmetric pointer corner)
+ *   - padding
+ *   - width behavior (hugs its parent column)
+ *
+ * The inner content slot (.message-bubble__content) is empty by default.
+ * It accepts arbitrary HTML: text, images, tables, cards, components, etc.
+ * No text styles, no avatar, no timestamp, no actions, no JavaScript.
+ *
+ * This file consumes ONLY --bubble-* custom properties.
+ * No raw values. No token definitions.
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+ * BASE
+ * Shared padding and display — applied to both variants.
+ * Width fills the parent; height is determined by content.
+ * ───────────────────────────────────────────────────────────── */
+.message-bubble {
+  display:     block;
+  box-sizing:  border-box;
+  width:       fit-content;
+  max-width:   100%;
+  padding:     var(--bubble-padding-y) var(--bubble-padding-x);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * AGENT VARIANT
+ * Background: gray (Bubble/Color/Agent)
+ * Pointer corner: top-left (4px) — message origin is on the left
+ *
+ * Corner map (clockwise from top-left):
+ *   TL = point   TR = default   BR = default   BL = default
+ * ───────────────────────────────────────────────────────────── */
+.message-bubble--agent {
+  background-color:    var(--bubble-bg-agent);
+  border-top-left-radius:     var(--bubble-radius-point);
+  border-top-right-radius:    var(--bubble-radius-default);
+  border-bottom-right-radius: var(--bubble-radius-default);
+  border-bottom-left-radius:  var(--bubble-radius-default);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * USER VARIANT
+ * Background: blue-tinted (Bubble/Color/User)
+ * Pointer corner: bottom-right (4px) — message origin is on the right
+ *
+ * Corner map (clockwise from top-left):
+ *   TL = default   TR = default   BR = point   BL = default
+ * ───────────────────────────────────────────────────────────── */
+.message-bubble--user {
+  background-color:    var(--bubble-bg-user);
+  border-top-left-radius:     var(--bubble-radius-default);
+  border-top-right-radius:    var(--bubble-radius-default);
+  border-bottom-right-radius: var(--bubble-radius-point);
+  border-bottom-left-radius:  var(--bubble-radius-default);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * CONTENT SLOT
+ * Empty by default. Accepts any child HTML.
+ * No typography, color, or layout assumptions.
+ * ───────────────────────────────────────────────────────────── */
+.message-bubble__content {
+  display: block;
+}
