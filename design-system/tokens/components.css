@@ -1,0 +1,107 @@
+/*
+ * components.css
+ *
+ * Layer 3 — Component-scoped tokens.
+ * Maps semantic roles to Button-specific custom properties.
+ * button.css consumes ONLY these --btn-* properties.
+ *
+ * Requires: primitives.css, semantic.css (must be loaded first, in order)
+ * Consumed by: components/button/button.css
+ */
+
+:root {
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Layout & Structure
+   * ───────────────────────────────────────────── */
+  --btn-padding-x:        var(--semantic-space-component-padding-x);
+  --btn-padding-y:        var(--semantic-space-component-padding-y);
+  --btn-gap:              var(--semantic-space-component-gap);
+  --btn-radius:           var(--semantic-radius-component);
+
+  --btn-icon-padding-x:   var(--semantic-space-component-icon-padding);
+  --btn-icon-padding-y:   var(--semantic-space-component-icon-padding);
+  --btn-icon-radius:      var(--semantic-radius-component-circular);
+
+  --btn-icon-size:        var(--semantic-icon-size-inline);
+  --btn-icon-size-solo:   var(--semantic-icon-size-standalone);
+
+  --btn-focus-ring-width: var(--semantic-border-focus-width);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Typography
+   * ───────────────────────────────────────────── */
+  --btn-font-family:      var(--semantic-font-family-ui);
+  --btn-font-size:        var(--semantic-font-size-ui);
+  --btn-font-weight:      var(--semantic-font-weight-regular);
+  --btn-line-height:      var(--semantic-line-height-tight);
+  --btn-letter-spacing:   var(--semantic-letter-spacing-none);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Primary variant
+   * Background: action tokens
+   * Text/icon: on-action (white) → muted when disabled
+   * Focus ring: inverse (white on dark fill)
+   * ───────────────────────────────────────────── */
+  --btn-primary-bg:              var(--semantic-color-action-bg-default);
+  --btn-primary-bg-hover:        var(--semantic-color-action-bg-hover);
+  --btn-primary-bg-focus:        var(--semantic-color-action-bg-focus);
+  --btn-primary-bg-active:       var(--semantic-color-action-bg-active);
+  --btn-primary-bg-disabled:     var(--semantic-color-action-bg-disabled);
+
+  --btn-primary-color:           var(--semantic-color-text-on-action);
+  --btn-primary-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-primary-focus-ring:      var(--semantic-color-focus-ring-inverse);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Secondary variant
+   * Background: surface tokens
+   * Text/icon: default → muted when disabled
+   * Focus ring: standard blue
+   * ───────────────────────────────────────────── */
+  --btn-secondary-bg:              var(--semantic-color-surface-default);
+  --btn-secondary-bg-hover:        var(--semantic-color-surface-hover);
+  --btn-secondary-bg-focus:        var(--semantic-color-surface-focus);
+  --btn-secondary-bg-active:       var(--semantic-color-surface-active);
+  --btn-secondary-bg-disabled:     var(--semantic-color-surface-disabled);
+
+  --btn-secondary-color:           var(--semantic-color-text-default);
+  --btn-secondary-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-secondary-focus-ring:      var(--semantic-color-focus-ring);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Clean variant
+   * Background: ghost tokens (transparent base)
+   * Text/icon: default (black) → muted when disabled
+   * No visible border except focus-visible outline
+   * Focus ring: standard blue
+   * ───────────────────────────────────────────── */
+  --btn-clean-bg:              var(--semantic-color-ghost-default);
+  --btn-clean-bg-hover:        var(--semantic-color-ghost-hover);
+  --btn-clean-bg-focus:        var(--semantic-color-ghost-focus);
+  --btn-clean-bg-active:       var(--semantic-color-ghost-active);
+  --btn-clean-bg-disabled:     var(--semantic-color-ghost-disabled);
+
+  --btn-clean-color:           var(--semantic-color-text-default);
+  --btn-clean-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-clean-focus-ring:      var(--semantic-color-focus-ring);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Icon variant (icon-only, circular)
+   * Background: ghost tokens
+   * Icon color: default → muted when disabled
+   * Focus ring: standard blue
+   * ───────────────────────────────────────────── */
+  --btn-icon-bg:              var(--semantic-color-ghost-default);
+  --btn-icon-bg-hover:        var(--semantic-color-surface-hover);
+  --btn-icon-bg-active:       var(--semantic-color-surface-active);
+  --btn-icon-bg-disabled:     var(--semantic-color-surface-disabled);
+
+  --btn-icon-color:           var(--semantic-color-text-default);
+  --btn-icon-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-icon-focus-ring:      var(--semantic-color-focus-ring);
+}

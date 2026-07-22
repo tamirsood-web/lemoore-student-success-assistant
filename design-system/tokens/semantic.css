@@ -1,0 +1,80 @@
+/*
+ * semantic.css
+ *
+ * Layer 2 — Role-based aliases.
+ * Maps primitive values to design roles: text, background, action,
+ * border, focus, disabled, and layout. No raw values here — every
+ * property references a primitive.
+ *
+ * Requires: primitives.css (must be loaded first)
+ * Consumed by: components.css
+ * Do NOT reference these in component CSS directly.
+ */
+
+:root {
+
+  /* ─────────────────────────────────────────────
+   * TEXT
+   * ───────────────────────────────────────────── */
+  --semantic-color-text-default:    var(--primitive-color-gray-900);   /* body / label default  */
+  --semantic-color-text-muted:      var(--primitive-color-gray-600);   /* disabled labels       */
+  --semantic-color-text-on-action:  var(--primitive-color-white);      /* text on filled action bg */
+
+  /* ─────────────────────────────────────────────
+   * BACKGROUND — action (primary button)
+   * ───────────────────────────────────────────── */
+  --semantic-color-action-bg-default:   var(--primitive-color-blue-900);
+  --semantic-color-action-bg-hover:     var(--primitive-color-blue-700);
+  --semantic-color-action-bg-focus:     var(--primitive-color-blue-900);
+  --semantic-color-action-bg-active:    var(--primitive-color-blue-900);
+  --semantic-color-action-bg-disabled:  var(--primitive-color-gray-100);
+
+  /* ─────────────────────────────────────────────
+   * BACKGROUND — surface (secondary / clean / icon buttons)
+   * ───────────────────────────────────────────── */
+  --semantic-color-surface-default:     var(--primitive-color-gray-100);
+  --semantic-color-surface-hover:       var(--primitive-color-gray-200);
+  --semantic-color-surface-focus:       var(--primitive-color-gray-100);
+  --semantic-color-surface-active:      var(--primitive-color-gray-300);
+  --semantic-color-surface-disabled:    var(--primitive-color-white);
+
+  /* ─────────────────────────────────────────────
+   * BACKGROUND — ghost (clean / icon — transparent base)
+   * ───────────────────────────────────────────── */
+  --semantic-color-ghost-default:    var(--primitive-color-transparent);
+  --semantic-color-ghost-hover:      var(--primitive-color-gray-100);
+  --semantic-color-ghost-focus:      var(--primitive-color-transparent);
+  --semantic-color-ghost-active:     var(--primitive-color-gray-200);
+  --semantic-color-ghost-disabled:   var(--primitive-color-transparent);
+
+  /* ─────────────────────────────────────────────
+   * FOCUS RING
+   * ───────────────────────────────────────────── */
+  --semantic-color-focus-ring:         var(--primitive-color-blue-500);
+  --semantic-color-focus-ring-inverse: var(--primitive-color-white);   /* on dark fill (primary) */
+
+  /* ─────────────────────────────────────────────
+   * LAYOUT — spacing, radius, border, icon
+   * ───────────────────────────────────────────── */
+  --semantic-space-component-padding-x:      var(--primitive-space-24);
+  --semantic-space-component-padding-y:      var(--primitive-space-16);
+  --semantic-space-component-gap:            var(--primitive-space-8);
+  --semantic-space-component-icon-padding:   var(--primitive-space-4);
+
+  --semantic-radius-component:               var(--primitive-radius-8);
+  --semantic-radius-component-circular:      var(--primitive-radius-full);
+
+  --semantic-border-focus-width:             var(--primitive-border-2);
+
+  --semantic-icon-size-inline:               var(--primitive-icon-size-16);
+  --semantic-icon-size-standalone:           var(--primitive-icon-size-16);
+
+  /* ─────────────────────────────────────────────
+   * TYPOGRAPHY
+   * ───────────────────────────────────────────── */
+  --semantic-font-family-ui:      var(--primitive-font-family-inter);
+  --semantic-font-size-ui:        var(--primitive-font-size-16);
+  --semantic-font-weight-regular: var(--primitive-font-weight-400);
+  --semantic-line-height-tight:   var(--primitive-line-height-1);
+  --semantic-letter-spacing-none: var(--primitive-letter-spacing-0);
+}

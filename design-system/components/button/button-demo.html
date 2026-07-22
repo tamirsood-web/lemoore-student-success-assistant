@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Button Component — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <!-- Token layers — must load in this order -->
+  <link rel="stylesheet" href="../../tokens/primitives.css" />
+  <link rel="stylesheet" href="../../tokens/semantic.css" />
+  <link rel="stylesheet" href="../../tokens/components.css" />
+  <!-- Component -->
+  <link rel="stylesheet" href="button.css" />
+  <style>
+    /* ── Demo page chrome only — not part of the component ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #121212;
+      background: #f5f5f5;
+      padding: 48px 40px;
+    }
+
+    h1 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 40px;
+      color: #121212;
+    }
+
+    .demo-section {
+      margin-bottom: 48px;
+    }
+
+    .demo-section__title {
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #5c5c5c;
+      margin-bottom: 16px;
+    }
+
+    .demo-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .demo-row__label {
+      font-size: 11px;
+      color: #5c5c5c;
+      width: 72px;
+      flex-shrink: 0;
+    }
+
+    /* Simulate :hover, :focus-visible, :active for static display */
+    .is-hover  { background-color: var(--state-bg-hover)  !important; }
+    .is-focus  {
+      outline: var(--btn-focus-ring-width) solid var(--state-ring) !important;
+      outline-offset: 2px !important;
+      background-color: var(--state-bg-focus) !important;
+    }
+    .is-active { background-color: var(--state-bg-active) !important; }
+
+    .demo-divider {
+      border: none;
+      border-top: 1px solid #dedede;
+      margin: 40px 0;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Button — All Variants &amp; States</h1>
+
+  <!-- ═══════════════════════════════════════════
+       PRIMARY
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Primary</p>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Default</span>
+      <button type="button" class="btn btn--primary">Button</button>
+      <button type="button" class="btn btn--primary">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+      </button>
+      <button type="button" class="btn btn--primary">
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+      <button type="button" class="btn btn--primary">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Hover</span>
+      <button type="button" class="btn btn--primary is-hover"
+        style="--state-bg-hover:var(--btn-primary-bg-hover);">Button</button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Focus</span>
+      <button type="button" class="btn btn--primary is-focus"
+        style="--state-bg-focus:var(--btn-primary-bg-focus); --state-ring:var(--btn-primary-focus-ring);">
+        Button
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Active</span>
+      <button type="button" class="btn btn--primary is-active"
+        style="--state-bg-active:var(--btn-primary-bg-active);">Button</button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Disabled</span>
+      <button type="button" class="btn btn--primary" disabled>Button</button>
+      <button type="button" class="btn btn--primary" disabled>
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       SECONDARY
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Secondary</p>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Default</span>
+      <button type="button" class="btn btn--secondary">Button</button>
+      <button type="button" class="btn btn--secondary">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+      </button>
+      <button type="button" class="btn btn--secondary">
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+      <button type="button" class="btn btn--secondary">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Hover</span>
+      <button type="button" class="btn btn--secondary is-hover"
+        style="--state-bg-hover:var(--btn-secondary-bg-hover);">Button</button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Focus</span>
+      <button type="button" class="btn btn--secondary is-focus"
+        style="--state-bg-focus:var(--btn-secondary-bg-focus); --state-ring:var(--btn-secondary-focus-ring);">
+        Button
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Active</span>
+      <button type="button" class="btn btn--secondary is-active"
+        style="--state-bg-active:var(--btn-secondary-bg-active);">Button</button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Disabled</span>
+      <button type="button" class="btn btn--secondary" disabled>Button</button>
+      <button type="button" class="btn btn--secondary" disabled>
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CLEAN
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Clean</p>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Default</span>
+      <button type="button" class="btn btn--clean">Button</button>
+      <button type="button" class="btn btn--clean">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+      </button>
+      <button type="button" class="btn btn--clean">
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+      <button type="button" class="btn btn--clean">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Hover</span>
+      <button type="button" class="btn btn--clean is-hover"
+        style="--state-bg-hover:var(--btn-clean-bg-hover);">Button</button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Focus</span>
+      <button type="button" class="btn btn--clean is-focus"
+        style="--state-bg-focus:var(--btn-clean-bg-focus); --state-ring:var(--btn-clean-focus-ring);">
+        Button
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Active</span>
+      <button type="button" class="btn btn--clean is-active"
+        style="--state-bg-active:var(--btn-clean-bg-active);">Button</button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Disabled</span>
+      <button type="button" class="btn btn--clean" disabled>Button</button>
+      <button type="button" class="btn btn--clean" disabled>
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+        Button
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       ICON
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Icon</p>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Default</span>
+      <button type="button" class="btn btn--icon" aria-label="Add to favourites">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Hover</span>
+      <button type="button" class="btn btn--icon is-hover" aria-label="Add to favourites"
+        style="--state-bg-hover:var(--btn-icon-bg-hover);">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Focus</span>
+      <button type="button" class="btn btn--icon is-focus" aria-label="Add to favourites"
+        style="--state-bg-focus:transparent; --state-ring:var(--btn-icon-focus-ring);">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Active</span>
+      <button type="button" class="btn btn--icon is-active" aria-label="Add to favourites"
+        style="--state-bg-active:var(--btn-icon-bg-active);">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Disabled</span>
+      <button type="button" class="btn btn--icon" aria-label="Add to favourites" disabled>
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+    </div>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       LIVE INTERACTION
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Live Interaction</p>
+    <p style="font-size:13px; color:#5c5c5c; margin-bottom:16px;">
+      Tab through the buttons below to verify keyboard focus ring.
+      Click to verify active state. All states above this line are static representations.
+    </p>
+    <div class="demo-row">
+      <button type="button" class="btn btn--primary">Primary</button>
+      <button type="button" class="btn btn--secondary">Secondary</button>
+      <button type="button" class="btn btn--clean">Clean</button>
+      <button type="button" class="btn btn--icon" aria-label="Star action">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l1.9 4 4.1.6-3 2.9.7 4.1L8 10.5l-3.7 2.1.7-4.1-3-2.9 4.1-.6z"/></svg>
+      </button>
+      <button type="button" class="btn btn--primary" disabled>Disabled</button>
+    </div>
+  </section>
+
+</body>
+</html>
