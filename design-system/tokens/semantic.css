@@ -105,8 +105,10 @@
   /* Layout */
   --semantic-space-input-padding-x: var(--primitive-space-24);   /* Input/Padding/X       */
   --semantic-space-input-padding-y: var(--primitive-space-16);   /* Input/Padding/Y       */
-  --semantic-space-input-gap:       var(--primitive-space-4);    /* Input/Gap/X           */
+  --semantic-space-input-gap-x:     var(--primitive-space-8);    /* Input/Gap/X (icon-to-text horizontal gap) */
+  --semantic-space-input-gap-y:     var(--primitive-space-4);    /* Input/Gap/Y (label-to-field vertical gap) */
   --semantic-radius-input:          var(--primitive-radius-8);   /* Input/Border/Corner   */
+  --semantic-icon-size-input:       var(--primitive-icon-size-16); /* Input/Icon/Size      */
 
   /* Typography — label */
   --semantic-font-size-label:       var(--primitive-font-size-14);  /* label/regular size    */
