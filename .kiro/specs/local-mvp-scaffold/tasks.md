@@ -218,48 +218,68 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 5. Retrieval, guardrail, escalation, normalization (server-only mocks behind seams)
 
-- [ ] 5.1 Mock retrieval behind the fixed `retrieve()` signature
+- [x] 5.1 Mock retrieval behind the fixed `retrieve()` signature
   - `src/lib/bedrock/retrieve.ts`: intent split (source vs. course-date); tag/keyword
-    scoring over `MockSource[]` with a threshold; below threshold → empty snippets.
+    scoring over `Source[]` with a threshold; below threshold → empty snippets.
   - Course-date: return `needsIdentifiers` when insufficient; exact single-row match →
     one snippet; zero/multiple → empty.
   - Unit tests for match, no-match, and each course-date branch.
   - _Requirements: 3.1, 4.1, 4.2, 4.3, 9.1, 9.2_
+  - NOTE: deterministic, async `retrieve` reading ONLY Group 4 mock data; course-date
+    matches are backed by the dataset source so citations resolve. `>1` match →
+    `needsIdentifiers` (ask for more), exactly `1` → snippet, `0` → empty (unresolved).
 
-- [ ] 5.2 Answer composition from snippets only
+- [x] 5.2 Answer composition from snippets only
   - `src/lib/bedrock/prompt.ts`: build the answer **only** from matched snippet content.
     WHEN no snippets support an answer, produce the cannot-verify outcome (no invented
     content).
   - Unit test: composed answer contains no text absent from snippets.
   - _Requirements: 3.1 (Property 1), 5.1 (Property 3)_
+  - NOTE: `composeAnswer` returns the verbatim `\n\n`-join of snippet excerpts, or `null`
+    when there are none; a test asserts the answer is exactly that join (no invented text).
 
-- [ ] 5.3 Mock guardrail: sensitive-data detection (no echo)
+- [x] 5.3 Mock guardrail: sensitive-data detection (no echo)
   - `src/lib/bedrock/guardrail.ts`: `screen()` detects SSN/student ID/DOB/password/bank
-    patterns → `{ ok:false, reason:"sensitive", safeMessage, department }`; never
-    includes the detected value.
+    patterns → `{ ok:false, reason:"sensitive", category, safeMessage, department }`;
+    never includes the detected value.
   - Treat injection markers as data only — never as instructions.
   - Unit tests: sensitive detected + not echoed; injection strings pass through as inert
     queries.
   - _Requirements: 6.1, 6.2, 7.1, 7.2_
+  - NOTE (integration): `GuardrailVerdict` false-branch gained a `category:
+    SensitiveCategory` field (Group 2 `src/types/guardrail.ts`) so the response's
+    `SafeRejection.category` can be populated. Ordered regex rules; first match wins.
 
-- [ ] 5.4 Redaction utility for logging
+- [x] 5.4 Redaction utility for logging
   - `src/lib/utils/redact.ts`: produce redacted/minimized log payload (category,
     confidence, latency); never the raw prompt.
   - _Requirements: 6.3_
+  - NOTE: `redact` masks emails / SSN-like / phone-like / long digit runs and truncates;
+    `redactQuestion` exported for reuse. Deterministic.
 
-- [ ] 5.5 Deterministic escalation rules
+- [x] 5.5 Deterministic escalation rules
   - `src/lib/bedrock/escalation.ts`: `applyEscalationRules()` escalates on no
     sources / missing citations / sensitive / binding-policy / conflicting / unmatched
     course date / safety; sets department; never claims a human was contacted.
   - Unit tests for each escalation trigger; determinism (same input → same result).
   - _Requirements: 5.1, 5.2, 5.3, 5.4_
+  - NOTE (integration): `ApplyEscalationRulesFn` input gained an optional `query`
+    (Group 2 `src/types/services.ts`) so query-driven reasons (safety, private/
+    student-specific, conflicting, binding, high-stakes) can be detected deterministically
+    as data-only keyword rules. Result-driven reasons (unresolved course date, no source,
+    missing citations) also covered. `escalationMessage()` provides the transparent
+    fallback wording.
 
-- [ ] 5.6 Normalization to `AssistantResponse`
+- [x] 5.6 Normalization to `AssistantResponse`
   - `src/lib/bedrock/normalize.ts`: assemble `answer`, confidence, `citations` (each
     backed by a real source entry used in the answer), `department?`,
     `escalationRecommended`, `suggestedQuestions`.
   - Unit test: every emitted citation maps to a real source record (Property 2).
   - _Requirements: 3.2, 3.3, 3.5_
+  - NOTE: `toAssistantResponse` maps the flow pieces to the discriminated `AssistantResponse`
+    union (safe_rejection → insufficient_evidence → grounded). Citations are filtered to
+    those resolving via `getSourceById` (integrity); grounded requires ≥1 valid citation.
+    Barrel at `src/lib/bedrock/index.ts`. No API routes/UI added.
 
 ## 6. API route handlers (server-only)
 
