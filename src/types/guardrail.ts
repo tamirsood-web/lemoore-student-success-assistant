@@ -28,8 +28,6 @@ export type GuardrailVerdict =
   | {
       readonly ok: false;
       readonly reason: "sensitive";
-      /** Which sensitive category was detected; lets the response label the rejection. */
-      readonly category: SensitiveCategory;
       readonly safeMessage: string;
       readonly department: string;
     };
