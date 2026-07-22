@@ -192,4 +192,25 @@
   --modal-title-font-weight: var(--semantic-font-weight-bold);
   --modal-title-line-height: var(--semantic-line-height-tight);
   --modal-title-letter-spacing: var(--semantic-letter-spacing-none);
+
+  /* ─────────────────────────────────────────────
+   * SOURCE LINK
+   * Source: Figma DS-course · node 234:790
+   * Consumed by: components/source-link/source-link.css
+   * ───────────────────────────────────────────── */
+  --source-link-padding-x:      var(--semantic-space-source-link-padding-x);
+  --source-link-padding-y:      var(--semantic-space-source-link-padding-y);
+  --source-link-radius:         var(--semantic-radius-source-link);
+
+  --source-link-font-family:    var(--semantic-font-family-ui);
+  --source-link-font-size:      var(--semantic-font-size-copy);
+  --source-link-font-weight:    var(--semantic-font-weight-regular);
+  --source-link-line-height:    var(--semantic-line-height-tight);
+  --source-link-letter-spacing: var(--semantic-letter-spacing-none);
+
+  --source-link-color:          var(--semantic-color-source-link-text);
+  --source-link-bg:             var(--semantic-color-source-link-bg);
+  --source-link-bg-hover:       var(--semantic-color-source-link-bg-hover);
+  --source-link-bg-active:      var(--semantic-color-source-link-bg-active);
+  --source-link-border-focus:   var(--semantic-color-source-link-border-focus);
 }

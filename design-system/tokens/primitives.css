@@ -83,6 +83,7 @@
   --primitive-font-size-18:      18px;   /* headline 5 — DS-course node 234:760 */
   --primitive-font-size-16:      16px;
   --primitive-font-size-14:      14px;   /* Input/Text/Label typography — DS-course node 34:218 */
+  --primitive-font-size-12:      12px;   /* copy/regular — DS-course node 234:790 (SourceLink) */
   --primitive-font-weight-700:   700;    /* headline 5 Bold — DS-course node 234:760 */
   --primitive-font-weight-400:   400;
   --primitive-line-height-1:     1;      /* 100% */

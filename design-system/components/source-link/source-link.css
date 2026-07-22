@@ -1,0 +1,94 @@
+/*
+ * source-link.css
+ *
+ * Source Link component — a pill-shaped link to an external source.
+ * Source: Figma DS-course · node 234:790
+ *
+ * Required load order:
+ *   1. tokens/primitives.css
+ *   2. tokens/semantic.css
+ *   3. tokens/components.css  ← defines --source-link-* properties
+ *   4. this file
+ *
+ * Semantics: <a> element, opens in new tab.
+ * States: Default, Hover, Focus-visible, Active
+ * No JavaScript required.
+ *
+ * This file consumes ONLY --source-link-* custom properties.
+ * No raw values. No token definitions.
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+ * BASE — pill link
+ * ───────────────────────────────────────────────────────────── */
+.source-link {
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+  padding:          var(--source-link-padding-y) var(--source-link-padding-x);
+  border-radius:    var(--source-link-radius);
+  border:           1px solid var(--source-link-bg);
+
+  /* Typography */
+  font-family:      var(--source-link-font-family);
+  font-size:        var(--source-link-font-size);
+  font-weight:      var(--source-link-font-weight);
+  line-height:      var(--source-link-line-height);
+  letter-spacing:   var(--source-link-letter-spacing);
+  white-space:      nowrap;
+  text-decoration:  none;
+
+  /* Colors — default state */
+  color:            var(--source-link-color);
+  background-color: var(--source-link-bg);
+
+  /* Smooth transitions */
+  transition: background-color 120ms ease,
+              border-color     120ms ease;
+
+  cursor: pointer;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * HOVER
+ * Background and border both use hover color.
+ * ───────────────────────────────────────────────────────────── */
+.source-link:hover {
+  background-color: var(--source-link-bg-hover);
+  border-color:     var(--source-link-bg-hover);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * FOCUS-VISIBLE
+ * Transparent background, blue border as focus indicator.
+ * ───────────────────────────────────────────────────────────── */
+.source-link:focus-visible {
+  background-color: var(--source-link-bg);
+  border-color:     var(--source-link-border-focus);
+  outline:          none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * ACTIVE
+ * Darker background and matching border.
+ * ───────────────────────────────────────────────────────────── */
+.source-link:active {
+  background-color: var(--source-link-bg-active);
+  border-color:     var(--source-link-bg-active);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * DISABLED APPEARANCE
+ * Use aria-disabled="true" — the link remains in the DOM but
+ * is visually muted and non-interactive.
+ * ───────────────────────────────────────────────────────────── */
+.source-link[aria-disabled="true"] {
+  opacity:        0.5;
+  pointer-events: none;
+  cursor:         default;
+}

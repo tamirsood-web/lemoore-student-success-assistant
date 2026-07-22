@@ -153,4 +153,23 @@
 
   --semantic-font-size-heading:     var(--primitive-font-size-18);     /* headline 5 size            */
   --semantic-font-weight-bold:      var(--primitive-font-weight-700);  /* headline 5 weight          */
+
+  /* ─────────────────────────────────────────────
+   * SOURCE LINK
+   * Source: Figma DS-course · node 234:790
+   * Variables: Sources/Text/Default, Sources/BG/*,
+   *            Sources/Border/Focus, Sources/Border/Corner,
+   *            Sources/Padding/X, Sources/Padding/Y, copy/regular
+   * ───────────────────────────────────────────── */
+  --semantic-color-source-link-text:         var(--primitive-color-gray-900);        /* Sources/Text/Default   */
+  --semantic-color-source-link-bg:           var(--primitive-color-gray-300);        /* Sources Link/BG/Default (updated: #bebebe) */
+  --semantic-color-source-link-bg-hover:     var(--primitive-color-gray-200);        /* Sources/BG/Hover       */
+  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-300);        /* Sources/BG/Active      */
+  --semantic-color-source-link-border-focus: var(--primitive-color-blue-700);        /* Sources/Border/Focus   */
+
+  --semantic-space-source-link-padding-x:    var(--primitive-space-8);               /* Sources/Padding/X      */
+  --semantic-space-source-link-padding-y:    var(--primitive-space-4);               /* Sources/Padding/Y      */
+  --semantic-radius-source-link:             var(--primitive-radius-full);           /* Sources/Border/Corner  */
+
+  --semantic-font-size-copy:                 var(--primitive-font-size-12);          /* copy/regular size      */
 }
