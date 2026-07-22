@@ -18,22 +18,20 @@
    * ───────────────────────────────────────────── */
 
   /* Blues */
-  --primitive-color-blue-900:   #134571;
-  --primitive-color-blue-800:   #0c2e4c;  /* Button/Primary/BG/Active — updated */
-  --primitive-color-blue-700:   #335183;
-  --primitive-color-blue-600:   #4d6792;  /* Button/Primary/BG/Hover — updated */
-  --primitive-color-blue-500:   #1f73bd;  /* focus ring (secondary/clean/icon) */
+  --primitive-color-blue-900:   #02196e;  /* Button/Primary/BG/Default */
+  --primitive-color-blue-800:   #011248;  /* Button/Primary/BG/Active  */
+  --primitive-color-blue-700:   #163abf;  /* Focus ring / Border focus / Primary hover */
 
   /* Grays */
-  --primitive-color-gray-900:   #121212;
-  --primitive-color-gray-600:   #5c5c5c;
-  --primitive-color-gray-500:   #9d9d9d;  /* Input/Border/Default — DS-course node 34:218 */
-  --primitive-color-gray-300:   #bebebe;
-  --primitive-color-gray-200:   #dedede;
-  --primitive-color-gray-100:   #ebebeb;
+  --primitive-color-gray-900:   #10141f;  /* Text default */
+  --primitive-color-gray-600:   #555761;  /* Text muted / disabled */
+  --primitive-color-gray-500:   #91939c;  /* Secondary/BG/Active, SourceLink/BG/Active */
+  --primitive-color-gray-300:   #b5b6bc;  /* Surface hover, SourceLink/BG/Default, Input border */
+  --primitive-color-gray-200:   #d3d5da;  /* Ghost active, Bubble agent, Chat window divider */
+  --primitive-color-gray-100:   #ebecf2;  /* Disabled bg, Secondary default, Ghost hover */
 
   /* Blues — chat bubble */
-  --primitive-color-blue-100:   #e5e9ef;  /* Bubble/Color/User — DS-course node 234:684 */
+  --primitive-color-blue-100:   #dce5ff;  /* Bubble/Color/User */
 
   /* Absolute */
   --primitive-color-white:      #ffffff;
