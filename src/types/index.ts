@@ -33,6 +33,33 @@ export type {
 
 export type { ChatRequestBody, FeedbackInput, FeedbackRequestBody } from "./chat";
 
+export type {
+  SearchMatchKind,
+  SearchResult,
+  SearchQuery,
+  SearchResponse,
+  SearchProvider,
+} from "./search";
+
+export type {
+  AudioInput,
+  AudioOutput,
+  TranscriptionResult,
+  SpeechToTextProvider,
+  TextToSpeechProvider,
+  VoiceTurn,
+  VoiceSession,
+  VoiceConversationService,
+} from "./voice";
+
+export type {
+  FoundationModelClient,
+  KnowledgeBaseRetriever,
+  KnowledgeBaseSearchProvider,
+  DocumentIngestionService,
+  VectorSearchClient,
+} from "./integrations";
+
 export type { LogMode, RedactedLogRecord, RedactInput } from "./logging";
 
 export type {
