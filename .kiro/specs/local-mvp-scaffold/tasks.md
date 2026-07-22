@@ -283,7 +283,7 @@ Wave definitions (each wave is verified and reviewed before the next begins):
 
 ## 6. API route handlers (server-only)
 
-- [ ] 6.1 `POST /api/chat`
+- [x] 6.1 `POST /api/chat`
   - `src/app/api/chat/route.ts`: Zod-validate → `guardrail.screen` → `retrieve` →
     compose → `applyEscalationRules` → `normalize` → redacted log → typed JSON.
   - 400 on invalid input; 500 with generic safe message on unexpected error (no internal
@@ -291,18 +291,26 @@ Wave definitions (each wave is verified and reviewed before the next begins):
   - Route tests: grounded answer, unsupported→escalation, course-date-without-ids,
     injection, sensitive-data, validation 400.
   - _Requirements: 3.1, 3.2, 4.1, 5.1, 6.1, 7.1, 8.4, 8.5_
+  - NOTE: `runtime = "nodejs"`; only `message` is read from the body (no client role/mode/
+    confidence/citations trusted). Redacted log via `redact()` (masks sensitive values,
+    never the raw sensitive token). 10 route tests incl. exact course-date branch and a
+    mocked-`retrieve` 500 test (`chat.route.error.test.ts`) asserting no leaked detail.
 
-- [ ] 6.2 `POST /api/feedback` (validated no-op)
+- [x] 6.2 `POST /api/feedback` (validated no-op)
   - `src/app/api/feedback/route.ts`: Zod-validate `FeedbackRequest`; call
     `db/feedback.ts` no-op sink; return `{ ok: true }`; 400 on invalid.
   - `src/lib/db/feedback.ts`: no-op returning success behind the fixed signature.
   - Route test: valid → 200; invalid → 400.
   - _Requirements: 8.5, 9.1, 9.2_
+  - NOTE: `feedbackRepository`/`recordFeedback` implement the fixed `FeedbackRepository` /
+    `RecordFeedbackFn` seam as a deterministic validated no-op (no DB/AWS/network/fs). 4
+    route tests incl. helpful, unhelpful+reason, invalid→400, and a mocked-sink 500 test.
 
-- [ ] 6.3 `GET /api/health`
+- [x] 6.3 `GET /api/health`
   - `src/app/api/health/route.ts`: return 200 `{ status: "ok" }`, no auth, no deps.
   - Route test: 200 status payload.
   - _Requirements: 10.1_
+  - NOTE: no auth, no env/AWS/DB dependency, no user data. 1 route test.
 
 ## 7. UI components
 
