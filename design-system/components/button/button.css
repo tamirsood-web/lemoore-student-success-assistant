@@ -136,7 +136,7 @@
 }
 
 .btn--loading .btn__loader {
-  animation: btn-spin 1s linear infinite;
+  animation: btn-spin 1.6s linear infinite;
 }
 
 
