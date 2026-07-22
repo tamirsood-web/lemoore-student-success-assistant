@@ -24,27 +24,27 @@
    * BACKGROUND — action (primary button)
    * ───────────────────────────────────────────── */
   --semantic-color-action-bg-default:   var(--primitive-color-blue-900);
-  --semantic-color-action-bg-hover:     var(--primitive-color-blue-700);
+  --semantic-color-action-bg-hover:     var(--primitive-color-blue-600);   /* Button/Primary/BG/Hover: #4d6792 */
   --semantic-color-action-bg-focus:     var(--primitive-color-blue-900);
-  --semantic-color-action-bg-active:    var(--primitive-color-blue-900);
+  --semantic-color-action-bg-active:    var(--primitive-color-blue-800);   /* Button/Primary/BG/Active: #0c2e4c */
   --semantic-color-action-bg-disabled:  var(--primitive-color-gray-100);
 
   /* ─────────────────────────────────────────────
    * BACKGROUND — surface (secondary / clean / icon buttons)
    * ───────────────────────────────────────────── */
   --semantic-color-surface-default:     var(--primitive-color-gray-100);
-  --semantic-color-surface-hover:       var(--primitive-color-gray-200);
+  --semantic-color-surface-hover:       var(--primitive-color-gray-300);   /* Button/Secondary/BG/Hover: #bebebe */
   --semantic-color-surface-focus:       var(--primitive-color-gray-100);
-  --semantic-color-surface-active:      var(--primitive-color-gray-300);
+  --semantic-color-surface-active:      var(--primitive-color-gray-500);   /* Button/Secondary/BG/Active: #9d9d9d */
   --semantic-color-surface-disabled:    var(--primitive-color-white);
 
   /* ─────────────────────────────────────────────
    * BACKGROUND — ghost (clean / icon — transparent base)
    * ───────────────────────────────────────────── */
   --semantic-color-ghost-default:    var(--primitive-color-transparent);
-  --semantic-color-ghost-hover:      var(--primitive-color-gray-100);
+  --semantic-color-ghost-hover:      var(--primitive-color-gray-100);   /* Button/Icon btn/BG/Hover: #ebebeb */
   --semantic-color-ghost-focus:      var(--primitive-color-transparent);
-  --semantic-color-ghost-active:     var(--primitive-color-gray-200);
+  --semantic-color-ghost-active:     var(--primitive-color-gray-200);   /* Button/Icon btn/BG/Active: #dedede */
   --semantic-color-ghost-disabled:   var(--primitive-color-transparent);
 
   /* ─────────────────────────────────────────────
@@ -89,11 +89,11 @@
 
   /* Backgrounds */
   --semantic-color-input-bg-default:   var(--primitive-color-white);      /* Input/Color/Default   */
-  --semantic-color-input-bg-hover:     var(--primitive-color-gray-200);   /* Input/Color/Hover     */
+  --semantic-color-input-bg-hover:     var(--primitive-color-gray-300);   /* Input/Color/Hover: #bebebe */
 
   /* Borders */
   --semantic-color-input-border-default:  var(--primitive-color-gray-500);  /* Input/Border/Default  */
-  --semantic-color-input-border-focus:    var(--primitive-color-blue-700);  /* Input/Border/Focus    */
+  --semantic-color-input-border-focus:    var(--primitive-color-blue-800);  /* Input/Border/Focus: #0c2e4c */
   --semantic-color-input-border-disabled: var(--primitive-color-gray-200);  /* Input/Border/Disabled */
 
   /* Text */
@@ -163,8 +163,8 @@
    * ───────────────────────────────────────────── */
   --semantic-color-source-link-text:         var(--primitive-color-gray-900);        /* Sources/Text/Default   */
   --semantic-color-source-link-bg:           var(--primitive-color-gray-300);        /* Sources Link/BG/Default (updated: #bebebe) */
-  --semantic-color-source-link-bg-hover:     var(--primitive-color-gray-200);        /* Sources/BG/Hover       */
-  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-300);        /* Sources/BG/Active      */
+  --semantic-color-source-link-bg-hover:     var(--primitive-color-gray-300);        /* Sources Link/BG/Hover: #bebebe  */
+  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-500);        /* Sources Link/BG/Active: #9d9d9d */
   --semantic-color-source-link-border-focus: var(--primitive-color-blue-700);        /* Sources/Border/Focus   */
 
   --semantic-space-source-link-padding-x:    var(--primitive-space-8);               /* Sources/Padding/X      */
