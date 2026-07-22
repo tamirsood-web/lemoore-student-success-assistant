@@ -1,0 +1,216 @@
+/*
+ * components.css
+ *
+ * Layer 3 — Component-scoped tokens.
+ * Maps semantic roles to Button-specific custom properties.
+ * button.css consumes ONLY these --btn-* properties.
+ *
+ * Requires: primitives.css, semantic.css (must be loaded first, in order)
+ * Consumed by: components/button/button.css
+ */
+
+:root {
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Layout & Structure
+   * ───────────────────────────────────────────── */
+  --btn-padding-x:        var(--semantic-space-component-padding-x);
+  --btn-padding-y:        var(--semantic-space-component-padding-y);
+  --btn-gap:              var(--semantic-space-component-gap);
+  --btn-radius:           var(--semantic-radius-component);
+
+  --btn-icon-padding-x:   var(--semantic-space-component-icon-padding);
+  --btn-icon-padding-y:   var(--semantic-space-component-icon-padding);
+  --btn-icon-radius:      var(--semantic-radius-component-circular);
+
+  --btn-icon-size:        var(--semantic-icon-size-inline);
+  --btn-icon-size-solo:   var(--semantic-icon-size-standalone);
+
+  --btn-focus-ring-width: var(--semantic-border-focus-width);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Typography
+   * ───────────────────────────────────────────── */
+  --btn-font-family:      var(--semantic-font-family-ui);
+  --btn-font-size:        var(--semantic-font-size-ui);
+  --btn-font-weight:      var(--semantic-font-weight-regular);
+  --btn-line-height:      var(--semantic-line-height-tight);
+  --btn-letter-spacing:   var(--semantic-letter-spacing-none);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Primary variant
+   * Background: action tokens
+   * Text/icon: on-action (white) → muted when disabled
+   * Focus ring: inverse (white on dark fill)
+   * ───────────────────────────────────────────── */
+  --btn-primary-bg:              var(--semantic-color-action-bg-default);
+  --btn-primary-bg-hover:        var(--semantic-color-action-bg-hover);
+  --btn-primary-bg-focus:        var(--semantic-color-action-bg-focus);
+  --btn-primary-bg-active:       var(--semantic-color-action-bg-active);
+  --btn-primary-bg-disabled:     var(--semantic-color-action-bg-disabled);
+
+  --btn-primary-color:           var(--semantic-color-text-on-action);
+  --btn-primary-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-primary-focus-ring:      var(--semantic-color-focus-ring-inverse);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Secondary variant
+   * Background: surface tokens
+   * Text/icon: default → muted when disabled
+   * Focus ring: standard blue
+   * ───────────────────────────────────────────── */
+  --btn-secondary-bg:              var(--semantic-color-surface-default);
+  --btn-secondary-bg-hover:        var(--semantic-color-surface-hover);
+  --btn-secondary-bg-focus:        var(--semantic-color-surface-focus);
+  --btn-secondary-bg-active:       var(--semantic-color-surface-active);
+  --btn-secondary-bg-disabled:     var(--semantic-color-surface-disabled);
+
+  --btn-secondary-color:           var(--semantic-color-text-default);
+  --btn-secondary-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-secondary-focus-ring:      var(--semantic-color-focus-ring);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Clean variant
+   * Background: ghost tokens (transparent base)
+   * Text/icon: default (black) → muted when disabled
+   * No visible border except focus-visible outline
+   * Focus ring: standard blue
+   * ───────────────────────────────────────────── */
+  --btn-clean-bg:              var(--semantic-color-ghost-default);
+  --btn-clean-bg-hover:        var(--semantic-color-ghost-hover);
+  --btn-clean-bg-focus:        var(--semantic-color-ghost-focus);
+  --btn-clean-bg-active:       var(--semantic-color-ghost-active);
+  --btn-clean-bg-disabled:     var(--semantic-color-ghost-disabled);
+
+  --btn-clean-color:           var(--semantic-color-text-default);
+  --btn-clean-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-clean-focus-ring:      var(--semantic-color-focus-ring);
+
+  /* ─────────────────────────────────────────────
+   * BUTTON — Icon variant (icon-only, circular)
+   * Background: ghost tokens
+   * Icon color: default → muted when disabled
+   * Focus ring: standard blue
+   * ───────────────────────────────────────────── */
+  --btn-icon-bg:              var(--semantic-color-ghost-default);
+  --btn-icon-bg-hover:        var(--semantic-color-surface-hover);
+  --btn-icon-bg-active:       var(--semantic-color-surface-active);
+  --btn-icon-bg-disabled:     var(--semantic-color-surface-disabled);
+
+  --btn-icon-color:           var(--semantic-color-text-default);
+  --btn-icon-color-disabled:  var(--semantic-color-text-muted);
+
+  --btn-icon-focus-ring:      var(--semantic-color-focus-ring);
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Layout & Structure
+   * Source: Figma DS-course · node 34:218
+   * Consumed by: components/chat-input/chat-input.css
+   * ───────────────────────────────────────────── */
+  --chat-input-padding-x:       var(--semantic-space-input-padding-x);
+  --chat-input-padding-y:       var(--semantic-space-input-padding-y);
+  --chat-input-gap:             var(--semantic-space-input-gap);
+  --chat-input-radius:          var(--semantic-radius-input);
+  --chat-input-border-width:    var(--semantic-border-input-width);
+
+  /* Heights — min is 1 line of text + padding + borders */
+  --chat-input-min-height:      50px;   /* 16px padding-top + 16px line-height + 16px padding-bottom + 2px borders */
+  --chat-input-max-height:      200px;  /* ~6 lines before internal scroll engages */
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Colors
+   * ───────────────────────────────────────────── */
+  --chat-input-bg:              var(--semantic-color-input-bg-default);
+  --chat-input-bg-hover:        var(--semantic-color-input-bg-hover);
+
+  --chat-input-border:          var(--semantic-color-input-border-default);
+  --chat-input-border-focus:    var(--semantic-color-input-border-focus);
+  --chat-input-border-disabled: var(--semantic-color-input-border-disabled);
+
+  --chat-input-bg-disabled:     var(--semantic-color-input-bg-default);  /* white in disabled state */
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Typography (textarea / input text)
+   * Source: caption text/refular
+   * ───────────────────────────────────────────── */
+  --chat-input-font-family:       var(--semantic-font-family-ui);
+  --chat-input-font-size:         var(--semantic-font-size-ui);
+  --chat-input-font-weight:       var(--semantic-font-weight-regular);
+  --chat-input-line-height:       var(--semantic-line-height-tight);
+  --chat-input-letter-spacing:    var(--semantic-letter-spacing-none);
+
+  --chat-input-color:             var(--semantic-color-input-text-typing);
+  --chat-input-color-placeholder: var(--semantic-color-input-text-placeholder);
+  --chat-input-color-disabled:    var(--semantic-color-input-text-disabled);
+
+  /* ─────────────────────────────────────────────
+   * CHAT INPUT — Label typography
+   * Source: label/regular
+   * ───────────────────────────────────────────── */
+  --chat-input-label-font-size:   var(--semantic-font-size-label);
+  --chat-input-label-font-family: var(--semantic-font-family-ui);
+  --chat-input-label-font-weight: var(--semantic-font-weight-regular);
+  --chat-input-label-line-height: var(--semantic-line-height-tight);
+  --chat-input-label-color:       var(--semantic-color-input-text-label);
+
+  /* ─────────────────────────────────────────────
+   * MESSAGE BUBBLE
+   * Source: Figma DS-course · node 234:684
+   * Consumed by: components/message-bubble/message-bubble.css
+   * Two variants: agent (message from AI) and user (message from human)
+   * ───────────────────────────────────────────── */
+  --bubble-padding-x:        var(--semantic-space-bubble-padding-x);
+  --bubble-padding-y:        var(--semantic-space-bubble-padding-y);
+
+  --bubble-radius-default:   var(--semantic-radius-bubble-default);   /* large corners       */
+  --bubble-radius-point:     var(--semantic-radius-bubble-point);     /* tail/pointer corner */
+
+  --bubble-bg-agent:         var(--semantic-color-bubble-agent);
+  --bubble-bg-user:          var(--semantic-color-bubble-user);
+
+  /* ─────────────────────────────────────────────
+   * MODAL WINDOW
+   * Source: Figma DS-course · node 234:760
+   * Consumed by: components/modal-window/modal-window.css
+   * ───────────────────────────────────────────── */
+  --modal-bg:              var(--semantic-color-modal-bg);
+  --modal-overlay:         var(--semantic-color-modal-overlay);
+  --modal-radius:          var(--semantic-radius-modal);
+  --modal-divider-color:   var(--semantic-color-modal-divider);
+
+  --modal-padding-x:       var(--semantic-space-modal-padding-x);
+  --modal-padding-y:       var(--semantic-space-modal-padding-y);
+  --modal-gap-y:           var(--semantic-space-modal-gap-y);
+  --modal-gap-x:           var(--semantic-space-modal-gap-x);
+
+  --modal-title-color:       var(--semantic-color-modal-title);
+  --modal-title-font-family: var(--semantic-font-family-ui);
+  --modal-title-font-size:   var(--semantic-font-size-heading);
+  --modal-title-font-weight: var(--semantic-font-weight-bold);
+  --modal-title-line-height: var(--semantic-line-height-tight);
+  --modal-title-letter-spacing: var(--semantic-letter-spacing-none);
+
+  /* ─────────────────────────────────────────────
+   * SOURCE LINK
+   * Source: Figma DS-course · node 234:790
+   * Consumed by: components/source-link/source-link.css
+   * ───────────────────────────────────────────── */
+  --source-link-padding-x:      var(--semantic-space-source-link-padding-x);
+  --source-link-padding-y:      var(--semantic-space-source-link-padding-y);
+  --source-link-radius:         var(--semantic-radius-source-link);
+
+  --source-link-font-family:    var(--semantic-font-family-ui);
+  --source-link-font-size:      var(--semantic-font-size-copy);
+  --source-link-font-weight:    var(--semantic-font-weight-regular);
+  --source-link-line-height:    var(--semantic-line-height-tight);
+  --source-link-letter-spacing: var(--semantic-letter-spacing-none);
+
+  --source-link-color:          var(--semantic-color-source-link-text);
+  --source-link-bg:             var(--semantic-color-source-link-bg);
+  --source-link-bg-hover:       var(--semantic-color-source-link-bg-hover);
+  --source-link-bg-active:      var(--semantic-color-source-link-bg-active);
+  --source-link-border-focus:   var(--semantic-color-source-link-border-focus);
+}

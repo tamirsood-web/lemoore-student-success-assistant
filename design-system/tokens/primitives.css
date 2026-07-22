@@ -1,0 +1,91 @@
+/*
+ * primitives.css
+ *
+ * Layer 1 — Raw values only.
+ * No role or context implied. Every value comes directly from the
+ * inspected Figma component (DS-course · node 5:2418) and its
+ * bound Figma variables. Nothing is invented or normalised.
+ *
+ * Consumed by: semantic.css
+ * Do NOT reference these in component or layout CSS directly.
+ */
+
+:root {
+
+  /* ─────────────────────────────────────────────
+   * COLOR PALETTE
+   * Source: Figma variable resolved values
+   * ───────────────────────────────────────────── */
+
+  /* Blues */
+  --primitive-color-blue-900:   #134571;
+  --primitive-color-blue-700:   #335183;
+  --primitive-color-blue-500:   #1f73bd;  /* focus ring (secondary/clean/icon) */
+
+  /* Grays */
+  --primitive-color-gray-900:   #121212;
+  --primitive-color-gray-600:   #5c5c5c;
+  --primitive-color-gray-500:   #9d9d9d;  /* Input/Border/Default — DS-course node 34:218 */
+  --primitive-color-gray-300:   #bebebe;
+  --primitive-color-gray-200:   #dedede;
+  --primitive-color-gray-100:   #ebebeb;
+
+  /* Blues — chat bubble */
+  --primitive-color-blue-100:   #e5e9ef;  /* Bubble/Color/User — DS-course node 234:684 */
+
+  /* Absolute */
+  --primitive-color-white:      #ffffff;
+  --primitive-color-transparent: transparent;
+  --primitive-color-overlay:    rgba(0, 0, 0, 0.48);  /* Modal window/Overlay/Shadow — DS-course node 234:760 */
+
+  /* ─────────────────────────────────────────────
+   * SPACING
+   * Source: Button/Padding/X, Button/Padding/Y,
+   *         Button/Gap/X,
+   *         Button/Icon btn/Padding/X,
+   *         Button/Icon btn/Padding/Y
+   * ───────────────────────────────────────────── */
+  --primitive-space-4:   4px;
+  --primitive-space-8:   8px;
+  --primitive-space-16:  16px;
+  --primitive-space-24:  24px;
+
+  /* ─────────────────────────────────────────────
+   * BORDER RADIUS
+   * Source: Button/Border/Corner,
+   *         Button/Icon/standart/size/icon-btn-default-crn-radius
+   * ───────────────────────────────────────────── */
+  --primitive-radius-8:    8px;
+  --primitive-radius-16:   16px;   /* Bubble/Border/Default — DS-course node 234:684 */
+  --primitive-radius-24:   24px;   /* Modal window/Border/Default — DS-course node 234:760 */
+  --primitive-radius-4:    4px;    /* Bubble/Border/Point   — DS-course node 234:684 */
+  --primitive-radius-full: 100px;
+
+  /* ─────────────────────────────────────────────
+   * BORDER WIDTH
+   * Source: Button/Secondary/Border/Bold,
+   *         Button/Clean/Border/Bold
+   * ───────────────────────────────────────────── */
+  --primitive-border-2: 2px;
+
+  /* ─────────────────────────────────────────────
+   * ICON SIZE
+   * Source: Button/Icon/Size,
+   *         Button/Icon btn/Text/Size
+   * ───────────────────────────────────────────── */
+  --primitive-icon-size-16: 16px;
+
+  /* ─────────────────────────────────────────────
+   * TYPOGRAPHY
+   * Source: caption text/refular
+   * ───────────────────────────────────────────── */
+  --primitive-font-family-inter: 'Inter', sans-serif;
+  --primitive-font-size-18:      18px;   /* headline 5 — DS-course node 234:760 */
+  --primitive-font-size-16:      16px;
+  --primitive-font-size-14:      14px;   /* Input/Text/Label typography — DS-course node 34:218 */
+  --primitive-font-size-12:      12px;   /* copy/regular — DS-course node 234:790 (SourceLink) */
+  --primitive-font-weight-700:   700;    /* headline 5 Bold — DS-course node 234:760 */
+  --primitive-font-weight-400:   400;
+  --primitive-line-height-1:     1;      /* 100% */
+  --primitive-letter-spacing-0:  0;
+}

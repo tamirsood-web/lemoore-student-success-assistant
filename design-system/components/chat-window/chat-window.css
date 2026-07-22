@@ -1,0 +1,147 @@
+/*
+ * chat-window.css
+ *
+ * Chat Window component — a floating, non-modal interface element.
+ * Source: Figma DS-course · node 234:760
+ *
+ * Required load order:
+ *   1. tokens/primitives.css
+ *   2. tokens/semantic.css
+ *   3. tokens/components.css  ← defines all --modal-* properties
+ *   4. ../button/button.css
+ *   5. ../chat-input/chat-input.css
+ *   6. this file
+ *
+ * Structure:
+ *   .chat-window             — the floating panel (no backdrop, non-modal)
+ *     .chat-window__header   — fixed top bar: title + icon actions
+ *     .chat-window__body     — scrollable content slot (accepts any HTML)
+ *     .chat-window__footer   — fixed bottom bar: chat input + send button
+ *
+ * States:
+ *   .chat-window--expanded   — 75vw × 75vh, centered in viewport
+ *
+ * This component does NOT block page interaction.
+ * There is no overlay, no backdrop, no focus trap.
+ *
+ * This file consumes ONLY --modal-* custom properties.
+ * No raw values. No token definitions.
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+ * PANEL — default (compact) state
+ * Width: 451px (Figma). Height: 469px (Figma).
+ * Position determined by the application.
+ * ───────────────────────────────────────────────────────────── */
+.chat-window {
+  display:          flex;
+  flex-direction:   column;
+  width:            451px;
+  max-width:        100%;
+  height:           469px;
+  background-color: var(--modal-bg);
+  border-radius:    var(--modal-radius);
+  box-shadow:       -1px 5px 6px var(--modal-overlay);
+  overflow:         hidden;
+
+  /* Smooth transition between default ↔ expanded */
+  transition: width 250ms ease,
+              height 250ms ease;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * EXPANDED STATE
+ * Toggled via JS class. 75% of viewport, centered.
+ * ───────────────────────────────────────────────────────────── */
+.chat-window--expanded {
+  position: fixed;
+  top:      12.5vh;
+  left:     12.5vw;
+  width:    75vw;
+  height:   75vh;
+  max-width: 75vw;
+  z-index:  200;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * HEADER
+ * Fixed at the top. Title left, actions right.
+ * ───────────────────────────────────────────────────────────── */
+.chat-window__header {
+  display:          flex;
+  align-items:      center;
+  justify-content:  space-between;
+  flex-shrink:      0;
+  padding:          var(--modal-padding-y) var(--modal-padding-x) var(--modal-gap-y);
+  border-bottom:    1px solid var(--modal-divider-color);
+}
+
+.chat-window__title {
+  flex:             1 0 0;
+  min-width:        0;
+  font-family:      var(--modal-title-font-family);
+  font-size:        var(--modal-title-font-size);
+  font-weight:      var(--modal-title-font-weight);
+  line-height:      var(--modal-title-line-height);
+  letter-spacing:   var(--modal-title-letter-spacing);
+  color:            var(--modal-title-color);
+  white-space:      nowrap;
+  overflow:         hidden;
+  text-overflow:    ellipsis;
+  margin:           0;
+}
+
+.chat-window__actions {
+  display:     flex;
+  align-items: center;
+  gap:         var(--modal-gap-x);
+  flex-shrink: 0;
+  margin-left: var(--modal-gap-x);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * BODY — scrollable content slot
+ * ───────────────────────────────────────────────────────────── */
+.chat-window__body {
+  flex:       1 1 0;
+  min-height: 0;
+  overflow-y: auto;
+  padding:    var(--modal-gap-y) var(--modal-padding-x);
+}
+
+.chat-window__content {
+  display: block;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * FOOTER — fixed at the bottom
+ * ───────────────────────────────────────────────────────────── */
+.chat-window__footer {
+  display:     flex;
+  align-items: center;
+  gap:         var(--modal-gap-x);
+  flex-shrink: 0;
+  padding:     var(--modal-gap-y) var(--modal-padding-x) var(--modal-padding-y);
+}
+
+.chat-window__footer .chat-input {
+  flex: 1 0 0;
+  min-width: 0;
+}
+
+.chat-window__footer .chat-input__label {
+  position:    absolute;
+  width:       1px;
+  height:      1px;
+  padding:     0;
+  margin:      -1px;
+  overflow:    hidden;
+  clip:        rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border:      0;
+}

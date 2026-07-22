@@ -1,0 +1,217 @@
+/*
+ * button.css
+ *
+ * Button component styles — all four variants, all five states.
+ *
+ * Required load order (all three must precede this file):
+ *   1. tokens/primitives.css
+ *   2. tokens/semantic.css
+ *   3. tokens/components.css
+ *
+ * This file consumes ONLY --btn-* custom properties.
+ * No raw values, no primitive or semantic references here.
+ *
+ * Usage:
+ *   <button type="button" class="btn btn--primary">Label</button>
+ *   <button type="button" class="btn btn--secondary">Label</button>
+ *   <button type="button" class="btn btn--clean">Label</button>
+ *   <button type="button" class="btn btn--icon" aria-label="…"><svg …></svg></button>
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+ * BASE — shared across all variants
+ * ───────────────────────────────────────────────────────────── */
+.btn {
+  /* Layout */
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             var(--btn-gap);
+
+  /* Reset */
+  border:             none;
+  background:         none;
+  text-decoration:    none;
+  cursor:             pointer;
+  -webkit-appearance: none;
+  appearance:         none;
+
+  /* Typography */
+  font-family:    var(--btn-font-family);
+  font-size:      var(--btn-font-size);
+  font-weight:    var(--btn-font-weight);
+  line-height:    var(--btn-line-height);
+  letter-spacing: var(--btn-letter-spacing);
+  white-space:    nowrap;
+
+  /* Clip overflowing icons */
+  overflow: hidden;
+
+  /* Smooth state transitions */
+  transition: background-color 120ms ease,
+              outline-color    120ms ease,
+              border-color     120ms ease;
+
+  /* Remove default outline — replaced per-variant below */
+  outline: none;
+}
+
+/* Icons inside any button are presentational */
+.btn svg,
+.btn img,
+.btn .btn__icon {
+  display:     block;
+  flex-shrink: 0;
+  width:       var(--btn-icon-size);
+  height:      var(--btn-icon-size);
+}
+
+/* Disabled — applies to all variants */
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  cursor:         not-allowed;
+  pointer-events: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * TEXT VARIANTS — primary, secondary, clean
+ * Shared padding, radius, and icon sizing
+ * ───────────────────────────────────────────────────────────── */
+.btn--primary,
+.btn--secondary,
+.btn--clean {
+  padding:       var(--btn-padding-y) var(--btn-padding-x);
+  border-radius: var(--btn-radius);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * PRIMARY
+ * ───────────────────────────────────────────────────────────── */
+.btn--primary {
+  background-color: var(--btn-primary-bg);
+  color:            var(--btn-primary-color);
+}
+
+.btn--primary:hover {
+  background-color: var(--btn-primary-bg-hover);
+}
+
+.btn--primary:focus-visible {
+  background-color: var(--btn-primary-bg-focus);
+  outline:          var(--btn-focus-ring-width) solid var(--btn-primary-focus-ring);
+  outline-offset:   2px;
+}
+
+.btn--primary:active {
+  background-color: var(--btn-primary-bg-active);
+}
+
+.btn--primary:disabled,
+.btn--primary[aria-disabled="true"] {
+  background-color: var(--btn-primary-bg-disabled);
+  color:            var(--btn-primary-color-disabled);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * SECONDARY
+ * ───────────────────────────────────────────────────────────── */
+.btn--secondary {
+  background-color: var(--btn-secondary-bg);
+  color:            var(--btn-secondary-color);
+}
+
+.btn--secondary:hover {
+  background-color: var(--btn-secondary-bg-hover);
+}
+
+.btn--secondary:focus-visible {
+  background-color: var(--btn-secondary-bg-focus);
+  outline:          var(--btn-focus-ring-width) solid var(--btn-secondary-focus-ring);
+  outline-offset:   2px;
+}
+
+.btn--secondary:active {
+  background-color: var(--btn-secondary-bg-active);
+}
+
+.btn--secondary:disabled,
+.btn--secondary[aria-disabled="true"] {
+  background-color: var(--btn-secondary-bg-disabled);
+  color:            var(--btn-secondary-color-disabled);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * CLEAN
+ * No visible border in default, hover, active, or disabled states.
+ * Focus ring appears only on :focus-visible via outline.
+ * Text and icon are black (confirmed by designer).
+ * ───────────────────────────────────────────────────────────── */
+.btn--clean {
+  background-color: var(--btn-clean-bg);
+  color:            var(--btn-clean-color);
+}
+
+.btn--clean:hover {
+  background-color: var(--btn-clean-bg-hover);
+}
+
+.btn--clean:focus-visible {
+  background-color: var(--btn-clean-bg-focus);
+  outline:          var(--btn-focus-ring-width) solid var(--btn-clean-focus-ring);
+  outline-offset:   2px;
+}
+
+.btn--clean:active {
+  background-color: var(--btn-clean-bg-active);
+}
+
+.btn--clean:disabled,
+.btn--clean[aria-disabled="true"] {
+  background-color: var(--btn-clean-bg-disabled);
+  color:            var(--btn-clean-color-disabled);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * ICON (icon-only, circular)
+ * Requires aria-label on the <button> element.
+ * ───────────────────────────────────────────────────────────── */
+.btn--icon {
+  padding:          var(--btn-icon-padding-y) var(--btn-icon-padding-x);
+  border-radius:    var(--btn-icon-radius);
+  background-color: var(--btn-icon-bg);
+  color:            var(--btn-icon-color);
+  gap:              0;
+}
+
+/* Icon inside .btn--icon uses the solo size token */
+.btn--icon svg,
+.btn--icon img,
+.btn--icon .btn__icon {
+  width:  var(--btn-icon-size-solo);
+  height: var(--btn-icon-size-solo);
+}
+
+.btn--icon:hover {
+  background-color: var(--btn-icon-bg-hover);
+}
+
+.btn--icon:focus-visible {
+  outline:        var(--btn-focus-ring-width) solid var(--btn-icon-focus-ring);
+  outline-offset: 2px;
+}
+
+.btn--icon:active {
+  background-color: var(--btn-icon-bg-active);
+}
+
+.btn--icon:disabled,
+.btn--icon[aria-disabled="true"] {
+  background-color: var(--btn-icon-bg-disabled);
+  color:            var(--btn-icon-color-disabled);
+}

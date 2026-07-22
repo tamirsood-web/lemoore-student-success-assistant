@@ -1,0 +1,140 @@
+/*
+ * chat-input.css
+ *
+ * Chat Input component styles — label + auto-expanding textarea.
+ * Source: Figma DS-course · node 34:218
+ *
+ * Required load order:
+ *   1. tokens/primitives.css
+ *   2. tokens/semantic.css
+ *   3. tokens/components.css  ← defines all --chat-input-* properties
+ *   4. this file
+ *
+ * Variants: Default, Hover, Active (focus), Disabled
+ * Behaviour: auto-expand on input, max-height + scroll cap.
+ *            Managed by chat-input.js.
+ *
+ * This file consumes ONLY --chat-input-* custom properties.
+ * No raw values. No token definitions.
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+ * WRAPPER
+ * Vertical flex column: label on top, field below.
+ * ───────────────────────────────────────────────────────────── */
+.chat-input {
+  display:        flex;
+  flex-direction: column;
+  align-items:    stretch;
+  gap:            var(--chat-input-gap);
+  width:          100%;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * LABEL
+ * Source: label/regular — 14px Inter Regular
+ * ───────────────────────────────────────────────────────────── */
+.chat-input__label {
+  font-family:    var(--chat-input-label-font-family);
+  font-size:      var(--chat-input-label-font-size);
+  font-weight:    var(--chat-input-label-font-weight);
+  line-height:    var(--chat-input-label-line-height);
+  letter-spacing: var(--chat-input-letter-spacing);
+  color:          var(--chat-input-label-color);
+  white-space:    nowrap;
+  cursor:         default;
+}
+
+/* Visually hidden label — still present in DOM for screen readers */
+.chat-input__label--hidden {
+  position:   absolute;
+  width:      1px;
+  height:     1px;
+  padding:    0;
+  margin:     -1px;
+  overflow:   hidden;
+  clip:       rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border:     0;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * TEXTAREA
+ * Source: caption text/refular — 16px Inter Regular
+ * Min height = padding-top + 1-line text + padding-bottom + 2px border
+ * ───────────────────────────────────────────────────────────── */
+.chat-input__textarea {
+  /* Layout */
+  display:     block;
+  width:       100%;
+  box-sizing:  border-box;
+  min-height:  var(--chat-input-min-height);
+  max-height:  var(--chat-input-max-height);
+  padding:     var(--chat-input-padding-y) var(--chat-input-padding-x);
+
+  /* Typography */
+  font-family:    var(--chat-input-font-family);
+  font-size:      var(--chat-input-font-size);
+  font-weight:    var(--chat-input-font-weight);
+  line-height:    var(--chat-input-line-height);
+  letter-spacing: var(--chat-input-letter-spacing);
+  color:          var(--chat-input-color);
+
+  /* Appearance */
+  background-color: var(--chat-input-bg);
+  border:           var(--chat-input-border-width) solid var(--chat-input-border);
+  border-radius:    var(--chat-input-radius);
+  outline:          none;
+  resize:           none;
+  overflow-y:       hidden;   /* hidden until max-height — JS switches to auto */
+  cursor:           text;
+
+  /* Smooth border transition */
+  transition: border-color 120ms ease,
+              background-color 120ms ease;
+}
+
+.chat-input__textarea::placeholder {
+  color:   var(--chat-input-color-placeholder);
+  opacity: 1;   /* Firefox reduces opacity by default */
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * HOVER STATE
+ * ───────────────────────────────────────────────────────────── */
+.chat-input__textarea:hover:not(:disabled):not(:focus) {
+  background-color: var(--chat-input-bg-hover);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * ACTIVE (FOCUS) STATE
+ * ───────────────────────────────────────────────────────────── */
+.chat-input__textarea:focus {
+  background-color: var(--chat-input-bg);
+  border-color:     var(--chat-input-border-focus);
+}
+
+.chat-input__textarea:focus-visible {
+  /* Keep border as the focus indicator — no additional outline ring */
+  outline: none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * DISABLED STATE
+ * ───────────────────────────────────────────────────────────── */
+.chat-input__textarea:disabled {
+  background-color: var(--chat-input-bg-disabled);
+  border-color:     var(--chat-input-border-disabled);
+  color:            var(--chat-input-color-disabled);
+  cursor:           not-allowed;
+}
+
+.chat-input__textarea:disabled::placeholder {
+  color: var(--chat-input-color-disabled);
+}

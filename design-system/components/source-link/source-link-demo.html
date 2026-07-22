@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Source Link — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <!-- Token layers -->
+  <link rel="stylesheet" href="../../tokens/primitives.css" />
+  <link rel="stylesheet" href="../../tokens/semantic.css" />
+  <link rel="stylesheet" href="../../tokens/components.css" />
+  <!-- Dependencies -->
+  <link rel="stylesheet" href="../message-bubble/message-bubble.css" />
+  <!-- This component -->
+  <link rel="stylesheet" href="source-link.css" />
+
+  <style>
+    /* ── Demo page chrome — not part of the component ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      font-size: 14px;
+      color: #121212;
+      background: #f5f5f5;
+      padding: 48px 40px;
+    }
+
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+
+    .page-description {
+      font-size: 13px; color: #5c5c5c;
+      margin-bottom: 40px; max-width: 560px;
+    }
+
+    .demo-section { margin-bottom: 48px; }
+
+    .demo-section__title {
+      font-size: 11px; font-weight: 600;
+      letter-spacing: 0.08em; text-transform: uppercase;
+      color: #5c5c5c; margin-bottom: 16px;
+    }
+
+    .demo-section__note {
+      font-size: 12px; color: #5c5c5c; margin-top: 12px;
+    }
+
+    .demo-row {
+      display: flex; flex-wrap: wrap;
+      align-items: center; gap: 16px; margin-bottom: 12px;
+    }
+
+    .demo-row__label {
+      font-size: 11px; color: #5c5c5c;
+      width: 72px; flex-shrink: 0;
+    }
+
+    .demo-divider {
+      border: none; border-top: 1px solid #dedede; margin: 40px 0;
+    }
+
+    /* Static state simulation */
+    .is-hover-demo {
+      background-color: var(--source-link-bg-hover) !important;
+      border-color: var(--source-link-bg-hover) !important;
+    }
+    .is-focus-demo {
+      background-color: var(--source-link-bg) !important;
+      border-color: var(--source-link-border-focus) !important;
+    }
+    .is-active-demo {
+      background-color: var(--source-link-bg-active) !important;
+      border-color: var(--source-link-bg-active) !important;
+    }
+
+    /* Demo text inside bubble (not component responsibility) */
+    .demo-message-text {
+      font-family: 'Inter', sans-serif;
+      font-size: 16px; font-weight: 400;
+      line-height: 1.5; color: #121212;
+    }
+
+    /* Sources group inside bubble content — wrapping row */
+    .demo-sources-group {
+      display: flex; flex-wrap: wrap; gap: 8px;
+      margin-top: 12px;
+    }
+
+    /* Conversation column */
+    .demo-conversation {
+      display: flex; flex-direction: column; gap: 12px; max-width: 480px;
+    }
+    .demo-conversation .message-bubble--agent { align-self: flex-start; }
+  </style>
+</head>
+<body>
+
+  <h1>Source Link</h1>
+  <p class="page-description">
+    A pill-shaped link to an external source. Opens in a new browser tab.
+    Default state now has a visible gray background (#bebebe).
+    Source: Figma DS-course · node 234:790.
+  </p>
+
+  <!-- ═══════════════════════════════════════════
+       ALL STATES
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">States</p>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Default</span>
+      <a class="source-link" href="https://example.com/default" target="_blank" rel="noopener noreferrer">Link to source</a>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Hover</span>
+      <a class="source-link is-hover-demo" href="https://example.com/hover" target="_blank" rel="noopener noreferrer" tabindex="-1">Link to source</a>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Focus</span>
+      <a class="source-link is-focus-demo" href="https://example.com/focus" target="_blank" rel="noopener noreferrer" tabindex="-1">Link to source</a>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Active</span>
+      <a class="source-link is-active-demo" href="https://example.com/active" target="_blank" rel="noopener noreferrer" tabindex="-1">Link to source</a>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Disabled</span>
+      <a class="source-link" aria-disabled="true" tabindex="-1">Link to source</a>
+    </div>
+
+    <p class="demo-section__note">
+      Static representations above. Tab through the live section below to see real focus ring.
+    </p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       LIVE — keyboard navigation
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Live — Keyboard Navigation</p>
+
+    <div class="demo-row">
+      <a class="source-link" href="https://developer.mozilla.org" target="_blank" rel="noopener noreferrer">MDN Web Docs</a>
+      <a class="source-link" href="https://www.w3.org/WAI/WCAG21/quickref/" target="_blank" rel="noopener noreferrer">WCAG Quick Ref</a>
+      <a class="source-link" href="https://tr.designtokens.org/format/" target="_blank" rel="noopener noreferrer">DTCG Format Spec</a>
+    </div>
+
+    <p class="demo-section__note">
+      Tab through these links. Focus-visible shows a blue border. Click to open in a new tab.
+    </p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CONTEXTUAL — inside Message Bubble content
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Context — Inside an Assistant Message Bubble</p>
+
+    <div class="demo-conversation">
+      <!-- Single source link -->
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content">
+          <p class="demo-message-text">
+            Design tokens are named values that represent design decisions.
+            They are platform-agnostic and can be consumed by any platform.
+          </p>
+          <div class="demo-sources-group">
+            <a class="source-link" href="https://tr.designtokens.org/format/" target="_blank" rel="noopener noreferrer">DTCG Spec</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Multiple source links (wrapping group) -->
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content">
+          <p class="demo-message-text">
+            Figma variables map directly to design tokens. You can export them
+            and use them across platforms with tools like Style Dictionary or Tokens Studio.
+          </p>
+          <div class="demo-sources-group">
+            <a class="source-link" href="https://docs.tokens.studio/" target="_blank" rel="noopener noreferrer">Tokens Studio Docs</a>
+            <a class="source-link" href="https://www.figma.com/blog/announcing-variables/" target="_blank" rel="noopener noreferrer">Figma Variables</a>
+            <a class="source-link" href="https://amzn.github.io/style-dictionary/" target="_blank" rel="noopener noreferrer">Style Dictionary</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="demo-section__note">
+      Source links live inside <code>.message-bubble__content</code>, after the response text.
+      They wrap to new lines when the bubble isn't wide enough for all links.
+    </p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       VARIABLE CONTENT LENGTHS
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Variable Content Lengths</p>
+
+    <div class="message-bubble message-bubble--agent" style="max-width:400px;">
+      <div class="message-bubble__content">
+        <p class="demo-message-text">Here are some references of varying lengths:</p>
+        <div class="demo-sources-group">
+          <a class="source-link" href="https://example.com/a" target="_blank" rel="noopener noreferrer">API</a>
+          <a class="source-link" href="https://example.com/b" target="_blank" rel="noopener noreferrer">Documentation Reference</a>
+          <a class="source-link" href="https://example.com/c" target="_blank" rel="noopener noreferrer">AWS Amplify Getting Started Guide</a>
+        </div>
+      </div>
+    </div>
+
+    <p class="demo-section__note">
+      Width is hug-content — the pill grows to fit the text. Group wraps when constrained.
+    </p>
+  </section>
+
+</body>
+</html>

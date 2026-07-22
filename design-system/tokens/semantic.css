@@ -1,0 +1,175 @@
+/*
+ * semantic.css
+ *
+ * Layer 2 — Role-based aliases.
+ * Maps primitive values to design roles: text, background, action,
+ * border, focus, disabled, and layout. No raw values here — every
+ * property references a primitive.
+ *
+ * Requires: primitives.css (must be loaded first)
+ * Consumed by: components.css
+ * Do NOT reference these in component CSS directly.
+ */
+
+:root {
+
+  /* ─────────────────────────────────────────────
+   * TEXT
+   * ───────────────────────────────────────────── */
+  --semantic-color-text-default:    var(--primitive-color-gray-900);   /* body / label default  */
+  --semantic-color-text-muted:      var(--primitive-color-gray-600);   /* disabled labels       */
+  --semantic-color-text-on-action:  var(--primitive-color-white);      /* text on filled action bg */
+
+  /* ─────────────────────────────────────────────
+   * BACKGROUND — action (primary button)
+   * ───────────────────────────────────────────── */
+  --semantic-color-action-bg-default:   var(--primitive-color-blue-900);
+  --semantic-color-action-bg-hover:     var(--primitive-color-blue-700);
+  --semantic-color-action-bg-focus:     var(--primitive-color-blue-900);
+  --semantic-color-action-bg-active:    var(--primitive-color-blue-900);
+  --semantic-color-action-bg-disabled:  var(--primitive-color-gray-100);
+
+  /* ─────────────────────────────────────────────
+   * BACKGROUND — surface (secondary / clean / icon buttons)
+   * ───────────────────────────────────────────── */
+  --semantic-color-surface-default:     var(--primitive-color-gray-100);
+  --semantic-color-surface-hover:       var(--primitive-color-gray-200);
+  --semantic-color-surface-focus:       var(--primitive-color-gray-100);
+  --semantic-color-surface-active:      var(--primitive-color-gray-300);
+  --semantic-color-surface-disabled:    var(--primitive-color-white);
+
+  /* ─────────────────────────────────────────────
+   * BACKGROUND — ghost (clean / icon — transparent base)
+   * ───────────────────────────────────────────── */
+  --semantic-color-ghost-default:    var(--primitive-color-transparent);
+  --semantic-color-ghost-hover:      var(--primitive-color-gray-100);
+  --semantic-color-ghost-focus:      var(--primitive-color-transparent);
+  --semantic-color-ghost-active:     var(--primitive-color-gray-200);
+  --semantic-color-ghost-disabled:   var(--primitive-color-transparent);
+
+  /* ─────────────────────────────────────────────
+   * FOCUS RING
+   * ───────────────────────────────────────────── */
+  --semantic-color-focus-ring:         var(--primitive-color-blue-500);
+  --semantic-color-focus-ring-inverse: var(--primitive-color-white);   /* on dark fill (primary) */
+
+  /* ─────────────────────────────────────────────
+   * LAYOUT — spacing, radius, border, icon
+   * ───────────────────────────────────────────── */
+  --semantic-space-component-padding-x:      var(--primitive-space-24);
+  --semantic-space-component-padding-y:      var(--primitive-space-16);
+  --semantic-space-component-gap:            var(--primitive-space-8);
+  --semantic-space-component-icon-padding:   var(--primitive-space-4);
+
+  --semantic-radius-component:               var(--primitive-radius-8);
+  --semantic-radius-component-circular:      var(--primitive-radius-full);
+
+  --semantic-border-focus-width:             var(--primitive-border-2);
+
+  --semantic-icon-size-inline:               var(--primitive-icon-size-16);
+  --semantic-icon-size-standalone:           var(--primitive-icon-size-16);
+
+  /* ─────────────────────────────────────────────
+   * TYPOGRAPHY
+   * ───────────────────────────────────────────── */
+  --semantic-font-family-ui:      var(--primitive-font-family-inter);
+  --semantic-font-size-ui:        var(--primitive-font-size-16);
+  --semantic-font-weight-regular: var(--primitive-font-weight-400);
+  --semantic-line-height-tight:   var(--primitive-line-height-1);
+  --semantic-letter-spacing-none: var(--primitive-letter-spacing-0);
+
+  /* ─────────────────────────────────────────────
+   * INPUT FIELD
+   * Source: Figma DS-course · node 34:218
+   * Variables: Input/Color/*, Input/Border/*,
+   *            Input/Text/*, Input/Padding/*,
+   *            Input/Gap/X, Input/Border/Corner,
+   *            label/regular, caption text/refular
+   * ───────────────────────────────────────────── */
+
+  /* Backgrounds */
+  --semantic-color-input-bg-default:   var(--primitive-color-white);      /* Input/Color/Default   */
+  --semantic-color-input-bg-hover:     var(--primitive-color-gray-200);   /* Input/Color/Hover     */
+
+  /* Borders */
+  --semantic-color-input-border-default:  var(--primitive-color-gray-500);  /* Input/Border/Default  */
+  --semantic-color-input-border-focus:    var(--primitive-color-blue-700);  /* Input/Border/Focus    */
+  --semantic-color-input-border-disabled: var(--primitive-color-gray-200);  /* Input/Border/Disabled */
+
+  /* Text */
+  --semantic-color-input-text-label:       var(--primitive-color-gray-900);  /* Input/Text/Label      */
+  --semantic-color-input-text-placeholder: var(--primitive-color-gray-600);  /* Input/Text/Placeholder */
+  --semantic-color-input-text-typing:      var(--primitive-color-gray-900);  /* Input/Text/Typing     */
+  --semantic-color-input-text-disabled:    var(--primitive-color-gray-100);  /* Input/Text/Disabled   */
+
+  /* Layout */
+  --semantic-space-input-padding-x: var(--primitive-space-24);   /* Input/Padding/X       */
+  --semantic-space-input-padding-y: var(--primitive-space-16);   /* Input/Padding/Y       */
+  --semantic-space-input-gap:       var(--primitive-space-4);    /* Input/Gap/X           */
+  --semantic-radius-input:          var(--primitive-radius-8);   /* Input/Border/Corner   */
+
+  /* Typography — label */
+  --semantic-font-size-label:       var(--primitive-font-size-14);  /* label/regular size    */
+
+  /* Border width — input uses 1px (browser default for border shorthand) */
+  --semantic-border-input-width:    1px;
+
+  /* ─────────────────────────────────────────────
+   * MESSAGE BUBBLE
+   * Source: Figma DS-course · node 234:684
+   * Variables: Bubble/Color/Agent, Bubble/Color/User,
+   *            Bubble/Padding/X, Bubble/Padding/Y,
+   *            Bubble/Border/Default, Bubble/Border/Point
+   * ───────────────────────────────────────────── */
+  --semantic-color-bubble-agent:    var(--primitive-color-gray-200);   /* Bubble/Color/Agent    */
+  --semantic-color-bubble-user:     var(--primitive-color-blue-100);   /* Bubble/Color/User     */
+
+  --semantic-space-bubble-padding-x: var(--primitive-space-24);        /* Bubble/Padding/X      */
+  --semantic-space-bubble-padding-y: var(--primitive-space-24);        /* Bubble/Padding/Y      */
+
+  --semantic-radius-bubble-default:  var(--primitive-radius-16);       /* Bubble/Border/Default */
+  --semantic-radius-bubble-point:    var(--primitive-radius-4);        /* Bubble/Border/Point   */
+
+  /* ─────────────────────────────────────────────
+   * MODAL WINDOW
+   * Source: Figma DS-course · node 234:760
+   * Variables: Modal window/Color/Bg, Modal window/Overlay/Shadow,
+   *            Modal window/Border/Default, Modal window/Border/color,
+   *            Modal window/Padding/X, Modal window/Padding/Y,
+   *            Modal window/Gap/X, Modal window/Gap/Y,
+   *            Modal window/Text/color, headline 5
+   * ───────────────────────────────────────────── */
+  --semantic-color-modal-bg:       var(--primitive-color-white);       /* Modal window/Color/Bg      */
+  --semantic-color-modal-overlay:  var(--primitive-color-overlay);     /* Modal window/Overlay/Shadow */
+  --semantic-color-modal-divider:  var(--primitive-color-gray-500);    /* Modal window/Border/color  */
+  --semantic-color-modal-title:    var(--primitive-color-gray-900);    /* Modal window/Text/color    */
+
+  --semantic-radius-modal:         var(--primitive-radius-24);         /* Modal window/Border/Default */
+
+  --semantic-space-modal-padding-x: var(--primitive-space-24);         /* Modal window/Padding/X     */
+  --semantic-space-modal-padding-y: var(--primitive-space-24);         /* Modal window/Padding/Y     */
+  --semantic-space-modal-gap-y:     var(--primitive-space-16);         /* Modal window/Gap/Y         */
+  --semantic-space-modal-gap-x:     var(--primitive-space-8);          /* Modal window/Gap/X         */
+
+  --semantic-font-size-heading:     var(--primitive-font-size-18);     /* headline 5 size            */
+  --semantic-font-weight-bold:      var(--primitive-font-weight-700);  /* headline 5 weight          */
+
+  /* ─────────────────────────────────────────────
+   * SOURCE LINK
+   * Source: Figma DS-course · node 234:790
+   * Variables: Sources/Text/Default, Sources/BG/*,
+   *            Sources/Border/Focus, Sources/Border/Corner,
+   *            Sources/Padding/X, Sources/Padding/Y, copy/regular
+   * ───────────────────────────────────────────── */
+  --semantic-color-source-link-text:         var(--primitive-color-gray-900);        /* Sources/Text/Default   */
+  --semantic-color-source-link-bg:           var(--primitive-color-gray-300);        /* Sources Link/BG/Default (updated: #bebebe) */
+  --semantic-color-source-link-bg-hover:     var(--primitive-color-gray-200);        /* Sources/BG/Hover       */
+  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-300);        /* Sources/BG/Active      */
+  --semantic-color-source-link-border-focus: var(--primitive-color-blue-700);        /* Sources/Border/Focus   */
+
+  --semantic-space-source-link-padding-x:    var(--primitive-space-8);               /* Sources/Padding/X      */
+  --semantic-space-source-link-padding-y:    var(--primitive-space-4);               /* Sources/Padding/Y      */
+  --semantic-radius-source-link:             var(--primitive-radius-full);           /* Sources/Border/Corner  */
+
+  --semantic-font-size-copy:                 var(--primitive-font-size-12);          /* copy/regular size      */
+}
