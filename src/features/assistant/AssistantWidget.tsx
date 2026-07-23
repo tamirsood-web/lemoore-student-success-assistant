@@ -337,7 +337,7 @@ export function AssistantWidget() {
                 aria-disabled={pending || undefined}
                 onClick={handleSubmit}
               >
-                {pending ? "Sending…" : "Send"}
+                {pending ? "Thinking" : "Send"}
                 {pending ? (
                   <svg className="btn__icon btn__loader" aria-hidden="true" viewBox="0 0 24 24" fill="none">
                     <path d="M11.9961 3V6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
