@@ -5,6 +5,7 @@ import {
   encodeEvent,
   buildSystemPrompt,
   ASSISTANT_NAME,
+  GREETING,
   KB_TOOL_NAME,
   kbToolSpec,
   parseToolInput,
@@ -68,6 +69,44 @@ describe("system prompt", () => {
     expect(p.toLowerCase()).toContain("never invent");
     expect(p.toLowerCase()).toContain("private student records");
     expect(p).toContain("Thank you for calling Lemoore College Student Support");
+  });
+
+  it("greets exactly once with the canonical greeting text", () => {
+    const p = buildSystemPrompt();
+    expect(p).toContain(GREETING);
+    expect(p.toLowerCase()).toContain("greet the caller exactly once");
+    expect(p.toLowerCase()).toContain("only once per call");
+  });
+
+  it("requires concise 1-2 sentence answers and allows a third only for specific cases", () => {
+    const p = buildSystemPrompt();
+    expect(p).toContain("1-2 short spoken sentences");
+    expect(p.toLowerCase()).toContain("answer immediately and directly");
+    expect(p.toLowerCase()).toContain("third sentence");
+  });
+
+  it("forbids repeated introductions, re-greeting, and treating a turn as a new call", () => {
+    const p = buildSystemPrompt();
+    const lower = p.toLowerCase();
+    expect(lower).toContain("never reintroduce yourself");
+    expect(lower).toContain("never greet again");
+    expect(lower).toContain("never as a new call");
+    expect(lower).toContain("after a tool result");
+  });
+
+  it("bans stock filler phrases and does not ask if more help is needed after every answer", () => {
+    const p = buildSystemPrompt();
+    expect(p).toContain("Is there anything else I can help you with?");
+    expect(p).toContain("Great question");
+    expect(p).toContain("I'd be happy to help with that");
+    expect(p.toLowerCase()).toContain("do not end your answers by asking whether the caller needs anything else");
+  });
+
+  it("keeps sources on screen, preserves context, and forbids reading long URLs aloud", () => {
+    const p = buildSystemPrompt();
+    expect(p.toLowerCase()).toContain("shown on screen");
+    expect(p.toLowerCase()).toContain("do not read long web addresses aloud");
+    expect(p.toLowerCase()).toContain("maintain context across follow-up questions");
   });
 });
 
@@ -308,5 +347,165 @@ describe("Nova session lifecycle (fake invoke, no AWS)", () => {
     await flush();
     expect(captured.map((e) => Object.keys((e as { event: Record<string, unknown> }).event)[0]).filter((t) => t === "audioInput")).toHaveLength(1);
     outputs.close();
+  });
+});
+
+/* ---------- conversation: exactly one greeting per call, one continuous call (fake invoke) ---------- */
+
+type Captured = Array<Record<string, unknown>>;
+const eventType = (e: Record<string, unknown>) => Object.keys((e as { event: Record<string, unknown> }).event)[0];
+const typesOf = (captured: Captured) => captured.map(eventType);
+const countType = (captured: Captured, type: string) => typesOf(captured).filter((t) => t === type).length;
+const promptNamesOf = (captured: Captured): Set<string> => {
+  const names = new Set<string>();
+  for (const e of captured) {
+    const ev = (e as { event: Record<string, unknown> }).event;
+    const payload = ev[Object.keys(ev)[0] as string];
+    if (payload && typeof payload === "object" && typeof (payload as { promptName?: unknown }).promptName === "string") {
+      names.add((payload as { promptName: string }).promptName);
+    }
+  }
+  return names;
+};
+
+async function startConversation(systemPrompt = "SYSTEM PROMPT — greet once, then be concise.") {
+  const { invoke, captured, outputs } = makeFakeInvoke();
+  const seenOutputs: NovaOutput[] = [];
+  let ids = 0;
+  const session = await createNovaSession({
+    invoke,
+    modelId: "amazon.nova-2-sonic-v1:0",
+    systemPrompt,
+    tools: [kbToolSpec()],
+    newId: (p) => `${p}${(ids += 1)}`,
+    onOutput: (o) => void seenOutputs.push(o),
+  });
+  await flush();
+  return { session, captured, outputs, seenOutputs };
+}
+
+describe("Nova conversation: exactly one greeting, one continuous call (fake invoke, no AWS)", () => {
+  it("queues the greeting-triggering opening (promptStart + one SYSTEM prompt) exactly once at call start", async () => {
+    const { session, captured, outputs } = await startConversation();
+    expect(countType(captured, "sessionStart")).toBe(1);
+    expect(countType(captured, "promptStart")).toBe(1);
+    expect(countType(captured, "textInput")).toBe(1); // the single SYSTEM prompt content
+    expect(session.greetingSent()).toBe(true);
+    outputs.close();
+  });
+
+  it("re-calling start() is idempotent: no second greeting, no second system prompt", async () => {
+    const { session, captured, outputs } = await startConversation();
+    session.start();
+    session.start();
+    await flush();
+    expect(countType(captured, "promptStart")).toBe(1);
+    expect(countType(captured, "textInput")).toBe(1);
+    outputs.close();
+  });
+
+  it("a second caller question (more audio) stays in the same call and never re-sends the opening/greeting", async () => {
+    const { session, captured, outputs } = await startConversation();
+    session.sendAudio("QUFB"); // question 1 audio
+    session.sendAudio("QkJC"); // follow-up question audio
+    await flush();
+    expect(countType(captured, "promptStart")).toBe(1);
+    expect(countType(captured, "textInput")).toBe(1);
+    expect(countType(captured, "audioInput")).toBe(2);
+    outputs.close();
+  });
+
+  it("a Knowledge Base tool result continues the same call and never re-sends the opening/greeting", async () => {
+    const { session, captured, outputs } = await startConversation();
+    session.sendToolResult(
+      "tid",
+      JSON.stringify({ status: "answered", answer: "You can order transcripts online.", citations: [], escalationRecommended: false }),
+    );
+    await flush();
+    expect(countType(captured, "promptStart")).toBe(1);
+    expect(countType(captured, "textInput")).toBe(1); // no NEW system prompt after the tool result
+    expect(session.toolRunCount()).toBe(1);
+    outputs.close();
+  });
+
+  it("runs two or more tool results within ONE Nova session (single prompt, single greeting)", async () => {
+    const { session, captured, outputs } = await startConversation();
+    session.sendToolResult("t1", JSON.stringify({ status: "answered" }));
+    session.sendToolResult("t2", JSON.stringify({ status: "answered" }));
+    await flush();
+    expect(session.toolRunCount()).toBe(2);
+    expect(countType(captured, "toolResult")).toBe(2);
+    expect(countType(captured, "promptStart")).toBe(1);
+    // Every event that carries a prompt name uses the SAME one → one continuous conversation.
+    expect(promptNamesOf(captured)).toEqual(new Set([session.promptName]));
+    outputs.close();
+  });
+
+  it("remains the same active conversation across audio + tool + audio turns", async () => {
+    const { session, captured, outputs } = await startConversation();
+    session.sendAudio("QUFB");
+    session.sendToolResult("t1", JSON.stringify({ status: "answered" }));
+    session.sendAudio("QkJC");
+    await flush();
+    expect(promptNamesOf(captured)).toEqual(new Set([session.promptName]));
+    expect(countType(captured, "promptStart")).toBe(1);
+    expect(session.isActive()).toBe(true);
+    outputs.close();
+  });
+
+  it("interruption / barge-in output still flows through as an interruption signal", async () => {
+    const { outputs, seenOutputs } = await startConversation();
+    outputs.push({ event: { contentEnd: { stopReason: "INTERRUPTED" } } } as never);
+    outputs.push({ event: { textOutput: { role: "ASSISTANT", content: '{"interrupted":true}' } } } as never);
+    await flush();
+    expect(seenOutputs).toContainEqual({ kind: "interruption" });
+    expect(seenOutputs.filter((o) => o.kind === "interruption")).toHaveLength(2);
+    outputs.close();
+  });
+
+  it("ending a call then starting a brand-new call allows exactly one fresh greeting per call", async () => {
+    const first = await startConversation();
+    await first.session.end();
+    await flush();
+    const second = await startConversation(); // a completely new Nova session
+
+    // Each call sends its own single opening (one promptStart + one SYSTEM prompt) → one greeting.
+    expect(countType(first.captured, "promptStart")).toBe(1);
+    expect(countType(first.captured, "textInput")).toBe(1);
+    expect(countType(second.captured, "promptStart")).toBe(1);
+    expect(countType(second.captured, "textInput")).toBe(1);
+    expect(first.session).not.toBe(second.session);
+    expect(second.session.greetingSent()).toBe(true);
+    second.outputs.close();
+  });
+
+  it("a Knowledge Base tool result carries no greeting, identity, or filler text", async () => {
+    const result = toToolResult({
+      kind: "answered",
+      query: "transcripts",
+      answer: "You can order transcripts online [1].",
+      citations: [
+        { id: "a", title: "Transcripts | Lemoore College", excerpt: "e", url: "https://lemoorecollege.edu/resources/transcripts.php" },
+      ],
+      relatedResults: [],
+    });
+    const json = JSON.stringify(result);
+    expect(json).not.toMatch(/thank you for calling/i);
+    expect(json).not.toMatch(/virtual student assistant/i);
+    expect(json).not.toMatch(/i'?d be happy to help/i);
+    expect(json).not.toMatch(/great question/i);
+    expect(result.answer).not.toMatch(/https?:\/\//); // no raw URL spoken
+
+    // Same guarantee end-to-end through runKbTool.
+    const viaTool = await runKbTool('{"question":"How do I order transcripts?"}', {
+      answer: async () => ({
+        kind: "answered",
+        query: "q",
+        answer: "Order online.",
+        citations: [{ id: "a", title: "Transcripts | Lemoore College", excerpt: "e", url: "https://lemoorecollege.edu/x" }],
+        relatedResults: [],
+      }),
+    });
+    expect(JSON.stringify(viaTool)).not.toMatch(/thank you for calling|virtual student assistant|great question/i);
   });
 });
