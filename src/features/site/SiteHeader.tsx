@@ -45,14 +45,6 @@ export function SiteHeader() {
                 {link}
               </InactiveControl>
             ))}
-            <button
-              type="button"
-              onClick={openSearch}
-              className="ml-1 flex items-center gap-1.5 px-3 py-2 text-[0.78rem] font-semibold text-lc-gold hover:bg-white/10"
-            >
-              <SearchIcon className="h-3.5 w-3.5" />
-              AI Search
-            </button>
           </nav>
         </div>
       </div>
@@ -63,11 +55,11 @@ export function SiteHeader() {
           <Logo />
 
           {/* Desktop main nav */}
-          <nav aria-label="Main" className="hidden items-center gap-1 lg:flex">
+          <nav aria-label="Main" className="hidden items-center lg:flex">
             {MAIN_NAV.map((item) => (
               <InactiveControl
                 key={item}
-                className="rounded px-3 py-2 text-[0.92rem] font-semibold text-lc-ink hover:bg-lc-wash hover:text-lc-blue"
+                className="whitespace-nowrap rounded px-2 py-2 text-[0.92rem] font-semibold text-lc-ink hover:bg-lc-wash hover:text-lc-blue"
               >
                 {item}
               </InactiveControl>
@@ -79,13 +71,13 @@ export function SiteHeader() {
             <button
               type="button"
               onClick={openSearch}
-              className="flex items-center gap-2 rounded-md border border-lc-line px-3 py-2 text-sm font-medium text-lc-slate hover:border-lc-blue hover:text-lc-blue lg:min-w-[150px]"
+              className="flex items-center gap-2 rounded-md border border-lc-line px-3 py-2 text-sm font-medium text-lc-slate hover:border-lc-blue hover:text-lc-blue lg:min-w-[130px]"
               aria-label="Open AI search"
             >
               <SearchIcon className="h-4 w-4" />
               <span className="hidden lg:inline">Search…</span>
             </button>
-            <InactiveControl className="hidden rounded-md bg-lc-gold px-4 py-2 text-sm font-bold text-lc-navy-dark hover:bg-lc-gold-dark sm:inline-block">
+            <InactiveControl className="hidden whitespace-nowrap rounded-md bg-lc-gold px-3 py-2 text-sm font-bold text-lc-navy-dark hover:bg-lc-gold-dark sm:inline-block">
               Apply Now
             </InactiveControl>
 
