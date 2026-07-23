@@ -179,7 +179,7 @@
   /* ─────────────────────────────────────────────
    * MODAL WINDOW
    * Source: Figma DS-course · node 234:760
-   * Consumed by: components/modal-window/modal-window.css
+   * Consumed by: components/chat-window/chat-window.css
    * ───────────────────────────────────────────── */
   --modal-bg:              var(--semantic-color-modal-bg);
   --modal-shadow:          var(--semantic-shadow-modal);

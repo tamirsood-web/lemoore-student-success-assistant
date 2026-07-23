@@ -166,9 +166,9 @@
    *            Sources/Padding/X, Sources/Padding/Y, copy/regular
    * ───────────────────────────────────────────── */
   --semantic-color-source-link-text:         var(--primitive-color-gray-900);        /* Sources/Text/Default   */
-  --semantic-color-source-link-bg:           var(--primitive-color-gray-300);        /* Sources Link/BG/Default (updated: #bebebe) */
+  --semantic-color-source-link-bg:           var(--primitive-color-gray-300);        /* Sources Link/BG/Default: #b5b6bc */
   --semantic-color-source-link-bg-hover:     var(--primitive-color-gray-100);        /* Sources Link/BG/Hover: #ebecf2  */
-  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-500);        /* Sources Link/BG/Active: #9d9d9d */
+  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-500);        /* Sources Link/BG/Active: #91939c */
   --semantic-color-source-link-border-focus: var(--primitive-color-blue-700);        /* Sources/Border/Focus   */
 
   --semantic-space-source-link-padding-x:    var(--primitive-space-8);               /* Sources/Padding/X      */
