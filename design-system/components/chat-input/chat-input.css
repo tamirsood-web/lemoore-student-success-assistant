@@ -138,3 +138,73 @@
 .chat-input__textarea:disabled::placeholder {
   color: var(--chat-input-color-disabled);
 }
+
+
+/* ─────────────────────────────────────────────────────────────
+ * FIELD WITH ICON — optional leading icon inside the input field.
+ * Wrap the textarea and icon in .chat-input__field for icon layout.
+ *
+ * Markup:
+ *   <div class="chat-input__field">
+ *     <svg class="chat-input__icon" …></svg>
+ *     <textarea class="chat-input__textarea" …></textarea>
+ *   </div>
+ *
+ * When .chat-input__field is present, the border/bg/radius move to it
+ * and the textarea becomes borderless.
+ * ───────────────────────────────────────────────────────────── */
+.chat-input__field {
+  display:          flex;
+  align-items:      center;
+  gap:              var(--chat-input-gap-x, 8px);
+  box-sizing:       border-box;
+  padding:          var(--chat-input-padding-y) var(--chat-input-padding-x);
+  background-color: var(--chat-input-bg);
+  border:           var(--chat-input-border-width) solid var(--chat-input-border);
+  border-radius:    var(--chat-input-radius);
+  transition:       border-color 120ms ease,
+                    background-color 120ms ease;
+}
+
+/* When inside .chat-input__field, remove border/padding from textarea */
+.chat-input__field .chat-input__textarea {
+  border:      none;
+  padding:     0;
+  min-height:  auto;
+  background:  transparent;
+  border-radius: 0;
+}
+
+/* Field hover */
+.chat-input__field:hover:not(:has(:disabled)):not(:focus-within) {
+  background-color: var(--chat-input-bg-hover);
+}
+
+/* Field focus (when textarea inside is focused) */
+.chat-input__field:focus-within {
+  background-color: var(--chat-input-bg);
+  border-color:     var(--chat-input-border-focus);
+}
+
+/* Field disabled */
+.chat-input__field:has(:disabled) {
+  background-color: var(--chat-input-bg-disabled);
+  border-color:     var(--chat-input-border-disabled);
+}
+
+/* Icon inside field */
+.chat-input__icon {
+  display:     block;
+  flex-shrink: 0;
+  width:       16px;   /* Input/Icon/Size */
+  height:      16px;
+  color:       var(--chat-input-color-placeholder);
+}
+
+.chat-input__field:focus-within .chat-input__icon {
+  color: var(--chat-input-color);
+}
+
+.chat-input__field:has(:disabled) .chat-input__icon {
+  color: var(--chat-input-color-disabled);
+}

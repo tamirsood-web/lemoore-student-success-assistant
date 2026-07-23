@@ -117,6 +117,7 @@
   --chat-input-padding-x:       var(--semantic-space-input-padding-x);
   --chat-input-padding-y:       var(--semantic-space-input-padding-y);
   --chat-input-gap:             var(--semantic-space-input-gap-y);
+  --chat-input-gap-x:           var(--semantic-space-input-gap-x);
   --chat-input-radius:          var(--semantic-radius-input);
   --chat-input-border-width:    var(--semantic-border-input-width);
 
