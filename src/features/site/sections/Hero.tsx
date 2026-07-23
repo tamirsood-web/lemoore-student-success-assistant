@@ -1,10 +1,8 @@
 // Homepage hero/banner. Reproduces the real full-width promotional banner: a large image
 // area (a neutral brand-navy photographic placeholder, since the official rotating photos
-// can't be reproduced here), an eyebrow + large headline + supporting line, a gold CTA, and
-// — as the flagship improvement — a prominent AI search entry.
+// can't be reproduced here), an eyebrow + large headline + supporting line, and a gold CTA.
 
 import { HERO_SLIDES } from "../homeContent";
-import { HeroSearchBar } from "./HeroSearchBar";
 import { InactiveControl } from "../InactiveControl";
 
 export function Hero() {
@@ -46,14 +44,6 @@ export function Hero() {
           <InactiveControl className="rounded-md border border-white/40 px-6 py-3 text-base font-semibold text-white hover:bg-white/10">
             It Starts Here
           </InactiveControl>
-        </div>
-
-        {/* Flagship: AI search entry */}
-        <div className="mt-10">
-          <p className="mb-2 text-sm font-medium text-white/80">
-            New: search the site in plain language — answers cite official pages.
-          </p>
-          <HeroSearchBar />
         </div>
       </div>
     </section>

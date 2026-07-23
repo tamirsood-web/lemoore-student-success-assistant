@@ -27,8 +27,8 @@
   --primitive-color-gray-600:   #555761;  /* Text muted / disabled */
   --primitive-color-gray-500:   #91939c;  /* Secondary/BG/Active, SourceLink/BG/Active */
   --primitive-color-gray-300:   #b5b6bc;  /* Surface hover, SourceLink/BG/Default, Input border */
-  --primitive-color-gray-200:   #d3d5da;  /* Ghost active, Bubble agent, Chat window divider */
-  --primitive-color-gray-100:   #ebecf2;  /* Disabled bg, Secondary default, Ghost hover */
+  --primitive-color-gray-200:   #d3d5da;  /* Ghost active, Chat window divider */
+  --primitive-color-gray-100:   #ebecf2;  /* Disabled bg, Secondary default, Ghost hover, Bubble agent */
 
   /* Blues — chat bubble */
   --primitive-color-blue-100:   #dce5ff;  /* Bubble/Color/User */

@@ -1,7 +1,7 @@
 // Responsive / mobile-layout smoke tests for the reproduced Lemoore College site shell.
 //
 // Renders the public layout at a phone-sized viewport and at a desktop viewport, asserting
-// that the site landmarks, the AI search control, the mobile menu, the floating Student
+// that the site landmarks, the site search control, the mobile menu, the floating Student
 // Assistant, and the prototype disclosure stay present and reachable. This checks semantic
 // structure and responsive intent — NOT pixel geometry, which jsdom cannot compute.
 
@@ -46,8 +46,8 @@ describe("Lemoore site shell — mobile viewport smoke", () => {
     expect(screen.getByRole("main")).toBeInTheDocument();
     expect(screen.getByRole("contentinfo")).toBeInTheDocument();
 
-    // AI search + floating assistant are the working improvements.
-    expect(screen.getByRole("button", { name: /open ai search/i })).toBeInTheDocument();
+    // Site search + floating assistant are the working improvements.
+    expect(screen.getByRole("button", { name: /open site search/i })).toBeInTheDocument();
     expect(
       screen.getByRole("button", { name: /open the student assistant/i }),
     ).toBeInTheDocument();
@@ -85,7 +85,7 @@ describe("Lemoore site shell — desktop viewport smoke", () => {
         <div>Page content</div>
       </PublicLayout>,
     );
-    expect(screen.getByRole("button", { name: /open ai search/i })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: /open site search/i })).toBeInTheDocument();
     expect(screen.getByRole("navigation", { name: /^main$/i })).toBeInTheDocument();
   });
 });

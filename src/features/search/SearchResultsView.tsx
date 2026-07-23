@@ -38,21 +38,34 @@ export function SearchResultsView() {
       </p>
 
       <form onSubmit={submit} className="mt-5 flex items-center gap-2">
-        <label htmlFor="results-query" className="sr-only">
-          Search Lemoore College
-        </label>
-        <input
-          id="results-query"
-          type="search"
-          value={draft}
-          onChange={(e) => setDraft(e.target.value)}
-          placeholder="Ask a question or enter keywords"
-          className="min-w-0 flex-1 rounded-md border border-lc-line px-4 py-2.5 text-base text-lc-ink outline-none focus:border-lc-blue"
-        />
-        <button
-          type="submit"
-          className="rounded-md bg-lc-blue px-5 py-2.5 text-sm font-semibold text-white hover:bg-lc-blue-dark"
-        >
+        <div className="chat-input min-w-0 flex-1">
+          <label className="chat-input__label chat-input__label--hidden" htmlFor="results-query">
+            Search Lemoore College
+          </label>
+          <div className="chat-input__field">
+            <svg className="chat-input__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+              <path d="M15 15L16.5 16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M16.9333 19.0252C16.3556 18.4475 16.3556 17.5109 16.9333 16.9333C17.5109 16.3556 18.4475 16.3556 19.0252 16.9333L21.0667 18.9748C21.6444 19.5525 21.6444 20.4891 21.0667 21.0667C20.4891 21.6444 19.5525 21.6444 18.9748 21.0667L16.9333 19.0252Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              <path d="M16.5 9.5C16.5 5.63401 13.366 2.5 9.5 2.5C5.63401 2.5 2.5 5.63401 2.5 9.5C2.5 13.366 5.63401 16.5 9.5 16.5C13.366 16.5 16.5 13.366 16.5 9.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+            </svg>
+            <textarea
+              className="chat-input__textarea"
+              id="results-query"
+              value={draft}
+              onChange={(e) => setDraft(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" && !e.shiftKey) {
+                  e.preventDefault();
+                  submit(e);
+                }
+              }}
+              placeholder="Ask a question or enter keywords"
+              autoComplete="off"
+              rows={1}
+            />
+          </div>
+        </div>
+        <button type="submit" className="btn btn--primary">
           Search
         </button>
       </form>

@@ -175,6 +175,7 @@
 
   --bubble-bg-agent:         var(--semantic-color-bubble-agent);
   --bubble-bg-user:          var(--semantic-color-bubble-user);
+  --bubble-sources-gap:      var(--semantic-space-component-gap);   /* 8px — gap between source links */
 
   /* ─────────────────────────────────────────────
    * MODAL WINDOW
