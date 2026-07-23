@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Design System Sandbox</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Token layers -->
+  <link rel="stylesheet" href="../tokens/primitives.css" />
+  <link rel="stylesheet" href="../tokens/semantic.css" />
+  <link rel="stylesheet" href="../tokens/components.css" />
+  <!-- Production components -->
+  <link rel="stylesheet" href="../components/button/button.css" />
+  <link rel="stylesheet" href="../components/chat-input/chat-input.css" />
+  <link rel="stylesheet" href="../components/message-bubble/message-bubble.css" />
+  <link rel="stylesheet" href="../components/source-link/source-link.css" />
+  <link rel="stylesheet" href="../components/chat-window/chat-window.css" />
+  <link rel="stylesheet" href="../components/fab/fab.css" />
+</head>
+<body>
+<div class="sandbox">
+  <header class="sandbox__header">
+    <h1>Design System Sandbox</h1>
+    <p class="sandbox__desc">Manual verification of production components before release.</p>
+  </header>
+
+  <!-- ══════════════════════════════════════════════════════════
+       BUTTONS
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sandbox__section" id="buttons">
+    <h2>Buttons</h2>
+    <div class="sandbox__row">
+      <button type="button" class="btn btn--primary">Primary</button>
+      <button type="button" class="btn btn--secondary">Secondary</button>
+      <button type="button" class="btn btn--clean">Clean</button>
+      <button type="button" class="btn btn--icon" aria-label="Star">
+        <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M19.002 12H5.00001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="sandbox__row">
+      <button type="button" class="btn btn--primary" disabled>Disabled Primary</button>
+      <button type="button" class="btn btn--secondary" disabled>Disabled Secondary</button>
+      <button type="button" class="btn btn--clean" disabled>Disabled Clean</button>
+    </div>
+    <div class="sandbox__row">
+      <button type="button" class="btn btn--primary btn--loading" aria-busy="true" aria-disabled="true" id="btn-loading">
+        Thinking...
+        <svg class="btn__icon btn__loader" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M11.9961 3V6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M11.9961 18V21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M20.9961 12H17.9961" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M5.99609 12H2.99609" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M18.3596 5.63672L16.2383 7.75804" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7.75413 16.2422L5.63281 18.3635" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M18.3596 18.3635L16.2383 16.2422" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><path d="M7.75413 7.75804L5.63281 5.63672" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </button>
+    </div>
+    <div class="sandbox__helpers">
+      <label><input type="checkbox" onchange="document.getElementById('btn-loading').classList.toggle('btn--loading',this.checked); document.getElementById('btn-loading').setAttribute('aria-busy',this.checked)" checked /> Loading state</label>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       FAB
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sandbox__section" id="fab">
+    <h2>FAB (Floating Action Button)</h2>
+    <div class="sandbox__row">
+      <button type="button" class="fab" aria-label="Open chat" title="Open chat">
+        <img class="fab__icon" src="../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
+    <p class="sandbox__note">Tab to focus. Click or Enter/Space to activate.</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       CHAT INPUT
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sandbox__section" id="chat-input">
+    <h2>Chat Input</h2>
+    <div class="sandbox__col" style="max-width:480px;">
+      <div class="chat-input">
+        <label class="chat-input__label" for="sandbox-input">Message</label>
+        <textarea class="chat-input__textarea" id="sandbox-input" placeholder="Type here… Enter to submit, Shift+Enter for new line" rows="1" data-chat-input></textarea>
+      </div>
+    </div>
+    <div class="sandbox__col" style="max-width:480px; margin-top:16px;">
+      <div class="chat-input">
+        <label class="chat-input__label" for="sandbox-input-icon">Search</label>
+        <div class="chat-input__field">
+          <svg class="chat-input__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M15 15L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.9333 19.0252C16.3556 18.4475 16.3556 17.5109 16.9333 16.9333C17.5109 16.3556 18.4475 16.3556 19.0252 16.9333L21.0667 18.9748C21.6444 19.5525 21.6444 20.4891 21.0667 21.0667C20.4891 21.6444 19.5525 21.6444 18.9748 21.0667L16.9333 19.0252Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 9.5C16.5 5.63401 13.366 2.5 9.5 2.5C5.63401 2.5 2.5 5.63401 2.5 9.5C2.5 13.366 5.63401 16.5 9.5 16.5C13.366 16.5 16.5 13.366 16.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <textarea class="chat-input__textarea" id="sandbox-input-icon" placeholder="Search…" rows="1" data-chat-input></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="sandbox__col" style="max-width:480px; margin-top:16px;">
+      <div class="chat-input">
+        <label class="chat-input__label" for="sandbox-input-disabled">Disabled</label>
+        <textarea class="chat-input__textarea" id="sandbox-input-disabled" placeholder="Cannot type" rows="1" disabled></textarea>
+      </div>
+    </div>
+    <div class="sandbox__helpers">
+      <button type="button" class="btn btn--secondary" onclick="document.getElementById('sandbox-input').value='This is a pre-filled multiline message.\nLine two.\nLine three.\nLine four.\nLine five.\nLine six.\nLine seven.'; document.getElementById('sandbox-input').dispatchEvent(new Event('input'));">Populate multiline</button>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       MESSAGE BUBBLE
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sandbox__section" id="message-bubble">
+    <h2>Message Bubble</h2>
+    <div class="sandbox__conversation">
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content sandbox__text">Hello! How can I help?</div>
+      </div>
+      <div class="message-bubble message-bubble--user">
+        <div class="message-bubble__content sandbox__text">Short user message.</div>
+      </div>
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content sandbox__text">
+          <p>Design tokens are named values that represent design decisions. They decouple visual properties from component code, enabling a single source of truth across platforms.</p>
+          <p>They follow a three-layer architecture: primitives hold raw values, semantics assign roles, and component tokens map roles to specific UI elements.</p>
+        </div>
+      </div>
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content sandbox__text">
+          <p>Here are some references:</p>
+          <div class="message-bubble__sources">
+            <a class="source-link" href="https://tr.designtokens.org/format/" target="_blank" rel="noopener noreferrer">DTCG Spec</a>
+            <a class="source-link" href="https://docs.tokens.studio/" target="_blank" rel="noopener noreferrer">Tokens Studio</a>
+            <a class="source-link" href="https://www.figma.com/blog/announcing-variables/" target="_blank" rel="noopener noreferrer">Figma Variables</a>
+          </div>
+        </div>
+      </div>
+      <div class="message-bubble message-bubble--user">
+        <div class="message-bubble__content sandbox__text">Thanks, that helps a lot!</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       SOURCE LINK
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sandbox__section" id="source-link">
+    <h2>Source Link</h2>
+    <div class="sandbox__row">
+      <a class="source-link" href="https://example.com" target="_blank" rel="noopener noreferrer">Short</a>
+      <a class="source-link" href="https://example.com" target="_blank" rel="noopener noreferrer">Documentation Reference</a>
+      <a class="source-link" href="https://example.com" target="_blank" rel="noopener noreferrer">AWS Amplify Getting Started Guide for Beginners</a>
+    </div>
+    <p class="sandbox__note">Links wrap when constrained. Tab through to test focus ring.</p>
+  </section>
+
+  <!-- ══════════════════════════════════════════════════════════
+       CHAT WINDOW
+  ═══════════════════════════════════════════════════════════ -->
+  <section class="sandbox__section" id="chat-window">
+    <h2>Chat Window</h2>
+    <div class="sandbox__helpers">
+      <button type="button" class="btn btn--primary" id="cw-open">Open Chat Window</button>
+      <button type="button" class="btn btn--secondary" id="cw-close">Close Chat Window</button>
+      <button type="button" class="btn btn--secondary" id="cw-add-msg">Add Long Message</button>
+      <button type="button" class="btn btn--secondary" id="cw-add-many">Add 20 Messages</button>
+    </div>
+  </section>
+
+  <!-- Chat Window (floating, initially hidden) -->
+  <div style="position:fixed; bottom:24px; right:24px; z-index:50;" id="cw-wrapper" hidden>
+    <div class="chat-window" id="cw-main">
+      <div class="chat-window__header">
+        <h2 class="chat-window__title">Chat Assistant</h2>
+        <div class="chat-window__actions" role="group" aria-label="Window controls">
+          <button type="button" class="btn btn--icon" aria-label="Open in new tab">
+            <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M15 3H18C19.4142 3 20.1213 3 20.5607 3.43934C21 3.87868 21 4.58579 21 6V9M20 4L11 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M20 13C20 16.7712 20 18.6569 18.8284 19.8284C17.6569 21 15.7712 21 12 21H11C7.22876 21 5.34315 21 4.17157 19.8284C3 18.6569 3 16.7712 3 13V12C3 8.22876 3 6.34315 4.17157 5.17157C5.34315 4 7.22876 4 11 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <button type="button" class="btn btn--icon" aria-label="Expand chat window" title="Expand chat window" aria-expanded="false" data-chat-window-expand>
+            <svg class="btn__icon chat-window__icon-expand" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M16.4999 3.26621C17.3443 3.25421 20.1408 2.67328 20.7337 3.26621C21.3266 3.85913 20.7457 6.65559 20.7337 7.5M20.5059 3.49097L13.5021 10.4961" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M3.26636 16.5001C3.25436 17.3445 2.67343 20.141 3.26636 20.7339C3.85928 21.3268 6.65574 20.7459 7.50015 20.7339M10.502 13.4976L3.49824 20.5027" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <svg class="btn__icon chat-window__icon-restore" aria-hidden="true" viewBox="0 0 24 24" fill="none" style="display:none"><path d="M2.46186 20.4697C2.16896 20.7626 2.16896 21.2374 2.46186 21.5303C2.75475 21.8232 3.22962 21.8232 3.52252 21.5303L2.99219 21L2.46186 20.4697ZM10.0225 15.0303C10.3154 14.7374 10.3154 14.2626 10.0225 13.9697C9.72962 13.6768 9.25475 13.6768 8.96186 13.9697L9.49219 14.5L10.0225 15.0303ZM2.99219 21L3.52252 21.5303L10.0225 15.0303L9.49219 14.5L8.96186 13.9697L2.46186 20.4697L2.99219 21Z" fill="currentColor"/><path d="M21.5225 3.53033C21.8154 3.23744 21.8154 2.76256 21.5225 2.46967C21.2296 2.17678 20.7548 2.17678 20.4619 2.46967L20.9922 3L21.5225 3.53033ZM13.9619 8.96967C13.669 9.26256 13.669 9.73744 13.9619 10.0303C14.2548 10.3232 14.7296 10.3232 15.0225 10.0303L14.4922 9.5L13.9619 8.96967ZM20.9922 3L20.4619 2.46967L13.9619 8.96967L14.4922 9.5L15.0225 10.0303L21.5225 3.53033L20.9922 3Z" fill="currentColor"/><path d="M14.2688 5.00098C14.2688 5.00098 13.6464 9.10202 14.2688 9.72438C14.8911 10.3467 18.9922 9.72436 18.9922 9.72436" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.71561 19.001C9.71561 19.001 10.3379 14.8999 9.71558 14.2776C9.09323 13.6552 4.99219 14.2776 4.99219 14.2776" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <button type="button" class="btn btn--icon" aria-label="Minimize" id="cw-minimize">
+            <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M19.002 12H5.00001" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+        </div>
+      </div>
+      <div class="chat-window__body" id="cw-body">
+        <div class="chat-window__content">
+          <div class="sandbox__conversation sandbox__conversation--fullwidth" id="cw-messages">
+            <div class="message-bubble message-bubble--agent"><div class="message-bubble__content sandbox__text">Hello! Ask me anything.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="chat-window__footer">
+        <div class="chat-input">
+          <label class="chat-input__label" for="cw-input">Message</label>
+          <textarea class="chat-input__textarea" id="cw-input" placeholder="Placeholder text" rows="1" data-chat-input></textarea>
+        </div>
+        <button type="button" class="btn btn--primary">
+          Send
+          <svg class="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M9.49811 15L16.9981 7.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M8.00634 7.67888L15.327 4.21881C18.3688 2.78111 19.8897 2.06226 20.8598 2.78341C21.8299 3.50455 21.5527 5.14799 20.9984 8.43486L20.0435 14.0968C19.6811 16.246 19.4998 17.3205 18.6989 17.7891C17.8979 18.2577 16.8574 17.8978 14.7765 17.178L8.41077 14.9762C4.51917 13.6301 2.57337 12.9571 2.50019 11.6365C2.427 10.3159 4.28678 9.43692 8.00634 7.67888Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M9.49811 15.5V17.7274C9.49811 20.101 9.49811 21.2878 10.2083 21.4771C10.9185 21.6663 11.6664 20.6789 13.1622 18.7039L13.9981 17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</div><!-- /.sandbox -->
+
+<!-- Sandbox-only styles (not part of any component) -->
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', sans-serif; font-size: 14px; color: #10141f; background: #f5f5f5; padding: 48px 40px 120px; }
+  .sandbox__header { margin-bottom: 48px; }
+  .sandbox__header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .sandbox__desc { font-size: 13px; color: #555761; }
+  .sandbox__section { margin-bottom: 56px; }
+  .sandbox__section h2 { font-size: 16px; font-weight: 600; margin-bottom: 16px; padding-bottom: 8px; border-bottom: 1px solid #d3d5da; }
+  .sandbox__row { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; margin-bottom: 16px; }
+  .sandbox__col { display: flex; flex-direction: column; gap: 8px; }
+  .sandbox__helpers { display: flex; flex-wrap: wrap; gap: 12px; align-items: center; margin-top: 12px; padding: 12px 16px; background: #ffffff; border: 1px solid #d3d5da; border-radius: 8px; font-size: 12px; }
+  .sandbox__helpers label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
+  .sandbox__note { font-size: 12px; color: #555761; margin-top: 8px; }
+  .sandbox__conversation { display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
+  .sandbox__conversation--fullwidth { max-width: none; }
+  .sandbox__conversation .message-bubble--agent { align-self: flex-start; }
+  .sandbox__conversation .message-bubble--user { align-self: flex-end; }
+  .sandbox__text { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; line-height: 1.5; color: #10141f; }
+  .sandbox__text p { margin-bottom: 8px; }
+  .sandbox__text p:last-child { margin-bottom: 0; }
+</style>
+
+<!-- Production scripts -->
+<script src="../components/chat-input/chat-input.js"></script>
+<script src="../components/chat-window/chat-window.js"></script>
+
+<!-- Sandbox interaction helpers -->
+<script>
+(function() {
+  var wrapper = document.getElementById('cw-wrapper');
+  var body = document.getElementById('cw-body');
+  var messages = document.getElementById('cw-messages');
+
+  document.getElementById('cw-open').addEventListener('click', function() { openChatWindow(wrapper); });
+  document.getElementById('cw-close').addEventListener('click', function() { closeChatWindow(wrapper); });
+  document.getElementById('cw-minimize').addEventListener('click', function() { closeChatWindow(wrapper); });
+
+  document.getElementById('cw-input').addEventListener('chat-input:submit', function(e) {
+    addMsg(e.detail.value, true);
+    if (body) body.scrollTop = body.scrollHeight;
+  });
+
+  document.getElementById('cw-add-msg').addEventListener('click', function() {
+    addMsg('This is a long assistant message to test scrolling behavior. Design tokens are named values that represent design decisions. They decouple visual values from component code, making it easy to update an entire system from a single source of truth across all platforms and implementations.', false);
+    if (body) body.scrollTop = body.scrollHeight;
+  });
+
+  document.getElementById('cw-add-many').addEventListener('click', function() {
+    for (var i = 0; i < 20; i++) {
+      addMsg('Message #' + (messages.children.length + 1), i % 2 === 0);
+    }
+    if (body) body.scrollTop = body.scrollHeight;
+  });
+
+  function addMsg(text, isUser) {
+    var div = document.createElement('div');
+    div.className = 'message-bubble message-bubble--' + (isUser ? 'user' : 'agent');
+    div.innerHTML = '<div class="message-bubble__content sandbox__text">' + escapeHtml(text) + '</div>';
+    messages.appendChild(div);
+  }
+
+  function escapeHtml(str) {
+    var d = document.createElement('div');
+    d.textContent = str;
+    return d.innerHTML;
+  }
+})();
+</script>
+</body>
+</html>

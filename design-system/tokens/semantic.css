@@ -24,33 +24,33 @@
    * BACKGROUND — action (primary button)
    * ───────────────────────────────────────────── */
   --semantic-color-action-bg-default:   var(--primitive-color-blue-900);
-  --semantic-color-action-bg-hover:     var(--primitive-color-blue-700);
+  --semantic-color-action-bg-hover:     var(--primitive-color-blue-700);   /* Button/Primary/BG/Hover: #163abf */
   --semantic-color-action-bg-focus:     var(--primitive-color-blue-900);
-  --semantic-color-action-bg-active:    var(--primitive-color-blue-900);
+  --semantic-color-action-bg-active:    var(--primitive-color-blue-800);   /* Button/Primary/BG/Active: #0c2e4c */
   --semantic-color-action-bg-disabled:  var(--primitive-color-gray-100);
 
   /* ─────────────────────────────────────────────
    * BACKGROUND — surface (secondary / clean / icon buttons)
    * ───────────────────────────────────────────── */
   --semantic-color-surface-default:     var(--primitive-color-gray-100);
-  --semantic-color-surface-hover:       var(--primitive-color-gray-200);
+  --semantic-color-surface-hover:       var(--primitive-color-gray-300);   /* Button/Secondary/BG/Hover: #bebebe */
   --semantic-color-surface-focus:       var(--primitive-color-gray-100);
-  --semantic-color-surface-active:      var(--primitive-color-gray-300);
+  --semantic-color-surface-active:      var(--primitive-color-gray-500);   /* Button/Secondary/BG/Active: #9d9d9d */
   --semantic-color-surface-disabled:    var(--primitive-color-white);
 
   /* ─────────────────────────────────────────────
    * BACKGROUND — ghost (clean / icon — transparent base)
    * ───────────────────────────────────────────── */
   --semantic-color-ghost-default:    var(--primitive-color-transparent);
-  --semantic-color-ghost-hover:      var(--primitive-color-gray-100);
+  --semantic-color-ghost-hover:      var(--primitive-color-gray-100);   /* Button/Icon btn/BG/Hover: #ebebeb */
   --semantic-color-ghost-focus:      var(--primitive-color-transparent);
-  --semantic-color-ghost-active:     var(--primitive-color-gray-200);
+  --semantic-color-ghost-active:     var(--primitive-color-gray-200);   /* Button/Icon btn/BG/Active: #dedede */
   --semantic-color-ghost-disabled:   var(--primitive-color-transparent);
 
   /* ─────────────────────────────────────────────
    * FOCUS RING
    * ───────────────────────────────────────────── */
-  --semantic-color-focus-ring:         var(--primitive-color-blue-500);
+  --semantic-color-focus-ring:         var(--primitive-color-blue-700);   /* #163abf */
   --semantic-color-focus-ring-inverse: var(--primitive-color-white);   /* on dark fill (primary) */
 
   /* ─────────────────────────────────────────────
@@ -89,11 +89,11 @@
 
   /* Backgrounds */
   --semantic-color-input-bg-default:   var(--primitive-color-white);      /* Input/Color/Default   */
-  --semantic-color-input-bg-hover:     var(--primitive-color-gray-200);   /* Input/Color/Hover     */
+  --semantic-color-input-bg-hover:     var(--primitive-color-gray-100);   /* Input/Color/Hover: #ebecf2 */
 
   /* Borders */
-  --semantic-color-input-border-default:  var(--primitive-color-gray-500);  /* Input/Border/Default  */
-  --semantic-color-input-border-focus:    var(--primitive-color-blue-700);  /* Input/Border/Focus    */
+  --semantic-color-input-border-default:  var(--primitive-color-gray-300);  /* Input/Border/Default: #bebebe  */
+  --semantic-color-input-border-focus:    var(--primitive-color-blue-800);  /* Input/Border/Focus: #011248 */
   --semantic-color-input-border-disabled: var(--primitive-color-gray-200);  /* Input/Border/Disabled */
 
   /* Text */
@@ -105,8 +105,10 @@
   /* Layout */
   --semantic-space-input-padding-x: var(--primitive-space-24);   /* Input/Padding/X       */
   --semantic-space-input-padding-y: var(--primitive-space-16);   /* Input/Padding/Y       */
-  --semantic-space-input-gap:       var(--primitive-space-4);    /* Input/Gap/X           */
+  --semantic-space-input-gap-x:     var(--primitive-space-8);    /* Input/Gap/X (icon-to-text horizontal gap) */
+  --semantic-space-input-gap-y:     var(--primitive-space-4);    /* Input/Gap/Y (label-to-field vertical gap) */
   --semantic-radius-input:          var(--primitive-radius-8);   /* Input/Border/Corner   */
+  --semantic-icon-size-input:       var(--primitive-icon-size-16); /* Input/Icon/Size      */
 
   /* Typography — label */
   --semantic-font-size-label:       var(--primitive-font-size-14);  /* label/regular size    */
@@ -139,9 +141,11 @@
    *            Modal window/Gap/X, Modal window/Gap/Y,
    *            Modal window/Text/color, headline 5
    * ───────────────────────────────────────────── */
-  --semantic-color-modal-bg:       var(--primitive-color-white);       /* Modal window/Color/Bg      */
-  --semantic-color-modal-overlay:  var(--primitive-color-overlay);     /* Modal window/Overlay/Shadow */
-  --semantic-color-modal-divider:  var(--primitive-color-gray-500);    /* Modal window/Border/color  */
+  --semantic-color-modal-bg:       var(--primitive-color-white);       /* Chat window/Color/Bg      */
+  --semantic-shadow-modal:
+    var(--primitive-shadow-1-x) var(--primitive-shadow-1-y) var(--primitive-shadow-1-blur) var(--primitive-shadow-1-spread) var(--primitive-color-shadow-1),
+    var(--primitive-shadow-2-x) var(--primitive-shadow-2-y) var(--primitive-shadow-2-blur) var(--primitive-shadow-2-spread) var(--primitive-color-shadow-2);
+  --semantic-color-modal-divider:  var(--primitive-color-gray-200);    /* Chat window/Border/color: #d3d5da */
   --semantic-color-modal-title:    var(--primitive-color-gray-900);    /* Modal window/Text/color    */
 
   --semantic-radius-modal:         var(--primitive-radius-24);         /* Modal window/Border/Default */
@@ -162,9 +166,9 @@
    *            Sources/Padding/X, Sources/Padding/Y, copy/regular
    * ───────────────────────────────────────────── */
   --semantic-color-source-link-text:         var(--primitive-color-gray-900);        /* Sources/Text/Default   */
-  --semantic-color-source-link-bg:           var(--primitive-color-gray-300);        /* Sources Link/BG/Default (updated: #bebebe) */
-  --semantic-color-source-link-bg-hover:     var(--primitive-color-gray-200);        /* Sources/BG/Hover       */
-  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-300);        /* Sources/BG/Active      */
+  --semantic-color-source-link-bg:           var(--primitive-color-gray-300);        /* Sources Link/BG/Default: #b5b6bc */
+  --semantic-color-source-link-bg-hover:     var(--primitive-color-gray-100);        /* Sources Link/BG/Hover: #ebecf2  */
+  --semantic-color-source-link-bg-active:    var(--primitive-color-gray-500);        /* Sources Link/BG/Active: #91939c */
   --semantic-color-source-link-border-focus: var(--primitive-color-blue-700);        /* Sources/Border/Focus   */
 
   --semantic-space-source-link-padding-x:    var(--primitive-space-8);               /* Sources/Padding/X      */
@@ -172,4 +176,19 @@
   --semantic-radius-source-link:             var(--primitive-radius-full);           /* Sources/Border/Corner  */
 
   --semantic-font-size-copy:                 var(--primitive-font-size-12);          /* copy/regular size      */
+
+  /* ─────────────────────────────────────────────
+   * FAB (Floating Action Button)
+   * Source: Figma DS-course · node 286:610
+   * ───────────────────────────────────────────── */
+  --semantic-color-fab-bg:         var(--primitive-color-blue-900);    /* Button/FAB/BG/Default  */
+  --semantic-color-fab-bg-hover:   var(--primitive-color-blue-700);    /* Button/FAB/BG/Hover    */
+  --semantic-color-fab-bg-active:  var(--primitive-color-blue-800);    /* Button/FAB/BG/Active   */
+  --semantic-color-fab-bg-focus:   var(--primitive-color-blue-900);    /* Button/FAB/BG/Focus    */
+  --semantic-color-fab-border-focus: var(--primitive-color-white);     /* Button/FAB/Border/Focus */
+  --semantic-color-fab-icon:       var(--primitive-color-white);       /* Button/FAB/Text/Default */
+  --semantic-space-fab-padding:    var(--primitive-space-4);           /* Button/FAB/Padding/X,Y */
+  --semantic-shadow-fab:
+    var(--primitive-shadow-3-x) var(--primitive-shadow-3-y) var(--primitive-shadow-3-blur) var(--primitive-shadow-3-spread) var(--primitive-color-shadow-3),
+    var(--primitive-shadow-4-x) var(--primitive-shadow-4-y) var(--primitive-shadow-4-blur) var(--primitive-shadow-4-spread) var(--primitive-color-shadow-4);
 }

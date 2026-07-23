@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="../../tokens/components.css" />
   <!-- Component -->
   <link rel="stylesheet" href="message-bubble.css" />
+  <link rel="stylesheet" href="../source-link/source-link.css" />
   <style>
     /* ── Demo chrome only — not part of the component ── */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -275,6 +276,28 @@
       </div>
     </div>
     <p class="demo-section__note">Any application component can be slotted into the content area.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
+       CONTENT SLOT — with source links
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">Content: With Source Links</p>
+    <div class="demo-column demo-column--agent">
+      <div class="message-bubble message-bubble--agent">
+        <div class="message-bubble__content demo-text">
+          <p>Design tokens are named values that represent design decisions. They decouple visual values from component code.</p>
+          <div class="message-bubble__sources">
+            <a class="source-link" href="https://tr.designtokens.org/format/" target="_blank" rel="noopener noreferrer">DTCG Spec</a>
+            <a class="source-link" href="https://docs.tokens.studio/" target="_blank" rel="noopener noreferrer">Tokens Studio Docs</a>
+            <a class="source-link" href="https://www.figma.com/blog/announcing-variables/" target="_blank" rel="noopener noreferrer">Figma Variables</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <p class="demo-section__note">Source links inside <code>.message-bubble__sources</code> after the message text. They wrap when the bubble isn't wide enough.</p>
   </section>
 
   <hr class="demo-divider" />

@@ -54,6 +54,10 @@
 
   --btn-primary-focus-ring:      var(--semantic-color-focus-ring-inverse);
 
+  /* Loading state — reuses disabled bg, text is default (black) */
+  --btn-primary-bg-loading:      var(--semantic-color-action-bg-disabled);
+  --btn-primary-color-loading:   var(--semantic-color-text-default);  /* Button/Primary/Text/Load: #10141f */
+
   /* ─────────────────────────────────────────────
    * BUTTON — Secondary variant
    * Background: surface tokens
@@ -96,8 +100,8 @@
    * Focus ring: standard blue
    * ───────────────────────────────────────────── */
   --btn-icon-bg:              var(--semantic-color-ghost-default);
-  --btn-icon-bg-hover:        var(--semantic-color-surface-hover);
-  --btn-icon-bg-active:       var(--semantic-color-surface-active);
+  --btn-icon-bg-hover:        var(--semantic-color-ghost-hover);     /* Button/Icon btn/BG/Hover: #ebebeb */
+  --btn-icon-bg-active:       var(--semantic-color-ghost-active);    /* Button/Icon btn/BG/Active: #dedede */
   --btn-icon-bg-disabled:     var(--semantic-color-surface-disabled);
 
   --btn-icon-color:           var(--semantic-color-text-default);
@@ -112,13 +116,14 @@
    * ───────────────────────────────────────────── */
   --chat-input-padding-x:       var(--semantic-space-input-padding-x);
   --chat-input-padding-y:       var(--semantic-space-input-padding-y);
-  --chat-input-gap:             var(--semantic-space-input-gap);
+  --chat-input-gap:             var(--semantic-space-input-gap-y);
+  --chat-input-gap-x:           var(--semantic-space-input-gap-x);
   --chat-input-radius:          var(--semantic-radius-input);
   --chat-input-border-width:    var(--semantic-border-input-width);
 
   /* Heights — min is 1 line of text + padding + borders */
   --chat-input-min-height:      50px;   /* 16px padding-top + 16px line-height + 16px padding-bottom + 2px borders */
-  --chat-input-max-height:      200px;  /* ~6 lines before internal scroll engages */
+  --chat-input-max-height:      104px;  /* ~4 visible text lines before internal scroll */
 
   /* ─────────────────────────────────────────────
    * CHAT INPUT — Colors
@@ -174,10 +179,10 @@
   /* ─────────────────────────────────────────────
    * MODAL WINDOW
    * Source: Figma DS-course · node 234:760
-   * Consumed by: components/modal-window/modal-window.css
+   * Consumed by: components/chat-window/chat-window.css
    * ───────────────────────────────────────────── */
   --modal-bg:              var(--semantic-color-modal-bg);
-  --modal-overlay:         var(--semantic-color-modal-overlay);
+  --modal-shadow:          var(--semantic-shadow-modal);
   --modal-radius:          var(--semantic-radius-modal);
   --modal-divider-color:   var(--semantic-color-modal-divider);
 
@@ -213,4 +218,20 @@
   --source-link-bg-hover:       var(--semantic-color-source-link-bg-hover);
   --source-link-bg-active:      var(--semantic-color-source-link-bg-active);
   --source-link-border-focus:   var(--semantic-color-source-link-border-focus);
+
+  /* ─────────────────────────────────────────────
+   * FAB (Floating Action Button)
+   * Source: Figma DS-course · node 286:610
+   * Consumed by: components/fab/fab.css
+   * ───────────────────────────────────────────── */
+  --fab-size:           56px;          /* Figma FAB frame: 56×56 */
+  --fab-radius:         var(--semantic-radius-component-circular);  /* Button/Border/Round: 100px */
+  --fab-padding:        var(--semantic-space-fab-padding);
+  --fab-bg:             var(--semantic-color-fab-bg);
+  --fab-bg-hover:       var(--semantic-color-fab-bg-hover);
+  --fab-bg-active:      var(--semantic-color-fab-bg-active);
+  --fab-bg-focus:       var(--semantic-color-fab-bg-focus);
+  --fab-border-focus:   var(--semantic-color-fab-border-focus);
+  --fab-icon-color:     var(--semantic-color-fab-icon);
+  --fab-shadow:         var(--semantic-shadow-fab);
 }

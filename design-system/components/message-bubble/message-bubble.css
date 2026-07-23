@@ -82,4 +82,19 @@
  * ───────────────────────────────────────────────────────────── */
 .message-bubble__content {
   display: block;
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * SOURCE LINKS SECTION
+ * Wrapping row of source-link elements placed after message text.
+ * Only used inside assistant bubbles.
+ * ───────────────────────────────────────────────────────────── */
+.message-bubble__sources {
+  display:   flex;
+  flex-wrap: wrap;
+  gap:       8px;
+  margin-top: 12px;
 }

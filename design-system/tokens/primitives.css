@@ -18,25 +18,48 @@
    * ───────────────────────────────────────────── */
 
   /* Blues */
-  --primitive-color-blue-900:   #134571;
-  --primitive-color-blue-700:   #335183;
-  --primitive-color-blue-500:   #1f73bd;  /* focus ring (secondary/clean/icon) */
+  --primitive-color-blue-900:   #02196e;  /* Button/Primary/BG/Default */
+  --primitive-color-blue-800:   #011248;  /* Button/Primary/BG/Active  */
+  --primitive-color-blue-700:   #163abf;  /* Focus ring / Border focus / Primary hover */
 
   /* Grays */
-  --primitive-color-gray-900:   #121212;
-  --primitive-color-gray-600:   #5c5c5c;
-  --primitive-color-gray-500:   #9d9d9d;  /* Input/Border/Default — DS-course node 34:218 */
-  --primitive-color-gray-300:   #bebebe;
-  --primitive-color-gray-200:   #dedede;
-  --primitive-color-gray-100:   #ebebeb;
+  --primitive-color-gray-900:   #10141f;  /* Text default */
+  --primitive-color-gray-600:   #555761;  /* Text muted / disabled */
+  --primitive-color-gray-500:   #91939c;  /* Secondary/BG/Active, SourceLink/BG/Active */
+  --primitive-color-gray-300:   #b5b6bc;  /* Surface hover, SourceLink/BG/Default, Input border */
+  --primitive-color-gray-200:   #d3d5da;  /* Ghost active, Bubble agent, Chat window divider */
+  --primitive-color-gray-100:   #ebecf2;  /* Disabled bg, Secondary default, Ghost hover */
 
   /* Blues — chat bubble */
-  --primitive-color-blue-100:   #e5e9ef;  /* Bubble/Color/User — DS-course node 234:684 */
+  --primitive-color-blue-100:   #dce5ff;  /* Bubble/Color/User */
 
   /* Absolute */
   --primitive-color-white:      #ffffff;
   --primitive-color-transparent: transparent;
-  --primitive-color-overlay:    rgba(0, 0, 0, 0.48);  /* Modal window/Overlay/Shadow — DS-course node 234:760 */
+
+  /* Shadows — Chat window two-layer system */
+  --primitive-color-shadow-1:   #0000001a;  /* Color/shadow-1 — rgba(0,0,0,0.1) */
+  --primitive-color-shadow-2:   #00000014;  /* Color/shadow -2 — rgba(0,0,0,0.08) */
+  --primitive-shadow-1-x:       0px;
+  --primitive-shadow-1-y:       24px;
+  --primitive-shadow-1-blur:    64px;
+  --primitive-shadow-1-spread:  -20px;
+  --primitive-shadow-2-x:       0px;
+  --primitive-shadow-2-y:       8px;
+  --primitive-shadow-2-blur:    24px;
+  --primitive-shadow-2-spread:  -6px;
+
+  /* Shadow layers 3 & 4 — FAB */
+  --primitive-color-shadow-3:   #0000001f;  /* Color/shadow-3 — rgba(0,0,0,0.12) */
+  --primitive-color-shadow-4:   #0000002e;  /* Color/shadow-4 — rgba(0,0,0,0.18) */
+  --primitive-shadow-3-x:       0px;
+  --primitive-shadow-3-y:       2px;
+  --primitive-shadow-3-blur:    4px;
+  --primitive-shadow-3-spread:  0px;
+  --primitive-shadow-4-x:       0px;
+  --primitive-shadow-4-y:       6px;
+  --primitive-shadow-4-blur:    12px;
+  --primitive-shadow-4-spread:  -2px;
 
   /* ─────────────────────────────────────────────
    * SPACING

@@ -215,6 +215,31 @@
   <hr class="demo-divider" />
 
   <!-- ═══════════════════════════════════════════
+       WITH ICON
+  ════════════════════════════════════════════ -->
+  <section class="demo-section">
+    <p class="demo-section__title">With Leading Icon (search)</p>
+    <div class="demo-container">
+      <div class="chat-input">
+        <label class="chat-input__label" for="input-icon">Search</label>
+        <div class="chat-input__field">
+          <svg class="chat-input__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M15 15L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.9333 19.0252C16.3556 18.4475 16.3556 17.5109 16.9333 16.9333C17.5109 16.3556 18.4475 16.3556 19.0252 16.9333L21.0667 18.9748C21.6444 19.5525 21.6444 20.4891 21.0667 21.0667C20.4891 21.6444 19.5525 21.6444 18.9748 21.0667L16.9333 19.0252Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 9.5C16.5 5.63401 13.366 2.5 9.5 2.5C5.63401 2.5 2.5 5.63401 2.5 9.5C2.5 13.366 5.63401 16.5 9.5 16.5C13.366 16.5 16.5 13.366 16.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <textarea
+            class="chat-input__textarea"
+            id="input-icon"
+            placeholder="Placeholder text"
+            rows="1"
+            data-chat-input
+          ></textarea>
+        </div>
+      </div>
+    </div>
+    <p class="demo-section__note">Uses <code>.chat-input__field</code> wrapper. Icon from <code>icons/search.svg</code>. Gap is <code>--chat-input-gap-x</code> (8px).</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <!-- ═══════════════════════════════════════════
        LIVE — AUTO-EXPAND + SUBMIT
   ════════════════════════════════════════════ -->
   <section class="demo-section">

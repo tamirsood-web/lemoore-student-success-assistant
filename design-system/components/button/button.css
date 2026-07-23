@@ -65,6 +65,7 @@
   flex-shrink: 0;
   width:       var(--btn-icon-size);
   height:      var(--btn-icon-size);
+  color:       inherit;  /* Ensure SVG currentColor resolves from button's color */
 }
 
 /* Disabled — applies to all variants */
@@ -113,6 +114,29 @@
 .btn--primary[aria-disabled="true"] {
   background-color: var(--btn-primary-bg-disabled);
   color:            var(--btn-primary-color-disabled);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * PRIMARY — Loading state
+ * Activated via .btn--loading class + aria-busy="true".
+ * Uses disabled bg with dark text. Non-interactive.
+ * ───────────────────────────────────────────────────────────── */
+.btn--primary.btn--loading {
+  background-color: var(--btn-primary-bg-loading);
+  color:            var(--btn-primary-color-loading);
+  pointer-events:   none;
+  cursor:           default;
+}
+
+/* Spinning loader icon animation */
+@keyframes btn-spin {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.btn--loading .btn__loader {
+  animation: btn-spin 1.6s linear infinite;
 }
 
 
@@ -195,6 +219,7 @@
 .btn--icon .btn__icon {
   width:  var(--btn-icon-size-solo);
   height: var(--btn-icon-size-solo);
+  color:  inherit;
 }
 
 .btn--icon:hover {

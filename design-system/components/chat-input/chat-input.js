@@ -117,6 +117,9 @@ function initChatInput(textarea) {
   textarea.addEventListener('keydown', function (event) {
     if (event.key !== 'Enter') return;
 
+    // Do not interfere with IME composition (e.g. CJK input)
+    if (event.isComposing) return;
+
     if (event.shiftKey) {
       // Shift+Enter: let the browser insert a newline, then resize
       // No preventDefault — browser handles the newline insertion
