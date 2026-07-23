@@ -132,9 +132,10 @@ export function AssistantWidget() {
     setExpanded((prev) => !prev);
   }, []);
 
-  // --- Open / Close ---
-  const handleOpen = useCallback(() => setOpen(true), []);
-  const handleClose = useCallback(() => setOpen(false), []);
+  // --- FAB click toggles the chat window ---
+  const handleFabClick = useCallback(() => {
+    setOpen((prev) => !prev);
+  }, []);
 
   // Build the expand/collapse classes for the chat window
   const chatWindowClasses = [
@@ -144,33 +145,34 @@ export function AssistantWidget() {
     .filter(Boolean)
     .join(" ");
 
+  const fabLabel = open ? "Close the Student Assistant" : "Open the Student Assistant";
+
   return (
     <>
-      {/* FAB Launcher — production FAB component */}
-      {!open ? (
-        <div className="fixed bottom-6 right-6 z-40">
-          <button
-            type="button"
-            className="fab"
-            aria-label="Open the Student Assistant"
-            title="Open the Student Assistant"
-            onClick={handleOpen}
-          >
-            <img
-              className="fab__icon"
-              src="/design-system/icons/eagle-headset.svg"
-              alt=""
-              aria-hidden="true"
-            />
-          </button>
-        </div>
-      ) : null}
+      {/* FAB — always visible, production FAB component */}
+      <div className="fixed bottom-6 right-6 z-50">
+        <button
+          type="button"
+          className="fab"
+          aria-label={fabLabel}
+          title={fabLabel}
+          aria-expanded={open}
+          onClick={handleFabClick}
+        >
+          <img
+            className="fab__icon"
+            src="/design-system/icons/eagle-headset.svg"
+            alt=""
+            aria-hidden="true"
+          />
+        </button>
+      </div>
 
       {/* Chat Window Panel — production Chat Window component */}
       {open ? (
         <div
           ref={wrapperRef}
-          className="fixed bottom-6 right-6 z-40"
+          className="fixed bottom-24 right-6 z-40"
           role="dialog"
           aria-modal="false"
           aria-label="Student Assistant"
@@ -211,7 +213,7 @@ export function AssistantWidget() {
                   type="button"
                   className="btn btn--icon"
                   aria-label="Minimize"
-                  onClick={handleClose}
+                  onClick={() => setOpen(false)}
                 >
                   <svg className="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
                     <path d="M19.002 12H5.00001" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>

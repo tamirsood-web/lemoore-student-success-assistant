@@ -44,7 +44,7 @@ describe("AssistantWidget", () => {
     await waitFor(() => expect(fetchMock).toHaveBeenCalledWith("/api/search", expect.any(Object)));
 
     // Renders the grounded answer + working official-source link.
-    expect(await screen.findByRole("heading", { name: /^answer$/i })).toBeInTheDocument();
+    expect(await screen.findByText(/you can order transcripts/i)).toBeInTheDocument();
     const link = await screen.findByRole("link", { name: /source link/i });
     expect(link).toHaveAttribute("href", "https://lemoorecollege.edu/resources/transcripts.php");
   });

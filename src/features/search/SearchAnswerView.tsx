@@ -67,14 +67,14 @@ export function SearchAnswerView({
     return (
       <div className="space-y-4">
         <div className="rounded-lg border border-lc-line bg-lc-wash p-4">
-          <p className="text-sm font-semibold uppercase tracking-wide text-lc-slate">
+          <p className="text-sm font-semibold tracking-wide text-lc-slate">
             No verified answer
           </p>
           <p className="mt-1 text-base text-lc-ink">{response.message}</p>
         </div>
         {response.relatedResults.length > 0 ? (
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
+            <h3 className="text-sm font-bold tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
               Related official pages
             </h3>
             <ol style={{ marginTop: 8, paddingLeft: 20, listStyleType: "decimal", display: "flex", flexDirection: "column", gap: 4 }}>
@@ -93,16 +93,11 @@ export function SearchAnswerView({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
-          Answer
-        </h2>
-        <div className="mt-2">
-          <AnswerText text={response.answer} />
-        </div>
+        <AnswerText text={response.answer} />
       </div>
 
       <div>
-        <h3 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
+        <h3 className="text-sm font-bold tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
           Sources
         </h3>
         <ol style={{ marginTop: 8, paddingLeft: 20, listStyleType: "decimal", display: "flex", flexDirection: "column", gap: 4 }}>
@@ -114,7 +109,7 @@ export function SearchAnswerView({
 
       {response.relatedResults.length > 0 ? (
         <div>
-          <h3 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
+          <h3 className="text-sm font-bold tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
             Related official pages
           </h3>
           <ol style={{ marginTop: 8, paddingLeft: 20, listStyleType: "decimal", display: "flex", flexDirection: "column", gap: 4 }}>
