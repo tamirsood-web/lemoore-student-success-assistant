@@ -56,7 +56,9 @@ describe("VoiceDemo — incoming call", () => {
     expect(screen.getByRole("heading", { name: /Lemoore College Student Support/i })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Answer" })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "Decline" })).toBeInTheDocument();
-    expect(screen.getByText(/Simulation only — no real phone call is being placed/i)).toBeInTheDocument();
+    expect(
+      screen.getByText(/Live Nova 2 Sonic demo — simulated call, no phone number involved/i),
+    ).toBeInTheDocument();
   });
 });
 
