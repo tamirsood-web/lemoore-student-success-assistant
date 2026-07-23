@@ -4,6 +4,7 @@ import { useState, useRef, useEffect, useId } from "react";
 import { Spinner } from "@/components/Spinner";
 import { ChatInput } from "./ChatInput";
 import { AssistantMessage, UserMessage } from "./ChatMessage";
+import { generateId } from "@/lib/id";
 import type { AssistantResponse } from "@/types";
 
 type Turn =
@@ -36,8 +37,8 @@ export function ChatInterface() {
     const trimmed = text.trim();
     if (!trimmed || chatState === "loading") return;
 
-    const conversationId = crypto.randomUUID();
-    setTurns((prev) => [...prev, { kind: "user", id: crypto.randomUUID(), text: trimmed }]);
+    const conversationId = generateId();
+    setTurns((prev) => [...prev, { kind: "user", id: generateId(), text: trimmed }]);
     setInputValue("");
     setChatState("loading");
     setErrorMsg("");
@@ -51,7 +52,7 @@ export function ChatInterface() {
       const data = (await res.json()) as AssistantResponse & { error?: string };
       if (!res.ok) throw new Error((data as { error?: string }).error ?? "The assistant could not respond.");
 
-      setTurns((prev) => [...prev, { kind: "assistant", id: crypto.randomUUID(), conversationId, response: data }]);
+      setTurns((prev) => [...prev, { kind: "assistant", id: generateId(), conversationId, response: data }]);
       setChatState("idle");
     } catch (err) {
       setErrorMsg(err instanceof Error ? err.message : "Something went wrong. Please try again.");

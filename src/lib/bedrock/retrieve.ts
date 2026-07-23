@@ -1,122 +1,215 @@
-// Local mock retrieval service.
+// Bedrock retrieve → generate (two-step, server-only).
 //
-// Implements the RetrievalService seam using the local mock knowledge dataset.
-// In the AWS phase this module is replaced by Bedrock Knowledge Bases; the route
-// handler depends only on the RetrievalResult type, not this implementation.
+// Optimized RAG configuration:
+// - Retrieves top 3 results (reduced from 5 for speed)
+// - Filters by relevance score ≥0.5
+// - Truncates chunks to 800 chars max to reduce tokens
+// - Uses system message for Anthropic models (more efficient)
+// - Deduplicates citations from same source
+// - Returns source type for UI badges
 
-import type { RetrievalResult, RetrievedSnippet } from "@/types";
-import { sources, courseDates } from "@/lib/mock";
+import {
+  BedrockAgentRuntimeClient,
+  RetrieveCommand,
+} from "@aws-sdk/client-bedrock-agent-runtime";
+import {
+  BedrockRuntimeClient,
+  InvokeModelCommand,
+} from "@aws-sdk/client-bedrock-runtime";
+import { getEnv } from "@/lib/validation";
 
-const COURSE_DATE_KEYWORDS = [
-  "census",
-  "drop",
-  "withdrawal",
-  "withdraw",
-  "last day",
-  "deadline",
-  "course date",
-  "class date",
-];
+export type BedrockSnippet = {
+  text: string;
+  title: string;
+  uri?: string;
+  sourceType: "s3" | "web" | "unknown";
+  relevanceScore?: number;
+};
 
-const MAX_SNIPPETS = 3;
+export type BedrockRetrievalResult = {
+  answer: string;
+  snippets: BedrockSnippet[];
+  noResults: boolean;
+};
 
-function tokenize(text: string): Set<string> {
-  return new Set(text.toLowerCase().match(/[a-z0-9]+/g) ?? []);
-}
+// ── singleton clients ────────────────────────────────────────────────────────
 
-function scoreSource(
-  queryTokens: Set<string>,
-  source: { readonly tags: readonly string[]; readonly content: string },
-): number {
-  const haystack = tokenize(source.tags.join(" ") + " " + source.content);
-  let score = 0;
-  for (const token of queryTokens) {
-    if (haystack.has(token)) score++;
-  }
-  return score;
-}
+let _agentClient: BedrockAgentRuntimeClient | null = null;
+let _runtimeClient: BedrockRuntimeClient | null = null;
 
-function isCourseDateQuery(query: string): boolean {
-  const lower = query.toLowerCase();
-  return COURSE_DATE_KEYWORDS.some((kw) => lower.includes(kw));
-}
-
-function extractCourseIdentifiers(query: string): {
-  term?: string;
-  subject?: string;
-  catalogNumber?: string;
-  section?: string;
-} {
-  const upper = query.toUpperCase();
-  const courseMatch = upper.match(
-    /\b([A-Z]{2,6})\s*(\d{2,4})(?:[- ](\d{2,3}))?\b/,
-  );
-  const termMatch = query.match(
-    /\b(Fall|Spring|Summer|Winter)\s+(20\d{2})\b/i,
-  );
-  return {
-    subject: courseMatch?.[1],
-    catalogNumber: courseMatch?.[2],
-    section: courseMatch?.[3],
-    term: termMatch ? `${termMatch[1]} ${termMatch[2]}` : undefined,
-  };
-}
-
-export async function retrieve(query: string): Promise<RetrievalResult> {
-  // --- course-date path ---
-  if (isCourseDateQuery(query)) {
-    const ids = extractCourseIdentifiers(query);
-
-    if (!ids.subject && !ids.catalogNumber) {
-      return { intent: "course-date", snippets: [], needsIdentifiers: true };
-    }
-
-    const matches = courseDates.filter((cd) => {
-      if (ids.term && cd.term.toLowerCase() !== ids.term.toLowerCase())
-        return false;
-      if (
-        ids.subject &&
-        cd.subject.toLowerCase() !== ids.subject.toLowerCase()
-      )
-        return false;
-      if (ids.catalogNumber && cd.catalogNumber !== ids.catalogNumber)
-        return false;
-      if (ids.section && cd.section !== ids.section) return false;
-      return true;
+function getAgentClient(): BedrockAgentRuntimeClient {
+  if (!_agentClient) {
+    _agentClient = new BedrockAgentRuntimeClient({
+      region: getEnv().aws.region ?? "us-west-2",
     });
+  }
+  return _agentClient;
+}
 
-    if (matches.length === 0) {
-      return { intent: "course-date", snippets: [], needsIdentifiers: false };
-    }
+function getRuntimeClient(): BedrockRuntimeClient {
+  if (!_runtimeClient) {
+    _runtimeClient = new BedrockRuntimeClient({
+      region: getEnv().aws.region ?? "us-west-2",
+    });
+  }
+  return _runtimeClient;
+}
 
-    const snippets: RetrievedSnippet[] = matches
-      .slice(0, MAX_SNIPPETS)
-      .map((cd) => ({
-        source: cd,
-        title: cd.sourceTitle,
-        excerpt:
-          `${cd.subject} ${cd.catalogNumber} Section ${cd.section} — ${cd.term}: ` +
-          `Start ${cd.startDate} · Census ${cd.censusDate} · Drop ${cd.dropDate}.`,
-      }));
+// ── Constants ────────────────────────────────────────────────────────────────
 
-    return { intent: "course-date", snippets };
+const TOP_K_RESULTS = 3; // Reduced from 5 for speed
+const MIN_RELEVANCE_SCORE = 0.5; // Filter low-relevance chunks
+const MAX_CHUNK_LENGTH = 800; // Truncate to reduce token usage
+const SYSTEM_PROMPT = `You are the Lemoore College Student Success Assistant.
+Answer using ONLY the provided sources. Be concise, accurate, and student-friendly.
+If sources lack sufficient information, state: "I could not find verified information about that in the approved college sources."
+Never invent policies, deadlines, contact details, or course-specific dates.`;
+
+// ── main export ──────────────────────────────────────────────────────────────
+
+export async function retrieve(query: string): Promise<BedrockRetrievalResult> {
+  const env = getEnv();
+  const knowledgeBaseId = env.aws.bedrock.knowledgeBaseId;
+  const modelId = env.aws.bedrock.modelId ?? "amazon.nova-lite-v1:0";
+
+  console.log("[retrieve] Starting with:", { knowledgeBaseId, modelId, queryLength: query.length });
+
+  if (!knowledgeBaseId) {
+    console.log("[retrieve] No knowledge base ID configured");
+    return { answer: "", snippets: [], noResults: true };
   }
 
-  // --- general source path ---
-  const queryTokens = tokenize(query);
+  // ── Step 1: retrieve document chunks (optimized) ─────────────────────────
+  const retrieveCmd = new RetrieveCommand({
+    knowledgeBaseId,
+    retrievalQuery: { text: query },
+    retrievalConfiguration: {
+      vectorSearchConfiguration: { numberOfResults: TOP_K_RESULTS },
+    },
+  });
 
-  const scored = sources
-    .map((source) => ({ source, score: scoreSource(queryTokens, source) }))
-    .filter(({ score }) => score > 0)
-    .sort((a, b) => b.score - a.score)
-    .slice(0, MAX_SNIPPETS);
+  const retrieveResponse = await getAgentClient().send(retrieveCmd);
+  let results = retrieveResponse.retrievalResults ?? [];
 
-  const snippets: RetrievedSnippet[] = scored.map(({ source }) => ({
-    source,
-    title: source.title,
-    uri: source.uri,
-    excerpt: source.content,
-  }));
+  console.log("[retrieve] Retrieved results:", results.length);
 
-  return { intent: "source", snippets };
+  // Filter by relevance score if available
+  results = results.filter((r) => {
+    const score = r.score ?? 1.0;
+    return score >= MIN_RELEVANCE_SCORE;
+  });
+
+  console.log("[retrieve] After relevance filtering (≥0.5):", results.length);
+
+  if (results.length === 0) {
+    console.log("[retrieve] No results after filtering");
+    return { answer: "", snippets: [], noResults: true };
+  }
+
+  // Build snippets with source type detection and deduplication
+  const seenUris = new Set<string>();
+  const snippets: BedrockSnippet[] = [];
+
+  for (const r of results) {
+    const text = r.content?.text ?? "";
+    const s3Uri = r.location?.s3Location?.uri;
+    const webUrl = (r.location as { webLocation?: { url?: string } })?.webLocation
+      ?.url;
+    const uri = s3Uri ?? webUrl ?? (r.metadata?.["x-amz-bedrock-kb-source-uri"] as string | undefined);
+
+    // Deduplicate by URI
+    if (uri && seenUris.has(uri)) continue;
+    if (uri) seenUris.add(uri);
+
+    // Determine source type
+    const sourceType: "s3" | "web" | "unknown" = s3Uri
+      ? "s3"
+      : webUrl
+        ? "web"
+        : "unknown";
+
+    const rawTitle =
+      (r.metadata?.["_document_title"] as string | undefined) ??
+      (r.metadata?.["x-amz-bedrock-kb-source-uri"] as string | undefined)
+        ?.split("/")
+        .pop() ??
+      (uri ? decodeURIComponent(uri.split("/").pop() ?? "") : "College Source");
+
+    // Truncate chunk to max length
+    const truncatedText =
+      text.length > MAX_CHUNK_LENGTH
+        ? text.slice(0, MAX_CHUNK_LENGTH) + "…"
+        : text;
+
+    snippets.push({
+      text: truncatedText,
+      title: rawTitle.replace(/\.[^.]+$/, ""),
+      uri,
+      sourceType,
+      relevanceScore: r.score,
+    });
+  }
+
+  if (snippets.length === 0) {
+    console.log("[retrieve] No snippets after deduplication");
+    return { answer: "", snippets: [], noResults: true };
+  }
+
+  console.log("[retrieve] Final snippets:", snippets.length);
+
+  // ── Step 2: generate answer (optimized for token efficiency) ─────────────
+  const context = snippets
+    .map((s, i) => `[${i + 1}] ${s.title}\n${s.text}`)
+    .join("\n\n");
+
+  const userMessage = `Sources:\n${context}\n\nQuestion: ${query}`;
+
+  // Build request body — use system message for Anthropic (more efficient)
+  const isAnthropicModel = modelId.includes("anthropic.");
+  const requestBody = isAnthropicModel
+    ? {
+        anthropic_version: "bedrock-2023-05-31",
+        max_tokens: 400, // Reduced from 512 for faster responses
+        temperature: 0.1,
+        system: SYSTEM_PROMPT,
+        messages: [
+          { role: "user", content: [{ type: "text", text: userMessage }] },
+        ],
+      }
+    : {
+        messages: [
+          {
+            role: "user",
+            content: [{ text: `${SYSTEM_PROMPT}\n\n${userMessage}` }],
+          },
+        ],
+        inferenceConfig: { max_new_tokens: 400, temperature: 0.1 },
+      };
+
+  const invokeCmd = new InvokeModelCommand({
+    modelId,
+    contentType: "application/json",
+    accept: "application/json",
+    body: JSON.stringify(requestBody),
+  });
+
+  const invokeResponse = await getRuntimeClient().send(invokeCmd);
+  const responseBody = JSON.parse(
+    new TextDecoder().decode(invokeResponse.body),
+  ) as {
+    // Anthropic response shape
+    content?: Array<{ text?: string }>;
+    // Nova response shape
+    output?: { message?: { content?: Array<{ text?: string }> } };
+  };
+
+  const answer = (
+    responseBody.content?.[0]?.text ??
+    responseBody.output?.message?.content?.[0]?.text ??
+    ""
+  ).trim();
+
+  console.log("[retrieve] Generated answer length:", answer.length);
+
+  return { answer, snippets, noResults: answer === "" };
 }

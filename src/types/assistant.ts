@@ -26,12 +26,15 @@ export type SourceId = string;
  * A citation shown to the student. `sourceId` is required so every displayed citation
  * references a real source record (requirements.md Req 3.2 / Correctness Property 2); the
  * remaining fields match the AGENTS.md §9 citation shape.
+ * 
+ * `sourceType` indicates whether the source is from S3 storage or web crawl for UI badging.
  */
 export type Citation = {
   readonly sourceId: SourceId;
   readonly title: string;
   readonly uri?: string;
   readonly excerpt?: string;
+  readonly sourceType?: "s3" | "web" | "unknown";
 };
 
 /**
