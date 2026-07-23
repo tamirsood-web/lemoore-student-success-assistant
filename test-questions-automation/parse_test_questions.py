@@ -3,6 +3,12 @@
 Parse markdown test question files and generate a structured JSON output.
 This script extracts questions, good criteria, and bad criteria from markdown files
 in the test-questions directory.
+
+New simplified format:
+- Questions start with "# " followed by the question text
+- Good criteria start with "- Good: "
+- Bad criteria start with "- Bad: "
+- Blank lines separate sections
 """
 
 import json
@@ -11,106 +17,96 @@ from pathlib import Path
 from typing import List, Dict, Any
 
 
-def parse_markdown_file(filepath: Path) -> Dict[str, Any]:
+def parse_markdown_file(filepath: Path) -> List[Dict[str, str]]:
     """
     Parse a single markdown file and extract questions with their rubrics.
+    
+    The new format expects:
+    # Question text here
+    
+    - Good: Good criteria here
+    
+    - Bad: Bad criteria here
     
     Args:
         filepath: Path to the markdown file
         
     Returns:
-        Dictionary containing file metadata and parsed questions
+        List of question dictionaries
     """
     with open(filepath, 'r', encoding='utf-8') as f:
         content = f.read()
     
-    # Extract title (first # heading)
-    title_match = re.search(r'^#\s+(.+)$', content, re.MULTILINE)
-    title = title_match.group(1) if title_match else filepath.stem
-    
     questions = []
     
-    # Pattern to match question sections
-    # Looks for: ### [number]. [emoji] [title]
-    question_pattern = r'###\s+(\d+)\.\s+(🔵|🟣)?\s*(.+?)\n\*\*Q\d+:\s*"(.+?)"\*\*\n(.*?)(?=###|\n---\n|\Z)'
+    # Split content by lines starting with "# " (question headers)
+    # This regex splits at lines starting with # and space, keeping the delimiter
+    blocks = re.split(r'^(?=# )', content, flags=re.MULTILINE)
     
-    matches = re.finditer(question_pattern, content, re.DOTALL)
+    for block in blocks:
+        block = block.strip()
+        if not block or not block.startswith('# '):
+            continue
+        
+        # Extract question text (first line starting with "# ")
+        lines = block.split('\n')
+        question_text = lines[0][2:].strip()  # Remove "# " prefix
+        
+        # Find Good and Bad criteria
+        good_criteria = ""
+        bad_criteria = ""
+        
+        for line in lines[1:]:
+            line = line.strip()
+            if line.startswith('- Good:'):
+                good_criteria = line[8:].strip()  # Remove "- Good: " prefix
+            elif line.startswith('- Bad:'):
+                bad_criteria = line[7:].strip()  # Remove "- Bad: " prefix
+        
+        # Only add if we found both criteria
+        if good_criteria and bad_criteria:
+            question_obj = {
+                "question": question_text,
+                "good": good_criteria,
+                "bad": bad_criteria
+            }
+            questions.append(question_obj)
     
-    for match in matches:
-        question_num = match.group(1)
-        emoji = match.group(2) if match.group(2) else ""
-        section_title = match.group(3).strip()
-        question_text = match.group(4).strip()
-        criteria_block = match.group(5).strip()
-        
-        # Stop at horizontal rule or "Section" heading (end of questions section)
-        criteria_block = re.split(r'\n---+\n|^##\s+(?:Section|Scoring)', criteria_block)[0].strip()
-        
-        # Parse good and bad criteria
-        good_criteria = []
-        bad_criteria = []
-        
-        # Extract good criteria (lines starting with - ✅ Good:)
-        good_matches = re.finditer(r'-\s*✅\s*Good:\s*(.+?)(?=\n\s*-\s*❌|\n\n|\Z)', criteria_block, re.DOTALL)
-        for good_match in good_matches:
-            good_text = good_match.group(1).strip()
-            # Clean up extra whitespace and newlines
-            good_text = re.sub(r'\s+', ' ', good_text)
-            good_criteria.append(good_text)
-        
-        # Extract bad criteria (lines starting with - ❌ Bad:)
-        bad_matches = re.finditer(r'-\s*❌\s*Bad:\s*(.+?)(?=\n\s*-\s*✅|\n\n|\Z)', criteria_block, re.DOTALL)
-        for bad_match in bad_matches:
-            bad_text = bad_match.group(1).strip()
-            # Clean up extra whitespace and newlines
-            bad_text = re.sub(r'\s+', ' ', bad_text)
-            bad_criteria.append(bad_text)
-        
-        # Determine question type based on emoji
-        question_type = "core" if emoji == "🔵" else "supplemental" if emoji == "🟣" else "unknown"
-        
-        question_obj = {
-            "question_number": int(question_num),
-            "question_type": question_type,
-            "section_title": section_title,
-            "question_text": question_text,
-            "good_criteria": good_criteria,
-            "bad_criteria": bad_criteria
-        }
-        
-        questions.append(question_obj)
-    
-    return {
-        "source_file": str(filepath),
-        "title": title,
-        "total_questions": len(questions),
-        "questions": questions
-    }
+    return questions
 
 
 def parse_all_markdown_files(directory: str = "../test-questions") -> Dict[str, Any]:
     """
     Parse all markdown files in the specified directory.
+    Excludes files ending with _TEMPLATE.md
     
     Args:
         directory: Path to the directory containing markdown files
         
     Returns:
-        Dictionary containing all parsed test questions
+        Dictionary containing total count and list of questions
     """
     test_dir = Path(directory)
     
     if not test_dir.exists():
         raise FileNotFoundError(f"Directory '{directory}' not found")
     
-    # Find all .md files recursively
-    md_files = list(test_dir.glob("**/*.md"))
+    # Find all .md files recursively, excluding templates
+    all_md_files = list(test_dir.glob("**/*.md"))
+    md_files = [f for f in all_md_files if not f.name.endswith('_TEMPLATE.md')]
     
     if not md_files:
-        raise FileNotFoundError(f"No markdown files found in '{directory}'")
+        raise FileNotFoundError(f"No markdown files found in '{directory}' (excluding templates)")
     
-    parsed_files = []
-    total_questions = 0
+    # Show excluded templates
+    template_files = [f for f in all_md_files if f.name.endswith('_TEMPLATE.md')]
+    if template_files:
+        print(f"Excluding {len(template_files)} template file(s):")
+        for tf in template_files:
+            print(f"  - {tf.name}")
+        print()
+    
+    all_questions = []
     seen_files = set()  # Track file basenames to avoid duplicates
     
     for md_file in md_files:
@@ -121,24 +117,19 @@ def parse_all_markdown_files(directory: str = "../test-questions") -> Dict[str, 
         
         print(f"Parsing: {md_file}")
         try:
-            parsed_data = parse_markdown_file(md_file)
-            if parsed_data["questions"]:  # Only include files with questions
-                parsed_files.append(parsed_data)
-                total_questions += parsed_data["total_questions"]
+            questions = parse_markdown_file(md_file)
+            if questions:
+                all_questions.extend(questions)
                 seen_files.add(md_file.name)
-                print(f"  ✓ Found {parsed_data['total_questions']} questions")
+                print(f"  ✓ Found {len(questions)} questions")
             else:
                 print(f"  ⚠ No questions found (may be a supplementary file)")
         except Exception as e:
             print(f"  ✗ Error parsing file: {e}")
     
     return {
-        "metadata": {
-            "total_files_parsed": len(parsed_files),
-            "total_questions": total_questions,
-            "source_directory": directory
-        },
-        "test_files": parsed_files
+        "total_questions": len(all_questions),
+        "questions": all_questions
     }
 
 
@@ -161,8 +152,7 @@ def main():
         print()
         print("=" * 60)
         print(f"✓ Successfully created '{output_file}'")
-        print(f"  Total files: {result['metadata']['total_files_parsed']}")
-        print(f"  Total questions: {result['metadata']['total_questions']}")
+        print(f"  Total questions: {result['total_questions']}")
         print("=" * 60)
         
     except Exception as e:

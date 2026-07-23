@@ -1,6 +1,31 @@
 # Test Question Parser
 
-This script parses markdown test plan files from the `../test-questions/` directory and generates a structured JSON output containing all questions and their evaluation rubrics.
+This script parses markdown test question files from the `../test-questions/` directory and generates a structured JSON output containing all questions and their evaluation rubrics.
+
+## Format
+
+The script expects a simplified markdown format:
+
+```markdown
+# Question text here?
+
+- Good: Criteria for a good response.
+
+- Bad: Criteria for a bad response.
+
+
+# Next question here?
+
+- Good: Good criteria.
+
+- Bad: Bad criteria.
+```
+
+Each question consists of:
+1. A line starting with `# ` followed by the question text
+2. A line starting with `- Good: ` followed by criteria for correct responses
+3. A line starting with `- Bad: ` followed by criteria for incorrect responses
+4. Blank lines between sections (optional but recommended for readability)
 
 ## Usage
 
@@ -16,55 +41,48 @@ Or from the project root:
 python3 test-questions-automation/parse_test_questions.py
 ```
 
+## Template Files
+
+Files ending with `_TEMPLATE.md` are automatically excluded from parsing. These files contain format specifications and examples but no actual test questions.
+
 ## Output
 
-The script generates `test_questions.json` in the same directory with the following structure:
+The script generates `test_questions.json` with a simplified structure:
 
 ```json
 {
-  "metadata": {
-    "total_files_parsed": 3,
-    "total_questions": 40,
-    "source_directory": "test-questions"
-  },
-  "test_files": [
+  "total_questions": 25,
+  "questions": [
     {
-      "source_file": "path/to/file.md",
-      "title": "Test Plan Title",
-      "total_questions": 15,
-      "questions": [
-        {
-          "question_number": 1,
-          "question_type": "core",
-          "section_title": "Topic description",
-          "question_text": "The actual question text",
-          "good_criteria": [
-            "List of criteria for a good response"
-          ],
-          "bad_criteria": [
-            "List of criteria for a bad response"
-          ]
-        }
-      ]
+      "question": "How do I schedule a counseling appointment?",
+      "good": "Directs to Counseling Services, provides contact info...",
+      "bad": "Gives a generic answer with no specific contact info..."
+    },
+    {
+      "question": "How do I apply for financial aid?",
+      "good": "Explains the FAFSA process, mentions required documents...",
+      "bad": "Skips prerequisites or provides incorrect information..."
     }
   ]
 }
 ```
 
+The output is a flat list of questions with their evaluation criteria. No file tracking, no question numbering, just the essential data for testing.
+
 ## Question Types
 
-- **core** (🔵): Core topic questions that test fundamental functionality
-- **supplemental** (🟣): Supplemental/stress-test questions for edge cases
-- **unknown**: Questions without an emoji indicator
+The simplified format no longer uses question type categorization (core/supplemental) or emoji indicators. All questions are treated equally and numbered sequentially within each file.
 
 ## Features
 
 - Recursively parses all `.md` files in the `../test-questions/` directory
+- Automatically excludes files ending with `_TEMPLATE.md`
 - Automatically skips duplicate files (same filename in different subdirectories)
-- Extracts question text, section titles, and evaluation criteria
-- Distinguishes between "good" and "bad" response criteria
-- Categorizes questions by type (core vs. supplemental)
-- Outputs clean, structured JSON for programmatic use
+- Extracts question text and evaluation criteria using simple line-prefix matching
+- Each question has exactly one good criterion and one bad criterion
+- Outputs minimal, clean JSON structure (just total count and question list)
+- No file tracking, no question numbering - just the essential test data
+- Simple, maintainable format that's easy to write, edit, and consume programmatically
 
 ## Requirements
 
