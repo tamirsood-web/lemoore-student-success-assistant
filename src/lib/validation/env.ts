@@ -87,6 +87,18 @@ const RawEnvSchema = z.object({
     z.enum(["vector", "managed"]).optional(),
   ),
 
+  // Server-only production retrieval strategy. Defaults to "s3-first" in bedrock mode (applied
+  // by the bedrock config resolver). "combined" is retained for diagnostics/evaluation only.
+  BEDROCK_RETRIEVAL_STRATEGY: z.preprocess(
+    (value) =>
+      typeof value === "string" && value.trim() === "" ? undefined : value,
+    z.enum(["s3-first", "combined", "s3", "crawler"]).optional(),
+  ),
+  // Data-source ids used ONLY server-side to filter retrieval to one source via the reserved
+  // Bedrock metadata key. Never prefixed NEXT_PUBLIC_, so they never reach the browser bundle.
+  BEDROCK_DATA_SOURCE_ID: optionalEnvString,
+  BEDROCK_WEB_CRAWLER_DATA_SOURCE_ID: optionalEnvString,
+
   // --- AWS (all optional at env level; app boots without them in local mode) ---
   // KB id / model ARN structure is validated in the bedrock config resolver (bedrock mode
   // only), so a placeholder value can't break local boot. The two numeric settings are
@@ -119,6 +131,9 @@ export const EnvSchema = RawEnvSchema.transform((raw) => ({
       modelArn: raw.BEDROCK_MODEL_ARN,
       knowledgeBaseId: raw.BEDROCK_KNOWLEDGE_BASE_ID,
       kbType: raw.BEDROCK_KB_TYPE,
+      retrievalStrategy: raw.BEDROCK_RETRIEVAL_STRATEGY,
+      dataSourceId: raw.BEDROCK_DATA_SOURCE_ID,
+      webCrawlerDataSourceId: raw.BEDROCK_WEB_CRAWLER_DATA_SOURCE_ID,
       numberOfResults: raw.BEDROCK_NUMBER_OF_RESULTS,
       timeoutMs: raw.BEDROCK_REQUEST_TIMEOUT_MS,
       guardrailId: raw.BEDROCK_GUARDRAIL_ID,

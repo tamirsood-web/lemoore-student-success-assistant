@@ -22,18 +22,25 @@ vi.mock("@aws-sdk/client-bedrock-agent-runtime", () => ({
 }));
 
 import { createBedrockSearchService } from "./bedrockProvider";
-import type { BedrockConfigResult } from "./bedrockConfig";
+import type { BedrockConfig, BedrockConfigResult } from "./bedrockConfig";
 
-const OK: BedrockConfigResult = {
-  status: "ok",
-  config: {
-    region: "us-west-2",
-    knowledgeBaseId: "ABCDEF1234",
-    modelArn: "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0",
-    numberOfResults: 8,
-    timeoutMs: 15000,
-  },
+const BASE_CONFIG: BedrockConfig = {
+  region: "us-west-2",
+  knowledgeBaseId: "ABCDEF1234",
+  modelArn: "arn:aws:bedrock:us-west-2::foundation-model/anthropic.claude-3-5-sonnet-20241022-v2:0",
+  numberOfResults: 8,
+  timeoutMs: 15000,
+  strategy: "combined",
+  dataSourceIds: {},
 };
+const OK: BedrockConfigResult = { status: "ok", config: BASE_CONFIG };
+const S3_ID = "S3SOURCE01";
+const S3_FIRST_CONFIG: BedrockConfig = {
+  ...BASE_CONFIG,
+  strategy: "s3-first",
+  dataSourceIds: { s3: S3_ID, crawler: "CRAWLERID9" },
+};
+const S3_FIRST: BedrockConfigResult = { status: "ok", config: S3_FIRST_CONFIG };
 
 beforeEach(() => {
   h.commandInputs.length = 0;
@@ -77,9 +84,37 @@ describe("RetrieveAndGenerateCommand construction (default call path, SDK mocked
     expect(input.retrieveAndGenerateConfiguration.type).toBe("KNOWLEDGE_BASE");
     const kb = input.retrieveAndGenerateConfiguration.knowledgeBaseConfiguration;
     expect(kb.knowledgeBaseId).toBe("ABCDEF1234");
-    expect(kb.modelArn).toBe(OK.config.modelArn);
+    expect(kb.modelArn).toBe(BASE_CONFIG.modelArn);
     expect(kb.retrievalConfiguration.vectorSearchConfiguration.numberOfResults).toBe(8);
+    // combined strategy → no data-source filter.
+    expect(
+      (kb.retrievalConfiguration.vectorSearchConfiguration as { filter?: unknown }).filter,
+    ).toBeUndefined();
 
     expect(res.kind).toBe("answered");
+  });
+
+  it("adds a reserved-key data-source filter for the s3-first strategy's S3 call", async () => {
+    const svc = createBedrockSearchService(S3_FIRST); // real default path, SDK mocked
+    await svc.answer("How do I register?");
+
+    expect(h.commandInputs).toHaveLength(1); // S3 answered → no crawler call
+    const input = h.commandInputs[0] as {
+      retrieveAndGenerateConfiguration: {
+        knowledgeBaseConfiguration: {
+          retrievalConfiguration: {
+            vectorSearchConfiguration: {
+              numberOfResults: number;
+              filter?: { equals?: { key?: string; value?: string } };
+            };
+          };
+        };
+      };
+    };
+    const vsc =
+      input.retrieveAndGenerateConfiguration.knowledgeBaseConfiguration.retrievalConfiguration
+        .vectorSearchConfiguration;
+    expect(vsc.filter?.equals?.key).toBe("x-amz-bedrock-kb-data-source-id");
+    expect(vsc.filter?.equals?.value).toBe(S3_ID);
   });
 });

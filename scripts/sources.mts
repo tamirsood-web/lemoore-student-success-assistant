@@ -55,9 +55,21 @@ import {
   isConfirmed,
   resolveUploadDecision,
   resolveSyncDecision,
+  BEDROCK_DATA_SOURCE_METADATA_KEY,
+  RETRIEVAL_SCOPES,
+  isRetrievalScope,
+  resolveScopeFilter,
+  classifyOrigin,
+  evaluateQuestion,
+  buildComparison,
+  renderComparisonMarkdown,
   type SourceRecord,
   type ReviewRow,
   type CurrentStatus,
+  type RetrievalScope,
+  type RetrievedResult,
+  type QuestionEval,
+  type ScopeReport,
 } from "../src/lib/ingestion/index.ts";
 
 // ---- Configuration & paths ---------------------------------------------------------------
@@ -945,11 +957,79 @@ async function cmdSync(argv: string[]): Promise<void> {
   console.log("Monitor completion in the Bedrock console, then run `npm run sources:evaluate`.");
 }
 
-async function cmdEvaluate(): Promise<void> {
+/** Parse `--scope <combined|s3|crawler>` (default combined) from CLI args. */
+function parseScope(argv: string[]): RetrievalScope {
+  const i = argv.indexOf("--scope");
+  if (i === -1) return "combined";
+  const value = argv[i + 1];
+  if (!value || !isRetrievalScope(value)) {
+    console.error(
+      `Invalid --scope "${value ?? ""}". Use one of: ${RETRIEVAL_SCOPES.join(" | ")}.`,
+    );
+    process.exit(1);
+  }
+  return value;
+}
+
+function scopeReportPath(scope: RetrievalScope): string {
+  return join(REPORTS_DIR, `lemoore-eval-${scope}.json`);
+}
+
+// Read a previously written per-scope report (redacted) back into a ScopeReport, or undefined.
+function readScopeReport(scope: RetrievalScope): ScopeReport | undefined {
+  const path = scopeReportPath(scope);
+  if (!existsSync(path)) return undefined;
+  try {
+    const parsed = readJson(path) as {
+      scope?: RetrievalScope;
+      generatedAt?: string;
+      total?: number;
+      usable?: number;
+      results?: QuestionEval[];
+    };
+    if (parsed.scope !== scope || !Array.isArray(parsed.results)) return undefined;
+    return {
+      scope,
+      generatedAt: parsed.generatedAt ?? "",
+      total: parsed.total ?? parsed.results.length,
+      usable: parsed.usable ?? parsed.results.filter((r) => r.usable).length,
+      questions: parsed.results,
+    };
+  } catch {
+    return undefined;
+  }
+}
+
+// Rebuild the three-way comparison from whichever per-scope reports exist on disk.
+function writeComparison(): void {
+  const reports: Partial<Record<RetrievalScope, ScopeReport>> = {};
+  for (const scope of RETRIEVAL_SCOPES) {
+    const report = readScopeReport(scope);
+    if (report) reports[scope] = report;
+  }
+  const comparison = buildComparison(reports, NOW_ISO);
+  writeJson(join(REPORTS_DIR, "lemoore-eval-comparison.json"), comparison);
+  writeFileSync(join(REPORTS_DIR, "lemoore-eval-comparison.md"), renderComparisonMarkdown(comparison));
+  console.log(
+    `\nComparison (scopes present: ${comparison.scopesPresent.join(", ") || "none"}` +
+      `${comparison.scopesMissing.length ? `; missing: ${comparison.scopesMissing.join(", ")}` : ""}):`,
+  );
+  for (const scope of RETRIEVAL_SCOPES) {
+    const u = comparison.totals.usableByScope[scope];
+    console.log(`  ${scope}: ${u === null ? "not run" : `${u}/${comparison.totals.total} usable`}`);
+  }
+  console.log(
+    `Reports: ${relative(ROOT, join(REPORTS_DIR, "lemoore-eval-comparison.json"))}, ` +
+      `lemoore-eval-comparison.md (KB + data-source ids redacted).`,
+  );
+}
+
+async function cmdEvaluate(argv: string[]): Promise<void> {
   if (process.env.NODE_ENV === "test") {
     console.error("Refusing to run sources:evaluate under NODE_ENV=test.");
     process.exit(1);
   }
+  const scope = parseScope(argv);
   const evalSet = readJson(EVAL_PATH) as {
     questions: Array<{ id: string; question: string; expectedTopic: string; expectedSourceUrls: string[] }>;
   };
@@ -957,7 +1037,20 @@ async function cmdEvaluate(): Promise<void> {
   const knowledgeBaseId = process.env.BEDROCK_KNOWLEDGE_BASE_ID;
   const numberOfResults = clampInt(process.env.BEDROCK_NUMBER_OF_RESULTS, 1, 20, 8);
 
-  console.log(`Retrieval evaluation set: ${evalSet.questions.length} question(s).`);
+  // Data-source ids: never printed, only used to build the reserved-key filter + attribute
+  // origins. The crawler id is required ONLY for --scope crawler (the S3 id only for --scope s3).
+  const ids = {
+    s3: process.env.BEDROCK_DATA_SOURCE_ID,
+    crawler: process.env.BEDROCK_WEB_CRAWLER_DATA_SOURCE_ID,
+  };
+  const filterResult = resolveScopeFilter(scope, ids);
+  if (!filterResult.ok) {
+    console.error(`Cannot run --scope ${scope}: ${filterResult.error}`);
+    console.error("Set the required value in .env.local and retry. (combined needs neither id.)");
+    process.exit(1);
+  }
+
+  console.log(`Retrieval evaluation set: ${evalSet.questions.length} question(s). Scope: ${scope}.`);
   if (!region || !knowledgeBaseId) {
     console.log(
       "\nAWS_REGION and BEDROCK_KNOWLEDGE_BASE_ID are not set — cannot run live retrieval.\n" +
@@ -970,69 +1063,116 @@ async function cmdEvaluate(): Promise<void> {
     return;
   }
 
-  console.warn("\n⚠️  sources:evaluate performs LIVE, PAID Bedrock Retrieve calls. Retrieval only — no answer generation.\n");
+  console.warn(
+    `\n⚠️  sources:evaluate performs LIVE, PAID Bedrock Retrieve calls (scope: ${scope}). ` +
+      "Retrieval only — no answer generation.\n",
+  );
   const runtime = await import("@aws-sdk/client-bedrock-agent-runtime");
   const client = new runtime.BedrockAgentRuntimeClient({ region });
 
-  const results: Array<Record<string, unknown>> = [];
+  // Build the retrieval filter once (undefined for combined). Copied into a plain object so the
+  // readonly library type is assignable to the SDK's mutable command input.
+  const filter = filterResult.filter
+    ? { equals: { key: filterResult.filter.equals.key, value: filterResult.filter.equals.value } }
+    : undefined;
+
+  const evaluations: QuestionEval[] = [];
   let usableCount = 0;
+  let errorCount = 0;
 
   for (const q of evalSet.questions) {
-    let line: Record<string, unknown>;
     try {
+      const vectorSearchConfiguration = filter
+        ? { numberOfResults, filter }
+        : { numberOfResults };
       const res = await client.send(
         new runtime.RetrieveCommand({
           knowledgeBaseId,
           retrievalQuery: { text: q.question },
-          retrievalConfiguration: { vectorSearchConfiguration: { numberOfResults } },
+          retrievalConfiguration: { vectorSearchConfiguration },
         }),
       );
-      const retrieved = (res.retrievalResults ?? []).map((r, idx) => {
+      const retrieved: RetrievedResult[] = (res.retrievalResults ?? []).map((r, idx) => {
         const md = (r.metadata ?? {}) as Record<string, unknown>;
         const url = pickApprovedUrl(md, r.location);
+        const loc = r.location as
+          | { type?: string; s3Location?: { uri?: string }; webLocation?: { url?: string } }
+          | undefined;
+        const rawDsId = md[BEDROCK_DATA_SOURCE_METADATA_KEY];
+        const webUrl = loc?.webLocation?.url;
         return {
           rank: idx + 1,
           title: String(md["page_title"] ?? md["title"] ?? "(untitled)"),
           url,
-          currentStatus: String(md["current_status"] ?? ""),
-          wrongCampus: url ? !isApprovedOfficialUrl(url) : false,
-          historicalSource: String(md["current_status"] ?? "") === "historical",
+          score: typeof r.score === "number" ? r.score : undefined,
+          origin: classifyOrigin({
+            dataSourceId: typeof rawDsId === "string" ? rawDsId : undefined,
+            locationType: loc?.type,
+            hasS3Uri: Boolean(loc?.s3Location?.uri),
+            hasWebUrl: Boolean(webUrl),
+            ids,
+          }),
+          currentStatus: (String(md["current_status"] ?? "") || undefined),
+          wrongCampus: typeof webUrl === "string" ? !isApprovedOfficialUrl(webUrl) : false,
         };
       });
-      const expectedCanon = q.expectedSourceUrls.map((u) => tryCanonicalizeUrl(u));
-      const rank = retrieved.findIndex((r) => r.url && expectedCanon.some((e) => isSameCanonicalUrl(e, r.url!)));
-      const usable = rank !== -1;
-      if (usable) usableCount += 1;
-      line = {
+
+      const evaluation = evaluateQuestion({ question: q, scope, retrieved, currentYear: CURRENT_YEAR });
+      if (evaluation.usable) usableCount += 1;
+      evaluations.push(evaluation);
+      console.log(
+        `  ${q.id}: ${evaluation.usable ? `usable (rank ${evaluation.rank})` : `NOT usable [${evaluation.failureClassification}]`}` +
+          ` — ${evaluation.returnedUrls.length} unique of ${retrieved.length} result(s)`,
+      );
+    } catch (err) {
+      errorCount += 1;
+      evaluations.push({
         id: q.id,
         question: q.question,
         expectedTopic: q.expectedTopic,
-        expectedSourceUrls: q.expectedSourceUrls,
-        retrievedTitles: retrieved.map((r) => r.title),
-        retrievedUrls: retrieved.map((r) => r.url).filter(Boolean),
-        expectedRank: usable ? rank + 1 : null,
-        usable,
-        wrongCampusWarning: retrieved.some((r) => r.wrongCampus),
-        historicalSourceWarning: retrieved.some((r) => r.historicalSource),
-      };
-      console.log(`  ${q.id}: ${usable ? `usable (rank ${rank + 1})` : "NOT usable"} — ${retrieved.length} result(s)`);
-    } catch (err) {
-      line = { id: q.id, question: q.question, error: err instanceof Error ? err.name : "unknown", usable: false };
+        expectedSourceGroup: q.expectedSourceUrls,
+        scope,
+        usable: false,
+        rank: null,
+        rawRank: null,
+        returnedTitles: [],
+        returnedUrls: [],
+        returnedOrigins: [],
+        topScore: null,
+        matchedScore: null,
+        matchedOrigin: null,
+        crossSourceDuplicates: 0,
+        duplicatesRemoved: 0,
+        wrongCampusWarning: false,
+        staleSourceWarning: false,
+        evaluatorMatchingCorrected: false,
+        failureClassification: "genuine-retrieval-failure",
+      });
       console.log(`  ${q.id}: error (${err instanceof Error ? err.name : "unknown"})`);
     }
-    results.push(line);
   }
 
   ensureDir(REPORTS_DIR);
-  writeJson(join(REPORTS_DIR, "lemoore-eval-results.json"), {
+  const report = {
     generatedAt: NOW_ISO,
+    scope,
     knowledgeBaseId: "<redacted>",
+    dataSourceFilter: scope === "combined" ? "none (whole Knowledge Base)" : "<redacted>",
     total: evalSet.questions.length,
     usable: usableCount,
-    results,
-  });
-  console.log(`\nRetrieval usable for ${usableCount}/${evalSet.questions.length} question(s).`);
-  console.log(`Report: ${relative(ROOT, join(REPORTS_DIR, "lemoore-eval-results.json"))} (KB id redacted).`);
+    errors: errorCount,
+    results: evaluations,
+  };
+  // Per-scope diagnostic report (feeds the comparison).
+  writeJson(scopeReportPath(scope), report);
+  // Preserve the canonical combined-scope filename + backward-compatible shape.
+  if (scope === "combined") writeJson(join(REPORTS_DIR, "lemoore-eval-results.json"), report);
+
+  console.log(`\nScope ${scope}: retrieval usable for ${usableCount}/${evalSet.questions.length} question(s).`);
+  console.log(`Report: ${relative(ROOT, scopeReportPath(scope))} (KB + data-source ids redacted).`);
+
+  // (Re)build the three-way comparison from whatever scope reports now exist on disk.
+  writeComparison();
 }
 
 // Recognized URL fields, matching the app's citation contract (INTEGRATIONS.md priority order).
@@ -1100,7 +1240,7 @@ async function main(): Promise<void> {
       await cmdSync(rest);
       break;
     case "evaluate":
-      await cmdEvaluate();
+      await cmdEvaluate(rest);
       break;
     default:
       console.error(

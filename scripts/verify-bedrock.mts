@@ -9,9 +9,12 @@
 
 import { readFileSync, existsSync } from "node:fs";
 import { resolve } from "node:path";
-import { getEnv } from "@/lib/validation";
-import { resolveBedrockConfig } from "@/lib/rag/bedrockConfig";
-import { createBedrockSearchService } from "@/lib/rag/bedrockProvider";
+// Relative imports (not `@/`) so this standalone script resolves through vite-node the same way
+// scripts/sources.mts does; the `@/` aliases inside the imported src modules are still resolved
+// by the vite-tsconfig-paths plugin.
+import { getEnv } from "../src/lib/validation/index.ts";
+import { resolveBedrockConfig } from "../src/lib/rag/bedrockConfig.ts";
+import { createBedrockSearchService } from "../src/lib/rag/bedrockProvider.ts";
 
 // Minimal .env.local loader (no dependency): populates process.env for local runs.
 function loadEnvFile(file: string): void {

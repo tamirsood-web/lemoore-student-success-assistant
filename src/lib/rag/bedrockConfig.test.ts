@@ -73,4 +73,31 @@ describe("resolveBedrockConfig", () => {
     const r = resolveBedrockConfig(env({ knowledgeBaseId: undefined }));
     if (r.status === "invalid") expect(typeof r.detail).toBe("string");
   });
+
+  it("defaults the retrieval strategy to s3-first when unset", () => {
+    const r = resolveBedrockConfig(env({}));
+    expect(r.status === "ok" && r.config.strategy).toBe("s3-first");
+  });
+
+  it("respects an explicit retrieval strategy and surfaces data-source ids", () => {
+    const r = resolveBedrockConfig(
+      env({ retrievalStrategy: "combined", dataSourceId: "S3SOURCE01", webCrawlerDataSourceId: "CRAWLERID9" }),
+    );
+    expect(r.status).toBe("ok");
+    if (r.status === "ok") {
+      expect(r.config.strategy).toBe("combined");
+      expect(r.config.dataSourceIds).toEqual({ s3: "S3SOURCE01", crawler: "CRAWLERID9" });
+    }
+  });
+
+  it("falls back to s3-first for an unrecognized strategy value", () => {
+    const r = resolveBedrockConfig(env({ retrievalStrategy: "bogus" as never }));
+    expect(r.status === "ok" && r.config.strategy).toBe("s3-first");
+  });
+
+  it("resolves ok even without data-source ids (provider degrades at request time)", () => {
+    const r = resolveBedrockConfig(env({ retrievalStrategy: "s3-first" }));
+    expect(r.status).toBe("ok");
+    if (r.status === "ok") expect(r.config.dataSourceIds).toEqual({});
+  });
 });
