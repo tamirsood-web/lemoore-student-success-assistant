@@ -1,0 +1,423 @@
+{
+  "name": "Lemoore College curated ingestion manifest",
+  "description": "Reviewed list of official Lemoore College / West Hills CCD URLs approved for download into the Bedrock Knowledge Base corpus. URLs were taken from the official sitemap and are on approved domains. A human must review and enable each entry before build/upload. Prototype demo — not the official website.",
+  "version": 1,
+  "updated": "2026-07-22",
+  "sources": [
+    {
+      "url": "https://lemoorecollege.edu/admissions/",
+      "topic": "admissions",
+      "department": "Admissions",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Apply to Lemoore College",
+      "enabled": true,
+      "keywords": ["apply", "application", "how to apply", "future students", "new students", "returning students", "enroll", "admissions steps"]
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/future-students/",
+      "topic": "admissions",
+      "department": "Admissions",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Future Students",
+      "enabled": false,
+      "notes": "Disabled 2026-07-22: this URL redirects to /admissions/ and returns identical content (exact duplicate). The main Admissions page (kept) covers how future students apply; see its keywords for future-student wording."
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/returning-students/",
+      "topic": "admissions",
+      "department": "Admissions",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Returning Students",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/future-students/orientation.php",
+      "topic": "orientation",
+      "department": "Admissions",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Orientation",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/",
+      "topic": "dual-enrollment",
+      "department": "Admissions",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "High School Dual Enrollment",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/schedule/",
+      "topic": "registration",
+      "department": "Admissions and Records",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Class Schedule",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/academic-calendar/",
+      "topic": "academic-calendar",
+      "department": "Admissions and Records",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Academic Calendar",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/transcripts.php",
+      "topic": "transcripts",
+      "department": "Admissions and Records",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Transcripts",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/faqs.php",
+      "topic": "graduation",
+      "department": "Admissions and Records",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Admissions and Records FAQs",
+      "enabled": true,
+      "notes": "Covers graduation petition and common admissions/records questions."
+    },
+    {
+      "url": "https://lemoorecollege.edu/catalog/current",
+      "topic": "catalog",
+      "department": "Admissions and Records",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Lemoore College Catalog (2026-2027)",
+      "enabled": true,
+      "keywords": ["catalog", "college catalog", "course catalog", "degree requirements", "graduation requirements", "academic policies", "course descriptions"],
+      "notes": "Companion doc. /catalog/current redirects to the college's online catalog system (westhillslemoore.elumenapp.com/catalog/26-27/), an off-approved-domain interactive app the crawler cannot extract. Current edition verified as 2026-2027 from the official redirect target on 2026-07-22. Canonical citation stays on the approved on-domain catalog URL.",
+      "companion": {
+        "documentVersion": "2026-2027",
+        "currentStatus": "current",
+        "body": "## Lemoore College Catalog (2026-2027)\n\nThe current Lemoore College catalog is the **2026-2027** edition. It contains degree and certificate requirements, course descriptions, academic policies, and graduation requirements for the 2026-2027 academic year.\n\nThe catalog is published in the college's interactive online catalog system. Browse it directly from the official catalog page for the most current program and policy details:\n\n- Official catalog: https://lemoorecollege.edu/catalog/current"
+      }
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/financial-aid/",
+      "topic": "financial-aid",
+      "department": "Financial Aid",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Financial Aid",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/financial-aid/apply.php",
+      "topic": "fafsa",
+      "department": "Financial Aid",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "How to Apply for Financial Aid",
+      "enabled": true,
+      "keywords": ["fafsa", "cadaa", "california dream act application", "dream act", "fsa id", "apply for financial aid"],
+      "notes": "FAFSA / California Dream Act Application steps."
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/financial-aid/faqs.php",
+      "topic": "financial-aid",
+      "department": "Financial Aid",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Financial Aid FAQs",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/financial-aid/sap.php",
+      "topic": "sap",
+      "department": "Financial Aid",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Satisfactory Academic Progress",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/financial-aid/loans.php",
+      "topic": "financial-aid",
+      "department": "Financial Aid",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Student Loans",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/financial-aid/work-study.php",
+      "topic": "financial-aid",
+      "department": "Financial Aid",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Work Study",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/grants-and-scholarships.php",
+      "topic": "grants-and-scholarships",
+      "department": "Financial Aid",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Grants and Scholarships",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/cost-of-attendance/",
+      "topic": "cost-of-attendance",
+      "department": "Financial Aid",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Cost of Attendance",
+      "enabled": true,
+      "keywords": ["tuition", "fees", "enrollment fee", "per unit", "cost of attendance", "how much does college cost", "payment", "refund", "payment and refund policy", "net price"],
+      "notes": "Canonical cost/fees source. The tuition-and-fees and net-price-calculator URLs redirect to or are covered by this page; keywords carry the tuition/fees/payment/refund wording so those queries retrieve this page."
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/cost-of-attendance/tuition-and-fees.php",
+      "topic": "tuition-and-fees",
+      "department": "Financial Aid",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Tuition and Fees",
+      "enabled": false,
+      "notes": "Disabled 2026-07-22: this URL redirects to /admissions/cost-of-attendance/ and returns identical content (exact duplicate). Tuition/fee amounts are covered by the retained Cost of Attendance page (see its keywords)."
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php",
+      "topic": "refunds",
+      "department": "Financial Aid",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Payment and Refund Request",
+      "enabled": true,
+      "keywords": ["payment", "refund", "refund request", "tuition payment", "pay bill", "net price calculator"],
+      "notes": "Companion doc. The live page's policy body is JavaScript-rendered (crawler saw an empty shell); the Financial Aid contact, the online Refund Request Form link, and the Net Price Calculator link are in the static page source and were transcribed verbatim. The Refund Request Form (formstack.com) and Net Price Calculator (npc.cccco.edu) are official but off-approved-domain, so they are referenced by name only, never as citation URLs.",
+      "companion": {
+        "currentStatus": "current",
+        "body": "## Payment and Refund Request\n\nTuition and enrollment fees, payments, and refund requests for Lemoore College are handled by the Financial Aid / Business Office. Fee amounts and the full cost of attendance are listed on the official Cost of Attendance page.\n\n**Requesting a refund:** Refund requests are submitted using the official online Refund Request Form linked from the Payment and Refund Request page. The Payment and Refund Policy and a Net Price Calculator are also linked from the official Cost of Attendance page.\n\n**Financial Aid Office**\n- Phone: (559) 925-3310\n- Email: lemoorefinancialaid@whccd.edu\n- Location: 100 Bldg.\n- Hours: Monday - Friday, 8:00 am - 5:00 pm\n\nOfficial pages:\n- Payment and Refund Request: https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php\n- Cost of Attendance (fees, payment and refund policy): https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      }
+    },
+    {
+      "url": "https://lemoorecollege.edu/admissions/cost-of-attendance/net-price-calculator.php",
+      "topic": "cost-of-attendance",
+      "department": "Financial Aid",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Net Price Calculator",
+      "enabled": false,
+      "notes": "Disabled 2026-07-22: this on-domain URL returns HTTP 404. The official Net Price Calculator is the California Community Colleges calculator at npc.cccco.edu/582/npcalc.htm, which is off-approved-domain and therefore not ingested per the approved-domain/security policy. It is referenced by name from the retained Payment and Refund Request and Cost of Attendance sources. Reported as a coverage note; no on-domain replacement exists."
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/counseling/",
+      "topic": "counseling",
+      "department": "Counseling",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Counseling/Advising Services",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/student-support/tutoring/",
+      "topic": "tutoring",
+      "department": "Academic Support",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Tutoring (ACE)",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/library/",
+      "topic": "library",
+      "department": "Library",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Library and Learning Resource Center",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/student-support/disabled-student-services/",
+      "topic": "dsps",
+      "department": "DSPS",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Disabled Students Program & Services",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php",
+      "topic": "dsps",
+      "department": "DSPS",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "DSPS Services",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/student-support/eops/",
+      "topic": "eops",
+      "department": "EOPS",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "EOPS",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/student-support/calworks/",
+      "topic": "calworks",
+      "department": "CalWORKs",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "CalWORKs",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/military-services/veterans/",
+      "topic": "veterans",
+      "department": "Veterans Services",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Veterans Services",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/transfer-center/",
+      "topic": "transfer",
+      "department": "Transfer Center",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Transfer Center",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/career-center/",
+      "topic": "career-services",
+      "department": "Career Center",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Career Center",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/student-life/food-and-basic-needs/",
+      "topic": "basic-needs",
+      "department": "Basic Needs",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Food and Basic Needs",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/student-life/eagle-pantry/",
+      "topic": "basic-needs",
+      "department": "Basic Needs",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Eagle Pantry",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/student-life/food-and-basic-needs/mental-health-resources.php",
+      "topic": "mental-health",
+      "department": "Basic Needs",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Mental Health Resources",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/resources/dream-resource-center/",
+      "topic": "dream-resource-center",
+      "department": "Dream Resource Center",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Dream Resource Center",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/portal/",
+      "topic": "student-portal",
+      "department": "Information Technology",
+      "priority": "critical",
+      "sourceType": "official-web-page",
+      "expectedTitle": "myWestHills Portal",
+      "enabled": true,
+      "notes": "Portal help / how to access myWestHills, Canvas, and student email. Public info page only — never crawl the authenticated portal."
+    },
+    {
+      "url": "https://lemoorecollege.edu/helpdesk/",
+      "topic": "helpdesk",
+      "department": "Information Technology",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Help Desk",
+      "enabled": true,
+      "notes": "Student technology help, including portal/Canvas/student-email password support."
+    },
+    {
+      "url": "https://lemoorecollege.edu/contact-us/",
+      "topic": "campus-contact",
+      "department": "Campus",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Contact Lemoore College",
+      "enabled": true,
+      "keywords": ["contact", "phone number", "address", "location", "directions", "office directory", "how to reach"],
+      "notes": "Companion doc. The live Contact Us page body is JavaScript-rendered (crawler saw only nav links). Main phone and address are in the static page source; department phone numbers were verified from the ingested Office Directory page and transcribed verbatim.",
+      "companion": {
+        "currentStatus": "current",
+        "body": "## Contact Lemoore College\n\n**Main campus (Student Services)**\n- Phone: (559) 925-3000\n- Address: 555 College Avenue, Lemoore, CA 93245\n- Hours: Monday - Friday, 8:00 am - 5:00 pm\n\n**Key department contacts**\n- Admissions & Records - (559) 925-3317 (Building 100)\n- Financial Aid Office - (559) 925-3310, lemoorefinancialaid@whccd.edu (100 Bldg.)\n- Counseling Services - (559) 925-3130 (Building 100)\n\nFor a full list of offices and phone numbers, see the official Office Directory.\n\nOfficial pages:\n- Contact Us: https://lemoorecollege.edu/contact-us/\n- Office Directory: https://lemoorecollege.edu/contact-us/office-directory.php\n- Faculty & Staff Directory: https://lemoorecollege.edu/contact-us/directory/"
+      }
+    },
+    {
+      "url": "https://lemoorecollege.edu/contact-us/office-directory.php",
+      "topic": "directory",
+      "department": "Campus",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Office Directory",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/map/",
+      "topic": "campus-map",
+      "department": "Campus",
+      "priority": "normal",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Campus Map & Location",
+      "enabled": true,
+      "keywords": ["map", "campus map", "directions", "parking", "location", "address", "where is the campus"],
+      "notes": "Companion doc. The map page's useful information is the official campus map/directory PDF plus the campus location and address (verified from the page source on 2026-07-22). The map PDF (lc-campus-directory.pdf) is on the approved domain and verified 200 OK.",
+      "companion": {
+        "currentStatus": "current",
+        "body": "## Campus Map & Location\n\nLemoore College is located in Lemoore at Bush Street and College Avenue, just off Highway 41.\n\n- Address: 555 College Avenue, Lemoore, CA 93245\n- Main phone: (559) 925-3000\n- Official campus map / directory (PDF): https://lemoorecollege.edu/map/documents/lc-campus-directory.pdf\n\nOfficial page:\n- Campus Map: https://lemoorecollege.edu/map/"
+      }
+    },
+    {
+      "url": "https://lemoorecollege.edu/degrees-and-certificates/",
+      "topic": "degrees-and-certificates",
+      "department": "Academics",
+      "priority": "high",
+      "sourceType": "official-web-page",
+      "expectedTitle": "Degrees and Certificates",
+      "enabled": true
+    },
+    {
+      "url": "https://lemoorecollege.edu/documents/final_exam_schedule.pdf",
+      "topic": "academic-calendar",
+      "department": "Admissions and Records",
+      "priority": "normal",
+      "sourceType": "official-pdf",
+      "expectedTitle": "Final Exam Schedule",
+      "enabled": false,
+      "notes": "Disabled 2026-07-22: PDF verified as the SPRING 2025 final exam schedule (extracted text shows 'LEMOORE COLLEGE FINAL EXAM SCHEDULE SPRING 202...' with March/May 2025 dates). It is text-searchable and applies to Lemoore College, but it is NOT the current term as of 2026-07 and must not be marked current. No current final-exam-schedule PDF is published at this stable URL yet; exam-period dates are covered by the Academic Calendar. Reported as a coverage note."
+    }
+  ]
+}

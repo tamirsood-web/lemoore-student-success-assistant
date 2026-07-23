@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-07-23T02:10:57.997Z",
+  "totals": {
+    "attempted": 38,
+    "cleanedHtml": 38,
+    "preservedPdf": 0,
+    "approvedForUpload": 38,
+    "excluded": 0,
+    "duplicates": 0,
+    "historicalWarnings": 0,
+    "validationErrors": 0,
+    "totalWords": 39729
+  },
+  "excludedByReason": {},
+  "byCategory": {
+    "admissions": 4,
+    "registration": 3,
+    "academics": 2,
+    "financial-aid": 9,
+    "support-services": 14,
+    "technology": 2,
+    "campus": 3,
+    "programs": 1
+  },
+  "needsManualVerification": []
+}

@@ -1,0 +1,76 @@
+{
+  "metadataAttributes": {
+    "page_title": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Admissions - Apply to Lemoore College | Lemoore College"
+      },
+      "includeForEmbedding": true
+    },
+    "department": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Admissions"
+      },
+      "includeForEmbedding": true
+    },
+    "topic": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "admissions"
+      },
+      "includeForEmbedding": true
+    },
+    "source_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/admissions/"
+      },
+      "includeForEmbedding": false
+    },
+    "canonical_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/admissions/"
+      },
+      "includeForEmbedding": false
+    },
+    "source_type": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "official-web-page"
+      },
+      "includeForEmbedding": false
+    },
+    "last_checked": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "2026-07-23"
+      },
+      "includeForEmbedding": false
+    },
+    "current_status": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "current"
+      },
+      "includeForEmbedding": false
+    },
+    "keywords": {
+      "value": {
+        "type": "STRING_LIST",
+        "stringListValue": [
+          "apply",
+          "application",
+          "how to apply",
+          "future students",
+          "new students",
+          "returning students",
+          "enroll",
+          "admissions steps"
+        ]
+      },
+      "includeForEmbedding": true
+    }
+  }
+}

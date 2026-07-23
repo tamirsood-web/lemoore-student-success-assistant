@@ -1,0 +1,75 @@
+{
+  "metadataAttributes": {
+    "page_title": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Contact Lemoore College"
+      },
+      "includeForEmbedding": true
+    },
+    "department": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Campus"
+      },
+      "includeForEmbedding": true
+    },
+    "topic": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "campus-contact"
+      },
+      "includeForEmbedding": true
+    },
+    "source_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/contact-us/"
+      },
+      "includeForEmbedding": false
+    },
+    "canonical_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/contact-us/"
+      },
+      "includeForEmbedding": false
+    },
+    "source_type": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "official-web-page"
+      },
+      "includeForEmbedding": false
+    },
+    "last_checked": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "2026-07-23"
+      },
+      "includeForEmbedding": false
+    },
+    "current_status": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "current"
+      },
+      "includeForEmbedding": false
+    },
+    "keywords": {
+      "value": {
+        "type": "STRING_LIST",
+        "stringListValue": [
+          "contact",
+          "phone number",
+          "address",
+          "location",
+          "directions",
+          "office directory",
+          "how to reach"
+        ]
+      },
+      "includeForEmbedding": true
+    }
+  }
+}

@@ -32,6 +32,12 @@ KNOWLEDGE_BUCKET_NAME=
 KNOWLEDGE_PREFIX=
 ```
 
+> The content ingestion pipeline (`npm run sources:*`, see `docs/INGESTION_PIPELINE.md`) reads
+> the existing S3 data source via these **script-only** variables:
+> `BEDROCK_SOURCE_BUCKET` (the existing bucket), `BEDROCK_SOURCE_PREFIX` (default `lemoore/`),
+> and `BEDROCK_DATA_SOURCE_ID`. The pipeline uses an existing bucket + data source only — it
+> never creates, replaces, or deletes buckets, data sources, or the Knowledge Base.
+
 ## Bedrock Knowledge Base
 
 - [ ] Create one knowledge base.

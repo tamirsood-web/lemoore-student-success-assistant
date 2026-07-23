@@ -1,0 +1,78 @@
+{
+  "metadataAttributes": {
+    "page_title": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Cost Of Attendance | Lemoore College"
+      },
+      "includeForEmbedding": true
+    },
+    "department": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Financial Aid"
+      },
+      "includeForEmbedding": true
+    },
+    "topic": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "cost-of-attendance"
+      },
+      "includeForEmbedding": true
+    },
+    "source_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      },
+      "includeForEmbedding": false
+    },
+    "canonical_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      },
+      "includeForEmbedding": false
+    },
+    "source_type": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "official-web-page"
+      },
+      "includeForEmbedding": false
+    },
+    "last_checked": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "2026-07-23"
+      },
+      "includeForEmbedding": false
+    },
+    "current_status": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "current"
+      },
+      "includeForEmbedding": false
+    },
+    "keywords": {
+      "value": {
+        "type": "STRING_LIST",
+        "stringListValue": [
+          "tuition",
+          "fees",
+          "enrollment fee",
+          "per unit",
+          "cost of attendance",
+          "how much does college cost",
+          "payment",
+          "refund",
+          "payment and refund policy",
+          "net price"
+        ]
+      },
+      "includeForEmbedding": true
+    }
+  }
+}

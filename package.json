@@ -17,7 +17,14 @@
     "corpus:validate": "node scripts/ingest.mjs validate",
     "corpus:manifest": "node scripts/ingest.mjs manifest",
     "corpus:refresh": "node scripts/ingest.mjs refresh",
-    "verify:bedrock": "vite-node -c vitest.config.ts scripts/verify-bedrock.mts"
+    "verify:bedrock": "vite-node -c vitest.config.ts scripts/verify-bedrock.mts",
+    "sources:discover": "vite-node -c vitest.config.ts scripts/sources.mts discover",
+    "sources:build": "vite-node -c vitest.config.ts scripts/sources.mts build",
+    "sources:validate": "vite-node -c vitest.config.ts scripts/sources.mts validate",
+    "sources:review": "vite-node -c vitest.config.ts scripts/sources.mts review",
+    "sources:upload": "vite-node -c vitest.config.ts scripts/sources.mts upload",
+    "sources:sync": "vite-node -c vitest.config.ts scripts/sources.mts sync",
+    "sources:evaluate": "vite-node -c vitest.config.ts scripts/sources.mts evaluate"
   },
   "dependencies": {
     "@aws-sdk/client-bedrock-agent-runtime": "^3.1093.0",
@@ -25,6 +32,10 @@
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "zod": "^3.25.76"
+  },
+  "optionalDependencies": {
+    "@aws-sdk/client-bedrock-agent": "^3.1093.0",
+    "@aws-sdk/client-s3": "^3.1093.0"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^6.6.3",
