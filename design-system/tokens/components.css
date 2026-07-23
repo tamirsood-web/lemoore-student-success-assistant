@@ -181,7 +181,7 @@
    * Consumed by: components/modal-window/modal-window.css
    * ───────────────────────────────────────────── */
   --modal-bg:              var(--semantic-color-modal-bg);
-  --modal-overlay:         var(--semantic-color-modal-overlay);
+  --modal-shadow:          var(--semantic-shadow-modal);
   --modal-radius:          var(--semantic-radius-modal);
   --modal-divider-color:   var(--semantic-color-modal-divider);
 

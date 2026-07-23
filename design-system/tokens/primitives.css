@@ -36,7 +36,18 @@
   /* Absolute */
   --primitive-color-white:      #ffffff;
   --primitive-color-transparent: transparent;
-  --primitive-color-overlay:    rgba(0, 0, 0, 0.48);  /* Modal window/Overlay/Shadow — DS-course node 234:760 */
+
+  /* Shadows — Chat window two-layer system */
+  --primitive-color-shadow-1:   #0000001a;  /* Color/shadow-1 — rgba(0,0,0,0.1) */
+  --primitive-color-shadow-2:   #00000014;  /* Color/shadow -2 — rgba(0,0,0,0.08) */
+  --primitive-shadow-1-x:       0px;
+  --primitive-shadow-1-y:       24px;
+  --primitive-shadow-1-blur:    64px;
+  --primitive-shadow-1-spread:  -20px;
+  --primitive-shadow-2-x:       0px;
+  --primitive-shadow-2-y:       8px;
+  --primitive-shadow-2-blur:    24px;
+  --primitive-shadow-2-spread:  -6px;
 
   /* ─────────────────────────────────────────────
    * SPACING

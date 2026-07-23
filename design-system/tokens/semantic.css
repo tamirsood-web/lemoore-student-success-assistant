@@ -141,8 +141,10 @@
    *            Modal window/Gap/X, Modal window/Gap/Y,
    *            Modal window/Text/color, headline 5
    * ───────────────────────────────────────────── */
-  --semantic-color-modal-bg:       var(--primitive-color-white);       /* Modal window/Color/Bg      */
-  --semantic-color-modal-overlay:  var(--primitive-color-overlay);     /* Modal window/Overlay/Shadow */
+  --semantic-color-modal-bg:       var(--primitive-color-white);       /* Chat window/Color/Bg      */
+  --semantic-shadow-modal:
+    var(--primitive-shadow-1-x) var(--primitive-shadow-1-y) var(--primitive-shadow-1-blur) var(--primitive-shadow-1-spread) var(--primitive-color-shadow-1),
+    var(--primitive-shadow-2-x) var(--primitive-shadow-2-y) var(--primitive-shadow-2-blur) var(--primitive-shadow-2-spread) var(--primitive-color-shadow-2);
   --semantic-color-modal-divider:  var(--primitive-color-gray-200);    /* Chat window/Border/color: #d3d5da */
   --semantic-color-modal-title:    var(--primitive-color-gray-900);    /* Modal window/Text/color    */
 

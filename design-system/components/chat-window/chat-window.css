@@ -35,7 +35,7 @@
   padding-right:    var(--modal-padding-x);
   background-color: var(--modal-bg);
   border-radius:    var(--modal-radius);
-  box-shadow:       -1px 5px 6px var(--modal-overlay);
+  box-shadow:       var(--modal-shadow);
   overflow:         hidden;
 }
 
