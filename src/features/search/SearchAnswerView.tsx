@@ -8,20 +8,22 @@ import { CitationCard } from "./CitationCard";
 const PROTOTYPE_NOTE =
   "Prototype demo — answers are drawn only from official Lemoore College pages and link to the real source.";
 
-/** Highlight inline [n] citation markers inside the answer text. */
+/** Render inline (n) citation markers as subtle superscript footnote references. */
 function AnswerText({ text }: { readonly text: string }) {
   const parts = text.split(/(\[\d+\])/g);
   return (
     <p className="text-[1.05rem] leading-relaxed text-lc-ink">
-      {parts.map((part, i) =>
-        /^\[\d+\]$/.test(part) ? (
-          <sup key={i} className="ml-0.5 font-bold text-lc-blue">
-            {part}
-          </sup>
-        ) : (
-          <span key={i}>{part}</span>
-        ),
-      )}
+      {parts.map((part, i) => {
+        const match = /^\[(\d+)\]$/.exec(part);
+        if (match) {
+          return (
+            <sup key={i} style={{ fontSize: "0.7em", marginLeft: 1, color: "inherit" }}>
+              ({match[1]})
+            </sup>
+          );
+        }
+        return <span key={i}>{part}</span>;
+      })}
     </p>
   );
 }
