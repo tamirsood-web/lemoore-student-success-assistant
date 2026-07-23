@@ -1,16 +1,25 @@
-// Placeholder landing page for the Group 1 scaffold. The mobile-first public student
-// chat experience is implemented in a later task group (see
-// .kiro/specs/local-mvp-scaffold/tasks.md, Group 7).
+// Public student home page — mobile-first chat experience.
+// Server component; ChatInterface is "use client".
+
+import { ChatInterface } from "@/features/chat";
+
 export default function Home() {
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center gap-4 p-6 text-center">
-      <h1 className="text-2xl font-semibold tracking-tight">
-        Lemoore Student Success Assistant
-      </h1>
-      <p className="max-w-prose text-sm text-muted-foreground">
-        Local development scaffold is ready. The student question-and-answer experience
-        will be implemented in a later task group.
-      </p>
+    <main className="flex h-dvh flex-col">
+      <header className="shrink-0 border-b border-border bg-background px-4 py-3">
+        <div className="mx-auto flex max-w-2xl items-center justify-between">
+          <div>
+            <h1 className="text-base font-semibold leading-tight text-foreground">Lemoore College</h1>
+            <p className="text-xs text-muted-foreground">Student Success Assistant</p>
+          </div>
+          <span className="rounded-full border border-border px-2.5 py-0.5 text-xs text-muted-foreground">
+            Demo
+          </span>
+        </div>
+      </header>
+      <div className="min-h-0 flex-1">
+        <ChatInterface />
+      </div>
     </main>
   );
 }
