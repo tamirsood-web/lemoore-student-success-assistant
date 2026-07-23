@@ -102,7 +102,10 @@ describe("VoiceDemo — unsupported response", () => {
     const user = await answerTheCall();
     await user.type(screen.getByLabelText(/type a caller message/i), "something obscure");
     await user.click(screen.getByRole("button", { name: "Send" }));
-    expect(await screen.findByText(/No verified answer/i)).toBeInTheDocument();
+    // The merged UI renders the honest no-answer state as an assistant transcript message.
+    expect(
+      await screen.findByText(/couldn.t find any official information/i),
+    ).toBeInTheDocument();
   });
 });
 
@@ -153,7 +156,7 @@ describe("VoiceDemo — ending the call and summary", () => {
     const user = await answerTheCall();
     await user.type(screen.getByLabelText(/type a caller message/i), "obscure");
     await user.click(screen.getByRole("button", { name: "Send" }));
-    await screen.findByText(/No verified answer/i);
+    await screen.findByText(/couldn.t find any official information/i);
     await user.click(screen.getByRole("button", { name: "End call" }));
     expect(screen.getByTestId("summary-escalation")).toHaveTextContent("Yes");
   });
@@ -166,9 +169,18 @@ describe("VoiceDemo — safe error handling", () => {
     await user.type(screen.getByLabelText(/type a caller message/i), "anything");
     await user.click(screen.getByRole("button", { name: "Send" }));
 
-    const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent(/having trouble reaching/i);
-    expect(alert.textContent ?? "").not.toMatch(/boom|arn:aws|secret/i);
+    // Safe service errors are now shown as an assistant transcript message with contact
+    // information (no separate role="alert" element). A friendly, generic message is displayed...
+    expect(
+      await screen.findByText(/something went wrong while processing your request/i),
+    ).toBeInTheDocument();
+    // ...contact/help information is shown when appropriate...
+    expect(screen.getByText(/contact Lemoore College/i)).toBeInTheDocument();
+    expect(
+      screen.getByRole("link", { name: /lemoorehelpdesk@whccd\.edu/i }),
+    ).toBeInTheDocument();
+    // ...and no internal exception detail, AWS ARN, or secret is ever exposed anywhere in the UI.
+    expect(document.body.textContent ?? "").not.toMatch(/boom|arn:aws|secret/i);
   });
 });
 
