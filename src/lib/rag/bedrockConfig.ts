@@ -7,6 +7,21 @@
 
 import type { AppConfig } from "@/lib/validation";
 
+/**
+ * Production retrieval strategy (server-only). Default is "s3-first": query the curated S3
+ * source first and fall back to the crawler only when the S3 result is unsupported/invalid or
+ * a transient AWS failure occurs. "combined" (unfiltered) is retained for diagnostics only.
+ */
+export const RETRIEVAL_STRATEGIES = ["s3-first", "combined", "s3", "crawler"] as const;
+export type RetrievalStrategy = (typeof RETRIEVAL_STRATEGIES)[number];
+export const DEFAULT_RETRIEVAL_STRATEGY: RetrievalStrategy = "s3-first";
+
+/** Opaque data-source ids, resolved server-side, used only to build reserved-key filters. */
+export type BedrockDataSourceIds = {
+  readonly s3?: string;
+  readonly crawler?: string;
+};
+
 /** Fully validated Bedrock vector-KB configuration. */
 export type BedrockConfig = {
   readonly region: string;
@@ -14,6 +29,10 @@ export type BedrockConfig = {
   readonly modelArn: string;
   readonly numberOfResults: number;
   readonly timeoutMs: number;
+  /** Production retrieval strategy (never exposed to the browser). */
+  readonly strategy: RetrievalStrategy;
+  /** Data-source ids for scoped retrieval (never exposed to the browser). */
+  readonly dataSourceIds: BedrockDataSourceIds;
 };
 
 /** Result of resolving bedrock config: usable, managed (unsupported), or invalid. */
@@ -36,8 +55,16 @@ const REGION_PATTERN = /^[a-z]{2}-[a-z-]+-\d+$/;
  */
 export function resolveBedrockConfig(env: AppConfig): BedrockConfigResult {
   const { region } = env.aws;
-  const { kbType, knowledgeBaseId, modelArn, numberOfResults, timeoutMs } =
-    env.aws.bedrock;
+  const {
+    kbType,
+    knowledgeBaseId,
+    modelArn,
+    numberOfResults,
+    timeoutMs,
+    retrievalStrategy,
+    dataSourceId,
+    webCrawlerDataSourceId,
+  } = env.aws.bedrock;
 
   if (!kbType) {
     return {
@@ -76,6 +103,15 @@ export function resolveBedrockConfig(env: AppConfig): BedrockConfigResult {
     return { status: "invalid", detail: `Bedrock config invalid: ${problems.join("; ")}.` };
   }
 
+  // Strategy + data-source ids are advisory here (never a hard failure): a valid vector KB
+  // always resolves so the app stays up. If a strategy needs an id that is absent, the provider
+  // logs an internal warning and degrades to unfiltered retrieval at request time.
+  const strategy: RetrievalStrategy = RETRIEVAL_STRATEGIES.includes(
+    (retrievalStrategy ?? DEFAULT_RETRIEVAL_STRATEGY) as RetrievalStrategy,
+  )
+    ? ((retrievalStrategy ?? DEFAULT_RETRIEVAL_STRATEGY) as RetrievalStrategy)
+    : DEFAULT_RETRIEVAL_STRATEGY;
+
   return {
     status: "ok",
     config: {
@@ -84,6 +120,11 @@ export function resolveBedrockConfig(env: AppConfig): BedrockConfigResult {
       modelArn: modelArn as string,
       numberOfResults,
       timeoutMs,
+      strategy,
+      dataSourceIds: {
+        ...(dataSourceId ? { s3: dataSourceId } : {}),
+        ...(webCrawlerDataSourceId ? { crawler: webCrawlerDataSourceId } : {}),
+      },
     },
   };
 }

@@ -1,0 +1,291 @@
+{
+  "generatedAt": "2026-07-23T04:50:31.799Z",
+  "region": "<redacted>",
+  "check1_dataSource": {
+    "dataSourceType": "S3",
+    "dataSourceStatus": "AVAILABLE",
+    "inclusionPrefixCount": 1,
+    "inclusionPrefixesRedacted": [
+      "<other-prefix>"
+    ],
+    "prefixIncludesConfigured": false,
+    "bucketArnPresent": true,
+    "configuredPrefix": "lemoore/"
+  },
+  "check4_vectorStore": {
+    "vectorStoreType": "OPENSEARCH_SERVERLESS",
+    "hasOpenSearchServerless": true,
+    "vectorIndexNamePresent": true,
+    "fieldMapping": {
+      "hasMetadataField": true,
+      "hasTextField": true,
+      "hasVectorField": true
+    },
+    "engineNote": "engine (faiss vs nmslib) is on the index mapping; probed separately."
+  },
+  "check2_pairing": {
+    "totalObjects": 76,
+    "contentObjects": 38,
+    "sidecarObjects": 38,
+    "docsMissingSidecar": [],
+    "docsWithSidecar": 38,
+    "orphanSidecars": [],
+    "anySidecarOversize": [],
+    "sampleRelativeKeys": [
+      "academics/academic-calendar.md",
+      "academics/academic-calendar.md.metadata.json",
+      "academics/catalog-current.md",
+      "academics/catalog-current.md.metadata.json",
+      "admissions/admissions-future-students-orientation.md",
+      "admissions/admissions-future-students-orientation.md.metadata.json"
+    ]
+  },
+  "check3_sidecarSchema": {
+    "sampled": 8,
+    "allJsonValid": true,
+    "allSchemaValid": true,
+    "anyBOM": false,
+    "contentTypes": [
+      "application/json"
+    ],
+    "details": [
+      {
+        "doc": "academics/academic-calendar.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status"
+        ]
+      },
+      {
+        "doc": "admissions/admissions-future-students-orientation.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status"
+        ]
+      },
+      {
+        "doc": "campus/contact-us-office-directory.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status"
+        ]
+      },
+      {
+        "doc": "financial-aid/admissions-cost-of-attendance-payment-and-refund-request.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status",
+          "keywords"
+        ]
+      },
+      {
+        "doc": "programs/degrees-and-certificates.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status"
+        ]
+      },
+      {
+        "doc": "registration/admissions-faqs.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status"
+        ]
+      },
+      {
+        "doc": "support-services/resources-career-center.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status"
+        ]
+      },
+      {
+        "doc": "technology/helpdesk.md.metadata.json",
+        "contentType": "application/json",
+        "jsonOk": true,
+        "jsonErr": "",
+        "schemaOk": true,
+        "schemaErr": "",
+        "hasBOM": false,
+        "attrKeys": [
+          "page_title",
+          "department",
+          "topic",
+          "source_url",
+          "canonical_url",
+          "source_type",
+          "last_checked",
+          "current_status"
+        ]
+      }
+    ]
+  },
+  "check5_ingestionJob": {
+    "found": true,
+    "status": "COMPLETE",
+    "failureReasons": [],
+    "statistics": {
+      "numberOfDocumentsScanned": 6,
+      "numberOfMetadataDocumentsScanned": 0,
+      "numberOfNewDocumentsIndexed": 0,
+      "numberOfModifiedDocumentsIndexed": 0,
+      "numberOfMetadataDocumentsModified": 0,
+      "numberOfDocumentsDeleted": 0,
+      "numberOfDocumentsFailed": 0
+    }
+  },
+  "check6_retrievalKeys": {
+    "resultCount": 5,
+    "customMetadataKeysSeen": [],
+    "expectedCustomKeys": [
+      "page_title",
+      "source_url",
+      "canonical_url",
+      "department",
+      "topic",
+      "source_type",
+      "current_status"
+    ],
+    "items": [
+      {
+        "sourceType": "S3",
+        "relativeDoc": "RAG-DATA/Award Notice Email.html",
+        "score": 0.4351,
+        "metadataKeyNames": [
+          "<reserved>",
+          "<reserved>",
+          "<reserved>",
+          "<reserved>"
+        ]
+      },
+      {
+        "sourceType": "S3",
+        "relativeDoc": "RAG-DATA/FAFSA Docs Needed Email.html",
+        "score": 0.4264,
+        "metadataKeyNames": [
+          "<reserved>",
+          "<reserved>",
+          "<reserved>",
+          "<reserved>"
+        ]
+      },
+      {
+        "sourceType": "S3",
+        "relativeDoc": "RAG-DATA/Award Notice Email.html",
+        "score": 0.4116,
+        "metadataKeyNames": [
+          "<reserved>",
+          "<reserved>",
+          "<reserved>",
+          "<reserved>"
+        ]
+      },
+      {
+        "sourceType": "S3",
+        "relativeDoc": "RAG-DATA/SAP Denial Email.html",
+        "score": 0.4101,
+        "metadataKeyNames": [
+          "<reserved>",
+          "<reserved>",
+          "<reserved>",
+          "<reserved>"
+        ]
+      },
+      {
+        "sourceType": "S3",
+        "relativeDoc": "RAG-DATA/Degree Awarded.docx",
+        "score": 0.4049,
+        "metadataKeyNames": [
+          "<reserved>",
+          "<reserved>",
+          "<reserved>",
+          "<reserved>"
+        ]
+      }
+    ]
+  }
+}

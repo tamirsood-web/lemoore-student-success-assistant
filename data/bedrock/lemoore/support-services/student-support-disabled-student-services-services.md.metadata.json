@@ -1,0 +1,60 @@
+{
+  "metadataAttributes": {
+    "page_title": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Services | Lemoore College"
+      },
+      "includeForEmbedding": true
+    },
+    "department": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "DSPS"
+      },
+      "includeForEmbedding": true
+    },
+    "topic": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "dsps"
+      },
+      "includeForEmbedding": true
+    },
+    "source_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php"
+      },
+      "includeForEmbedding": false
+    },
+    "canonical_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php"
+      },
+      "includeForEmbedding": false
+    },
+    "source_type": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "official-web-page"
+      },
+      "includeForEmbedding": false
+    },
+    "last_checked": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "2026-07-23"
+      },
+      "includeForEmbedding": false
+    },
+    "current_status": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "current"
+      },
+      "includeForEmbedding": false
+    }
+  }
+}

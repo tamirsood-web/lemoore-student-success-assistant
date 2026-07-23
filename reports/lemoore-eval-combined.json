@@ -1,0 +1,1900 @@
+{
+  "generatedAt": "2026-07-23T05:29:26.455Z",
+  "scope": "combined",
+  "knowledgeBaseId": "<redacted>",
+  "dataSourceFilter": "none (whole Knowledge Base)",
+  "total": 45,
+  "usable": 29,
+  "errors": 0,
+  "results": [
+    {
+      "id": "q01",
+      "question": "How do I apply to Lemoore College?",
+      "expectedTopic": "admissions",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Admissions - Apply to Lemoore College | Lemoore College"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/"
+      ],
+      "returnedOrigins": [
+        "s3"
+      ],
+      "topScore": 0.91478574,
+      "matchedScore": 0.91478574,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 7,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q02",
+      "question": "How do I register for classes?",
+      "expectedTopic": "registration",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/schedule/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 4,
+      "rawRank": 4,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "Lemoore Class Schedule - Course Catalog | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/2019-2020/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/catalog.pdf",
+        "https://lemoorecollege.edu/schedule/",
+        "https://lemoorecollege.edu/catalog/2018-2019/admissions/index.php",
+        "https://lemoorecollege.edu/catalog/2018-2019/admissions/index.pdf",
+        "https://lemoorecollege.edu/oer/documents/CD14A.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5027637,
+      "matchedScore": 0.4759117,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q03",
+      "question": "How do I drop a class?",
+      "expectedTopic": "registration",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/academic-calendar/",
+        "https://lemoorecollege.edu/admissions/faqs.php"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/documents/2004-2005_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2002-2003_whc.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2008-2010_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2006-2008_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2010-2012.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/catalog.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.6166783,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 0,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q04",
+      "question": "How do I order my transcripts?",
+      "expectedTopic": "transcripts",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/transcripts.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Transcripts | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/resources/transcripts.php",
+        "https://westhillscollege.com/district/administration/board-of-trustees/policies-and-procedures/documents/ap5040studentrecordsdirectoryinformationandprivacy.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf",
+        "https://lemoorecollege.edu/degrees-and-certificates/nursing/nursing-program-information.php",
+        "https://lemoorecollege.edu/resources/military-services/veterans/documents/va-transcript-cert-form.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5185924,
+      "matchedScore": 0.5185924,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 1,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q05",
+      "question": "Where can I find the academic calendar?",
+      "expectedTopic": "academic-calendar",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/academic-calendar/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Academic Calendar | Lemoore College"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/academic-calendar/"
+      ],
+      "returnedOrigins": [
+        "s3"
+      ],
+      "topScore": 0.57865065,
+      "matchedScore": 0.57865065,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 7,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q06",
+      "question": "How do I contact financial aid?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "Financial Aid Frequently Asked Questions | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/about/documents/whcl-2022-25-student-equity-plan.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/student-services/index.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/student-services/index.pdf",
+        "https://lemoorecollege.edu/admissions/financial-aid/faqs.php",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/student-services/index.php",
+        "https://lemoorecollege.edu/catalog/2018-2019/catalog.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.46731782,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q07",
+      "question": "How do I complete the FAFSA?",
+      "expectedTopic": "fafsa",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/apply.php"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-financial-aid-handbook.pdf",
+        "https://lemoorecollege.edu/admissions/financial-aid/faqs.php",
+        "https://lemoorecollege.edu/admissions/financial-aid/index.php"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.4827503,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 5,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "crawler-noise"
+    },
+    {
+      "id": "q08",
+      "question": "Can I use the California Dream Act Application instead of FAFSA?",
+      "expectedTopic": "fafsa",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/apply.php",
+        "https://lemoorecollege.edu/resources/dream-resource-center/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 4,
+      "rawRank": 5,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "Apply | Lemoore College",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-financial-aid-handbook.pdf",
+        "https://lemoorecollege.edu/resources/dream-resource-center/paying-for-college.php",
+        "https://lemoorecollege.edu/admissions/financial-aid/index.php",
+        "https://lemoorecollege.edu/admissions/financial-aid/apply.php",
+        "https://lemoorecollege.edu/admissions/why-whc.php"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5714749,
+      "matchedScore": 0.53446823,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": true,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q09",
+      "question": "How much does college cost?",
+      "expectedTopic": "cost-of-attendance",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/2020-2021/catalog.pdf",
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-financial-aid-handbook.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2005-2006_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2010-2012.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2001-2002_whc.pdf",
+        "https://lemoorecollege.edu/admissions/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.4516621,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q10",
+      "question": "How much is tuition and what fees are there?",
+      "expectedTopic": "tuition-and-fees",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/oer/documents/CD14A.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2005-2006_whcl.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.47131947,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q11",
+      "question": "Are scholarships available?",
+      "expectedTopic": "grants-and-scholarships",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/grants-and-scholarships.php"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/student-services/index.pdf",
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-financial-aid-handbook.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/catalog.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.4845888,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 2,
+      "wrongCampusWarning": true,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "wrong-campus"
+    },
+    {
+      "id": "q12",
+      "question": "How do I get a refund for dropped classes?",
+      "expectedTopic": "refunds",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/documents/2002-2003_whc.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/admissions/",
+        "https://lemoorecollege.edu/catalog/documents/2004-2005_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf",
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/index.php",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.57282627,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 2,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q13",
+      "question": "What is Satisfactory Academic Progress for financial aid?",
+      "expectedTopic": "sap",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/sap.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Satisfactory Academic Progress Policy | Lemoore College",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/financial-aid/sap.php",
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-financial-aid-handbook.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler"
+      ],
+      "topScore": 0.63855386,
+      "matchedScore": 0.63855386,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 1,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q14",
+      "question": "Are student loans available?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/loans.php"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2010-2012.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/student-services/index.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/student-services/index.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2008-2010_whcl.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.44994828,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 0,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q15",
+      "question": "How does work study work?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/work-study.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Work Study | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/financial-aid/work-study.php",
+        "https://lemoorecollege.edu/admissions/financial-aid/",
+        "https://lemoorecollege.edu/admissions/financial-aid/faqs.php",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2010-2012.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2006-2008_whcl.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5525276,
+      "matchedScore": 0.5525276,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q16",
+      "question": "How do I meet with a counselor?",
+      "expectedTopic": "counseling",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/counseling/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Counseling/Advising Services  | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/resources/counseling/",
+        "https://lemoorecollege.edu/about/accreditation/documents/2017-WHCL-Self-Study-Report.pdf",
+        "https://lemoorecollege.edu/resources/military-services/active-military/",
+        "https://lemoorecollege.edu/resources/student-support/calworks/"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.43928844,
+      "matchedScore": 0.43928844,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 4,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q17",
+      "question": "Is tutoring free?",
+      "expectedTopic": "tutoring",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/tutoring/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/2020-2021/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/instructional-services/index.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/instructional-services/index.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.484827,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 0,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q18",
+      "question": "What does the library offer?",
+      "expectedTopic": "library",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/library/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/documents/2006-2008_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2002-2003_whc.pdf",
+        "https://lemoorecollege.edu/about/accreditation/documents/20170623-WHL-Evaluation-Team-Report.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2005-2006_whcl.pdf",
+        "https://lemoorecollege.edu/about/accreditation/ISER-WestHillsCollegeLemoore-web.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2001-2002_whc.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.47717687,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 2,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q19",
+      "question": "Where can veterans get assistance?",
+      "expectedTopic": "veterans",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/military-services/veterans/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 2,
+      "rawRank": 2,
+      "returnedTitles": [
+        "(untitled)",
+        "Veterans | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/resources/military-services/veterans/documents/va-point-of-contact.pdf",
+        "https://lemoorecollege.edu/resources/military-services/veterans/",
+        "https://lemoorecollege.edu/catalog/2018-2019/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/student-services/index.pdf",
+        "https://lemoorecollege.edu/resources/military-services/veterans/documents/college-fee-waiver-program-for-veterans-dependents-application.pdf",
+        "https://lemoorecollege.edu/resources/military-services/veterans/disabled-veterans-chapter-31.php",
+        "https://lemoorecollege.edu/announcements/posts/veterans-upward-bound-program.php",
+        "https://lemoorecollege.edu/resources/military-services/veterans/veterans-upward-bound/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.4668503,
+      "matchedScore": 0.45290574,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 0,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q20",
+      "question": "What accommodations are available through DSPS?",
+      "expectedTopic": "dsps",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/",
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 2,
+      "rawRank": 2,
+      "returnedTitles": [
+        "(untitled)",
+        "Services | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/degrees-and-certificates/nursing/documents/lc-adn-appendices.pdf",
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php",
+        "https://lemoorecollege.edu/degrees-and-certificates/nursing/documents/lc-adn-faculty-handbook.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/student-services/index.pdf",
+        "https://lemoorecollege.edu/student-life/food-and-basic-needs/student-support-resources.php"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5814093,
+      "matchedScore": 0.56750005,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q21",
+      "question": "What help does EOPS provide?",
+      "expectedTopic": "eops",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/eops/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "EOPS | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/resources/student-support/eops/",
+        "https://lemoorecollege.edu/catalog/documents/2004-2005_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2002-2003_whc.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2001-2002_whc.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/student-services/"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.6138416,
+      "matchedScore": 0.6138416,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 1,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q22",
+      "question": "Does the college help with CalWORKs?",
+      "expectedTopic": "calworks",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/calworks/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 5,
+      "rawRank": 5,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "CalWORKs | Lemoore College"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/documents/2008-2010_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/catalog.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/student-services/index.pdf",
+        "https://lemoorecollege.edu/resources/student-support/calworks/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "s3"
+      ],
+      "topScore": 0.6752159,
+      "matchedScore": 0.643882,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 1,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q23",
+      "question": "How do I apply for graduation?",
+      "expectedTopic": "graduation",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/faqs.php"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://support.whccd.edu/hc/article_attachments/360091414213/whcl-petition-to-graduate-guide.pdf",
+        "https://lemoorecollege.edu/admissions/",
+        "https://lemoorecollege.edu/admissions/future-students/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.509696,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 4,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "crawler-noise"
+    },
+    {
+      "id": "q24",
+      "question": "How do I access Canvas?",
+      "expectedTopic": "student-portal",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/portal/",
+        "https://lemoorecollege.edu/helpdesk/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/helpdesk/"
+      ],
+      "returnedOrigins": [
+        "crawler"
+      ],
+      "topScore": 0.49048248,
+      "matchedScore": 0.49048248,
+      "matchedOrigin": "crawler",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 7,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q25",
+      "question": "I forgot my student portal password.",
+      "expectedTopic": "helpdesk",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/helpdesk/",
+        "https://lemoorecollege.edu/portal/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "myWestHills Portal | West Hills Community College District",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/portal/",
+        "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/index.php",
+        "https://lemoorecollege.edu/helpdesk/index.php"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.46868226,
+      "matchedScore": 0.46868226,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 1,
+      "duplicatesRemoved": 5,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q26",
+      "question": "Where can I find the current course schedule?",
+      "expectedTopic": "registration",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/schedule/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Lemoore Class Schedule - Course Catalog | Lemoore College"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/schedule/"
+      ],
+      "returnedOrigins": [
+        "s3"
+      ],
+      "topScore": 0.508998,
+      "matchedScore": 0.508998,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 7,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q27",
+      "question": "What transfer assistance is available?",
+      "expectedTopic": "transfer",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/transfer-center/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 2,
+      "rawRank": 2,
+      "returnedTitles": [
+        "(untitled)",
+        "Transfer Services | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/2020-2021/catalog.pdf",
+        "https://lemoorecollege.edu/resources/transfer-center/",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2005-2006_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/2019-2020/student-services/index.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2004-2005_whcl.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5154813,
+      "matchedScore": 0.51485085,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q28",
+      "question": "Where can I get food or basic-needs support?",
+      "expectedTopic": "basic-needs",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/student-life/food-and-basic-needs/",
+        "https://lemoorecollege.edu/student-life/eagle-pantry/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Golden Nest: Food and Basic Needs Center | Lemoore College",
+        "Student Pantry | Lemoore College",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/student-life/food-and-basic-needs/",
+        "https://lemoorecollege.edu/student-life/eagle-pantry/",
+        "https://lemoorecollege.edu/about/documents/whcl-2022-25-student-equity-plan.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "s3",
+        "crawler"
+      ],
+      "topScore": 0.5268,
+      "matchedScore": 0.5268,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 5,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q29",
+      "question": "What mental-health resources are available?",
+      "expectedTopic": "mental-health",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/student-life/food-and-basic-needs/mental-health-resources.php",
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Mental Health & Wellbeing Resources | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/student-life/food-and-basic-needs/mental-health-resources.php",
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/other-mental-health.php",
+        "https://lemoorecollege.edu/about/documents/whcl-2022-25-student-equity-plan.pdf",
+        "https://lemoorecollege.edu/oer/documents/HS0402025.pdf",
+        "https://lemoorecollege.edu/oer/documents/HealthandSocialJustice_Digital.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5081841,
+      "matchedScore": 0.5081841,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q30",
+      "question": "How do I get career help or build a resume?",
+      "expectedTopic": "career-services",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/career-center/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/resources/career-center/",
+        "https://lemoorecollege.edu/oer/documents/Introduction-to-Kinesiology-version1.6.1.pdf",
+        "https://lemoorecollege.edu/oer/documents/A-Career-in-Sociology-2025.pdf",
+        "https://lemoorecollege.edu/blog/posts/college-101/elevate_your_career_path.php"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.42981955,
+      "matchedScore": 0.42981955,
+      "matchedOrigin": "crawler",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 4,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q31",
+      "question": "Can high school students take college classes?",
+      "expectedTopic": "dual-enrollment",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/2018-2019/catalog.pdf",
+        "https://lemoorecollege.edu/admissions/why-whc.php",
+        "https://lemoorecollege.edu/catalog/2018-2019/special-programs/index.php",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf",
+        "https://lemoorecollege.edu/catalog/2018-2019/special-programs/index.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.47745904,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q32",
+      "question": "Do I need to attend orientation?",
+      "expectedTopic": "orientation",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/future-students/orientation.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 2,
+      "rawRank": 4,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/degrees-and-certificates/nursing/documents/adnprogrampoliciesandprocedures.pdf",
+        "https://lemoorecollege.edu/admissions/future-students/orientation.php",
+        "https://lemoorecollege.edu/catalog/2020-2021/admissions/index.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.45362118,
+      "matchedScore": 0.43576944,
+      "matchedOrigin": "crawler",
+      "crossSourceDuplicates": 1,
+      "duplicatesRemoved": 5,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q33",
+      "question": "What degrees and certificates can I earn?",
+      "expectedTopic": "degrees-and-certificates",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/degrees-and-certificates/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/2020-2021/programs-of-study/index.php",
+        "https://lemoorecollege.edu/catalog/2020-2021/",
+        "https://lemoorecollege.edu/catalog/2019-2020/programs-of-study/index.php",
+        "https://lemoorecollege.edu/catalog/2019-2020/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.53653944,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 2,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q34",
+      "question": "Where is the current college catalog?",
+      "expectedTopic": "catalog",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/catalog/current"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 4,
+      "rawRank": 4,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "Lemoore College Catalog (2026-2027)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/about/accreditation/documents/20170623-WHL-Evaluation-Team-Report.pdf",
+        "https://lemoorecollege.edu/about/accreditation/documents/2017-WHCL-Self-Study-Report.pdf",
+        "https://lemoorecollege.edu/about/accreditation/documents/self-study-2006-final.pdf",
+        "https://lemoorecollege.edu/catalog/current",
+        "https://lemoorecollege.edu/about/accreditation/ISER-WestHillsCollegeLemoore-web.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2003_2004/index.php"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.6030076,
+      "matchedScore": 0.5641437,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 2,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q35",
+      "question": "How do I contact the college or find an office?",
+      "expectedTopic": "campus-contact",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/contact-us/",
+        "https://lemoorecollege.edu/contact-us/office-directory.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 2,
+      "rawRank": 2,
+      "returnedTitles": [
+        "(untitled)",
+        "Office Directory | Lemoore College",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/catalog/2018-2019/presidents-message.pdf",
+        "https://lemoorecollege.edu/contact-us/office-directory.php",
+        "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/index.php"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "s3",
+        "crawler"
+      ],
+      "topScore": 0.4550452,
+      "matchedScore": 0.45336175,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 5,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q36",
+      "question": "Where is the campus map?",
+      "expectedTopic": "campus-map",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/map/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Campus Map & Location",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/map/",
+        "https://lemoorecollege.edu/about/outreach/",
+        "https://lemoorecollege.edu/resources/transfer-center/documents/uc-transfer-guide-25-26.pdf",
+        "https://lemoorecollege.edu/about/accreditation/ISER-WestHillsCollegeLemoore-web.pdf",
+        "https://lemoorecollege.edu/student-life/campus-safety/documents/lc_25_annualsafetyreport_final.pdf",
+        "https://lemoorecollege.edu/resources/transfer-center/documents/cal-state-apply-transfer-application-guide-25-26.pdf",
+        "https://lemoorecollege.edu/student-life/campus-safety/documents/crime_statistics_2025.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.470842,
+      "matchedScore": 0.470842,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q37",
+      "question": "I'm a returning student — how do I come back?",
+      "expectedTopic": "admissions",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/returning-students/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 2,
+      "rawRank": 2,
+      "returnedTitles": [
+        "(untitled)",
+        "Returning Students | Lemoore College",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/resources/transfer-center/documents/cal-state-apply-transfer-application-guide-25-26.pdf",
+        "https://lemoorecollege.edu/admissions/returning-students/",
+        "https://lemoorecollege.edu/degrees-and-certificates/nursing/documents/lc-adn-student-handbook.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "s3",
+        "crawler"
+      ],
+      "topScore": 0.5604188,
+      "matchedScore": 0.53988385,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 1,
+      "duplicatesRemoved": 5,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q38",
+      "question": "How do I estimate my net price?",
+      "expectedTopic": "cost-of-attendance",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/",
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-heerf-annual-report-year-3.pdf",
+        "https://lemoorecollege.edu/degrees-and-certificates/nurse-assistant-training/documents/natp_cost_estimates.pdf",
+        "https://lemoorecollege.edu/oer/documents/CD14A.pdf",
+        "https://lemoorecollege.edu/oer/documents/2024-Drawing-Perspectives-Art-005B-OER-textbook-digital.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2006-2008_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2001-2002_whc.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2005-2006_whcl.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.3913402,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "crawler-noise"
+    },
+    {
+      "id": "q39",
+      "question": "What resources exist for undocumented / Dream Act students?",
+      "expectedTopic": "dream-resource-center",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/dream-resource-center/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 6,
+      "rawRank": 7,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "DREAM Resource Center - AB 540 SB 68 | Lemoore College"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/oer/documents/Our-Lives-ES.pdf",
+        "https://lemoorecollege.edu/admissions/why-whc.php",
+        "https://lemoorecollege.edu/resources/dream-resource-center/paying-for-college.php",
+        "https://lemoorecollege.edu/oer/documents/SpanishES001.pdf",
+        "https://lemoorecollege.edu/resources/dream-resource-center/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "s3"
+      ],
+      "topScore": 0.6222705,
+      "matchedScore": 0.49021545,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": true,
+      "staleSourceWarning": false,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q40",
+      "question": "Are there frequently asked questions about financial aid?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/faqs.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Financial Aid Frequently Asked Questions | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/financial-aid/faqs.php",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-financial-aid-handbook.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "s3",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.60012084,
+      "matchedScore": 0.60012084,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 4,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q41",
+      "question": "When are final exams?",
+      "expectedTopic": "academic-calendar",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/academic-calendar/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 5,
+      "rawRank": 7,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/documents/final_exam_schedule.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf",
+        "https://lemoorecollege.edu/catalog/2020-2021/instructional-calendar.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf",
+        "https://lemoorecollege.edu/academic-calendar/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.5322696,
+      "matchedScore": 0.43515697,
+      "matchedOrigin": "crawler",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q42",
+      "question": "How do I get my student email?",
+      "expectedTopic": "helpdesk",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/helpdesk/",
+        "https://lemoorecollege.edu/portal/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/index.php",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2017-2018.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.51337165,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "stale-source"
+    },
+    {
+      "id": "q43",
+      "question": "What is the difference between grants and scholarships?",
+      "expectedTopic": "grants-and-scholarships",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/grants-and-scholarships.php"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 1,
+      "rawRank": 1,
+      "returnedTitles": [
+        "Grants And Scholarships | Lemoore College",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/admissions/grants-and-scholarships.php",
+        "https://lemoorecollege.edu/admissions/financial-aid/documents/whccd-financial-aid-handbook.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2006-2008_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2008-2010_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2005-2006_whcl.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2010-2012.pdf"
+      ],
+      "returnedOrigins": [
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.454748,
+      "matchedScore": 0.454748,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 1,
+      "wrongCampusWarning": true,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q44",
+      "question": "How do I pay my tuition bill?",
+      "expectedTopic": "tuition-and-fees",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php",
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      ],
+      "scope": "combined",
+      "usable": true,
+      "rank": 2,
+      "rawRank": 3,
+      "returnedTitles": [
+        "(untitled)",
+        "Payment and Refund Request",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/oer/documents/CD14A.pdf",
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php",
+        "https://lemoorecollege.edu/catalog/documents/2001-2002_whc.pdf",
+        "https://lemoorecollege.edu/catalog/documents/2006-2008_whcl.pdf",
+        "https://lemoorecollege.edu/blog/posts/college-life/college-life-simplify-your-semester.php",
+        "https://lemoorecollege.edu/catalog/2019-2020-addendum/tuition-and-fees/"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "s3",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.43226856,
+      "matchedScore": 0.4033155,
+      "matchedOrigin": "s3",
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 2,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": null
+    },
+    {
+      "id": "q45",
+      "question": "Where do I get help choosing a major or program?",
+      "expectedTopic": "degrees-and-certificates",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/degrees-and-certificates/",
+        "https://lemoorecollege.edu/resources/counseling/"
+      ],
+      "scope": "combined",
+      "usable": false,
+      "rank": null,
+      "rawRank": null,
+      "returnedTitles": [
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)",
+        "(untitled)"
+      ],
+      "returnedUrls": [
+        "https://lemoorecollege.edu/resources/transfer-center/documents/uc-transfer-guide-25-26.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2014-2016.pdf",
+        "https://lemoorecollege.edu/resources/transfer-center/documents/cal-state-apply-transfer-application-guide-25-26.pdf",
+        "https://lemoorecollege.edu/catalog/documents/WHCL-catalog-2016-2017.pdf",
+        "https://lemoorecollege.edu/resources/student-support/upward-bound/resources.php"
+      ],
+      "returnedOrigins": [
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler",
+        "crawler"
+      ],
+      "topScore": 0.4500633,
+      "matchedScore": null,
+      "matchedOrigin": null,
+      "crossSourceDuplicates": 0,
+      "duplicatesRemoved": 3,
+      "wrongCampusWarning": false,
+      "staleSourceWarning": true,
+      "evaluatorMatchingCorrected": false,
+      "failureClassification": "crawler-noise"
+    }
+  ]
+}

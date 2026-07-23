@@ -1,0 +1,75 @@
+{
+  "metadataAttributes": {
+    "page_title": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Campus Map & Location"
+      },
+      "includeForEmbedding": true
+    },
+    "department": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "Campus"
+      },
+      "includeForEmbedding": true
+    },
+    "topic": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "campus-map"
+      },
+      "includeForEmbedding": true
+    },
+    "source_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/map/"
+      },
+      "includeForEmbedding": false
+    },
+    "canonical_url": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "https://lemoorecollege.edu/map/"
+      },
+      "includeForEmbedding": false
+    },
+    "source_type": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "official-web-page"
+      },
+      "includeForEmbedding": false
+    },
+    "last_checked": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "2026-07-23"
+      },
+      "includeForEmbedding": false
+    },
+    "current_status": {
+      "value": {
+        "type": "STRING",
+        "stringValue": "current"
+      },
+      "includeForEmbedding": false
+    },
+    "keywords": {
+      "value": {
+        "type": "STRING_LIST",
+        "stringListValue": [
+          "map",
+          "campus map",
+          "directions",
+          "parking",
+          "location",
+          "address",
+          "where is the campus"
+        ]
+      },
+      "includeForEmbedding": true
+    }
+  }
+}

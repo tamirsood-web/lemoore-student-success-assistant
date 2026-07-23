@@ -1,0 +1,1486 @@
+{
+  "generatedAt": "2026-07-23T05:29:59.247Z",
+  "knowledgeBaseId": "<redacted>",
+  "dataSourceIds": "<redacted>",
+  "scopesPresent": [
+    "combined",
+    "s3",
+    "crawler"
+  ],
+  "scopesMissing": [],
+  "totals": {
+    "total": 45,
+    "usableByScope": {
+      "combined": 29,
+      "s3": 42,
+      "crawler": 17
+    }
+  },
+  "failureCounts": {
+    "stale-source": 2,
+    "crawler-noise": 1,
+    "correct-source-ranked-too-low": 13
+  },
+  "evaluatorMatchingCorrectedCount": 0,
+  "topicGroups": [
+    {
+      "topic": "academic-calendar",
+      "total": 2,
+      "usableByScope": {
+        "combined": 2,
+        "s3": 2,
+        "crawler": 1
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "admissions",
+      "total": 2,
+      "usableByScope": {
+        "combined": 2,
+        "s3": 2,
+        "crawler": 2
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "basic-needs",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "calworks",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "campus-contact",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "campus-map",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "career-services",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "catalog",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "cost-of-attendance",
+      "total": 2,
+      "usableByScope": {
+        "combined": 0,
+        "s3": 2,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "counseling",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "degrees-and-certificates",
+      "total": 2,
+      "usableByScope": {
+        "combined": 0,
+        "s3": 2,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "dream-resource-center",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "dsps",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "dual-enrollment",
+      "total": 1,
+      "usableByScope": {
+        "combined": 0,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "eops",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "fafsa",
+      "total": 2,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "financial-aid",
+      "total": 4,
+      "usableByScope": {
+        "combined": 2,
+        "s3": 3,
+        "crawler": 1
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "graduation",
+      "total": 1,
+      "usableByScope": {
+        "combined": 0,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "grants-and-scholarships",
+      "total": 2,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 2,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "helpdesk",
+      "total": 2,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 2,
+        "crawler": 1
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "library",
+      "total": 1,
+      "usableByScope": {
+        "combined": 0,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "mental-health",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "orientation",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "refunds",
+      "total": 1,
+      "usableByScope": {
+        "combined": 0,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "registration",
+      "total": 3,
+      "usableByScope": {
+        "combined": 2,
+        "s3": 2,
+        "crawler": 1
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "sap",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "student-portal",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "transcripts",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "betterSource": "tie"
+    },
+    {
+      "topic": "transfer",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "tuition-and-fees",
+      "total": 2,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 2,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "tutoring",
+      "total": 1,
+      "usableByScope": {
+        "combined": 0,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    },
+    {
+      "topic": "veterans",
+      "total": 1,
+      "usableByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 0
+      },
+      "betterSource": "s3"
+    }
+  ],
+  "rows": [
+    {
+      "id": "q01",
+      "question": "How do I apply to Lemoore College?",
+      "expectedTopic": "admissions",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 2
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q02",
+      "question": "How do I register for classes?",
+      "expectedTopic": "registration",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/schedule/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 4,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q03",
+      "question": "How do I drop a class?",
+      "expectedTopic": "registration",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/academic-calendar/",
+        "https://lemoorecollege.edu/admissions/faqs.php"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": false,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": null,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": null,
+        "crawler": null
+      },
+      "combinedFailureClassification": "stale-source",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q04",
+      "question": "How do I order my transcripts?",
+      "expectedTopic": "transcripts",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/transcripts.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 2
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q05",
+      "question": "Where can I find the academic calendar?",
+      "expectedTopic": "academic-calendar",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/academic-calendar/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q06",
+      "question": "How do I contact financial aid?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": false,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": null,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": null,
+        "crawler": null
+      },
+      "combinedFailureClassification": "stale-source",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q07",
+      "question": "How do I complete the FAFSA?",
+      "expectedTopic": "fafsa",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/apply.php"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": false,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": null,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": null,
+        "crawler": null
+      },
+      "combinedFailureClassification": "crawler-noise",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q08",
+      "question": "Can I use the California Dream Act Application instead of FAFSA?",
+      "expectedTopic": "fafsa",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/apply.php",
+        "https://lemoorecollege.edu/resources/dream-resource-center/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 4,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q09",
+      "question": "How much does college cost?",
+      "expectedTopic": "cost-of-attendance",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q10",
+      "question": "How much is tuition and what fees are there?",
+      "expectedTopic": "tuition-and-fees",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q11",
+      "question": "Are scholarships available?",
+      "expectedTopic": "grants-and-scholarships",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/grants-and-scholarships.php"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q12",
+      "question": "How do I get a refund for dropped classes?",
+      "expectedTopic": "refunds",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 3,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q13",
+      "question": "What is Satisfactory Academic Progress for financial aid?",
+      "expectedTopic": "sap",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/sap.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q14",
+      "question": "Are student loans available?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/loans.php"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q15",
+      "question": "How does work study work?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/work-study.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 6
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q16",
+      "question": "How do I meet with a counselor?",
+      "expectedTopic": "counseling",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/counseling/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 2,
+        "crawler": 5
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q17",
+      "question": "Is tutoring free?",
+      "expectedTopic": "tutoring",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/tutoring/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q18",
+      "question": "What does the library offer?",
+      "expectedTopic": "library",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/library/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q19",
+      "question": "Where can veterans get assistance?",
+      "expectedTopic": "veterans",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/military-services/veterans/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 2,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q20",
+      "question": "What accommodations are available through DSPS?",
+      "expectedTopic": "dsps",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/",
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 2,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q21",
+      "question": "What help does EOPS provide?",
+      "expectedTopic": "eops",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/eops/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q22",
+      "question": "Does the college help with CalWORKs?",
+      "expectedTopic": "calworks",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/student-support/calworks/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 5,
+        "s3": 1,
+        "crawler": 5
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q23",
+      "question": "How do I apply for graduation?",
+      "expectedTopic": "graduation",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/faqs.php"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 2,
+        "crawler": 2
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q24",
+      "question": "How do I access Canvas?",
+      "expectedTopic": "student-portal",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/portal/",
+        "https://lemoorecollege.edu/helpdesk/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 1
+      },
+      "matchedOriginByScope": {
+        "combined": "crawler",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q25",
+      "question": "I forgot my student portal password.",
+      "expectedTopic": "helpdesk",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/helpdesk/",
+        "https://lemoorecollege.edu/portal/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 2
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q26",
+      "question": "Where can I find the current course schedule?",
+      "expectedTopic": "registration",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/schedule/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 2
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q27",
+      "question": "What transfer assistance is available?",
+      "expectedTopic": "transfer",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/transfer-center/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 2,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q28",
+      "question": "Where can I get food or basic-needs support?",
+      "expectedTopic": "basic-needs",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/student-life/food-and-basic-needs/",
+        "https://lemoorecollege.edu/student-life/eagle-pantry/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": 4
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q29",
+      "question": "What mental-health resources are available?",
+      "expectedTopic": "mental-health",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/student-life/food-and-basic-needs/mental-health-resources.php",
+        "https://lemoorecollege.edu/resources/student-support/disabled-student-services/services.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q30",
+      "question": "How do I get career help or build a resume?",
+      "expectedTopic": "career-services",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/career-center/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 2,
+        "crawler": 1
+      },
+      "matchedOriginByScope": {
+        "combined": "crawler",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q31",
+      "question": "Can high school students take college classes?",
+      "expectedTopic": "dual-enrollment",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/high-school-dual-enrollment/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q32",
+      "question": "Do I need to attend orientation?",
+      "expectedTopic": "orientation",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/future-students/orientation.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 2,
+        "s3": 1,
+        "crawler": 2
+      },
+      "matchedOriginByScope": {
+        "combined": "crawler",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q33",
+      "question": "What degrees and certificates can I earn?",
+      "expectedTopic": "degrees-and-certificates",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/degrees-and-certificates/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q34",
+      "question": "Where is the current college catalog?",
+      "expectedTopic": "catalog",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/catalog/current"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 4,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q35",
+      "question": "How do I contact the college or find an office?",
+      "expectedTopic": "campus-contact",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/contact-us/",
+        "https://lemoorecollege.edu/contact-us/office-directory.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 2,
+        "s3": 1,
+        "crawler": 4
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q36",
+      "question": "Where is the campus map?",
+      "expectedTopic": "campus-map",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/map/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q37",
+      "question": "I'm a returning student — how do I come back?",
+      "expectedTopic": "admissions",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/returning-students/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 2,
+        "s3": 1,
+        "crawler": 2
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q38",
+      "question": "How do I estimate my net price?",
+      "expectedTopic": "cost-of-attendance",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/",
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 2,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q39",
+      "question": "What resources exist for undocumented / Dream Act students?",
+      "expectedTopic": "dream-resource-center",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/resources/dream-resource-center/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 6,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q40",
+      "question": "Are there frequently asked questions about financial aid?",
+      "expectedTopic": "financial-aid",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/financial-aid/faqs.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q41",
+      "question": "When are final exams?",
+      "expectedTopic": "academic-calendar",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/academic-calendar/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": true
+      },
+      "rankByScope": {
+        "combined": 5,
+        "s3": 1,
+        "crawler": 5
+      },
+      "matchedOriginByScope": {
+        "combined": "crawler",
+        "s3": "s3",
+        "crawler": "crawler"
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q42",
+      "question": "How do I get my student email?",
+      "expectedTopic": "helpdesk",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/helpdesk/",
+        "https://lemoorecollege.edu/portal/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 2,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q43",
+      "question": "What is the difference between grants and scholarships?",
+      "expectedTopic": "grants-and-scholarships",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/grants-and-scholarships.php"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 1,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q44",
+      "question": "How do I pay my tuition bill?",
+      "expectedTopic": "tuition-and-fees",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/payment-and-refund-request.php",
+        "https://lemoorecollege.edu/admissions/cost-of-attendance/"
+      ],
+      "usableByScope": {
+        "combined": true,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": 2,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": "s3",
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": null,
+      "evaluatorMatchingCorrected": false
+    },
+    {
+      "id": "q45",
+      "question": "Where do I get help choosing a major or program?",
+      "expectedTopic": "degrees-and-certificates",
+      "expectedSourceGroup": [
+        "https://lemoorecollege.edu/degrees-and-certificates/",
+        "https://lemoorecollege.edu/resources/counseling/"
+      ],
+      "usableByScope": {
+        "combined": false,
+        "s3": true,
+        "crawler": false
+      },
+      "rankByScope": {
+        "combined": null,
+        "s3": 1,
+        "crawler": null
+      },
+      "matchedOriginByScope": {
+        "combined": null,
+        "s3": "s3",
+        "crawler": null
+      },
+      "combinedFailureClassification": "correct-source-ranked-too-low",
+      "evaluatorMatchingCorrected": false
+    }
+  ]
+}
