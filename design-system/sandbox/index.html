@@ -64,11 +64,8 @@
       <button type="button" class="fab" aria-label="Open chat" title="Open chat">
         <img class="fab__icon" src="../icons/eagle-headset.svg" alt="" aria-hidden="true" />
       </button>
-      <button type="button" class="fab" aria-label="Disabled" disabled>
-        <img class="fab__icon" src="../icons/eagle-headset.svg" alt="" aria-hidden="true" />
-      </button>
     </div>
-    <p class="sandbox__note">Tab to focus. Click or Enter/Space to activate. Disabled variant on the right.</p>
+    <p class="sandbox__note">Tab to focus. Click or Enter/Space to activate.</p>
   </section>
 
   <!-- ══════════════════════════════════════════════════════════
@@ -80,6 +77,15 @@
       <div class="chat-input">
         <label class="chat-input__label" for="sandbox-input">Message</label>
         <textarea class="chat-input__textarea" id="sandbox-input" placeholder="Type here… Enter to submit, Shift+Enter for new line" rows="1" data-chat-input></textarea>
+      </div>
+    </div>
+    <div class="sandbox__col" style="max-width:480px; margin-top:16px;">
+      <div class="chat-input">
+        <label class="chat-input__label" for="sandbox-input-icon">Search</label>
+        <div class="chat-input__field">
+          <svg class="chat-input__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none"><path d="M15 15L16.5 16.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.9333 19.0252C16.3556 18.4475 16.3556 17.5109 16.9333 16.9333C17.5109 16.3556 18.4475 16.3556 19.0252 16.9333L21.0667 18.9748C21.6444 19.5525 21.6444 20.4891 21.0667 21.0667C20.4891 21.6444 19.5525 21.6444 18.9748 21.0667L16.9333 19.0252Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/><path d="M16.5 9.5C16.5 5.63401 13.366 2.5 9.5 2.5C5.63401 2.5 2.5 5.63401 2.5 9.5C2.5 13.366 5.63401 16.5 9.5 16.5C13.366 16.5 16.5 13.366 16.5 9.5Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <textarea class="chat-input__textarea" id="sandbox-input-icon" placeholder="Search…" rows="1" data-chat-input></textarea>
+        </div>
       </div>
     </div>
     <div class="sandbox__col" style="max-width:480px; margin-top:16px;">
@@ -173,7 +179,7 @@
       </div>
       <div class="chat-window__body" id="cw-body">
         <div class="chat-window__content">
-          <div class="sandbox__conversation" id="cw-messages">
+          <div class="sandbox__conversation sandbox__conversation--fullwidth" id="cw-messages">
             <div class="message-bubble message-bubble--agent"><div class="message-bubble__content sandbox__text">Hello! Ask me anything.</div></div>
           </div>
         </div>
@@ -208,6 +214,7 @@
   .sandbox__helpers label { display: flex; align-items: center; gap: 6px; cursor: pointer; }
   .sandbox__note { font-size: 12px; color: #555761; margin-top: 8px; }
   .sandbox__conversation { display: flex; flex-direction: column; gap: 12px; max-width: 480px; }
+  .sandbox__conversation--fullwidth { max-width: none; }
   .sandbox__conversation .message-bubble--agent { align-self: flex-start; }
   .sandbox__conversation .message-bubble--user { align-self: flex-end; }
   .sandbox__text { font-family: 'Inter', sans-serif; font-size: 16px; font-weight: 400; line-height: 1.5; color: #10141f; }

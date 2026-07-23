@@ -123,7 +123,7 @@
 
   /* Heights — min is 1 line of text + padding + borders */
   --chat-input-min-height:      50px;   /* 16px padding-top + 16px line-height + 16px padding-bottom + 2px borders */
-  --chat-input-max-height:      200px;  /* ~6 lines before internal scroll engages */
+  --chat-input-max-height:      104px;  /* ~4 visible text lines before internal scroll */
 
   /* ─────────────────────────────────────────────
    * CHAT INPUT — Colors
