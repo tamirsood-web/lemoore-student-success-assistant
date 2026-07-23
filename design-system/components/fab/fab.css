@@ -1,0 +1,99 @@
+/*
+ * fab.css
+ *
+ * Floating Action Button (FAB) — circular icon button with elevated shadow.
+ * Source: Figma DS-course · node 286:610
+ *
+ * Required load order:
+ *   1. tokens/primitives.css
+ *   2. tokens/semantic.css
+ *   3. tokens/components.css
+ *   4. this file
+ *
+ * States: Default, Hover, Focus-visible, Active, Disabled
+ * This file consumes ONLY --fab-* custom properties.
+ */
+
+
+/* ─────────────────────────────────────────────────────────────
+ * BASE
+ * ───────────────────────────────────────────────────────────── */
+.fab {
+  display:          inline-flex;
+  align-items:      center;
+  justify-content:  center;
+  width:            var(--fab-size);
+  height:           var(--fab-size);
+  padding:          var(--fab-padding);
+  border:           none;
+  border-radius:    var(--fab-radius);
+  background-color: var(--fab-bg);
+  color:            var(--fab-icon-color);
+  box-shadow:       var(--fab-shadow);
+  cursor:           pointer;
+  outline:          none;
+  -webkit-appearance: none;
+  appearance:      none;
+
+  transition: background-color 120ms ease,
+              box-shadow 120ms ease;
+}
+
+/* Icon inside FAB */
+.fab svg,
+.fab img,
+.fab .fab__icon {
+  display:     block;
+  flex-shrink: 0;
+  width:       100%;
+  height:      100%;
+  color:       inherit;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * HOVER
+ * ───────────────────────────────────────────────────────────── */
+.fab:hover:not(:disabled) {
+  background-color: var(--fab-bg-hover);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * FOCUS-VISIBLE
+ * ───────────────────────────────────────────────────────────── */
+.fab:focus-visible {
+  background-color: var(--fab-bg-focus);
+  outline:          2px solid var(--fab-border-focus);
+  outline-offset:   2px;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * ACTIVE / PRESSED
+ * ───────────────────────────────────────────────────────────── */
+.fab:active:not(:disabled) {
+  background-color: var(--fab-bg-active);
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * DISABLED
+ * ───────────────────────────────────────────────────────────── */
+.fab:disabled,
+.fab[aria-disabled="true"] {
+  opacity:        0.4;
+  cursor:         not-allowed;
+  pointer-events: none;
+  box-shadow:     none;
+}
+
+
+/* ─────────────────────────────────────────────────────────────
+ * REDUCED MOTION
+ * ───────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .fab {
+    transition: none;
+  }
+}

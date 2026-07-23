@@ -49,6 +49,18 @@
   --primitive-shadow-2-blur:    24px;
   --primitive-shadow-2-spread:  -6px;
 
+  /* Shadow layers 3 & 4 — FAB */
+  --primitive-color-shadow-3:   #0000001f;  /* Color/shadow-3 — rgba(0,0,0,0.12) */
+  --primitive-color-shadow-4:   #0000002e;  /* Color/shadow-4 — rgba(0,0,0,0.18) */
+  --primitive-shadow-3-x:       0px;
+  --primitive-shadow-3-y:       2px;
+  --primitive-shadow-3-blur:    4px;
+  --primitive-shadow-3-spread:  0px;
+  --primitive-shadow-4-x:       0px;
+  --primitive-shadow-4-y:       6px;
+  --primitive-shadow-4-blur:    12px;
+  --primitive-shadow-4-spread:  -2px;
+
   /* ─────────────────────────────────────────────
    * SPACING
    * Source: Button/Padding/X, Button/Padding/Y,

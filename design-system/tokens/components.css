@@ -56,7 +56,7 @@
 
   /* Loading state — reuses disabled bg, text is default (black) */
   --btn-primary-bg-loading:      var(--semantic-color-action-bg-disabled);
-  --btn-primary-color-loading:   var(--semantic-color-text-default);  /* Button/Primary/Text/Load: #121212 */
+  --btn-primary-color-loading:   var(--semantic-color-text-default);  /* Button/Primary/Text/Load: #10141f */
 
   /* ─────────────────────────────────────────────
    * BUTTON — Secondary variant
@@ -217,4 +217,20 @@
   --source-link-bg-hover:       var(--semantic-color-source-link-bg-hover);
   --source-link-bg-active:      var(--semantic-color-source-link-bg-active);
   --source-link-border-focus:   var(--semantic-color-source-link-border-focus);
+
+  /* ─────────────────────────────────────────────
+   * FAB (Floating Action Button)
+   * Source: Figma DS-course · node 286:610
+   * Consumed by: components/fab/fab.css
+   * ───────────────────────────────────────────── */
+  --fab-size:           56px;          /* Figma FAB frame: 56×56 */
+  --fab-radius:         var(--semantic-radius-component-circular);  /* Button/Border/Round: 100px */
+  --fab-padding:        var(--semantic-space-fab-padding);
+  --fab-bg:             var(--semantic-color-fab-bg);
+  --fab-bg-hover:       var(--semantic-color-fab-bg-hover);
+  --fab-bg-active:      var(--semantic-color-fab-bg-active);
+  --fab-bg-focus:       var(--semantic-color-fab-bg-focus);
+  --fab-border-focus:   var(--semantic-color-fab-border-focus);
+  --fab-icon-color:     var(--semantic-color-fab-icon);
+  --fab-shadow:         var(--semantic-shadow-fab);
 }

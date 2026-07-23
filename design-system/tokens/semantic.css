@@ -176,4 +176,19 @@
   --semantic-radius-source-link:             var(--primitive-radius-full);           /* Sources/Border/Corner  */
 
   --semantic-font-size-copy:                 var(--primitive-font-size-12);          /* copy/regular size      */
+
+  /* ─────────────────────────────────────────────
+   * FAB (Floating Action Button)
+   * Source: Figma DS-course · node 286:610
+   * ───────────────────────────────────────────── */
+  --semantic-color-fab-bg:         var(--primitive-color-blue-900);    /* Button/FAB/BG/Default  */
+  --semantic-color-fab-bg-hover:   var(--primitive-color-blue-700);    /* Button/FAB/BG/Hover    */
+  --semantic-color-fab-bg-active:  var(--primitive-color-blue-800);    /* Button/FAB/BG/Active   */
+  --semantic-color-fab-bg-focus:   var(--primitive-color-blue-900);    /* Button/FAB/BG/Focus    */
+  --semantic-color-fab-border-focus: var(--primitive-color-white);     /* Button/FAB/Border/Focus */
+  --semantic-color-fab-icon:       var(--primitive-color-white);       /* Button/FAB/Text/Default */
+  --semantic-space-fab-padding:    var(--primitive-space-4);           /* Button/FAB/Padding/X,Y */
+  --semantic-shadow-fab:
+    var(--primitive-shadow-3-x) var(--primitive-shadow-3-y) var(--primitive-shadow-3-blur) var(--primitive-shadow-3-spread) var(--primitive-color-shadow-3),
+    var(--primitive-shadow-4-x) var(--primitive-shadow-4-y) var(--primitive-shadow-4-blur) var(--primitive-shadow-4-spread) var(--primitive-color-shadow-4);
 }

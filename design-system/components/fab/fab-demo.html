@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FAB — Demo</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../../tokens/primitives.css" />
+  <link rel="stylesheet" href="../../tokens/semantic.css" />
+  <link rel="stylesheet" href="../../tokens/components.css" />
+  <link rel="stylesheet" href="fab.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'Inter', sans-serif; font-size: 14px; color: #121212; background: #f5f5f5; padding: 48px 40px; }
+    h1 { font-size: 20px; font-weight: 600; margin-bottom: 8px; }
+    .page-description { font-size: 13px; color: #5c5c5c; margin-bottom: 40px; max-width: 560px; }
+    .demo-section { margin-bottom: 48px; }
+    .demo-section__title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: #5c5c5c; margin-bottom: 16px; }
+    .demo-section__note { font-size: 12px; color: #5c5c5c; margin-top: 12px; }
+    .demo-row { display: flex; flex-wrap: wrap; align-items: center; gap: 24px; margin-bottom: 12px; }
+    .demo-row__label { font-size: 11px; color: #5c5c5c; width: 72px; flex-shrink: 0; }
+    .demo-divider { border: none; border-top: 1px solid #dedede; margin: 40px 0; }
+    .is-hover-demo { background-color: var(--fab-bg-hover) !important; }
+    .is-focus-demo { background-color: var(--fab-bg-focus) !important; outline: 2px solid var(--fab-border-focus) !important; outline-offset: 2px !important; }
+    .is-active-demo { background-color: var(--fab-bg-active) !important; }
+    .demo-fixed { position: fixed; bottom: 24px; right: 24px; z-index: 50; }
+  </style>
+</head>
+<body>
+
+  <h1>Floating Action Button (FAB)</h1>
+  <p class="page-description">
+    56×56px circular elevated button with eagle artwork.
+    Uses design-system/icons/eagle-headset.svg.
+    Source: Figma DS-course · node 286:610.
+  </p>
+
+  <section class="demo-section">
+    <p class="demo-section__title">States</p>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Default</span>
+      <button type="button" class="fab" aria-label="Open chat assistant" title="Open chat assistant">
+        <img class="fab__icon" src="../../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Hover</span>
+      <button type="button" class="fab is-hover-demo" aria-label="Open chat assistant" tabindex="-1">
+        <img class="fab__icon" src="../../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Focus</span>
+      <button type="button" class="fab is-focus-demo" aria-label="Open chat assistant" tabindex="-1">
+        <img class="fab__icon" src="../../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Active</span>
+      <button type="button" class="fab is-active-demo" aria-label="Open chat assistant" tabindex="-1">
+        <img class="fab__icon" src="../../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
+
+    <div class="demo-row">
+      <span class="demo-row__label">Disabled</span>
+      <button type="button" class="fab" aria-label="Open chat assistant" disabled>
+        <img class="fab__icon" src="../../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
+
+    <p class="demo-section__note">Tab through the live button below for real focus ring and keyboard activation.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <section class="demo-section">
+    <p class="demo-section__title">Live — Keyboard & Click</p>
+    <div class="demo-row">
+      <button type="button" class="fab" aria-label="Open chat assistant" title="Open chat assistant" onclick="alert('FAB clicked!')">
+        <img class="fab__icon" src="../../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+      </button>
+    </div>
+    <p class="demo-section__note">Click or press Enter/Space to activate.</p>
+  </section>
+
+  <hr class="demo-divider" />
+
+  <section class="demo-section">
+    <p class="demo-section__title">Floating position (bottom-right)</p>
+    <p class="demo-section__note">FAB fixed at bottom-right corner — positioning is application responsibility.</p>
+  </section>
+
+  <div class="demo-fixed">
+    <button type="button" class="fab" aria-label="Open chat assistant" title="Open chat assistant">
+      <img class="fab__icon" src="../../icons/eagle-headset.svg" alt="" aria-hidden="true" />
+    </button>
+  </div>
+
+</body>
+</html>
