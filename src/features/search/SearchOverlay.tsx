@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui";
 import { EXAMPLE_QUESTIONS } from "@/lib/rag/examples";
 import { useSearch } from "./useSearch";
 import { SearchAnswerView } from "./SearchAnswerView";
@@ -135,13 +136,13 @@ export function SearchOverlay({
               <ul className="mt-3 flex flex-wrap gap-2">
                 {EXAMPLE_QUESTIONS.map((q) => (
                   <li key={q}>
-                    <button
-                      type="button"
+                    <Button
+                      variant="secondary"
+                      size="sm"
                       onClick={() => submit(q)}
-                      className="rounded-full border border-lc-line bg-white px-3 py-1.5 text-sm text-lc-blue hover:border-lc-blue hover:bg-lc-blue-light"
                     >
                       {q}
-                    </button>
+                    </Button>
                   </li>
                 ))}
               </ul>
@@ -158,6 +159,21 @@ export function SearchOverlay({
           {response && status !== "submitting" ? (
             <div aria-live="polite">
               <SearchAnswerView response={response} onSelectSuggestion={submit} />
+              {response.kind === "clarification" && response.suggestedQuestions.length > 0 ? (
+                <ul className="mt-4 flex flex-wrap gap-2">
+                  {response.suggestedQuestions.map((q) => (
+                    <li key={q}>
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => submit(q)}
+                      >
+                        {q}
+                      </Button>
+                    </li>
+                  ))}
+                </ul>
+              ) : null}
               {response.kind === "answered" ? (
                 <button
                   type="button"

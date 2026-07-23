@@ -64,12 +64,16 @@ export function SiteHeader() {
     return () => document.removeEventListener("keydown", onKey);
   }, [searchOpen, closeSearch]);
 
-  const submitSearch = (e: React.FormEvent) => {
-    e.preventDefault();
-    const q = query.trim();
+  const executeSearch = useCallback((searchQuery: string) => {
+    const q = searchQuery.trim();
     if (!q) return;
     closeSearch();
     router.push(`/search?q=${encodeURIComponent(q)}`);
+  }, [closeSearch, router]);
+
+  const submitSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    executeSearch(query);
   };
 
   return (
@@ -164,10 +168,10 @@ export function SiteHeader() {
             id="site-search-panel"
             role="region"
             aria-label="Site search"
-            className="absolute inset-x-0 top-full z-50 bg-lc-navy shadow-lg"
+            className="absolute inset-x-0 top-full z-50 bg-white shadow-lg"
           >
             <div className="mx-auto max-w-site px-4 py-6 sm:py-8">
-              <h2 className="mb-4 text-center text-lg font-bold text-white sm:text-xl">
+              <h2 className="mb-4 text-center text-lg font-bold text-lc-ink sm:text-xl">
                 Search West Hills
               </h2>
 
@@ -206,7 +210,7 @@ export function SiteHeader() {
                 </div>
                 <button
                   type="submit"
-                  className="btn btn--secondary"
+                  className="btn btn--primary"
                   aria-label="Search"
                 >
                   Search
@@ -215,7 +219,7 @@ export function SiteHeader() {
 
               {/* FAQ suggestions — DS Secondary Buttons */}
               <div className="mx-auto mt-6 max-w-2xl">
-                <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-white/80">
+                <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-lc-slate">
                   Try asking
                 </h3>
                 <div className="flex flex-wrap gap-2">
@@ -227,7 +231,7 @@ export function SiteHeader() {
                       style={{ whiteSpace: "normal", textAlign: "left" }}
                       onClick={() => {
                         setQuery(question);
-                        inputRef.current?.focus();
+                        executeSearch(question);
                       }}
                     >
                       {question}
@@ -242,7 +246,6 @@ export function SiteHeader() {
               onClick={closeSearch}
               aria-label="Close site search"
               className="btn btn--icon absolute right-3 top-3 sm:right-5 sm:top-4"
-              style={{ color: "rgba(255,255,255,0.7)" }}
             >
               <svg className="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
                 <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />

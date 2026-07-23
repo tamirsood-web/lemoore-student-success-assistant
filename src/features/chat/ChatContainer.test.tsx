@@ -186,11 +186,14 @@ describe("ChatContainer — error handling", () => {
     render(<ChatContainer maxInputChars={2000} />);
     await ask("What are the admissions office hours?");
 
-    const alert = await screen.findByRole("alert");
-    expect(alert).toHaveTextContent(/something went wrong/i);
+    // Fallback message is rendered inside a MessageBubble (answer role).
+    const errorText = await screen.findByText(/something went wrong/i);
+    expect(errorText).toBeInTheDocument();
     // Raw internal error detail is never surfaced.
-    expect(alert).not.toHaveTextContent(/ECONNREFUSED/);
-    expect(alert).not.toHaveTextContent(/secret stack internals/);
+    expect(errorText.closest("[role=log]")!.textContent).not.toContain("ECONNREFUSED");
+    expect(errorText.closest("[role=log]")!.textContent).not.toContain(
+      "secret stack internals",
+    );
 
     // Prior conversation remains usable and the request can be retried.
     expect(screen.getByLabelText("Your question")).toBeEnabled();

@@ -14,6 +14,7 @@ import type {
   OfficialSourceCitation,
   WebsiteSearchResponse,
 } from "@/types";
+import { FALLBACK_MESSAGES } from "@/lib/fallback-messages";
 import { isApprovedOfficialUrl } from "@/lib/validation";
 
 // Loose shapes — Bedrock metadata is arbitrary JSON; we read defensively.
@@ -35,8 +36,7 @@ export type BedrockRagOutput = {
 
 const MAX_EXCERPT = 500;
 const UNSUPPORTED_MESSAGE =
-  "I couldn't find a verified answer to that in the official Lemoore College sources. " +
-  "Try rephrasing, or contact the relevant college office directly.";
+  `${FALLBACK_MESSAGES.noReliableAnswer.heading} ${FALLBACK_MESSAGES.noReliableAnswer.guidance}`;
 
 function clean(text: string): string {
   return text.replace(/\s+/g, " ").trim();

@@ -52,7 +52,7 @@ describe("FeedbackControls", () => {
     vi.stubGlobal("fetch", fetchMock);
 
     render(<FeedbackControls conversationId="turn-2" />);
-    await user.click(screen.getByRole("button", { name: "Unhelpful" }));
+    await user.click(screen.getByRole("button", { name: "Not helpful" }));
 
     await waitFor(() =>
       expect(feedbackBody(fetchMock)).toEqual({
@@ -70,7 +70,7 @@ describe("FeedbackControls", () => {
     render(<FeedbackControls conversationId="turn-3" />);
     await user.click(screen.getByRole("button", { name: "Helpful" }));
 
-    expect(await screen.findByText("Thanks for the feedback.")).toBeInTheDocument();
+    expect(await screen.findByText("Thank you for your response.")).toBeInTheDocument();
     // Buttons are gone once feedback succeeded, so it cannot be sent twice.
     expect(screen.queryByRole("button", { name: "Helpful" })).not.toBeInTheDocument();
     expect(fetchMock).toHaveBeenCalledTimes(1);
@@ -90,13 +90,13 @@ describe("FeedbackControls", () => {
     await user.click(helpful);
     // While submitting, both controls are disabled.
     expect(helpful).toBeDisabled();
-    expect(screen.getByRole("button", { name: "Unhelpful" })).toBeDisabled();
+    expect(screen.getByRole("button", { name: "Not helpful" })).toBeDisabled();
 
-    await user.click(screen.getByRole("button", { name: "Unhelpful" }));
+    await user.click(screen.getByRole("button", { name: "Not helpful" }));
     expect(fetchMock).toHaveBeenCalledTimes(1);
 
     resolve?.(okResponse());
-    await screen.findByText("Thanks for the feedback.");
+    await screen.findByText("Thank you for your response.");
   });
 
   it("keeps the chat usable when feedback fails", async () => {
