@@ -123,7 +123,7 @@
    *            Bubble/Padding/X, Bubble/Padding/Y,
    *            Bubble/Border/Default, Bubble/Border/Point
    * ───────────────────────────────────────────── */
-  --semantic-color-bubble-agent:    var(--primitive-color-gray-200);   /* Bubble/Color/Agent    */
+  --semantic-color-bubble-agent:    var(--primitive-color-gray-100);   /* Bubble/Color/Agent: #ebecf2 */
   --semantic-color-bubble-user:     var(--primitive-color-blue-100);   /* Bubble/Color/User     */
 
   --semantic-space-bubble-padding-x: var(--primitive-space-24);        /* Bubble/Padding/X      */

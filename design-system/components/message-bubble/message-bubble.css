@@ -95,6 +95,6 @@
 .message-bubble__sources {
   display:   flex;
   flex-wrap: wrap;
-  gap:       8px;
+  gap:       var(--bubble-sources-gap);
   margin-top: 12px;
 }
