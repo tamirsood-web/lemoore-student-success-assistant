@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import type { WebsiteSearchResponse } from "@/types";
 import { EXAMPLE_QUESTIONS } from "@/lib/rag/examples";
 import { SearchAnswerView } from "@/features/search/SearchAnswerView";
+import { FeedbackControls } from "@/features/chat/feedback/FeedbackControls";
 
 type Turn = {
   readonly id: number;
@@ -305,6 +306,29 @@ export function AssistantWidget() {
                             )}
                           </div>
                         </div>
+
+                        {/* Suggested questions — rendered outside the bubble as interactive UI controls */}
+                        {turn.response !== null && turn.response.kind === "clarification" && turn.response.suggestedQuestions.length > 0 ? (
+                          <ul style={{ display: "flex", flexWrap: "wrap", gap: 8, marginTop: 4 }}>
+                            {turn.response.suggestedQuestions.map((q) => (
+                              <li key={q} style={{ listStyle: "none" }}>
+                                <button
+                                  type="button"
+                                  onClick={() => ask(q)}
+                                  className="btn btn--secondary"
+                                  style={{ fontSize: 14 }}
+                                >
+                                  {q}
+                                </button>
+                              </li>
+                            ))}
+                          </ul>
+                        ) : null}
+
+                        {/* Feedback controls — shown after every completed response */}
+                        {turn.response !== null ? (
+                          <FeedbackControls conversationId={String(turn.id)} />
+                        ) : null}
                       </div>
                     ))}
                   </div>

@@ -72,7 +72,7 @@ export function ChatInput({
           {value.length}/{maxInputChars} · Press Ctrl+Enter to send
         </p>
         <Button type="submit" disabled={!canSubmit}>
-          {pending ? <Spinner label="Sending…" /> : "Send"}
+          {pending ? <Spinner label="Thinking" /> : "Send"}
         </Button>
       </div>
       {errorMessage ? (

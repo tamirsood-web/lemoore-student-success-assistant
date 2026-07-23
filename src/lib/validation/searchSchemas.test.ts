@@ -55,7 +55,7 @@ describe("websiteSearchResponseSchema", () => {
     const ok = {
       kind: "unsupported",
       query: "q",
-      message: "No verified answer.",
+      message: "I couldn\u2019t find any official information that matches your question.",
       relatedResults: [],
     };
     expect(websiteSearchResponseSchema.safeParse(ok).success).toBe(true);

@@ -2,13 +2,17 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import type { AssistantResponse } from "@/types";
+import type { FallbackScenario } from "@/lib/fallback-messages";
 import type { ChatState, Turn } from "./states";
 import { ChatInput } from "./ChatInput";
 import { MessageList } from "./MessageList";
 import { EmptyState } from "./EmptyState";
 
-const GENERIC_ERROR =
-  "Sorry — something went wrong while getting your answer. Please try again.";
+/** Shape of error responses from the API (non-2xx). */
+type ErrorPayload = { fallbackScenario?: FallbackScenario };
+
+/** Shape of a success response that may carry an optional fallbackScenario. */
+type SuccessPayload = AssistantResponse & { fallbackScenario?: FallbackScenario };
 
 export interface ChatContainerProps {
   /** Server-validated maximum input length, passed down from the server page. */
@@ -60,8 +64,47 @@ export function ChatContainer({ maxInputChars }: ChatContainerProps) {
           body: JSON.stringify({ message: question }),
           signal: controller.signal,
         });
-        if (!res.ok) throw new Error("Request failed");
-        const response = (await res.json()) as AssistantResponse;
+
+        if (!res.ok) {
+          // Non-2xx: extract fallbackScenario from the error payload.
+          let scenario: FallbackScenario = "technicalError";
+          try {
+            const errBody = (await res.json()) as ErrorPayload;
+            if (errBody.fallbackScenario) {
+              scenario = errBody.fallbackScenario;
+            }
+          } catch {
+            // JSON parsing failed — keep technicalError.
+          }
+          setTurns((prev) =>
+            prev.map((turn) =>
+              turn.id === id
+                ? { ...turn, state: { kind: "failed", scenario } }
+                : turn,
+            ),
+          );
+          setState({ status: "error" });
+          return;
+        }
+
+        const payload = (await res.json()) as SuccessPayload;
+
+        // If the server attached a fallbackScenario, render the fallback message
+        // instead of the normal assistant answer.
+        if (payload.fallbackScenario) {
+          setTurns((prev) =>
+            prev.map((turn) =>
+              turn.id === id
+                ? { ...turn, state: { kind: "fallback", scenario: payload.fallbackScenario! } }
+                : turn,
+            ),
+          );
+          setState({ status: "ready" });
+          return;
+        }
+
+        // Normal grounded answer.
+        const { fallbackScenario: _, ...response } = payload;
         setTurns((prev) =>
           prev.map((turn) =>
             turn.id === id
@@ -75,11 +118,11 @@ export function ChatContainer({ maxInputChars }: ChatContainerProps) {
         setTurns((prev) =>
           prev.map((turn) =>
             turn.id === id
-              ? { ...turn, state: { kind: "failed", message: GENERIC_ERROR } }
+              ? { ...turn, state: { kind: "failed", scenario: "technicalError" } }
               : turn,
           ),
         );
-        setState({ status: "error", message: GENERIC_ERROR });
+        setState({ status: "error" });
       } finally {
         if (abortRef.current === controller) abortRef.current = null;
       }

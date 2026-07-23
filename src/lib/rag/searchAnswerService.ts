@@ -9,6 +9,7 @@
 // Local mode makes no network/AWS calls and is fully usable offline and in tests.
 
 import type { WebsiteSearchResponse, OfficialSourceCitation } from "@/types";
+import { FALLBACK_MESSAGES } from "@/lib/fallback-messages";
 import { rewriteQuery } from "./queryRewriter";
 import { localRetriever, type KnowledgeRetriever } from "./retriever";
 import { rerank, type RankedSource } from "./reranker";
@@ -27,13 +28,10 @@ const MIN_MATCHED_TERMS = 2;
 const MAX_RELATED = 3;
 
 const UNSUPPORTED_MESSAGE =
-  "I couldn't find a verified answer to that in the official Lemoore College sources. " +
-  "Try rephrasing, or contact the relevant college office directly. You can also browse " +
-  "the related official pages below.";
+  `${FALLBACK_MESSAGES.noSearchResults.heading} ${FALLBACK_MESSAGES.noSearchResults.guidance}`;
 
 const CLARIFICATION_MESSAGE =
-  "I'm not sure exactly what you're looking for. Did you mean one of these? You can also " +
-  "rephrase your question with a bit more detail.";
+  `${FALLBACK_MESSAGES.needsMoreInformation.heading} ${FALLBACK_MESSAGES.needsMoreInformation.guidance}`;
 
 function isStrong(page: RankedSource): boolean {
   return page.score >= STRONG_SCORE || page.matchedTerms.length >= MIN_MATCHED_TERMS;

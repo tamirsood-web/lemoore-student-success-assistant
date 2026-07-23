@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { Button } from "@/components/ui";
 import { useSearch } from "./useSearch";
 import { SearchAnswerView } from "./SearchAnswerView";
 
@@ -85,6 +86,21 @@ export function SearchResultsView() {
         {response && status !== "submitting" ? (
           <div aria-live="polite">
             <SearchAnswerView response={response} onSelectSuggestion={(q) => router.push(`/search?q=${encodeURIComponent(q)}`)} />
+            {response.kind === "clarification" && response.suggestedQuestions.length > 0 ? (
+              <ul className="mt-4 flex flex-wrap gap-2">
+                {response.suggestedQuestions.map((q) => (
+                  <li key={q}>
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() => router.push(`/search?q=${encodeURIComponent(q)}`)}
+                    >
+                      {q}
+                    </Button>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         ) : null}
       </div>

@@ -63,8 +63,8 @@ describe("ChatInput", () => {
   it("blocks submission while a request is pending", async () => {
     const user = userEvent.setup();
     const { onSubmit } = setup({ pending: true });
-    // Pending shows a Sending… status and the submit control is disabled.
-    expect(screen.getByRole("status")).toHaveTextContent("Sending…");
+    // Pending shows a Thinking status and the submit control is disabled.
+    expect(screen.getByRole("status")).toHaveTextContent("Thinking");
     const send = screen.getByRole("button");
     expect(send).toBeDisabled();
     await user.click(send);

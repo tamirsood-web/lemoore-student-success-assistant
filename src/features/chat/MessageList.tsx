@@ -1,5 +1,7 @@
 import type { AssistantResponse, Confidence } from "@/types";
 import { Spinner } from "@/components/ui";
+import type { FallbackScenario } from "@/lib/fallback-messages";
+import { CONTACT, FALLBACK_MESSAGES } from "@/lib/fallback-messages";
 import type { Turn } from "./states";
 import { MessageBubble } from "./MessageBubble";
 import { CitationList } from "./citations/CitationList";
@@ -56,10 +58,11 @@ export function MessageList({
 
           {turn.state.kind === "pending" ? (
             <Spinner label="Finding an answer…" />
-          ) : turn.state.kind === "failed" ? (
-            <p role="alert" className="text-sm text-foreground">
-              {turn.state.message}
-            </p>
+          ) : turn.state.kind === "fallback" || turn.state.kind === "failed" ? (
+            <div className="flex flex-col">
+              <FallbackAnswer scenario={turn.state.scenario} />
+              <FeedbackControls conversationId={turn.id} />
+            </div>
           ) : (
             <AssistantAnswer
               response={turn.state.response}
@@ -71,6 +74,49 @@ export function MessageList({
         </div>
       ))}
     </div>
+  );
+}
+
+/** Renders a fallback or error message with actionable contact details. */
+function FallbackAnswer({ scenario }: { readonly scenario: FallbackScenario }) {
+  const { heading, guidance } = FALLBACK_MESSAGES[scenario];
+  const labelColor = "var(--semantic-color-text-muted)";
+
+  return (
+    <MessageBubble role="answer">
+      <div className="flex flex-col gap-3">
+        <p>{heading}</p>
+        <p>{guidance}</p>
+        <dl className="flex flex-col gap-1">
+          <div>
+            <span style={{ color: labelColor }}>Email: </span>
+            <a
+              href={`mailto:${CONTACT.email}`}
+              className="text-accent underline underline-offset-2"
+            >
+              {CONTACT.email}
+            </a>
+          </div>
+          <div>
+            <span style={{ color: labelColor }}>Lemoore Student Services: </span>
+            <a
+              href={`tel:${CONTACT.phoneTel}`}
+              className="text-accent underline underline-offset-2"
+            >
+              {CONTACT.phone}
+            </a>
+          </div>
+          <div>
+            <span style={{ color: labelColor }}>Hours: </span>
+            <span>{CONTACT.hours}</span>
+          </div>
+          <div>
+            <span style={{ color: labelColor }}>Location: </span>
+            <span>{CONTACT.location}</span>
+          </div>
+        </dl>
+      </div>
+    </MessageBubble>
   );
 }
 

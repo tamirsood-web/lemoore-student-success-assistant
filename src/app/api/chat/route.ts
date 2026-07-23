@@ -7,6 +7,7 @@
 
 import { NextResponse } from "next/server";
 import type { EscalationDecision, RetrievalResult } from "@/types";
+import type { FallbackScenario } from "@/lib/fallback-messages";
 import { parseChatRequest } from "@/lib/validation";
 import {
   screen,
@@ -19,11 +20,6 @@ import { redact } from "@/lib/utils/redact";
 
 export const runtime = "nodejs";
 
-const GENERIC_ERROR_MESSAGE =
-  "Something went wrong while handling your request. Please try again.";
-const UNREADABLE_REQUEST_MESSAGE =
-  "We couldn't read your request. Please try again.";
-
 // Placeholders for the guardrail-rejection branch, where retrieval/escalation are skipped.
 const EMPTY_RESULT: RetrievalResult = { intent: "source", snippets: [] };
 const NO_ESCALATION: EscalationDecision = {
@@ -31,8 +27,36 @@ const NO_ESCALATION: EscalationDecision = {
   confidence: "low",
 };
 
-function errorResponse(status: number, message: string): NextResponse {
-  return NextResponse.json({ message }, { status });
+function errorResponse(
+  status: number,
+  fallbackScenario: FallbackScenario,
+): NextResponse {
+  return NextResponse.json({ fallbackScenario }, { status });
+}
+
+/**
+ * Determine the fallback scenario for a non-grounded response based on the structured
+ * retrieval and escalation state. Prefers structured status over text matching.
+ */
+function resolveFallbackScenario(
+  result: RetrievalResult,
+  escalation: EscalationDecision,
+): FallbackScenario | null {
+  // No snippets returned → noSearchResults
+  if (result.snippets.length === 0) {
+    // If the query needed identifiers (course-date disambiguation), suggest more info.
+    if (result.intent === "course-date" && result.needsIdentifiers) {
+      return "needsMoreInformation";
+    }
+    return "noSearchResults";
+  }
+
+  // Snippets found but escalation still recommended → noReliableAnswer
+  if (escalation.escalationRecommended) {
+    return "noReliableAnswer";
+  }
+
+  return null;
 }
 
 export async function POST(request: Request): Promise<NextResponse> {
@@ -43,12 +67,12 @@ export async function POST(request: Request): Promise<NextResponse> {
     try {
       body = await request.json();
     } catch {
-      return errorResponse(400, UNREADABLE_REQUEST_MESSAGE);
+      return errorResponse(400, "technicalError");
     }
 
     const parsed = parseChatRequest(body);
     if (!parsed.success) {
-      return NextResponse.json(parsed, { status: 400 });
+      return errorResponse(400, "technicalError");
     }
     const { message } = parsed.data;
 
@@ -90,11 +114,17 @@ export async function POST(request: Request): Promise<NextResponse> {
       startedAt,
     });
 
-    // 9. Typed JSON.
+    // 9. Attach fallback scenario when the response is not a grounded answer.
+    const fallbackScenario = resolveFallbackScenario(result, escalation);
+    if (fallbackScenario) {
+      return NextResponse.json({ ...response, fallbackScenario }, { status: 200 });
+    }
+
+    // 10. Typed JSON (grounded answer).
     return NextResponse.json(response, { status: 200 });
   } catch {
     // Never leak internal detail.
-    return errorResponse(500, GENERIC_ERROR_MESSAGE);
+    return errorResponse(500, "technicalError");
   }
 }
 
