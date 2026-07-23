@@ -33,7 +33,7 @@ export {
   type NovaEvent,
 } from "./events";
 
-export { buildSystemPrompt, ASSISTANT_NAME } from "./systemPrompt";
+export { buildSystemPrompt, ASSISTANT_NAME, GREETING } from "./systemPrompt";
 
 export {
   KB_TOOL_NAME,

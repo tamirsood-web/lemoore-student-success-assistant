@@ -6,10 +6,10 @@
 
 import type { WebsiteSearchResponse } from "@/types";
 
-/** The AI's opening line when a caller answers the simulated call. */
-export const GREETING =
-  "Thank you for calling Lemoore College Student Support. I'm the virtual student assistant. " +
-  "How can I help you today?";
+// The AI's opening line when a caller answers the simulated call. Re-exported from the Nova
+// system-prompt module so the voice greeting and the text-only fallback greeting stay identical
+// (one canonical wording, spoken exactly once per call).
+export { GREETING } from "@/lib/nova-sonic/systemPrompt";
 
 /** Safe spoken/displayed line for a network/unknown failure (no internal detail). */
 export const CALL_ERROR_MESSAGE =

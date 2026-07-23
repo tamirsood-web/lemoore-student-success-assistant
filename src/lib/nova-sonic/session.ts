@@ -65,11 +65,24 @@ export class NovaInputQueue implements AsyncIterable<InputChunk> {
 }
 
 export type NovaSession = {
+  /** Idempotent: (re)sending the opening sequence after it has been sent once is a no-op. */
+  start(): void;
   sendAudio(base64: string): void;
   sendToolResult(toolUseId: string, resultJson: string): void;
   end(): Promise<void>;
+  /** The single prompt id for this call (activePromptId). Stable for the whole session. */
   readonly promptName: string;
+  /** The single continuous user-audio content id for this call (activeAudioContentId). */
+  readonly audioContentName: string;
   isActive(): boolean;
+  /**
+   * True once the one-time opening sequence (sessionStart + promptStart + SYSTEM prompt) has been
+   * queued. That system prompt is what makes Nova speak the greeting, so this is only ever set
+   * once per call and never re-sent — the greeting cannot repeat from a resent opening.
+   */
+  greetingSent(): boolean;
+  /** Number of tool results injected into this session (grows across turns; one session). */
+  toolRunCount(): number;
 };
 
 export type CreateNovaSessionOptions = {
@@ -95,21 +108,35 @@ export async function createNovaSession(opts: CreateNovaSessionOptions): Promise
   const systemContentName = opts.newId("system");
   let active = true;
   let closed = false;
+  // Per-call lifecycle state. `greetingSent` guards the ONE-TIME opening (promptStart + SYSTEM
+  // prompt), which is what makes Nova speak the greeting; `toolRuns` counts tool injections.
+  let greetingSent = false;
+  let toolRuns = 0;
 
-  // 1) Opening sequence: session + prompt (tools) + system content.
-  for (const event of buildOpeningSequence({
-    promptName,
-    systemContentName,
-    systemPrompt: opts.systemPrompt,
-    voiceId: opts.voiceId,
-    tools: opts.tools,
-  })) {
-    queue.push(event);
+  // Idempotent opening: queue sessionStart + promptStart (tools) + the SYSTEM prompt, then open
+  // the ONE continuous user-audio content for the whole call. Calling this again is a no-op, so a
+  // second start (or any later turn) can never re-send the system prompt or re-trigger the
+  // greeting. The greeting therefore happens exactly once per Nova session.
+  function sendOpeningSequence(): void {
+    if (greetingSent) return;
+    greetingSent = true;
+    for (const event of buildOpeningSequence({
+      promptName,
+      systemContentName,
+      systemPrompt: opts.systemPrompt,
+      voiceId: opts.voiceId,
+      tools: opts.tools,
+    })) {
+      queue.push(event);
+    }
+    // Open ONE continuous user audio content for the whole call.
+    queue.push(contentStartAudioUser({ promptName, contentName: audioContentName }));
   }
-  // 2) Open ONE continuous user audio content for the whole call.
-  queue.push(contentStartAudioUser({ promptName, contentName: audioContentName }));
 
-  // 3) Open the bidirectional stream.
+  // Send the opening exactly once at session creation.
+  sendOpeningSequence();
+
+  // Open the bidirectional stream.
   const output = await opts.invoke({ modelId: opts.modelId, body: queue });
 
   // 4) Read output events → normalize → hand to the consumer.
@@ -143,13 +170,24 @@ export async function createNovaSession(opts: CreateNovaSessionOptions): Promise
 
   return {
     promptName,
+    audioContentName,
     isActive: () => active,
+    greetingSent: () => greetingSent,
+    toolRunCount: () => toolRuns,
+    // Idempotent no-op after creation: never re-sends the opening/system prompt or re-greets.
+    start(): void {
+      if (!active) return;
+      sendOpeningSequence();
+    },
     sendAudio(base64: string): void {
       if (!active) return;
       queue.push(audioInput({ promptName, contentName: audioContentName, base64 }));
     },
     sendToolResult(toolUseId: string, resultJson: string): void {
       if (!active) return;
+      toolRuns += 1;
+      // Inject the tool result into the SAME prompt/session — never a new prompt or session, so a
+      // tool result continues the current call and cannot trigger another greeting.
       const contentName = opts.newId("tool");
       queue.push(contentStartToolResult({ promptName, contentName, toolUseId }));
       queue.push(toolResultEvent({ promptName, contentName, content: resultJson }));
