@@ -69,7 +69,7 @@ describe("SearchOverlay", () => {
     expect(
       await screen.findByRole("heading", { name: /^answer$/i }),
     ).toBeInTheDocument();
-    const link = await screen.findByRole("link", { name: /open official source/i });
+    const link = await screen.findByRole("link", { name: /source link/i });
     expect(link).toHaveAttribute("href", "https://lemoorecollege.edu/resources/transcripts.php");
     expect(link).toHaveAttribute("target", "_blank");
     expect(link).toHaveAttribute("rel", expect.stringContaining("noopener"));

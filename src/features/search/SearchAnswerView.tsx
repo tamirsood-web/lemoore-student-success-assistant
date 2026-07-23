@@ -74,14 +74,14 @@ export function SearchAnswerView({
         </div>
         {response.relatedResults.length > 0 ? (
           <div>
-            <h3 className="text-sm font-bold uppercase tracking-wide text-lc-slate">
+            <h3 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
               Related official pages
             </h3>
-            <ul className="mt-3 space-y-3">
-              {response.relatedResults.map((c, i) => (
-                <CitationCard key={c.id} citation={c} index={i + 1} />
+            <ol style={{ marginTop: 8, paddingLeft: 20, listStyleType: "decimal", display: "flex", flexDirection: "column", gap: 4 }}>
+              {response.relatedResults.map((c) => (
+                <CitationCard key={c.id} citation={c} />
               ))}
-            </ul>
+            </ol>
           </div>
         ) : null}
         <p className="text-xs text-lc-slate">{PROTOTYPE_NOTE}</p>
@@ -93,7 +93,7 @@ export function SearchAnswerView({
   return (
     <div className="space-y-6">
       <div>
-        <h2 className="text-sm font-bold uppercase tracking-wide text-lc-blue">
+        <h2 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
           Answer
         </h2>
         <div className="mt-2">
@@ -102,30 +102,26 @@ export function SearchAnswerView({
       </div>
 
       <div>
-        <h3 className="text-sm font-bold uppercase tracking-wide text-lc-slate">
+        <h3 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
           Sources
         </h3>
-        <ul className="mt-3 space-y-3">
-          {response.citations.map((c, i) => (
-            <CitationCard key={c.id} citation={c} index={i + 1} />
+        <ol style={{ marginTop: 8, paddingLeft: 20, listStyleType: "decimal", display: "flex", flexDirection: "column", gap: 4 }}>
+          {response.citations.map((c) => (
+            <CitationCard key={c.id} citation={c} />
           ))}
-        </ul>
+        </ol>
       </div>
 
       {response.relatedResults.length > 0 ? (
         <div>
-          <h3 className="text-sm font-bold uppercase tracking-wide text-lc-slate">
+          <h3 className="text-sm font-bold uppercase tracking-wide" style={{ color: "var(--semantic-color-text-default)" }}>
             Related official pages
           </h3>
-          <ul className="mt-3 space-y-3">
-            {response.relatedResults.map((c, i) => (
-              <CitationCard
-                key={c.id}
-                citation={c}
-                index={response.citations.length + i + 1}
-              />
+          <ol style={{ marginTop: 8, paddingLeft: 20, listStyleType: "decimal", display: "flex", flexDirection: "column", gap: 4 }}>
+            {response.relatedResults.map((c) => (
+              <CitationCard key={c.id} citation={c} />
             ))}
-          </ul>
+          </ol>
         </div>
       ) : null}
 
