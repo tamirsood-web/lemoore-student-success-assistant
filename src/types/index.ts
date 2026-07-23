@@ -13,6 +13,9 @@ export type {
   InsufficientEvidenceResponse,
   SafeRejectionResponse,
   AssistantResponse,
+  LocationCardData,
+  ComparisonOption,
+  ComparisonBlockData,
 } from "./assistant";
 
 export type {
@@ -31,7 +34,7 @@ export type {
   RetrievalResult,
 } from "./retrieval";
 
-export type { ChatRequestBody, FeedbackInput, FeedbackRequestBody } from "./chat";
+export type { ChatRequestBody, FeedbackInput, FeedbackRequestBody, HistoryTurn } from "./chat";
 
 export type { LogMode, RedactedLogRecord, RedactInput } from "./logging";
 

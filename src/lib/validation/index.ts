@@ -19,6 +19,9 @@ export {
 
 export {
   FEEDBACK_REASON_MAX_CHARS,
+  HISTORY_CONTENT_MAX_CHARS,
+  HISTORY_MAX_TURNS,
+  HISTORY_MAX_ITEMS,
   buildChatRequestSchema,
   chatRequestSchema,
   feedbackRequestSchema,

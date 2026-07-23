@@ -9,6 +9,12 @@ const EXAMPLE_QUESTIONS: readonly string[] = [
   "Where can I find the academic calendar?",
   "What services are available to adult learners?",
   "How do I contact counseling?",
+  // Location flow
+  "Where is Admissions?",
+  "Where do I go for Financial Aid?",
+  // Comparison flow
+  "What's the difference between dropping and withdrawing?",
+  "What is the difference between census date and drop date?",
 ];
 
 export interface EmptyStateProps {

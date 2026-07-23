@@ -63,6 +63,49 @@ export type Section9Response = {
   readonly suggestedQuestions: readonly string[];
 };
 
+// ---------------------------------------------------------------------------
+// Location card — carried by a grounded response when the query asks where to go.
+// ---------------------------------------------------------------------------
+
+/**
+ * Structured location/contact data for a single department, shown as a dedicated UI card.
+ * All field values are demo data; never claim official accuracy.
+ */
+export type LocationCardData = {
+  readonly name: string;
+  readonly building?: string;
+  readonly hours?: string;
+  readonly phone?: string;
+  readonly email?: string;
+  readonly url?: string;
+  readonly mapUrl?: string;
+};
+
+// ---------------------------------------------------------------------------
+// Comparison block — carried by a grounded response when the query compares two concepts.
+// ---------------------------------------------------------------------------
+
+/** One side of a comparison (option A or option B). */
+export type ComparisonOption = {
+  readonly label: string;
+  readonly explanation: string;
+};
+
+/**
+ * Structured comparison data for two related college concepts, shown as a side-by-side
+ * (stacked on mobile) UI block. Grounded only from approved mock sources.
+ */
+export type ComparisonBlockData = {
+  readonly topic: string;
+  readonly optionA: ComparisonOption;
+  readonly optionB: ComparisonOption;
+  readonly keyDifferences: readonly string[];
+};
+
+// ---------------------------------------------------------------------------
+// Response variants
+// ---------------------------------------------------------------------------
+
 /** A grounded answer composed only from retrieved sources, with one or more citations. */
 export type GroundedResponse = {
   readonly kind: "grounded";
@@ -72,6 +115,10 @@ export type GroundedResponse = {
   readonly department?: string;
   readonly escalationRecommended: boolean;
   readonly suggestedQuestions: readonly string[];
+  /** Present when the query asked where an office is. */
+  readonly locationCard?: LocationCardData;
+  /** Present when the query asked to compare two concepts. */
+  readonly comparisonBlock?: ComparisonBlockData;
 };
 
 /**

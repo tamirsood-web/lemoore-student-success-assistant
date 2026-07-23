@@ -5,9 +5,20 @@
 // types. No client-supplied role/mode is represented here — mode is server-derived and
 // fixed to "public" in this phase (AGENTS.md §11).
 
+/**
+ * A single turn in the conversation history sent with a chat request.
+ * Only the last 4 settled turns are included; content is truncated client-side.
+ */
+export type HistoryTurn = {
+  readonly role: "user" | "assistant";
+  readonly content: string;
+};
+
 /** Validated body of `POST /api/chat`. */
 export type ChatRequestBody = {
   readonly message: string;
+  /** Recent conversation history (optional, max 4 turns). */
+  readonly history?: HistoryTurn[];
 };
 
 /**

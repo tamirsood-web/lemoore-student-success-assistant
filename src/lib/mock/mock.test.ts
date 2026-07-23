@@ -7,6 +7,8 @@ import {
   sourceTitles,
   getSourceById,
   MOCK_DATA_DISCLAIMER,
+  comparisons,
+  findComparison,
 } from "./index";
 
 const SOURCE_ID_PATTERN = /^src_[a-z0-9_]+$/;
@@ -143,5 +145,77 @@ describe("mock course dates", () => {
       (cd) => `${cd.term}|${cd.subject}|${cd.catalogNumber}|${cd.section}`,
     );
     expect(new Set(keys).size).toBe(keys.length);
+  });
+});
+
+describe("mock departments — new location fields", () => {
+  it("every department has a building field", () => {
+    for (const id of DEPARTMENT_IDS) {
+      expect(departments[id].building).toBeDefined();
+      expect(departments[id].building!.trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  it("every department has an hours field", () => {
+    for (const id of DEPARTMENT_IDS) {
+      expect(departments[id].hours).toBeDefined();
+      expect(departments[id].hours!.trim().length).toBeGreaterThan(0);
+    }
+  });
+
+  it("every department mapUrl points to the campus map", () => {
+    for (const id of DEPARTMENT_IDS) {
+      expect(departments[id].mapUrl).toBe("https://lemoorecollege.edu/map/");
+    }
+  });
+});
+
+describe("mock comparisons", () => {
+  it("has at least one comparison record", () => {
+    expect(comparisons.length).toBeGreaterThan(0);
+  });
+
+  it("every comparison references a real source id", () => {
+    for (const record of comparisons) {
+      expect(getSourceById(record.sourceId)).toBeDefined();
+    }
+  });
+
+  it("every comparison has non-empty matchPhrases", () => {
+    for (const record of comparisons) {
+      expect(record.matchPhrases.length).toBeGreaterThan(0);
+      for (const phrase of record.matchPhrases) {
+        expect(phrase.trim().length).toBeGreaterThan(0);
+      }
+    }
+  });
+
+  it("every comparison data block has topic, optionA, optionB, and keyDifferences", () => {
+    for (const record of comparisons) {
+      expect(record.data.topic.trim().length).toBeGreaterThan(0);
+      expect(record.data.optionA.label.trim().length).toBeGreaterThan(0);
+      expect(record.data.optionA.explanation.trim().length).toBeGreaterThan(0);
+      expect(record.data.optionB.label.trim().length).toBeGreaterThan(0);
+      expect(record.data.optionB.explanation.trim().length).toBeGreaterThan(0);
+      expect(Array.isArray(record.data.keyDifferences)).toBe(true);
+    }
+  });
+
+  it("findComparison returns the correct record for a known phrase", () => {
+    const result = findComparison("What's the difference between dropping and withdrawing?");
+    expect(result).toBeDefined();
+    expect(result?.data.topic).toBe("Dropping vs. Withdrawing");
+  });
+
+  it("findComparison returns undefined for an unknown topic", () => {
+    expect(findComparison("compare semester and trimester systems")).toBeUndefined();
+  });
+
+  it("matchPhrases are all lowercase (consistent with query lowercasing)", () => {
+    for (const record of comparisons) {
+      for (const phrase of record.matchPhrases) {
+        expect(phrase).toBe(phrase.toLowerCase());
+      }
+    }
   });
 });

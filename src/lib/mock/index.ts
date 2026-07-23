@@ -1,7 +1,7 @@
 // Barrel for the local mock knowledge dataset. Import from "@/lib/mock".
 //
 // Everything exported here is LOCAL DEMO DATA for development only — see the file headers
-// in ./sources.ts, ./courseDates.ts, and ./departments.ts.
+// in ./sources.ts, ./courseDates.ts, ./departments.ts, and ./comparisons.ts.
 
 export {
   type DepartmentId,
@@ -21,3 +21,9 @@ export {
 } from "./sources";
 
 export { courseDates } from "./courseDates";
+
+export {
+  type ComparisonRecord,
+  comparisons,
+  findComparison,
+} from "./comparisons";

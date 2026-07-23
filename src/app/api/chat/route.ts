@@ -1,9 +1,12 @@
 // POST /api/chat — public student chat endpoint (server-only).
 //
-// Runs the deterministic pipeline in a fixed order: validate → guardrail → (reject) →
-// retrieve → compose → escalate → normalize → redacted log → typed JSON. It reuses the
-// Group 3 validation and Group 5 seam implementations unchanged. No AWS/Bedrock/DynamoDB
-// calls; no client-supplied privileged fields are trusted (only `message` is read).
+// Pipeline order:
+//   validate → rewrite (follow-up → standalone) → guardrail → (reject) →
+//   retrieve → compose → escalate → normalize → redacted log → typed JSON
+//
+// History is accepted as optional context for the rewriter only. No client-supplied
+// privileged fields are trusted — only `message` and `history` are read, and history
+// is treated purely as data, never as instructions (prompt-injection resilience).
 
 import { NextResponse } from "next/server";
 import type { EscalationDecision, RetrievalResult } from "@/types";
@@ -14,6 +17,7 @@ import {
   composeAnswer,
   applyEscalationRules,
   toAssistantResponse,
+  rewriteIfFollowUp,
 } from "@/lib/bedrock";
 import { redact } from "@/lib/utils/redact";
 
@@ -50,12 +54,16 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (!parsed.success) {
       return NextResponse.json(parsed, { status: 400 });
     }
-    const { message } = parsed.data;
+    const { message, history } = parsed.data;
 
-    // 2. Guardrail screening (query treated purely as data).
-    const guardrail = screen(message);
+    // 2. Rewrite follow-up into a standalone question using history context.
+    //    History is data only — injected instructions inside history are inert.
+    const query = rewriteIfFollowUp(message, history);
 
-    // 3. Sensitive rejection → normal 200 typed AssistantResponse.
+    // 3. Guardrail screening (query treated purely as data).
+    const guardrail = screen(query);
+
+    // 4. Sensitive rejection → normal 200 typed AssistantResponse.
     if (!guardrail.ok) {
       const response = toAssistantResponse({
         guardrail,
@@ -63,17 +71,17 @@ export async function POST(request: Request): Promise<NextResponse> {
         composedAnswer: null,
         escalation: NO_ESCALATION,
       });
-      logInteraction(message, response.confidence, response.escalationRecommended, {
+      logInteraction(query, response.confidence, response.escalationRecommended, {
         category: guardrail.category,
         startedAt,
       });
       return NextResponse.json(response, { status: 200 });
     }
 
-    // 4–7. Retrieve → compose → escalate → normalize.
-    const result = await retrieve(message);
+    // 5–8. Retrieve → compose → escalate → normalize.
+    const result = await retrieve(query);
     const composedAnswer = composeAnswer(result);
-    const escalation = applyEscalationRules({ result, composedAnswer, query: message });
+    const escalation = applyEscalationRules({ result, composedAnswer, query });
     const response = toAssistantResponse({
       guardrail,
       result,
@@ -81,8 +89,8 @@ export async function POST(request: Request): Promise<NextResponse> {
       escalation,
     });
 
-    // 8. Redacted, minimized log only (never the raw prompt or a sensitive value).
-    logInteraction(message, response.confidence, response.escalationRecommended, {
+    // 9. Redacted, minimized log only (never the raw prompt or a sensitive value).
+    logInteraction(query, response.confidence, response.escalationRecommended, {
       category:
         response.kind === "insufficient_evidence"
           ? response.escalation.reason
@@ -90,7 +98,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       startedAt,
     });
 
-    // 9. Typed JSON.
+    // 10. Typed JSON.
     return NextResponse.json(response, { status: 200 });
   } catch {
     // Never leak internal detail.

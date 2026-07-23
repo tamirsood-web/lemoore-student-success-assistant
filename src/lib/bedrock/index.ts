@@ -6,3 +6,4 @@ export { screen } from "./guardrail";
 export { composeAnswer, ANSWER_SEPARATOR } from "./prompt";
 export { applyEscalationRules, escalationMessage } from "./escalation";
 export { toAssistantResponse } from "./normalize";
+export { rewriteIfFollowUp, isFollowUp } from "./rewrite";

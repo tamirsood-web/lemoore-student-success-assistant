@@ -4,6 +4,8 @@ import type { Turn } from "./states";
 import { MessageBubble } from "./MessageBubble";
 import { CitationList } from "./citations/CitationList";
 import { EscalationCard } from "./escalation/EscalationCard";
+import { LocationCard } from "./location/LocationCard";
+import { ComparisonBlock } from "./comparison/ComparisonBlock";
 import { FeedbackControls } from "./feedback/FeedbackControls";
 import { ExampleQuestions } from "./ExampleQuestions";
 
@@ -97,6 +99,14 @@ function AssistantAnswer({
         {confidenceLead(response.confidence)}
       </p>
       <MessageBubble role="answer">{response.answer}</MessageBubble>
+
+      {response.kind === "grounded" && response.locationCard ? (
+        <LocationCard location={response.locationCard} />
+      ) : null}
+
+      {response.kind === "grounded" && response.comparisonBlock ? (
+        <ComparisonBlock comparison={response.comparisonBlock} />
+      ) : null}
 
       <CitationList citations={response.citations} />
       <EscalationCard response={response} />

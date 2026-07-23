@@ -128,5 +128,7 @@ export const toAssistantResponse: ToAssistantResponseFn = (input) => {
     citations: nonEmptyCitations,
     escalationRecommended: false,
     suggestedQuestions,
+    ...(result.locationCard ? { locationCard: result.locationCard } : {}),
+    ...(result.comparisonBlock ? { comparisonBlock: result.comparisonBlock } : {}),
   };
 };

@@ -13,7 +13,37 @@ import { safeParse, type ValidationResult } from "./parse";
 /** Maximum length of an optional free-text feedback comment. */
 export const FEEDBACK_REASON_MAX_CHARS = 500;
 
+/**
+ * Maximum length of a single history-turn content string accepted from the client.
+ * Long assistant answers are truncated to HISTORY_CONTENT_MAX_CHARS on the client
+ * before sending. This server-side limit is set slightly higher (512) as a buffer
+ * against off-by-one and multi-byte character edge cases.
+ */
+export const HISTORY_CONTENT_MAX_CHARS = 512;
+
+/** Maximum number of history turns accepted per request. */
+export const HISTORY_MAX_TURNS = 4;
+
+/**
+ * Maximum number of individual history *items* (role+content pairs) accepted per request.
+ * Each conversation turn produces two items (user + assistant), so this is 2× HISTORY_MAX_TURNS.
+ */
+export const HISTORY_MAX_ITEMS = HISTORY_MAX_TURNS * 2;
+
 const EMPTY_QUESTION_MESSAGE = "Please enter a question.";
+
+/** Schema for a single history turn. Role is constrained to the two allowed values. */
+const historyTurnSchema = z.object({
+  role: z.enum(["user", "assistant"]),
+  content: z
+    .string()
+    .trim()
+    .min(1)
+    .max(
+      HISTORY_CONTENT_MAX_CHARS,
+      `History turn content must not exceed ${HISTORY_CONTENT_MAX_CHARS} characters.`,
+    ),
+});
 
 /**
  * Build the chat-request schema for a given maximum question length. Exposed as a factory
@@ -32,6 +62,13 @@ export function buildChatRequestSchema(maxInputChars: number) {
         maxInputChars,
         `Your question is too long. Please keep it under ${maxInputChars} characters.`,
       ),
+    history: z
+      .array(historyTurnSchema)
+      .max(
+        HISTORY_MAX_ITEMS,
+        `History must not exceed ${HISTORY_MAX_ITEMS} items.`,
+      )
+      .optional(),
   });
 }
 

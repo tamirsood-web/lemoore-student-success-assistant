@@ -4,17 +4,28 @@
 // ONLY the Group 4 mock data and makes no network/AWS calls. Query text is treated purely
 // as data for matching — never as instructions (prompt-injection resilience).
 //
-// Two intents:
-//   - "course-date": exact-identifier lookup over the course-date dataset.
-//   - "source": tag/keyword scoring over approved-source snippets with a threshold.
+// Four intents (checked in this priority order):
+//   1. "location"    — deterministic lookup when the student asks where an office is.
+//   2. "comparison"  — structured topic lookup when the student asks to compare concepts.
+//   3. "course-date" — exact-identifier lookup over the course-date dataset.
+//   4. "source"      — tag/keyword scoring over approved-source snippets with a threshold.
 
-import type { RetrieveFn, RetrievalResult, RetrievedSnippet, Source } from "@/types";
+import type {
+  RetrieveFn,
+  RetrievalResult,
+  RetrievedSnippet,
+  Source,
+  LocationCardData,
+} from "@/types";
 import {
   sources,
   courseDates,
+  departments,
   getSourceById,
+  isDepartmentId,
   MOCK_DATA_DISCLAIMER,
   COURSE_DATE_SOURCE_TITLE,
+  findComparison,
 } from "@/lib/mock";
 
 const COURSE_DATE_SOURCE_ID = "src_course_dates_dataset";
@@ -38,6 +49,178 @@ const COURSE_DATE_KEYWORDS = [
   "withdrawal",
 ];
 
+// ---------------------------------------------------------------------------
+// Location intent detection
+// ---------------------------------------------------------------------------
+
+const LOCATION_TRIGGER_PHRASES = [
+  "where is ",
+  "where are ",
+  "where do i go",
+  "how do i get to",
+  "directions to",
+  "what building",
+  "which building",
+  "office location",
+  "get to the office",
+  "where should i go",
+  "where to go for",
+  "go for financial aid",
+  "go for admissions",
+  "go for counseling",
+  "go for student services",
+  "go for adult learner",
+  "physically located",
+  "in person at",
+  "walk to",
+  "campus location",
+];
+
+/**
+ * Department name aliases used to identify which department a location query is about.
+ * These are checked ONLY after isLocationIntent() returns true, so phrases here don't
+ * need to be exhaustive — just precise enough to pick the right department.
+ */
+const LOCATION_DEPT_ALIASES: ReadonlyArray<{
+  readonly phrases: readonly string[];
+  readonly departmentId: string;
+  readonly locationSourceId: string;
+}> = [
+  {
+    phrases: ["admissions", "records", "admissions & records", "admissions and records", "registrar"],
+    departmentId: "admissions_records",
+    locationSourceId: "src_location_admissions",
+  },
+  {
+    phrases: ["financial aid", "fafsa", "aid office", "fin aid"],
+    departmentId: "financial_aid",
+    locationSourceId: "src_location_financial_aid",
+  },
+  {
+    phrases: ["counseling", "counselor", "counselling", "advising"],
+    departmentId: "counseling",
+    locationSourceId: "src_location_counseling",
+  },
+  {
+    phrases: ["student services", "student service center"],
+    departmentId: "student_services",
+    locationSourceId: "src_location_student_services",
+  },
+  {
+    phrases: ["adult learner", "adult learners", "adult education", "re-entry", "reentry", "returning student"],
+    departmentId: "adult_learner_services",
+    locationSourceId: "src_location_student_services",
+  },
+];
+
+function isLocationIntent(query: string): boolean {
+  const lower = query.toLowerCase();
+  return LOCATION_TRIGGER_PHRASES.some((phrase) => lower.includes(phrase));
+}
+
+function buildLocationCardData(departmentId: string): LocationCardData | null {
+  if (!isDepartmentId(departmentId)) return null;
+  const dept = departments[departmentId];
+  return {
+    name: dept.name,
+    building: dept.building,
+    hours: dept.hours,
+    phone: dept.phone,
+    email: dept.email,
+    url: dept.url,
+    mapUrl: dept.mapUrl,
+  };
+}
+
+function buildLocationResult(query: string): RetrievalResult {
+  const lower = query.toLowerCase();
+
+  // Try to identify which department is being asked about.
+  for (const entry of LOCATION_DEPT_ALIASES) {
+    const matched = entry.phrases.some((phrase) => lower.includes(phrase));
+    if (!matched) continue;
+
+    const source = getSourceById(entry.locationSourceId);
+    if (!source || !("id" in source)) {
+      // Source not found — unknown location, escalate.
+      return { intent: "location", snippets: [] };
+    }
+
+    const snippet: RetrievedSnippet = {
+      source,
+      title: source.title,
+      ...(source.uri ? { uri: source.uri } : {}),
+      excerpt: source.content,
+    };
+
+    const locationCard = buildLocationCardData(entry.departmentId);
+    return {
+      intent: "location",
+      snippets: [snippet],
+      ...(locationCard ? { locationCard } : {}),
+    };
+  }
+
+  // Location intent but unknown place — do not guess; escalate.
+  return { intent: "location", snippets: [] };
+}
+
+// ---------------------------------------------------------------------------
+// Comparison intent detection
+// ---------------------------------------------------------------------------
+
+const COMPARISON_TRIGGER_PHRASES = [
+  "difference between",
+  "differences between",
+  "what is the difference",
+  "what's the difference",
+  "compare ",
+  " vs ",
+  " versus ",
+  "drop vs",
+  "drop versus",
+  "census vs",
+  "census versus",
+  "in-person vs",
+  "in person vs",
+  "online vs",
+];
+
+function isComparisonIntent(query: string): boolean {
+  const lower = query.toLowerCase();
+  return COMPARISON_TRIGGER_PHRASES.some((phrase) => lower.includes(phrase));
+}
+
+function buildComparisonResult(query: string): RetrievalResult {
+  const record = findComparison(query);
+  if (!record) {
+    // Comparison intent but unsupported topic — escalate.
+    return { intent: "comparison", snippets: [] };
+  }
+
+  const source = getSourceById(record.sourceId);
+  if (!source || !("id" in source)) {
+    return { intent: "comparison", snippets: [] };
+  }
+
+  const snippet: RetrievedSnippet = {
+    source,
+    title: source.title,
+    ...(source.uri ? { uri: source.uri } : {}),
+    excerpt: source.content,
+  };
+
+  return {
+    intent: "comparison",
+    snippets: [snippet],
+    comparisonBlock: record.data,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// Course-date helpers (unchanged from original)
+// ---------------------------------------------------------------------------
+
 function tokenize(text: string): string[] {
   return text
     .toLowerCase()
@@ -59,8 +242,6 @@ function isCourseDateIntent(query: string): boolean {
   return COURSE_DATE_KEYWORDS.some((keyword) => lower.includes(keyword));
 }
 
-// --- Course-date identifier parsing -------------------------------------------------
-
 const SUBJECTS = new Set(courseDates.map((cd) => cd.subject));
 const TERMS = Array.from(new Set(courseDates.map((cd) => cd.term)));
 
@@ -73,7 +254,6 @@ function parseSubject(tokens: string[]): string | undefined {
 }
 
 function parseCatalogNumber(query: string): string | undefined {
-  // Catalog numbers in the mock dataset are 3 digits (e.g., 101); years are 4 digits.
   const match = query.match(/\b\d{3}\b/);
   return match ? match[0] : undefined;
 }
@@ -95,7 +275,6 @@ function buildCourseDateResult(query: string): RetrievalResult {
   const section = parseSection(query);
   const term = parseTerm(query);
 
-  // Not enough to attempt an exact match → ask for identifiers.
   if (!subject || !catalogNumber) {
     return { intent: "course-date", snippets: [], needsIdentifiers: true };
   }
@@ -109,16 +288,13 @@ function buildCourseDateResult(query: string): RetrievalResult {
     );
   }
   if (term) {
-    // `parseTerm` returns the exact dataset term string, so compare directly.
     matches = matches.filter((cd) => cd.term === term);
   }
 
-  // More than one match → ambiguous; ask for the remaining identifiers.
   if (matches.length > 1) {
     return { intent: "course-date", snippets: [], needsIdentifiers: true };
   }
 
-  // Exactly one match → return it as a snippet backed by the dataset source.
   const cd = matches[0];
   const datasetSource = getSourceById(COURSE_DATE_SOURCE_ID);
   if (matches.length === 1 && cd && datasetSource) {
@@ -132,11 +308,12 @@ function buildCourseDateResult(query: string): RetrievalResult {
     return { intent: "course-date", snippets: [snippet], needsIdentifiers: false };
   }
 
-  // Zero matches (no such course) → unresolved, escalate.
   return { intent: "course-date", snippets: [], needsIdentifiers: false };
 }
 
-// --- Source scoring -----------------------------------------------------------------
+// ---------------------------------------------------------------------------
+// Source scoring (unchanged from original)
+// ---------------------------------------------------------------------------
 
 function buildSourceResult(query: string): RetrievalResult {
   const queryTokens = tokenize(query).filter((token) => !STOPWORDS.has(token));
@@ -151,7 +328,6 @@ function buildSourceResult(query: string): RetrievalResult {
       return { source, score };
     })
     .filter((entry) => entry.score >= SOURCE_SCORE_THRESHOLD)
-    // Deterministic ordering: higher score first, then stable by source id.
     .sort((a, b) =>
       b.score !== a.score ? b.score - a.score : a.source.id.localeCompare(b.source.id),
     )
@@ -167,11 +343,35 @@ function buildSourceResult(query: string): RetrievalResult {
   return { intent: "source", snippets };
 }
 
+// ---------------------------------------------------------------------------
+// Main retrieve function — priority: location > comparison > course-date > source
+// ---------------------------------------------------------------------------
+
 /** Retrieve supporting snippets for a query from the local mock corpus. Deterministic. */
 export const retrieve: RetrieveFn = async (query) => {
+  // 1. Location intent — check first so "where is financial aid" doesn't fall into
+  //    course-date or source scoring.
+  if (isLocationIntent(query)) {
+    return buildLocationResult(query);
+  }
+
+  // 2. Comparison intent — check before course-date since "drop vs withdraw" would
+  //    otherwise hit the course-date keyword "withdraw".
+  if (isComparisonIntent(query)) {
+    const result = buildComparisonResult(query);
+    // If the comparison is recognised, return it. If not (unsupported topic), fall
+    // through to source scoring so the user at least gets some context or escalation.
+    if (result.snippets.length > 0 || result.intent === "comparison") {
+      return result;
+    }
+  }
+
+  // 3. Course-date intent.
   if (isCourseDateIntent(query)) {
     return buildCourseDateResult(query);
   }
+
+  // 4. General source scoring.
   return buildSourceResult(query);
 };
 

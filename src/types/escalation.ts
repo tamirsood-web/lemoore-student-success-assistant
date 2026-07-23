@@ -29,7 +29,14 @@ export type DepartmentContact = {
   readonly email?: string;
   readonly phone?: string;
   readonly url?: string;
+  /** Physical office location note (building / room). Demo data only. */
   readonly office?: string;
+  /** Building name or number. Demo data only. */
+  readonly building?: string;
+  /** Sample office hours text. Demo data only. */
+  readonly hours?: string;
+  /** Link to the campus map page for this department. Demo data only. */
+  readonly mapUrl?: string;
 };
 
 /**
