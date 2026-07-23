@@ -1,10 +1,25 @@
 "use client";
 
-import { useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
 import { Logo } from "./Logo";
 import { InactiveControl } from "./InactiveControl";
 import { MAIN_NAV, UTILITY_LINKS } from "./navigation";
-import { useSearchOverlay } from "@/features/search/SearchProvider";
+
+const FAQ_SUGGESTIONS = [
+  "How do I order my official transcript?",
+  "When can I register for classes?",
+  "Where can I get tutoring?",
+  "How do I contact financial aid?",
+  "How much does attendance cost?",
+  "How do I apply for graduation?",
+  "Where is the academic calendar?",
+  "I forgot my student portal password.",
+  "What services are available for veterans?",
+  "How do I meet with a counselor?",
+  "What is dual enrollment?",
+  "Where can I find scholarships?",
+] as const;
 
 function SearchIcon({ className }: { readonly className?: string }) {
   return (
@@ -16,8 +31,46 @@ function SearchIcon({ className }: { readonly className?: string }) {
 }
 
 export function SiteHeader() {
-  const { open: openSearch } = useSearchOverlay();
+  const router = useRouter();
   const [menuOpen, setMenuOpen] = useState(false);
+  const [searchOpen, setSearchOpen] = useState(false);
+  const [query, setQuery] = useState("");
+  const inputRef = useRef<HTMLTextAreaElement>(null);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+
+  const openSearch = useCallback(() => setSearchOpen(true), []);
+  const closeSearch = useCallback(() => {
+    setSearchOpen(false);
+    setQuery("");
+    // Return focus to trigger after panel closes
+    setTimeout(() => triggerRef.current?.focus(), 0);
+  }, []);
+
+  // Auto-focus input when panel opens
+  useEffect(() => {
+    if (searchOpen) {
+      // Small delay to ensure DOM is rendered
+      requestAnimationFrame(() => inputRef.current?.focus());
+    }
+  }, [searchOpen]);
+
+  // Escape key closes the panel
+  useEffect(() => {
+    if (!searchOpen) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") closeSearch();
+    };
+    document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [searchOpen, closeSearch]);
+
+  const submitSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const q = query.trim();
+    if (!q) return;
+    closeSearch();
+    router.push(`/search?q=${encodeURIComponent(q)}`);
+  };
 
   return (
     <>
@@ -68,15 +121,19 @@ export function SiteHeader() {
 
           {/* Right actions */}
           <div className="flex items-center gap-2">
+            {/* Compact search trigger */}
             <button
+              ref={triggerRef}
               type="button"
               onClick={openSearch}
-              className="flex items-center gap-2 rounded-md border border-lc-line px-3 py-2 text-sm font-medium text-lc-slate hover:border-lc-blue hover:text-lc-blue lg:min-w-[130px]"
-              aria-label="Open AI search"
+              aria-expanded={searchOpen}
+              aria-controls="site-search-panel"
+              aria-label="Open site search"
+              className="rounded-md p-2 text-lc-slate hover:bg-lc-wash hover:text-lc-blue focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-lc-blue"
             >
-              <SearchIcon className="h-4 w-4" />
-              <span className="hidden lg:inline">Search…</span>
+              <SearchIcon className="h-5 w-5" />
             </button>
+
             <InactiveControl className="hidden whitespace-nowrap rounded-md bg-lc-gold px-3 py-2 text-sm font-bold text-lc-navy-dark hover:bg-lc-gold-dark sm:inline-block">
               Apply Now
             </InactiveControl>
@@ -100,6 +157,99 @@ export function SiteHeader() {
             </button>
           </div>
         </div>
+
+        {/* Expanded search panel */}
+        {searchOpen ? (
+          <div
+            id="site-search-panel"
+            role="region"
+            aria-label="Site search"
+            className="absolute inset-x-0 top-full z-50 bg-lc-navy shadow-lg"
+          >
+            <div className="mx-auto max-w-site px-4 py-6 sm:py-8">
+              <h2 className="mb-4 text-center text-lg font-bold text-white sm:text-xl">
+                Search West Hills
+              </h2>
+
+              {/* Search form — DS Chat Input + DS Icon Button */}
+              <form
+                onSubmit={submitSearch}
+                className="mx-auto flex max-w-2xl items-center gap-2"
+              >
+                <div className="chat-input flex-1">
+                  <label className="chat-input__label chat-input__label--hidden" htmlFor="site-search-input">
+                    Search West Hills
+                  </label>
+                  <div className="chat-input__field">
+                    <svg className="chat-input__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                      <path d="M15 15L16.5 16.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16.9333 19.0252C16.3556 18.4475 16.3556 17.5109 16.9333 16.9333C17.5109 16.3556 18.4475 16.3556 19.0252 16.9333L21.0667 18.9748C21.6444 19.5525 21.6444 20.4891 21.0667 21.0667C20.4891 21.6444 19.5525 21.6444 18.9748 21.0667L16.9333 19.0252Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M16.5 9.5C16.5 5.63401 13.366 2.5 9.5 2.5C5.63401 2.5 2.5 5.63401 2.5 9.5C2.5 13.366 5.63401 16.5 9.5 16.5C13.366 16.5 16.5 13.366 16.5 9.5Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
+                    <textarea
+                      ref={inputRef}
+                      className="chat-input__textarea"
+                      id="site-search-input"
+                      value={query}
+                      onChange={(e) => setQuery(e.target.value)}
+                      onKeyDown={(e) => {
+                        if (e.key === "Enter" && !e.shiftKey) {
+                          e.preventDefault();
+                          submitSearch(e);
+                        }
+                      }}
+                      placeholder="Search..."
+                      autoComplete="off"
+                      rows={1}
+                    />
+                  </div>
+                </div>
+                <button
+                  type="submit"
+                  className="btn btn--secondary"
+                  aria-label="Search"
+                >
+                  Search
+                </button>
+              </form>
+
+              {/* FAQ suggestions — DS Secondary Buttons */}
+              <div className="mx-auto mt-6 max-w-2xl">
+                <h3 className="mb-3 text-sm font-bold uppercase tracking-wide text-white/80">
+                  Try asking
+                </h3>
+                <div className="flex flex-wrap gap-2">
+                  {FAQ_SUGGESTIONS.map((question) => (
+                    <button
+                      key={question}
+                      type="button"
+                      className="btn btn--secondary"
+                      style={{ whiteSpace: "normal", textAlign: "left" }}
+                      onClick={() => {
+                        setQuery(question);
+                        inputRef.current?.focus();
+                      }}
+                    >
+                      {question}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
+            {/* Close button */}
+            <button
+              type="button"
+              onClick={closeSearch}
+              aria-label="Close site search"
+              className="btn btn--icon absolute right-3 top-3 sm:right-5 sm:top-4"
+              style={{ color: "rgba(255,255,255,0.7)" }}
+            >
+              <svg className="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+              </svg>
+            </button>
+          </div>
+        ) : null}
 
         {/* Mobile menu panel */}
         {menuOpen ? (
@@ -131,7 +281,6 @@ export function SiteHeader() {
           </div>
         ) : null}
       </header>
-
     </>
   );
 }

@@ -36,10 +36,29 @@ export function AssistantWidget() {
     }
   }, [open]);
 
-  // Scroll to bottom on new turns
-  useEffect(() => {
-    bodyRef.current?.scrollTo?.({ top: bodyRef.current.scrollHeight });
-  }, [turns]);
+  // Track which turn's assistant bubble we should scroll to (once)
+  const scrollTargetIdRef = useRef<number | null>(null);
+
+  // Ref callback: when the assistant bubble for the target turn mounts, scroll to it
+  const assistantBubbleRef = useCallback(
+    (node: HTMLDivElement | null) => {
+      if (!node || !bodyRef.current) return;
+      // Guard: jsdom (tests) doesn't implement scrollTo
+      if (typeof bodyRef.current.scrollTo !== "function") return;
+      const prefersReduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
+      const container = bodyRef.current;
+      const bubbleTop = node.offsetTop;
+      // Small offset so the message isn't flush against the header
+      const offset = 8;
+      container.scrollTo({
+        top: Math.max(0, bubbleTop - offset),
+        behavior: prefersReduced ? "instant" : "smooth",
+      });
+      // Clear target so we don't re-scroll on re-renders
+      scrollTargetIdRef.current = null;
+    },
+    [],
+  );
 
   // Escape to close
   useEffect(() => {
@@ -60,6 +79,7 @@ export function AssistantWidget() {
       setDraft("");
       setPending(true);
       setTurns((prev) => [...prev, { id, question, response: null }]);
+      scrollTargetIdRef.current = id;
       let response: WebsiteSearchResponse;
       try {
         const res = await fetch("/api/search", {
@@ -260,7 +280,11 @@ export function AssistantWidget() {
                         </div>
 
                         {/* Assistant response — production Message Bubble (agent variant) */}
-                        <div className="message-bubble message-bubble--agent" style={{ alignSelf: "flex-start", maxWidth: "85%" }}>
+                        <div
+                          className="message-bubble message-bubble--agent"
+                          style={{ alignSelf: "flex-start", maxWidth: "85%" }}
+                          ref={turn.id === scrollTargetIdRef.current ? assistantBubbleRef : undefined}
+                        >
                           <div className="message-bubble__content" style={{ fontFamily: "'Inter', sans-serif", fontSize: 14, fontWeight: 400, lineHeight: 1.5, color: "#121212" }}>
                             {turn.response === null ? (
                               <span style={{ display: "flex", alignItems: "center", gap: 8, color: "var(--primitive-color-gray-600)" }} aria-live="polite">
@@ -308,16 +332,30 @@ export function AssistantWidget() {
               </div>
               <button
                 type="button"
-                className="btn btn--primary"
-                disabled={pending || draft.trim().length === 0}
+                className={pending ? "btn btn--primary btn--loading" : "btn btn--primary"}
+                aria-busy={pending || undefined}
+                aria-disabled={pending || undefined}
                 onClick={handleSubmit}
               >
-                Send
-                <svg className="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
-                  <path d="M9.49811 15L16.9981 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M8.00634 7.67888L15.327 4.21881C18.3688 2.78111 19.8897 2.06226 20.8598 2.78341C21.8299 3.50455 21.5527 5.14799 20.9984 8.43486L20.0435 14.0968C19.6811 16.246 19.4998 17.3205 18.6989 17.7891C17.8979 18.2577 16.8574 17.8978 14.7765 17.178L8.41077 14.9762C4.51917 13.6301 2.57337 12.9571 2.50019 11.6365C2.427 10.3159 4.28678 9.43692 8.00634 7.67888Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                  <path d="M9.49811 15.5V17.7274C9.49811 20.101 9.49811 21.2878 10.2083 21.4771C10.9185 21.6663 11.6664 20.6789 13.1622 18.7039L13.9981 17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-                </svg>
+                {pending ? "Sending…" : "Send"}
+                {pending ? (
+                  <svg className="btn__icon btn__loader" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                    <path d="M11.9961 3V6" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M11.9961 18V21" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M20.9961 12H17.9961" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M5.99609 12H2.99609" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M18.3596 5.63672L16.2383 7.75804" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M7.75413 16.2422L5.63281 18.3635" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M18.3596 18.3635L16.2383 16.2422" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                    <path d="M7.75413 7.75804L5.63281 5.63672" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+                  </svg>
+                ) : (
+                  <svg className="btn__icon" aria-hidden="true" viewBox="0 0 24 24" fill="none">
+                    <path d="M9.49811 15L16.9981 7.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M8.00634 7.67888L15.327 4.21881C18.3688 2.78111 19.8897 2.06226 20.8598 2.78341C21.8299 3.50455 21.5527 5.14799 20.9984 8.43486L20.0435 14.0968C19.6811 16.246 19.4998 17.3205 18.6989 17.7891C17.8979 18.2577 16.8574 17.8978 14.7765 17.178L8.41077 14.9762C4.51917 13.6301 2.57337 12.9571 2.50019 11.6365C2.427 10.3159 4.28678 9.43692 8.00634 7.67888Z" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M9.49811 15.5V17.7274C9.49811 20.101 9.49811 21.2878 10.2083 21.4771C10.9185 21.6663 11.6664 20.6789 13.1622 18.7039L13.9981 17.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  </svg>
+                )}
               </button>
             </div>
           </div>
