@@ -1,19 +1,30 @@
-import { composeAnswer, ANSWER_SEPARATOR } from "./prompt";
+import { composeAnswer } from "./prompt";
 import { retrieve } from "./retrieve";
 
+/** Split answer into sentences for grounding verification. */
+function answerSentences(text: string): string[] {
+  return text
+    .split(/\n/)
+    .flatMap((line) => line.split(/(?<=[.!?])\s+/))
+    .map((s) => s.replace(/^\d+\.\s+/, "").replace(/^[•\-]\s+/, "").trim())
+    .filter((s) => s.length > 0);
+}
+
+/** Normalize whitespace for substring matching. */
+function norm(text: string): string {
+  return text.replace(/\s+/g, " ").trim();
+}
+
 describe("composeAnswer", () => {
-  it("composes an answer only from snippet excerpts", async () => {
+  it("composes an answer grounded only in snippet excerpts", async () => {
     const result = await retrieve("How can I contact financial aid?");
     const answer = composeAnswer(result);
     expect(answer).not.toBeNull();
 
-    const expected = result.snippets
-      .map((snippet) => snippet.excerpt)
-      .join(ANSWER_SEPARATOR);
-    // The answer is EXACTLY the concatenation of snippet excerpts — no invented text.
-    expect(answer).toBe(expected);
-    for (const snippet of result.snippets) {
-      expect(answer).toContain(snippet.excerpt);
+    // Every sentence in the answer must appear verbatim in at least one source excerpt.
+    const combinedSource = result.snippets.map((s) => norm(s.excerpt)).join(" ");
+    for (const sentence of answerSentences(answer!)) {
+      expect(combinedSource).toContain(norm(sentence));
     }
   });
 
@@ -22,15 +33,13 @@ describe("composeAnswer", () => {
     expect(composeAnswer(result)).toBeNull();
   });
 
-  it("contains no characters beyond the joined snippet excerpts", async () => {
+  it("contains no factual content beyond the source excerpts", async () => {
     const result = await retrieve("What are the admissions office hours?");
     const answer = composeAnswer(result) ?? "";
-    const totalExcerptLength = result.snippets.reduce(
-      (sum, snippet) => sum + snippet.excerpt.length,
-      0,
-    );
-    const separatorLength =
-      Math.max(0, result.snippets.length - 1) * ANSWER_SEPARATOR.length;
-    expect(answer.length).toBe(totalExcerptLength + separatorLength);
+    // Every sentence in the answer traces back to a snippet excerpt.
+    const combinedSource = result.snippets.map((s) => norm(s.excerpt)).join(" ");
+    for (const sentence of answerSentences(answer)) {
+      expect(combinedSource).toContain(norm(sentence));
+    }
   });
 });

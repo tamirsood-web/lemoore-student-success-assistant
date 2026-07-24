@@ -16,6 +16,9 @@ import {
   applyEscalationRules,
   toAssistantResponse,
 } from "@/lib/bedrock";
+import { classifyIntent } from "@/lib/rag/intentClassifier";
+import { rewriteForConversation } from "@/lib/rag/conversationRewriter";
+import { normalizeQuery } from "@/lib/rag/queryNormalizer";
 import { redact } from "@/lib/utils/redact";
 
 export const runtime = "nodejs";
@@ -74,9 +77,9 @@ export async function POST(request: Request): Promise<NextResponse> {
     if (!parsed.success) {
       return errorResponse(400, "technicalError");
     }
-    const { message } = parsed.data;
+    const { message, history } = parsed.data;
 
-    // 2. Guardrail screening (query treated purely as data).
+    // 2. Guardrail screening (query treated purely as data) — must run FIRST.
     const guardrail = screen(message);
 
     // 3. Sensitive rejection → normal 200 typed AssistantResponse.
@@ -94,9 +97,63 @@ export async function POST(request: Request): Promise<NextResponse> {
       return NextResponse.json(response, { status: 200 });
     }
 
+    // 1.4. Query normalization: correct obvious typos.
+    const normalization = normalizeQuery(message);
+    const effectiveMessage = normalization.status === "corrected"
+      ? normalization.normalizedText
+      : message;
+    if (normalization.status === "corrected") {
+      console.info("[chat:normalize]", { original: message, normalized: effectiveMessage });
+    }
+
+    // 1.5. Intent classification: short-circuit conversational messages.
+    const classification = classifyIntent(effectiveMessage);
+    if (!classification.requiresRetrieval && classification.response) {
+      const conversationalResponse = {
+        kind: "grounded" as const,
+        answer: classification.response,
+        confidence: "high" as const,
+        citations: [],
+        escalationRecommended: false,
+        suggestedQuestions: [],
+        conversationalIntent: classification.intent,
+      };
+      logInteraction(message, "high", false, {
+        category: `intent:${classification.intent}`,
+        startedAt,
+      });
+      return NextResponse.json(conversationalResponse, { status: 200 });
+    }
+
+    // 1.5b. Emotional-support intent: use empathetic response with counseling info.
+    // This prevents the chat retrieval system from returning academic-tutoring results.
+    if (classification.intent === "emotional_support") {
+      const empathyResponse = {
+        kind: "grounded" as const,
+        answer: "I'm sorry you're having a difficult time. I'll help you find the most appropriate support available through Lemoore College.\n\nCounseling Services is available to all students and can help with personal, academic, and career concerns.\n\nPhone: (559) 925-3130\nHours: Monday–Friday, 8:15 a.m.–4:45 p.m.\nLocation: 555 College Avenue, Building 100, Student Services",
+        confidence: "medium" as const,
+        citations: [],
+        escalationRecommended: false,
+        suggestedQuestions: [],
+        conversationalIntent: "emotional_support",
+      };
+      logInteraction(message, "medium", false, {
+        category: "intent:emotional_support",
+        startedAt,
+      });
+      return NextResponse.json(empathyResponse, { status: 200 });
+    }
+
+    // 1.6. Conversation-aware query rewriting: expand follow-up questions.
+    const rewrite = rewriteForConversation(message, history ?? []);
+    const searchQuery = rewrite.searchQuery;
+    if (rewrite.wasRewritten) {
+      console.info("[chat:rewrite]", { original: rewrite.originalQuery, rewritten: searchQuery });
+    }
+
     // 4–7. Retrieve → compose → escalate → normalize.
-    const result = await retrieve(message);
-    const composedAnswer = composeAnswer(result);
+    const result = await retrieve(searchQuery);
+    const composedAnswer = composeAnswer(result, message);
     const escalation = applyEscalationRules({ result, composedAnswer, query: message });
     const response = toAssistantResponse({
       guardrail,

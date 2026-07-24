@@ -5,32 +5,17 @@
 import type { WebsiteSearchResponse } from "@/types";
 import { CONTACT, FALLBACK_MESSAGES } from "@/lib/fallback-messages";
 import { CitationCard } from "./CitationCard";
+import { StructuredAnswer } from "@/features/shared/StructuredAnswer";
 
 const PROTOTYPE_NOTE =
   "Prototype demo — answers are drawn only from official Lemoore College pages and link to the real source.";
 
 /** Body text class for all assistant response text in the search feature. */
-const BODY_TEXT = "leading-relaxed text-lc-ink";
-const bodyTextStyle = { fontSize: "var(--semantic-font-size-ui)" } as const;
+const BODY_TEXT = "chat-body-text chat-body-text--answer text-lc-ink";
 
-/** Render inline (n) citation markers as subtle superscript footnote references. */
+/** Render a structured answer with proper semantic HTML. */
 function AnswerText({ text }: { readonly text: string }) {
-  const parts = text.split(/(\[\d+\])/g);
-  return (
-    <p className={BODY_TEXT} style={bodyTextStyle}>
-      {parts.map((part, i) => {
-        const match = /^\[(\d+)\]$/.exec(part);
-        if (match) {
-          return (
-            <sup key={i} style={{ fontSize: "0.7em", marginLeft: 1, color: "inherit" }}>
-              ({match[1]})
-            </sup>
-          );
-        }
-        return <span key={i}>{part}</span>;
-      })}
-    </p>
-  );
+  return <StructuredAnswer text={text} className={`${BODY_TEXT} space-y-3`} />;
 }
 
 /** Shared contact block rendered inside fallback messages. */
@@ -79,8 +64,8 @@ export function SearchAnswerView({
     const { heading, guidance } = FALLBACK_MESSAGES.technicalError;
     return (
       <div className="space-y-4">
-        <p className={BODY_TEXT} style={bodyTextStyle}>{heading}</p>
-        <p className={BODY_TEXT} style={bodyTextStyle}>{guidance}</p>
+        <p className={BODY_TEXT}>{heading}</p>
+        <p className={BODY_TEXT}>{guidance}</p>
         <ContactBlock />
       </div>
     );
@@ -90,8 +75,8 @@ export function SearchAnswerView({
     const { heading, guidance } = FALLBACK_MESSAGES.needsMoreInformation;
     return (
       <div className="space-y-4">
-        <p className={BODY_TEXT} style={bodyTextStyle}>{heading}</p>
-        <p className={BODY_TEXT} style={bodyTextStyle}>{guidance}</p>
+        <p className={BODY_TEXT}>{heading}</p>
+        <p className={BODY_TEXT}>{guidance}</p>
         <ContactBlock />
         <p className="text-xs text-lc-slate">{PROTOTYPE_NOTE}</p>
       </div>
@@ -104,8 +89,8 @@ export function SearchAnswerView({
     const { heading, guidance } = FALLBACK_MESSAGES[scenario];
     return (
       <div className="space-y-4">
-        <p className={BODY_TEXT} style={bodyTextStyle}>{heading}</p>
-        <p className={BODY_TEXT} style={bodyTextStyle}>{guidance}</p>
+        <p className={BODY_TEXT}>{heading}</p>
+        <p className={BODY_TEXT}>{guidance}</p>
         <ContactBlock />
         {response.relatedResults.length > 0 ? (
           <div>
@@ -120,6 +105,14 @@ export function SearchAnswerView({
           </div>
         ) : null}
         <p className="text-xs text-lc-slate">{PROTOTYPE_NOTE}</p>
+      </div>
+    );
+  }
+
+  if (response.kind === "conversational") {
+    return (
+      <div className="space-y-4">
+        <p className={BODY_TEXT}>{response.message}</p>
       </div>
     );
   }

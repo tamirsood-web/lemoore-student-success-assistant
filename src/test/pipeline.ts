@@ -66,7 +66,7 @@ export async function runMockPipeline(
   }
 
   const result = await retrieve(query);
-  const composedAnswer = composeAnswer(result);
+  const composedAnswer = composeAnswer(result, query);
   const escalation = applyEscalationRules({ result, composedAnswer, query });
   const response = toAssistantResponse({
     guardrail,

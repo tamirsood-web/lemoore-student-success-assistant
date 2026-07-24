@@ -81,6 +81,12 @@ export const officialSourceCitationSchema: z.ZodType<OfficialSourceCitation> =
 export const websiteSearchResponseSchema: z.ZodType<WebsiteSearchResponse> =
   z.discriminatedUnion("kind", [
     z.object({
+      kind: z.literal("conversational"),
+      query: z.string(),
+      message: z.string().min(1),
+      intent: z.string().min(1),
+    }),
+    z.object({
       kind: z.literal("answered"),
       query: z.string(),
       answer: z.string().min(1),
@@ -121,6 +127,15 @@ export function buildSearchRequestSchema(maxInputChars: number) {
         maxInputChars,
         `Your search is too long. Please keep it under ${maxInputChars} characters.`,
       ),
+    history: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string().optional(),
+        }),
+      )
+      .max(10)
+      .optional(),
   });
 }
 

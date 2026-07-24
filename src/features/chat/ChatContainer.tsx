@@ -58,10 +58,16 @@ export function ChatContainer({ maxInputChars }: ChatContainerProps) {
       const controller = new AbortController();
       abortRef.current = controller;
       try {
+        // Build conversation history from completed turns for context-aware retrieval.
+        const history = turns
+          .filter((t): t is Turn & { state: { kind: "answered" } } => t.state.kind === "answered")
+          .slice(-5) // Last 5 turns max.
+          .map((t) => ({ question: t.question, answer: t.state.response.answer }));
+
         const res = await fetch("/api/chat", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ message: question }),
+          body: JSON.stringify({ message: question, history }),
           signal: controller.signal,
         });
 

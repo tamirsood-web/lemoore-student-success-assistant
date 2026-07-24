@@ -110,5 +110,6 @@
   --primitive-font-weight-700:   700;    /* headline 5 Bold — DS-course node 234:760 */
   --primitive-font-weight-400:   400;
   --primitive-line-height-1:     1;      /* 100% */
+  --primitive-line-height-1-5:   1.5;    /* 150% — comfortable reading rhythm for body text */
   --primitive-letter-spacing-0:  0;
 }

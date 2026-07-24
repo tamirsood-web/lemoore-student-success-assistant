@@ -83,10 +83,16 @@ export function AssistantWidget() {
       scrollTargetIdRef.current = id;
       let response: WebsiteSearchResponse;
       try {
+        // Build conversation history from completed turns for context-aware retrieval.
+        const history = turns
+          .filter((t) => t.response !== null && t.response.kind === "answered")
+          .slice(-5)
+          .map((t) => ({ question: t.question, answer: t.response!.kind === "answered" ? t.response!.answer : "" }));
+
         const res = await fetch("/api/search", {
           method: "POST",
           headers: { "content-type": "application/json" },
-          body: JSON.stringify({ query: question }),
+          body: JSON.stringify({ query: question, history }),
         });
         response = (await res.json()) as WebsiteSearchResponse;
       } catch {

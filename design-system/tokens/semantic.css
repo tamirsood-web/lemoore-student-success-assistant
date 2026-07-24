@@ -76,6 +76,7 @@
   --semantic-font-size-ui:        var(--primitive-font-size-16);
   --semantic-font-weight-regular: var(--primitive-font-weight-400);
   --semantic-line-height-tight:   var(--primitive-line-height-1);
+  --semantic-line-height-body:    var(--primitive-line-height-1-5);  /* comfortable reading */
   --semantic-letter-spacing-none: var(--primitive-letter-spacing-0);
 
   /* ─────────────────────────────────────────────

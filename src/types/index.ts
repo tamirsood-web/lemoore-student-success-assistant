@@ -40,7 +40,7 @@ export type {
   RetrievalResult,
 } from "./retrieval";
 
-export type { ChatRequestBody, FeedbackInput, FeedbackRequestBody } from "./chat";
+export type { ChatRequestBody, ChatHistoryTurn, FeedbackInput, FeedbackRequestBody } from "./chat";
 
 export type { LogMode, RedactedLogRecord, RedactInput } from "./logging";
 

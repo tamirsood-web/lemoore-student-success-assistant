@@ -30,3 +30,7 @@ export {
   type BedrockErrorCategory,
 } from "./bedrockErrors";
 export { EXAMPLE_QUESTIONS, DEFAULT_SUGGESTIONS } from "./examples";
+export { classifyIntent, type Intent, type IntentClassification } from "./intentClassifier";
+export { rewriteForConversation, type ConversationTurn, type RewriteResult } from "./conversationRewriter";
+export { formatAnswer, detectFormat, type AnswerFormat, type FormatterInput } from "./answerFormatter";
+export { normalizeQuery, type QueryNormalizationResult } from "./queryNormalizer";
