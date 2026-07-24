@@ -13,10 +13,10 @@ export function MessageBubble({ role, children }: MessageBubbleProps) {
     <div className={cn("flex", isQuestion ? "justify-end" : "justify-start")}>
       <div
         className={cn(
-          "max-w-[85%] whitespace-pre-wrap break-words rounded-lg px-3 py-2 text-sm",
+          "chat-body-text max-w-[85%] whitespace-pre-wrap break-words rounded-lg px-3 py-2",
           isQuestion
             ? "bg-accent text-accent-foreground"
-            : "border border-border bg-muted text-foreground",
+            : "chat-body-text--answer border border-border bg-muted text-foreground",
         )}
       >
         {children}

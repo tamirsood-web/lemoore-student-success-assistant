@@ -30,7 +30,7 @@ export async function POST(request: Request): Promise<NextResponse> {
       return NextResponse.json({ kind: "error", message }, { status: 400 });
     }
 
-    const response = await getSearchProvider().answer(parsed.data.query);
+    const response = await getSearchProvider().answer(parsed.data.query, parsed.data.history);
 
     // Validate our own output: never ship a response that violates the contract
     // (e.g. an answered response missing citations, or an off-domain URL).

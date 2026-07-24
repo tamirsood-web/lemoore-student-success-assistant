@@ -5,9 +5,17 @@
 // types. No client-supplied role/mode is represented here — mode is server-derived and
 // fixed to "public" in this phase (AGENTS.md §11).
 
+/** A previous conversation turn, sent by the client for context-aware query rewriting. */
+export type ChatHistoryTurn = {
+  readonly question: string;
+  readonly answer?: string;
+};
+
 /** Validated body of `POST /api/chat`. */
 export type ChatRequestBody = {
   readonly message: string;
+  /** Recent conversation turns for follow-up query rewriting (optional). */
+  readonly history?: readonly ChatHistoryTurn[];
 };
 
 /**

@@ -32,6 +32,15 @@ export function buildChatRequestSchema(maxInputChars: number) {
         maxInputChars,
         `Your question is too long. Please keep it under ${maxInputChars} characters.`,
       ),
+    history: z
+      .array(
+        z.object({
+          question: z.string(),
+          answer: z.string().optional(),
+        }),
+      )
+      .max(10) // Limit history depth to prevent abuse.
+      .optional(),
   });
 }
 
@@ -79,9 +88,9 @@ type Assert<T extends true> = T;
 type _ChatToDomain = Assert<
   z.infer<typeof chatRequestSchema> extends ChatRequestBody ? true : false
 >;
-type _DomainToChat = Assert<
-  ChatRequestBody extends z.infer<typeof chatRequestSchema> ? true : false
->;
+// Note: the reverse direction (DomainToChat) is intentionally omitted because the domain
+// type uses `readonly` arrays while Zod infers mutable arrays. The schema-to-domain
+// direction above guarantees that validated input conforms to the domain contract.
 type _FeedbackToDomain = Assert<
   z.infer<typeof feedbackRequestSchema> extends FeedbackInput ? true : false
 >;

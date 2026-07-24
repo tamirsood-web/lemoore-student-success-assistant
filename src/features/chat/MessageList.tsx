@@ -4,6 +4,7 @@ import type { FallbackScenario } from "@/lib/fallback-messages";
 import { CONTACT, FALLBACK_MESSAGES } from "@/lib/fallback-messages";
 import type { Turn } from "./states";
 import { MessageBubble } from "./MessageBubble";
+import { StructuredAnswer } from "@/features/shared/StructuredAnswer";
 import { CitationList } from "./citations/CitationList";
 import { EscalationCard } from "./escalation/EscalationCard";
 import { FeedbackControls } from "./feedback/FeedbackControls";
@@ -142,7 +143,9 @@ function AssistantAnswer({
       <p className="mb-1 text-xs text-muted-foreground">
         {confidenceLead(response.confidence)}
       </p>
-      <MessageBubble role="answer">{response.answer}</MessageBubble>
+      <MessageBubble role="answer">
+        <StructuredAnswer text={response.answer} className="space-y-2" />
+      </MessageBubble>
 
       <CitationList citations={response.citations} />
       <EscalationCard response={response} />

@@ -57,12 +57,19 @@ export type RagProvider = "local" | "bedrock";
  * The response returned by the shared answer pipeline (`POST /api/search`), consumed by
  * both the website search UI and the floating assistant. An explicit discriminated union:
  *
- *  - `answered`      — a grounded answer with >=1 citation to official pages.
- *  - `clarification` — the query is ambiguous/underspecified; suggest better questions.
- *  - `unsupported`   — no official source can verify an answer (honest non-answer).
- *  - `error`         — the request could not be processed.
+ *  - `conversational` — a non-retrieval response to greetings, thanks, goodbyes, etc.
+ *  - `answered`       — a grounded answer with >=1 citation to official pages.
+ *  - `clarification`  — the query is ambiguous/underspecified; suggest better questions.
+ *  - `unsupported`    — no official source can verify an answer (honest non-answer).
+ *  - `error`          — the request could not be processed.
  */
 export type WebsiteSearchResponse =
+  | {
+      readonly kind: "conversational";
+      readonly query: string;
+      readonly message: string;
+      readonly intent: string;
+    }
   | {
       readonly kind: "answered";
       readonly query: string;

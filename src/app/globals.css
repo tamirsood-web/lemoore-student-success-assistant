@@ -42,3 +42,38 @@
 body {
   min-height: 100vh;
 }
+
+/* ─── Shared chat body typography (single source of truth) ────────────
+ * Applied to both user questions and assistant answers so they share
+ * the same font family, size, weight, and letter spacing.
+ * Uses Design System semantic tokens — no hardcoded values.
+ * Visual distinction comes from bubble color, alignment, and shape.
+ * ─────────────────────────────────────────────────────────────────── */
+.chat-body-text {
+  font-family:    var(--semantic-font-family-ui);
+  font-size:      var(--semantic-font-size-ui);
+  font-weight:    var(--semantic-font-weight-regular);
+  line-height:    var(--semantic-line-height-tight);
+  letter-spacing: var(--semantic-letter-spacing-none);
+}
+
+/* ─── Assistant answer line-height override ───────────────────────────
+ * Increases vertical breathing room for assistant responses only.
+ * Makes longer paragraphs and lists comfortable to scan without
+ * changing the user question's compact appearance.
+ * ─────────────────────────────────────────────────────────────────── */
+.chat-body-text--answer {
+  line-height: var(--semantic-line-height-body);
+}
+
+/* Ensure list elements inside chat answers inherit the same typography */
+.chat-body-text ul,
+.chat-body-text ol,
+.chat-body-text li,
+.chat-body-text p {
+  font-family: inherit;
+  font-size:   inherit;
+  font-weight: inherit;
+  line-height: inherit;
+  letter-spacing: inherit;
+}

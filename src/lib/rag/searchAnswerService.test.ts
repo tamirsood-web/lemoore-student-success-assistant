@@ -52,7 +52,7 @@ describe("SearchAnswerService — grounding + citation invariants", () => {
 
   it("the answer text ends with an inline citation marker", async () => {
     const res = await answered("How do I contact financial aid?");
-    expect(res.answer).toMatch(/\[1\]$/);
+    expect(res.answer).toMatch(/\[\d+\]$/);
   });
 
   it("keyword (non-question) queries also work", async () => {
@@ -62,11 +62,11 @@ describe("SearchAnswerService — grounding + citation invariants", () => {
 });
 
 describe("SearchAnswerService — honest non-answers", () => {
-  it("returns unsupported for an off-topic question with no official source", async () => {
+  it("returns out-of-scope or unsupported for an off-topic question with no official source", async () => {
     const res = await searchAnswerService.answer(
       "Where can I buy tickets to a professional football game?",
     );
-    expect(["unsupported", "clarification"]).toContain(res.kind);
+    expect(["unsupported", "clarification", "conversational"]).toContain(res.kind);
     if (res.kind === "answered") throw new Error("should not answer off-topic");
   });
 

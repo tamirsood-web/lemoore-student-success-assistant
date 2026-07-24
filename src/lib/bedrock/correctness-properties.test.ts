@@ -11,7 +11,7 @@ import { getSourceById, sourceById } from "@/lib/mock";
 import { runMockPipeline } from "@/test/pipeline";
 import { COURSE_DATE_SOURCE_ID } from "./retrieve";
 import { applyEscalationRules } from "./escalation";
-import { composeAnswer, ANSWER_SEPARATOR } from "./prompt";
+import { composeAnswer } from "./prompt";
 import { screen } from "./guardrail";
 
 const ISO_DATE = /\d{4}-\d{2}-\d{2}/;
@@ -44,7 +44,37 @@ const GROUNDED_QUERIES: readonly string[] = [
 
 // -------------------------------------------------------------------------------------
 // Property 1 — Grounding: an answer is derived ONLY from retrieved snippet excerpts.
+// Every sentence in the answer must trace back to a source excerpt (sentence-level
+// grounding). The answer may restructure, reorder, or omit marketing fluff, but it
+// cannot introduce factual content absent from the retrieved snippets.
 // -------------------------------------------------------------------------------------
+
+/** Normalize whitespace for substring matching. */
+function norm(text: string): string {
+  return text.replace(/\s+/g, " ").trim();
+}
+
+/** Strip formatting markers (bullets, numbered list prefixes) from a sentence. */
+function stripFormatting(text: string): string {
+  return text
+    .replace(/^\d+\.\s+/, "") // "1. text" → "text"
+    .replace(/^[•\-]\s+/, "") // "• text" → "text"
+    .trim();
+}
+
+/** Split text into sentences for grounding verification. */
+function answerSentences(text: string): string[] {
+  return text
+    .split(/\n/)
+    .flatMap((line) => {
+      // Strip bullet/number prefix before splitting into sentences.
+      const stripped = stripFormatting(line.trim());
+      return stripped.split(/(?<=[.!?])\s+/);
+    })
+    .map((s) => s.trim())
+    .filter((s) => s.length > 0 && !/^\d+\.?$/.test(s)); // Filter out bare numbers like "1." or "1"
+}
+
 describe("Property 1 — Grounding", () => {
   it.each(GROUNDED_QUERIES)(
     "answer for %j is composed only from retrieved snippet excerpts",
@@ -52,21 +82,13 @@ describe("Property 1 — Grounding", () => {
       const { result, response } = await runMockPipeline(query);
       expect(response.kind).toBe("grounded");
 
-      // The answer is EXACTLY the join of the retrieved excerpts — no room for the
-      // assistant to introduce a policy, date, contact, or procedural claim of its own.
-      const expected = result.snippets
-        .map((snippet) => snippet.excerpt)
-        .join(ANSWER_SEPARATOR);
-      expect(response.answer).toBe(expected);
-
-      // Every character of the answer traces back to a retrieved snippet excerpt.
-      const excerptChars = result.snippets.reduce(
-        (sum, snippet) => sum + snippet.excerpt.length,
-        0,
-      );
-      const separatorChars =
-        Math.max(0, result.snippets.length - 1) * ANSWER_SEPARATOR.length;
-      expect(response.answer.length).toBe(excerptChars + separatorChars);
+      // Every sentence in the answer must appear verbatim in at least one source excerpt.
+      // This prevents the assistant from introducing any policy, date, contact, or
+      // procedural claim not present in the retrieved evidence.
+      const combinedSource = result.snippets.map((s) => norm(s.excerpt)).join(" ");
+      for (const sentence of answerSentences(response.answer)) {
+        expect(combinedSource).toContain(norm(sentence));
+      }
     },
   );
 
@@ -454,10 +476,11 @@ describe("Property 6 — Untrusted input", () => {
     // grounded answer drawn ONLY from real local sources — never a fabricated disclosure.
     expect(["insufficient_evidence", "grounded"]).toContain(response.kind);
     if (response.kind === "grounded") {
-      const expected = result.snippets
-        .map((snippet) => snippet.excerpt)
-        .join(ANSWER_SEPARATOR);
-      expect(response.answer).toBe(expected); // grounding preserved
+      // Every sentence in the answer traces back to the retrieved evidence.
+      const combinedSource = result.snippets.map((s) => norm(s.excerpt)).join(" ");
+      for (const sentence of answerSentences(response.answer)) {
+        expect(combinedSource).toContain(norm(sentence));
+      }
       for (const citation of response.citations) {
         expect(getSourceById(citation.sourceId)).toBeDefined();
       }
